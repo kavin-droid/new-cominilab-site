@@ -1,0 +1,243 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-sans: var(--font-gabarito);
+  --font-display: var(--font-gabarito);
+  --font-marker: var(--font-sticky-notes), var(--font-caveat);
+  --font-mono: "Courier New", Courier, monospace;
+
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-white: var(--paper-white);
+  --color-cream: var(--cream);
+  --color-cream-ink: var(--cream-ink);
+  --color-cream-card: var(--cream-card);
+
+  --color-cta: var(--cta);
+  --color-cta-shadow: var(--cta-shadow);
+
+  --color-lavender-bg: var(--lavender-bg);
+  --color-lavender-ink: var(--lavender-ink);
+  --color-mint-bg: var(--mint-bg);
+  --color-mint-ink: var(--mint-ink);
+  --color-blue-bg: var(--blue-bg);
+  --color-blue-ink: var(--blue-ink);
+  --color-pink-bg: var(--pink-bg);
+  --color-pink-ink: var(--pink-ink);
+
+  --color-muted: var(--muted);
+}
+
+:root {
+  /* Tokens lifted from the "Comini Landing Page" Figma file (fileKey RaCnnTGHOPzKf7dDcxsKJ1,
+     node 1:5) via get_design_context + get_variable_defs. "Primery" is the file's one bound
+     variable (#000D26, a near-black navy) - used as the universal ink/border/text color.
+     Everything else is a raw fill lifted from the component code. */
+  --ink: #000d26;
+  --paper: #ffffff;
+  --paper-white: #ffffff;
+
+  /* hero / resource-sample panel background + its on-cream text color */
+  --cream: #fffce5;
+  --cream-ink: #383203;
+  /* "how it works" + roadmap card fill - same yellow as --cream, kept as its own token since
+     callers reach for "the card tint" vs "the panel background" as distinct concepts even though
+     the color itself is unified. */
+  --cream-card: #fffce5;
+  /* "how it works" + roadmap section backdrop (RoundedRectRow fill, matching the retired
+     howitworks-bg.svg/roadmap-bg.svg source colors) */
+  --section-tint-mint: #f5ffe5;
+  --section-tint-green: #e5ffef;
+  /* darker shade of --section-tint-green, same hue - used for the roadmap's dashed divider so
+     it reads as "the background color, deepened" rather than an unrelated ink line */
+  --section-tint-green-dark: #4caf7a;
+
+  /* primary CTA (yellow pill, black hard shadow) */
+  --cta: #fdbe35;
+  --cta-shadow: #000000;
+
+  /* philosophy / user-type card variants */
+  --lavender-bg: #faf7fd;
+  --lavender-ink: #1d0338;
+  --mint-bg: #f2fbf9;
+  --mint-ink: #03382d;
+  --blue-bg: #f6f9ff;
+  --blue-ink: #031538;
+  /* for-schools "userType" cards' 4th tint (Educators) */
+  --pink-bg: #fff5fa;
+  --pink-ink: #38031e;
+
+  --muted: #787878;
+
+  /* Hard-shadow scale: thinner border + closer shadow on small screens, full weight from lg up.
+     Centralized as custom properties so every .card-hard/.panel/.badge-sticky/.btn-* surface
+     scales together instead of each needing its own breakpoint variant. */
+  --bw: 2px;
+  --bw-thick: 2.5px;
+  --so: 4px;
+
+  /* Height of the decorative scalloped-wave divider (public/figma/decor-vector.svg) between the
+     header-to-peek-inside block, the FromComini photo grid, and the wherever-to-footer block in
+     page.tsx - and the exact negative margin that tucks the next block up underneath it, so the
+     seam stays in registration regardless of which of the three blocks is doing the measuring. */
+  --decor-h: 48px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --bw: 3px;
+    --bw-thick: 3px;
+    --so: 8px;
+    --decor-h: 96px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  :root {
+    --decor-h: 72px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  /* Marquee.tsx's full-bleed trick (100vw + a centering transform) is exact against the layout
+     viewport, but `vw` units include the scrollbar's own width on most desktop browsers - so the
+     element ends up a few px wider than the page's actual visible content area, which otherwise
+     shows up as a permanent horizontal scrollbar for that difference. */
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--cta);
+  color: var(--ink);
+}
+
+/* Hard-shadow surface: flat fill, uniform ink border, offset black shadow - no blur, no
+   gradient. Layered as `components` so a Tailwind bg-* utility on the same element still wins
+   over the default background here (unlayered CSS otherwise beats @layer in the cascade). */
+@layer components {
+  .panel {
+    border: var(--bw-thick) solid var(--ink);
+    border-radius: 30px;
+    background: var(--paper-white);
+  }
+
+  .card-hard {
+    border: var(--bw-thick) solid var(--ink);
+    border-radius: 15px;
+    background: var(--paper-white);
+    box-shadow: var(--so) var(--so) 0 0 var(--ink);
+  }
+
+  .badge-sticky {
+    border: var(--bw-thick) solid var(--ink);
+    border-radius: 8px;
+    background: var(--paper-white);
+  }
+
+  .btn-cta {
+    border: var(--bw) solid var(--ink);
+    border-radius: 9999px;
+    background: var(--cta);
+    box-shadow: 0 var(--so) 0 0 var(--cta-shadow);
+  }
+
+  /* Secondary hero CTA ("Explore"): same border weight + hard shadow as .btn-cta, white fill
+     instead of yellow. */
+  .btn-cta-white {
+    border: var(--bw) solid var(--ink);
+    border-radius: 9999px;
+    background: var(--paper-white);
+    box-shadow: 0 var(--so) 0 0 var(--cta-shadow);
+  }
+
+  .btn-ghost {
+    border: var(--bw) solid var(--ink);
+    border-radius: 9999px;
+    background: var(--paper-white);
+    box-shadow: 0 max(2px, calc(var(--so) - 2px)) 0 0 var(--ink);
+  }
+
+  /* Desktop content width: 85% of the viewport, capped so it doesn't sprawl on ultrawide
+     monitors. Below lg it's just full-width-with-padding (handled by each section's own px-*). */
+  .section-w {
+    width: 100%;
+    margin-inline: auto;
+  }
+  @media (min-width: 1024px) {
+    .section-w {
+      max-width: min(85vw, 1600px);
+    }
+  }
+}
+
+/* HowItWorksSection's mobile step-progress bar: the current step's segment fills left-to-right
+   over --step-ms, "stories"-style, so the auto-advance to the next card is visibly timed rather
+   than an unexplained jump. transform (not width) so the browser never has to reflow mid-fill. */
+@keyframes how-it-works-step-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* PeekGallery's per-resource "hint" badge (see StoryPreview.tsx) - masked slide, once per
+   distinct hint text (keyed on the text itself, so it doesn't re-flash on every beat - only
+   when what the badge SAYS actually changes).
+   `clip-path: inset(0 0 0 L%)` clips away everything left of L% - as L falls from 100% to 0%
+   the visible region's left edge sweeps from the right side over to the left, reading as a
+   reveal that travels right-to-left ("slide-in from right to left"); running the same property
+   back up from 0% to 100% at the end conceals the content starting at ITS left edge and eating
+   rightward ("slide-out from left to right") - both directions are one property, just played
+   forwards then backwards, so a single keyframe list covers both without a separate exit
+   animation. `translateX` rides along for the actual slide motion the clip is masking.
+   forwards fill-mode so it stays fully clipped (hidden) at the end rather than snapping back. */
+@keyframes peek-hint-slide {
+  0% {
+    clip-path: inset(0 0 0 100%);
+    transform: translateX(16px);
+  }
+  12% {
+    clip-path: inset(0 0 0 0%);
+    transform: translateX(0);
+  }
+  82% {
+    clip-path: inset(0 0 0 0%);
+    transform: translateX(0);
+  }
+  100% {
+    clip-path: inset(0 0 0 100%);
+    transform: translateX(16px);
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Marquee.tsx: a continuously-scrolling ticker (not a discrete step-and-hold like HeroTicker) -
+   the track renders two back-to-back copies of its items and slides left by exactly one copy's
+   width (-50%) on a linear infinite loop, so the reset from 100% back to 0% lands on identical
+   content and reads as an uninterrupted, never-pausing flow. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

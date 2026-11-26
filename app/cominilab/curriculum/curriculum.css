@@ -1,0 +1,159 @@
+/* /cominilab/curriculum: the subject map, styled like the app's parent Curriculum screen (PCurriculum). */
+
+/* ---------- hero ---------- */
+.cu-hero { padding: 56px 0 40px; border-bottom: 1.5px solid var(--line); }
+.cu-hero-in { display: grid; gap: 40px; justify-items: center; text-align: center; }
+.cu-hero-copy { display: grid; gap: 20px; justify-items: center; }
+.cu-hero-lede { max-width: 30ch; }
+.cu-hero-phone { display: none; margin: 0; position: relative; justify-self: center; width: 250px; }
+.cu-hero-phone { height: 340px; }
+.cu-hero-phone .lab-phone { height: 100%; overflow: hidden; border-radius: 34px 34px 0 0; padding-bottom: 0; box-shadow: none; }
+.cu-hero-phone .lab-phone-screen { border-radius: 26px 26px 0 0; }
+/* (the note on the phone was removed) */
+.cu-hero-note { position: absolute; left: -48px; top: 96px; rotate: -4deg; font-size: 1.3rem; padding: 10px 12px 8px; }
+@media (min-width: 768px) {
+  .cu-hero { padding: 72px 0 0; }
+  .cu-hero-in { gap: 48px; }
+  .cu-hero-phone { display: block; }
+}
+@media (min-width: 1024px) {
+  .cu-hero-phone { width: 340px; height: 360px; }
+  .cu-hero-lede { max-width: 34ch; }
+}
+
+/* ---------- explorer band ---------- */
+.cu-band { background: var(--paper-2); border-top: 1.5px solid var(--line); border-bottom: 1.5px solid var(--line); padding: 48px 0 72px; }
+@media (min-width: 1024px) { .cu-band { padding: 64px 0 96px; } }
+.cu-explorer { scroll-margin-top: calc(var(--nav-h) + 16px); max-width: 980px; margin: 0 auto; }
+
+@keyframes cuIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* landing: three picture cards */
+.cu-pick-title { margin-bottom: 28px; }
+.cu-tiles { display: grid; gap: 44px 28px; grid-template-columns: 1fr; animation: cuIn 0.45s var(--ease-rise) both; }
+@media (min-width: 560px) { .cu-tiles { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 900px) { .cu-tiles { grid-template-columns: repeat(3, 1fr); } }
+.cu-tile { display: grid; gap: 34px; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: center; cursor: pointer; }
+.cu-tile-card { transition: translate 0.18s var(--ease-pop), box-shadow 0.18s ease, rotate 0.3s var(--ease-pop); }
+.cu-tile .lab-card-pic { aspect-ratio: 5 / 4; background: #fff; }
+.cu-tile .lab-card-pic img { object-fit: cover; }
+.cu-tile:hover .cu-tile-card { translate: 0 -4px; rotate: 0deg !important; }
+.cu-tile:active .cu-tile-card { translate: 3px 3px; box-shadow: 4px 4px 0 var(--shade-card); }
+.cu-tile:focus-visible { outline: none; }
+.cu-tile:focus-visible .cu-tile-card { outline: 2px solid var(--teal-700); outline-offset: 4px; }
+.cu-tile-tag { font-size: 1.1rem; font-weight: 700; padding: 8px 14px; }
+.cu-tile-tag img { width: 32px; height: auto; }
+.cu-tile-meta { font-size: 0.95rem; color: var(--ink-muted); font-weight: 500; }
+
+/* subject view: back, subject chips */
+.cu-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-bottom: 32px; }
+.cu-back span { white-space: nowrap; }
+.cu-chips { display: flex; gap: 10px; overflow-x: auto; padding: 2px 6px 8px 2px; margin: 0 -6px -8px 0; scrollbar-width: none; max-width: 100%; }
+.cu-chips::-webkit-scrollbar { display: none; }
+.cu-chip { display: inline-flex; align-items: center; gap: 10px; flex: none; min-height: 52px; padding: 0 18px 0 12px; background: var(--paper); border: 1.5px solid var(--line); box-shadow: var(--press); font: inherit; font-weight: 600; font-size: 1.05rem; color: var(--ink); cursor: pointer; transition: translate 0.18s var(--ease-pop), box-shadow 0.18s ease; }
+.cu-chip img { width: 30px; height: auto; }
+.cu-chip:hover { translate: 0 -2px; }
+.cu-chip:active { translate: 3px 3px; box-shadow: 1px 1px 0 var(--shade); }
+.cu-chip[aria-pressed="true"] { background: var(--note); border-color: var(--ink); box-shadow: none; translate: none; cursor: default; }
+
+.cu-view { animation: cuIn 0.4s var(--ease-rise) both; }
+.cu-head { display: grid; gap: 20px; align-items: end; margin-bottom: 28px; }
+.cu-head-sub { margin-top: 8px; }
+.cu-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (min-width: 820px) {
+  .cu-head { grid-template-columns: 1fr auto; }
+  .cu-filters { grid-template-columns: 170px 210px; }
+}
+.cu-select { display: grid; gap: 6px; min-width: 0; }
+.cu-select-label { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); }
+.cu-select-box { position: relative; display: block; }
+.cu-select-box select { appearance: none; width: 100%; height: 50px; padding: 0 40px 0 14px; border: 1.5px solid var(--line); border-radius: 0; background: var(--paper); font: inherit; font-weight: 600; font-size: 1rem; color: var(--ink); cursor: pointer; text-overflow: ellipsis; }
+.cu-select-box select:focus-visible { outline: 2px solid var(--teal-700); outline-offset: -2px; }
+.cu-select-box svg { position: absolute; right: 12px; top: 50%; translate: 0 -50%; pointer-events: none; }
+
+.cu-count { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+.cu-count b { font-size: 1.15rem; }
+.cu-count span { font-size: 0.95rem; color: var(--ink-muted); }
+
+/* concept rows: the app's Curriculum list item */
+.cu-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.cu-row { background: var(--paper); border: 1.5px solid var(--line); box-shadow: var(--press); }
+.cu-row.is-open { border-color: #bdbdbd; }
+.cu-row-head { display: flex; align-items: center; gap: 16px; width: 100%; min-height: 84px; padding: 12px 16px 12px 12px; border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer; }
+.cu-row-head:active { background: var(--paper-2); }
+.cu-row-head:focus-visible { outline-offset: -3px; }
+.cu-row-icon { display: grid; place-items: center; flex: none; width: 58px; height: 58px; background: var(--note-soft); color: var(--ink); }
+.cu-row-glyph { width: 30px; height: 30px; }
+.cu-row-text { display: grid; gap: 8px; flex: 1; min-width: 0; justify-items: start; }
+.cu-row-name { font-weight: 700; font-size: 1.12rem; line-height: 1.25; }
+.cu-row-sub { font-size: 0.92rem; color: var(--ink-muted); font-weight: 500; }
+.cu-row.is-quiet .cu-row-name { color: var(--ink-soft); }
+.cu-row.is-quiet .cu-row-icon { background: var(--paper-2); }
+.cu-row-chev { flex: none; display: grid; place-items: center; width: 32px; transition: rotate 0.25s var(--ease-rise); }
+.cu-row.is-open .cu-row-chev { rotate: 180deg; }
+
+/* read-only coverage strip under the name */
+.cu-strip { display: flex; gap: 4px; }
+.cu-strip i { display: block; width: 14px; height: 8px; background: var(--line-soft); }
+.cu-strip i.on { background: var(--ink-soft); }
+
+.cu-row-panel { padding: 4px 16px 22px; border-top: 1.5px solid var(--paper-2); animation: cuIn 0.3s var(--ease-rise) both; }
+@media (min-width: 640px) { .cu-row-panel { padding: 6px 24px 26px 86px; } }
+.cu-stages { display: grid; grid-template-columns: repeat(auto-fill, minmax(58px, 1fr)); gap: 8px; margin: 14px 0 20px; }
+.cu-stage { display: grid; place-items: center; min-height: 44px; padding: 0 4px; border: 1.5px solid var(--line); border-radius: 0; background: var(--paper); box-shadow: 3px 3px 0 var(--shade); font: inherit; font-size: 0.92rem; font-weight: 600; color: var(--ink); cursor: pointer; font-variant-numeric: tabular-nums; transition: translate 0.15s var(--ease-pop), box-shadow 0.15s ease; }
+.cu-stage:active { translate: 2px 2px; box-shadow: 1px 1px 0 var(--shade); }
+.cu-stage[aria-pressed="true"] { background: var(--teal-50); border-color: var(--teal-700); box-shadow: none; translate: none; font-weight: 800; }
+.cu-stage.is-empty { background: var(--paper-2); border-color: var(--line); border-style: dashed; box-shadow: none; color: var(--ink-muted); cursor: default; font-weight: 500; }
+.cu-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.cu-goal { animation: cuIn 0.3s var(--ease-rise) both; }
+.cu-goal-age { font-size: 1.05rem; font-weight: 800; margin-bottom: 10px; }
+.cu-goal ul { margin: 0; padding-left: 1.3em; list-style: disc; display: grid; gap: 8px; max-width: 68ch; color: var(--ink-soft); }
+.cu-goal li { display: list-item; }
+.cu-goal li::marker { color: var(--teal-700); }
+
+/* ---------- closing call ---------- */
+.cu-end { padding: 88px 0 96px; }
+.cu-end-in { display: grid; justify-items: center; gap: 16px; text-align: center; }
+.cu-end-in .lab-lede { max-width: none; }
+.cu-end-in .lab-btn { margin-top: 12px; }
+.cu-end-star { line-height: 0; }
+
+@media (max-width: 479px) {
+  .cu-row-head { gap: 12px; min-height: 76px; }
+  .cu-row-icon { width: 50px; height: 50px; }
+  .cu-row-glyph { width: 26px; height: 26px; }
+  .cu-strip i { width: 10px; }
+  .cu-back span { display: none; }
+  .cu-back { width: 48px; padding: 0; }
+}
+
+/* round 4: the app's content, with the headline under each name instead of the coverage strip */
+.cu-soon { color: var(--ink-muted); }
+.cu-row:not(.is-quiet) .cu-row-sub { color: var(--ink-soft); }
+
+/* the coverage bar sits in the row beside the chevron (closed rows only): one block per age, 5 to 13 */
+.cu-row-head .cu-strip { flex: none; align-self: center; }
+.cu-strip i.at { outline: 1.5px solid var(--ink); outline-offset: 1px; }
+@media (max-width: 559px) { .cu-row-head .cu-strip { gap: 3px; } .cu-row-head .cu-strip i { width: 7px; height: 7px; } }
+
+/* round 6: the half-hidden phone shows on phones too, and the age chips run in one row that scrolls sideways */
+.cu-hero-phone { display: block; }
+@media (max-width: 767px) {
+  .cu-hero-phone { width: 240px; height: 300px; }
+  /* phones: the curriculum opening sizes to its content instead of filling the screen (it left a big gap up top) */
+  main .cu-hero { min-height: 0; padding: 48px 0 0; }
+  .cu-hero-in { gap: 32px; }
+}
+.cu-stages { display: flex; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; padding: 2px 4px 8px 2px; margin-right: -4px; }
+.cu-stages::-webkit-scrollbar { display: none; }
+.cu-stage { flex: none; min-width: 62px; scroll-snap-align: start; }
+/* keep the scrolling chip row from widening the list (grid items default to their content's width) */
+.cu-list { grid-template-columns: minmax(0, 1fr); }
+.cu-row, .cu-row-panel, .cu-explorer, .cu-view { min-width: 0; }
+
+/* round 7: a bigger phone on wide screens, and a quiet button down to the explorer */
+@media (min-width: 1024px) { .cu-hero-phone { width: 400px; height: 440px; } }
+.cu-band { scroll-margin-top: var(--nav-h); }
+html:has(.cu-band) { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html:has(.cu-band) { scroll-behavior: auto; } }

@@ -1,0 +1,35 @@
+/* The parent bear's body motions per mood (ParentBear.tsx). The face is morphed in script; only the body and the
+   extras live here. Motions run on .pb-body, transform-origin at the chin, so the bear squashes on the ground. */
+.pb .pb-body { transform-box: view-box; transform-origin: 50% 92%; }
+.pb .pb-x { opacity: 0; transform: scale(.4); transform-box: fill-box; transform-origin: center; transition: opacity .2s ease, transform .34s cubic-bezier(.22, 1, .36, 1); }
+.pb .pb-x.on { opacity: 1; transform: none; }
+
+.pb-idle .pb-body { animation: pbBreathe 2.8s ease-in-out infinite; }
+@keyframes pbBreathe { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.02, .98); } }
+.pb-happy .pb-body, .pb-proud .pb-body { animation: pbHop 1.1s cubic-bezier(.34, 1.4, .64, 1) infinite; }
+@keyframes pbHop { 0%, 60%, 100% { transform: translateY(0) scale(1, 1); } 20% { transform: translateY(-10%) scale(.96, 1.04); } 40% { transform: translateY(0) scale(1.04, .96); } }
+.pb-think .pb-body { animation: pbTilt 3s ease-in-out infinite; }
+@keyframes pbTilt { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-6deg); } }
+.pb-worried .pb-body { animation: pbFret 1.6s ease-in-out infinite; }
+@keyframes pbFret { 0%, 100% { transform: translateX(0) rotate(0); } 25% { transform: translateX(-1.5%) rotate(-2deg); } 75% { transform: translateX(1.5%) rotate(2deg); } }
+.pb-worried .pb-drop.on { animation: pbDrop 1.6s ease-in infinite; }
+@keyframes pbDrop { 0% { transform: translateY(0); opacity: 1; } 80% { transform: translateY(6px); opacity: 1; } 100% { transform: translateY(8px); opacity: 0; } }
+.pb-tired .pb-body { animation: pbSag 3.6s ease-in-out infinite; }
+@keyframes pbSag { 0%, 100% { transform: translateY(0) scale(1, 1) rotate(0); } 50% { transform: translateY(2%) scale(1.03, .96) rotate(-3deg); } }
+.pb-tired .pb-zz { animation: pbZz 3.6s ease-in-out infinite; }
+@keyframes pbZz { 0% { opacity: 0; transform: translate(-3px, 5px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translate(3px, -7px); } }
+.pb-wow .pb-body { animation: pbPop 1.6s ease-in-out infinite; }
+@keyframes pbPop { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.08); } 30% { transform: scale(1); } }
+.pb-look .pb-body { animation: pbBreathe 2.8s ease-in-out infinite; }
+.pb-calm .pb-body { animation: pbSway 3.4s ease-in-out infinite; }
+@keyframes pbSway { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+@media (prefers-reduced-motion: reduce) { .pb *, .pb .pb-body { animation: none !important; transition: none !important; } }
+/* with a body: the head moves on the shoulders (origin at the neck), the sweater breathes slowly */
+.pb-full .pb-body { transform-origin: 50% 66%; }
+.pb-full .pb-torso { transform-box: view-box; transform-origin: 50% 100%; animation: pbChest 3.4s ease-in-out infinite; }
+@keyframes pbChest { 0%, 100% { transform: scale(1, 1); } 50% { transform: scale(1.015, 1.02); } }
+
+/* overwhelmed: a small fast shake of the head */
+.pb-dizzy .pb-body { animation: pbDizzy 0.5s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 90%; }
+@keyframes pbDizzy { 0%, 100% { rotate: 0deg; } 25% { rotate: -3deg; } 75% { rotate: 3deg; } }
+@media (prefers-reduced-motion: reduce) { .pb-dizzy .pb-body { animation: none; } }

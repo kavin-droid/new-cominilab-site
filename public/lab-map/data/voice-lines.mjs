@@ -1,0 +1,63 @@
+// Everything the map says, recorded once in the storyteller voice (owner, round 13: "use the storyteller voice" in the
+// map, not the browser's). Read by comini-voice/record.mjs; the map plays the clips by their exact words
+// (data/voice-manifest.json, clips in voice/) and stays silent for any line without one.
+// The fixed lines come from map.js; "Off to <place>!" uses each activity's `say` in data/activities.js. Regenerate
+// both together when a line or a landmark's words change.
+const VOICE = { voice: 'en-in-storyteller-9', model: 'gemini-3.8-flash-tts' };
+
+export const LINES = [
+  "Pick a place to go!",
+  "See you tomorrow!",
+  "Tap play!",
+  "You got a star!",
+  "Get all the stars to open the gate!",
+  "All done! The gate is opening!",
+  "A new land!",
+  "Play again?",
+  "Off we go!",
+  "A new land for tomorrow!",
+  "Another star!",
+  "Off to the ducks!",
+  "Off to the fruit!",
+  "Off to the sheep!",
+  "Off to the chicks!",
+  "Off to the pairs!",
+  "Off to the socks!",
+  "Off to the raccoons!",
+  "Off to the frog!",
+  "Off to the apples!",
+  "Off to the toys!",
+  "Off to the van!",
+  "Off to the jumps!",
+  "Off to the bunny!",
+  "Off to the blocks!",
+  "Off to the ball!",
+  "Off to the eggs!",
+  "Off to the dots!",
+  "Off to the juice!",
+  "Off to the tart!",
+  "Off to the piggy banks!",
+  "Off to the treasure!",
+  "Off to the flowers!",
+  "Off to the dice!",
+  "Off to the cookies!",
+  "Off to the lantern!",
+  "Off to the cupcakes!",
+  "Off to the pizza!",
+  "Off to the stars!",
+  "Off to the chart!",
+  "Off to the flag!",
+  "Off to the sweets!",
+  "Off to the chocolate!",
+  "Off to the scales!",
+  "Off to the garden!",
+  "Off to the strawberries!",
+  "Off to the books!",
+  "Off to the jar!",
+  "Off to the snacks!",
+  "Off to the burger!",
+  "Off to the bread!",
+  "Off to the boat!",
+];
+
+export const VOICE_LINES = LINES.map((text) => ({ text, ...VOICE }));

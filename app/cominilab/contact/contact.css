@@ -1,0 +1,60 @@
+/* /cominilab/contact: copy left, the form in a white box right. Inputs follow the app's .t-in (tl.css). */
+
+.ct-page { padding: 56px 0 96px; }
+.ct-grid { display: grid; gap: 40px; align-items: start; }
+.ct-copy { display: grid; gap: 20px; justify-items: start; }
+.ct-art { position: relative; display: none; margin-top: 16px; width: 260px; }
+.ct-doodle { width: 220px; height: auto; rotate: -3deg; padding: 8px; background: var(--paper); border: 1.5px solid var(--line-soft); box-shadow: var(--press-card); }
+.ct-nest { position: absolute; right: -24px; bottom: -28px; }
+@media (min-width: 1000px) {
+  .ct-page { padding: 80px 0 120px; }
+  .ct-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 72px; }
+  .ct-art { display: block; }
+}
+
+.ct-box { background: var(--paper); border: 1.5px solid var(--line); box-shadow: var(--press-card); padding: 24px 18px 28px; }
+@media (min-width: 640px) { .ct-box { padding: 36px 36px 40px; } }
+
+.ct-form { display: grid; gap: 22px; }
+.ct-key { margin-top: -4px; }
+.ct-row { display: grid; gap: 22px; }
+@media (min-width: 640px) { .ct-row { grid-template-columns: 1fr 1fr; gap: 20px; } }
+
+/* a field: the yellow note label sits on the top edge of a white box */
+.ct-field { display: grid; justify-items: start; min-width: 0; }
+.ct-label { position: relative; z-index: 1; display: inline-flex; align-items: baseline; gap: 4px; margin: 0 0 -6px 10px; padding: 6px 10px 4px; background: var(--note); color: #111; font-family: var(--font-lab-hand), "Comic Sans MS", cursive; font-size: 1.15rem; line-height: 1; rotate: -1.5deg; }
+.ct-req { font-family: var(--font-lab-sans), sans-serif; font-weight: 800; color: #9c1b57; }
+.ct-opt { font-size: 0.95rem; color: #4a4a4a; }
+.ct-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.ct-in { display: block; width: 100%; height: 50px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 0; background: var(--paper); font: inherit; font-size: 1rem; color: var(--ink); box-sizing: border-box; transition: border-color 0.15s ease; }
+.ct-in::placeholder { color: #7a7a7a; }
+.ct-in:hover { border-color: #bdbdbd; }
+.ct-in:focus, .ct-in:focus-visible { outline: 2px solid var(--teal-700); outline-offset: -2px; border-color: var(--teal-700); }
+.ct-area { height: auto; min-height: 140px; padding: 14px 16px; resize: vertical; line-height: 1.5; }
+.ct-select { position: relative; display: block; width: 100%; }
+.ct-select select { appearance: none; padding-right: 44px; cursor: pointer; }
+.ct-select select:invalid { color: #7a7a7a; }
+.ct-select select option { color: var(--ink); }
+.ct-select svg { position: absolute; right: 14px; top: 50%; translate: 0 -50%; pointer-events: none; }
+
+/* errors: a red line on the box and plain words under it */
+.ct-field.has-err .ct-in { border-color: #c0362c; box-shadow: inset 0 0 0 1px #c0362c; }
+.ct-err { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 0.92rem; font-weight: 600; color: #a52a21; animation: ctIn 0.25s var(--ease-rise) both; }
+.ct-err::before { content: "!"; display: grid; place-items: center; flex: none; width: 18px; height: 18px; border-radius: 50%; background: #c0362c; color: #fff; font-size: 0.75rem; font-weight: 800; }
+
+.ct-send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 6px; }
+.ct-summary { font-size: 0.95rem; font-weight: 600; color: #a52a21; }
+.ct-summary:empty { display: none; }
+@media (max-width: 479px) { .ct-send .lab-btn { width: 100%; } }
+
+/* sent */
+.ct-done { display: grid; justify-items: center; gap: 12px; padding: 36px 8px 28px; text-align: center; animation: ctIn 0.4s var(--ease-rise) both; }
+.ct-done:focus { outline: none; }
+.ct-done-stars { display: flex; align-items: flex-end; gap: 6px; margin-bottom: 6px; }
+.ct-done-stars svg { animation: labPop 0.45s var(--ease-pop) both; }
+.ct-done-stars svg:nth-child(2) { animation-delay: 0.1s; }
+.ct-done-stars svg:nth-child(3) { animation-delay: 0.2s; }
+.ct-done-title { font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.02em; }
+
+@keyframes ctIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }

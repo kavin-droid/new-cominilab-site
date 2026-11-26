@@ -1,0 +1,85 @@
+/* /cominilab/our-story: the founders' letter. Page-only styles; shared tokens live in ../lab.css. */
+
+.st { padding: 40px 0 96px; }
+@media (min-width: 768px) { .st { padding: 64px 0 128px; } }
+.st-wrap { width: 100%; max-width: calc(820px + 2 * var(--gutter)); margin: 0 auto; padding: 0 12px; }
+@media (min-width: 768px) { .st-wrap { padding: 0 var(--gutter); } }
+
+/* ---------- heading row with the opened envelope ---------- */
+.st-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; padding: 0 4px; margin-bottom: 28px; }
+.st-env { position: relative; flex: none; width: 132px; margin-top: 46px; rotate: 6deg; }
+@media (min-width: 768px) { .st-env { width: 200px; margin-top: 70px; margin-right: 8px; } }
+.st-env-body { position: relative; aspect-ratio: 200 / 130; background: #fff4cc; border: 1.5px solid #efe3b4; }
+.st-env-lines { position: absolute; inset: 0; width: 100%; height: 100%; }
+.st-env-flap { position: absolute; z-index: 2; left: 0; top: 0; width: 100%; height: 54%; transform-origin: 50% 0; transform: scaleY(-1); overflow: visible; }
+.st-stamp { position: absolute; top: 8%; right: 7%; width: 27%; aspect-ratio: 5 / 6; display: grid; place-items: center; background: #fff; outline: 1.5px dashed #c9c9c9; outline-offset: -4px; border: 1.5px solid var(--line); }
+.st-stamp svg { width: 92%; height: auto; }
+.st-postmark { position: absolute; top: 10%; right: 26%; width: 50%; height: auto; opacity: 0.9; }
+
+/* ---------- the sheet ---------- */
+.st-sheet { position: relative; }
+.st-under { position: absolute; inset: 10px -4px -8px 6px; background: #fff4cc; border: 1.5px solid #efe3b4; rotate: 1.4deg; }
+.st-letter {
+  position: relative;
+  padding: 36px 22px 44px;
+  background-color: #fffbe6;
+  background-image:
+    linear-gradient(to bottom, transparent calc(33.3% - 1px), rgba(196, 160, 40, 0.08) 33.3%, transparent calc(33.3% + 6px)),
+    linear-gradient(to bottom, transparent calc(66.6% - 1px), rgba(196, 160, 40, 0.08) 66.6%, transparent calc(66.6% + 6px));
+  border: 1.5px solid #efe3b4;
+  display: flex; flex-direction: column; gap: 22px;
+  font-size: 1.08rem; line-height: 1.75; color: var(--ink);
+}
+@media (min-width: 768px) { .st-letter { padding: 64px 72px 72px; gap: 26px; font-size: 1.15rem; } }
+.st-date { align-self: flex-end; font-weight: 600; color: var(--ink-soft); font-size: 0.98rem; letter-spacing: 0.01em; }
+.st-open { font-size: clamp(1.35rem, 2.6vw, 1.7rem); line-height: 1.3; font-weight: 800; letter-spacing: -0.02em; }
+.st-hi { font-weight: 700; }
+.st-a { font-weight: 600; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; text-decoration-color: var(--teal); }
+.st-a:hover { text-decoration-color: var(--ink); }
+
+/* ---------- photos taped onto the letter ---------- */
+.st-photos { display: grid; gap: 34px; justify-items: center; padding: 18px 8px 10px; }
+@media (min-width: 640px) { .st-photos { grid-template-columns: repeat(3, 1fr); gap: 18px; padding: 22px 0 12px; } }
+.st-photo { position: relative; margin: 0; width: 100%; max-width: 300px; padding: 8px; background: #fff; border: 1.5px solid var(--line-soft); box-shadow: 5px 5px 0 var(--shade-card); }
+.st-photo img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--paper-2); }
+.st-photos-wide .st-photo img { aspect-ratio: 4 / 3; }
+.st-photo::before { content: ""; position: absolute; z-index: 1; top: -11px; left: 50%; width: 74px; height: 22px; translate: -50% 0; rotate: -4deg; background: rgba(226, 219, 196, 0.78); border-left: 1px dashed rgba(255, 255, 255, 0.7); border-right: 1px dashed rgba(255, 255, 255, 0.7); }
+.st-photo:nth-child(2)::before { rotate: 5deg; }
+@media (max-width: 639px) {
+  .st-photo:nth-child(odd) { justify-self: start; margin-left: 4px; }
+  .st-photo:nth-child(even) { justify-self: end; margin-right: 4px; }
+}
+
+/* ---------- signature ---------- */
+.st-sign { margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.st-sign-name { font-family: var(--font-lab-hand), "Comic Sans MS", cursive; font-size: clamp(1.9rem, 4.4vw, 2.6rem); line-height: 1.1; color: #1a1a1a; transform-origin: left center; }
+.st-sign-note { font-size: 0.95rem; color: var(--ink-muted); }
+
+/* ---------- call to action ---------- */
+.st-cta { display: flex; flex-direction: column; align-items: center; gap: 18px; margin-top: 64px; text-align: center; }
+.st-cta-q { font-size: clamp(1.3rem, 2.4vw, 1.6rem); font-weight: 700; letter-spacing: -0.01em; }
+@media (max-width: 420px) { .st-cta .lab-btn { width: 100%; } }
+
+/* ---------- entrance: the flap opens, the letter slides out of it ---------- */
+@keyframes stFlap { from { transform: scaleY(1); } to { transform: scaleY(-1); } }
+@keyframes stEnv { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+@keyframes stSheet { from { opacity: 0; transform: translateY(44px); } to { opacity: 1; transform: none; } }
+@keyframes stPhoto { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
+.st-env { animation: stEnv 0.5s var(--ease-rise) both; }
+.st-env-flap { animation: stFlap 0.55s var(--ease-rise) 0.35s both; }
+.st-sheet { animation: stSheet 0.9s var(--ease-rise) 0.7s both; }
+.st-photos:first-of-type .st-photo { animation: stPhoto 0.45s var(--ease-pop) both; }
+.st-photos:first-of-type .st-photo:nth-child(1) { animation-delay: 1.35s; }
+.st-photos:first-of-type .st-photo:nth-child(2) { animation-delay: 1.45s; }
+.st-photos:first-of-type .st-photo:nth-child(3) { animation-delay: 1.55s; }
+@media (prefers-reduced-motion: reduce) {
+  .st-env, .st-env-flap, .st-sheet, .st-photo { animation: none !important; }
+}
+
+/* round 4: phones. The letter's photos sit two to a row, the third centred under them, like prints laid on paper. */
+@media (max-width: 639px) {
+  .st-photos { grid-template-columns: 1fr 1fr; gap: 26px 14px; padding: 18px 2px 10px; }
+  .st-photos .st-photo { justify-self: stretch; margin: 0; padding: 5px; }
+  .st-photos .st-photo:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: 56%; }
+  .st-photo::before { width: 52px; height: 16px; top: -8px; }
+}

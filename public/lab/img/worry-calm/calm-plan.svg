@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- "No more planning": the loop of no-time.svg is gone. Today's plan is already made (five activities, one per
+       kind colour) and ticks itself off while the clock fills its 15 minutes; the parent's tea is still hot.
+       Classes cf-* are animated in app/cominilab/story/story.css. -->
+  <rect width="600" height="600" fill="#DCF1EF"/>
+  <circle cx="300" cy="300" r="214" fill="#C7E9E5"/>
+
+  <!-- the clipboard -->
+  <g transform="rotate(-3 300 320)">
+    <rect x="176" y="118" width="248" height="380" fill="#A8743F" transform="translate(10 10)"/>
+    <rect x="176" y="118" width="248" height="380" fill="#C98F55"/>
+    <rect x="196" y="148" width="208" height="330" fill="#FFFFFF"/>
+    <rect x="256" y="104" width="88" height="34" fill="#8B74D2"/>
+    <rect x="276" y="96" width="48" height="14" fill="#8B74D2"/>
+    <g font-family="'DM Sans', Arial, sans-serif" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="800" fill="#26232F">
+      <text x="214" y="186" font-size="22">Today</text>
+    </g>
+    <g>
+      <rect x="214" y="208" width="36" height="36" fill="#FFA94D"/><rect x="262" y="214" width="84" height="9" fill="#CFCDDA"/><rect x="262" y="230" width="56" height="7" fill="#ECEAF4"/>
+      <g class="cf-t cf-t1"><circle cx="380" cy="226" r="14" fill="#4AC1BD"/><path d="M373 226 L378 231 L388 220" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <rect x="214" y="258" width="36" height="36" fill="#A98BFF"/><rect x="262" y="264" width="84" height="9" fill="#CFCDDA"/><rect x="262" y="280" width="56" height="7" fill="#ECEAF4"/>
+      <g class="cf-t cf-t2"><circle cx="380" cy="276" r="14" fill="#4AC1BD"/><path d="M373 276 L378 281 L388 270" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <rect x="214" y="308" width="36" height="36" fill="#4AC1BD"/><rect x="262" y="314" width="84" height="9" fill="#CFCDDA"/><rect x="262" y="330" width="56" height="7" fill="#ECEAF4"/>
+      <g class="cf-t cf-t3"><circle cx="380" cy="326" r="14" fill="#4AC1BD"/><path d="M373 326 L378 331 L388 320" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <rect x="214" y="358" width="36" height="36" fill="#4AC1BD"/><rect x="262" y="364" width="84" height="9" fill="#CFCDDA"/><rect x="262" y="380" width="56" height="7" fill="#ECEAF4"/>
+      <g class="cf-t cf-t4"><circle cx="380" cy="376" r="14" fill="#4AC1BD"/><path d="M373 376 L378 381 L388 370" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+      <rect x="214" y="408" width="36" height="36" fill="#FF7EB6"/><rect x="262" y="414" width="84" height="9" fill="#CFCDDA"/><rect x="262" y="430" width="56" height="7" fill="#ECEAF4"/>
+      <g class="cf-t cf-t5"><circle cx="380" cy="426" r="14" fill="#4AC1BD"/><path d="M373 426 L378 431 L388 420" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+    </g>
+  </g>
+
+  <!-- the clock: a quarter of an hour -->
+  <g transform="translate(118 160)">
+    <circle r="62" fill="#FFFFFF" stroke="#8B74D2" stroke-width="8"/>
+    <path class="cf-wedge" d="M0 0 L0 -50 A50 50 0 0 1 50 0 Z" fill="#4AC1BD"/>
+    <circle r="6" fill="#26232F"/>
+    <path d="M0 0 L0 -40" stroke="#26232F" stroke-width="5" stroke-linecap="round"/>
+    <path d="M0 0 L24 0" stroke="#26232F" stroke-width="6" stroke-linecap="round"/>
+    <g font-family="'DM Sans', Arial, sans-serif" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="800" fill="#26232F" text-anchor="middle">
+      <text y="98" font-size="20">15 min</text>
+    </g>
+  </g>
+
+  <!-- the tea, still hot -->
+  <g transform="translate(486 456)">
+    <ellipse cx="0" cy="58" rx="62" ry="12" fill="#B8DDD8"/>
+    <path d="M-40 0 H40 L32 54 H-32 Z" fill="#FFFFFF" stroke="#8B74D2" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M40 10 Q66 12 62 30 Q58 44 36 40" fill="none" stroke="#8B74D2" stroke-width="6"/>
+    <rect x="-34" y="4" width="68" height="10" fill="#C98F55"/>
+    <g fill="none" stroke="#8B74D2" stroke-width="5" stroke-linecap="round">
+      <path class="cf-steam cf-st1" d="M-14 -12 Q-24 -28 -14 -42 Q-4 -56 -14 -70"/>
+      <path class="cf-steam cf-st2" d="M12 -12 Q2 -28 12 -42 Q22 -56 12 -70"/>
+    </g>
+  </g>
+</svg>

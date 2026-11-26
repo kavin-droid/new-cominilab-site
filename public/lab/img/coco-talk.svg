@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 2 100 102">
+  <g class="leaves"><g transform="translate(60 24) rotate(-40) scale(1.05)"><path d="M0 0 Q10 -14 26 -12 Q16 2 0 0 Z" fill="#5FB26B"/><path d="M2 -1 Q12 -9 23 -10.5" stroke="#4F9D69" stroke-width="1.4" fill="none" stroke-linecap="round"/></g><g transform="translate(56 26) rotate(-78) scale(0.8)"><path d="M0 0 Q10 -14 26 -12 Q16 2 0 0 Z" fill="#5FB26B"/><path d="M2 -1 Q12 -9 23 -10.5" stroke="#4F9D69" stroke-width="1.4" fill="none" stroke-linecap="round"/></g></g>
+  <circle cx="50" cy="60" r="41" fill="#8E5D3A"/><circle cx="50" cy="60" r="38" fill="#B07A4E"/>
+  <ellipse cx="50" cy="26" rx="27" ry="8" fill="#FFFBF2"/><ellipse cx="50" cy="27" rx="20" ry="5" fill="#F2E8D2"/>
+  <g class="face"><circle cx="38" cy="60" r="4.8" fill="#2B1A10"/><circle cx="62" cy="60" r="4.8" fill="#2B1A10"/><g class="mouth-a"><path d="M39 71 Q50 80.5 61 71" stroke="#2B1A10" stroke-width="3.2" fill="none" stroke-linecap="round"/></g><g class="mouth-b" style="display:none"><ellipse cx="50" cy="74" rx="4" ry="5" fill="#2B1A10"/></g></g>
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- Motion version of worry/no-time.svg. The scene: a relay round the day: calendar (the clock races), work (typing), cooking
+       (the lid rattles), the to-do list (the pencil reaches for it); each arrow lights up to hand over, and only the step it
+       points to moves. The list never gets its tick before the day comes round again. Classes nt-* are
+       animated in components/lab/motion/motion.css. -->
+  <defs>
+    <marker id="notime-head" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.2" markerHeight="3.2" orient="auto">
+      <path d="M2 1.5 L8.6 5 L2 8.5 Z" fill="#8B74D2" stroke="#8B74D2" stroke-width="1.4" stroke-linejoin="miter"/>
+    </marker>
+    <clipPath id="notime-cal"><rect x="92" y="276" width="116" height="92"/></clipPath>
+  </defs>
+  <rect width="600" height="600" fill="#DCF1EF"/>
+
+  <circle class="nt-c nt-c1" cx="150" cy="320" r="98" fill="#E0F0CC"/>
+  <circle class="nt-c nt-c2" cx="300" cy="162" r="98" fill="#CDE7F7"/>
+  <circle class="nt-c nt-c3" cx="450" cy="320" r="98" fill="#FCEBBE"/>
+
+  <g fill="none" stroke="#8B74D2" stroke-width="10" stroke-linecap="butt" marker-end="url(#notime-head)">
+    <path class="nt-a nt-a1" d="M114 198 Q132 138 178 114"/>
+    <path class="nt-a nt-a2" d="M422 114 Q468 138 486 198"/>
+    <path class="nt-a nt-a3" d="M466 432 Q452 458 402 460"/>
+    <path class="nt-a nt-a4" d="M198 460 Q148 458 134 432"/>
+  </g>
+
+  <!-- calendar + racing clock -->
+  <g class="nt-i nt-i1">
+    <g clip-path="url(#notime-cal)">
+      <rect x="92" y="276" width="116" height="92" fill="#FFFFFF"/>
+      <rect x="92" y="276" width="116" height="26" fill="#9C88DD"/>
+    </g>
+    <rect x="113" y="262" width="11" height="26" fill="#3B3757"/>
+    <rect x="176" y="262" width="11" height="26" fill="#3B3757"/>
+    <g fill="#CBC0F1">
+      <rect x="102" y="312" width="17" height="17"/><rect x="128" y="312" width="17" height="17"/>
+      <rect x="154" y="312" width="17" height="17"/><rect x="180" y="312" width="17" height="17"/>
+      <rect x="102" y="338" width="17" height="17"/><rect x="128" y="338" width="17" height="17"/>
+    </g>
+    <circle cx="200" cy="362" r="33" fill="#5E5488"/>
+    <circle cx="200" cy="362" r="25" fill="#FFFFFF"/>
+    <path class="nt-hour" d="M200 362 L211 368" stroke="#3B3757" stroke-width="5" fill="none"/>
+    <path class="nt-min" d="M200 362 V345" stroke="#3B3757" stroke-width="4" fill="none"/>
+  </g>
+
+  <!-- work -->
+  <g class="nt-i nt-i2">
+    <rect x="238" y="100" width="124" height="84" fill="#3B3757"/>
+    <rect x="248" y="110" width="104" height="64" fill="#EEF0FB"/>
+    <g class="nt-typing" fill="#8E86AE"><rect x="260" y="124" width="54" height="7"/><rect x="260" y="140" width="72" height="7"/><rect x="260" y="156" width="40" height="7"/></g>
+    <path d="M234 186 H366 L384 205 H216 Z" fill="#5E5488"/>
+    <rect x="284" y="191" width="32" height="6" fill="#3B3757"/>
+  </g>
+
+  <!-- cooking -->
+  <g class="nt-i nt-i3">
+    <g class="nt-steam" fill="none" stroke="#E2B35A" stroke-width="6" stroke-linecap="butt">
+      <path d="M436 236 q-9 8 0 16 q9 8 0 16"/>
+      <path d="M462 236 q-9 8 0 16 q9 8 0 16"/>
+    </g>
+    <g class="nt-lid"><rect x="440" y="271" width="20" height="14" fill="#3B3757"/><rect x="398" y="282" width="104" height="15" fill="#3B3757"/></g>
+    <rect x="386" y="306" width="128" height="10" fill="#3B3757"/>
+    <path d="M408 294 H492 V350 H408 Z" fill="#9C88DD"/>
+    <g class="nt-flame" fill="#FF9B3D">
+      <path d="M417 368 L417 358 L422 350 L426 342 L430 350 L435 358 L435 368 Z"/>
+      <path d="M441 368 L441 358 L446 350 L450 342 L454 350 L459 358 L459 368 Z"/>
+      <path d="M465 368 L465 358 L470 350 L474 342 L478 350 L483 358 L483 368 Z"/>
+    </g>
+    <g fill="#FFC86B"><path d="M421 368 L426 358 L431 368 Z"/><path d="M445 368 L450 358 L455 368 Z"/><path d="M469 368 L474 358 L479 368 Z"/></g>
+    <rect x="410" y="370" width="80" height="9" fill="#3B3757"/>
+  </g>
+
+  <!-- the to-do list that never gets its tick -->
+  <ellipse cx="300" cy="566" rx="138" ry="13" fill="#D6CEF3"/>
+  <g class="nt-i nt-i4"><g transform="rotate(-4 300 465)">
+    <rect x="228" y="380" width="144" height="176" fill="#E8B866"/>
+    <rect x="241" y="400" width="118" height="142" fill="#FFF9F0"/>
+    <rect x="258" y="388" width="84" height="18" fill="#7E66C6"/>
+    <rect x="270" y="368" width="60" height="30" fill="#7E66C6"/>
+    <rect x="293" y="376" width="14" height="12" fill="#FFFFFF"/>
+    <g fill="#DCD3F6">
+      <rect x="254" y="418" width="22" height="22"/>
+      <rect x="254" y="458" width="22" height="22"/>
+      <rect x="254" y="498" width="22" height="22"/>
+    </g>
+    <g fill="#8E86AE">
+      <rect x="288" y="425" width="56" height="8"/>
+      <rect x="288" y="465" width="52" height="8"/>
+      <rect x="288" y="505" width="48" height="8"/>
+    </g>
+  </g></g>
+  <g class="nt-burst" stroke="#F6C744" stroke-width="7" stroke-linecap="butt">
+    <path d="M343 366 L351 346"/><path d="M357 376 L373 362"/><path d="M362 392 L381 388"/>
+  </g>
+
+  <g class="nt-pencil">
+    <g transform="translate(398 494) rotate(128) scale(0.72)">
+      <rect x="0" y="-11" width="28" height="22" fill="#F4A3B4"/>
+      <rect x="20" y="-11" width="16" height="22" fill="#A5A9B8"/>
+      <rect x="36" y="-11" width="86" height="22" fill="#FFD34E"/>
+      <path d="M122 -11 L148 0 L122 11 Z" fill="#FBE3B8"/>
+      <path d="M140 -3.4 L148 0 L140 3.4 Z" fill="#3B3757"/>
+    </g>
+  </g>
+</svg>

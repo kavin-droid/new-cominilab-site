@@ -1,0 +1,54 @@
+/* Art for the approach page's AngleSlider (aa-*) and BridgePicker (bpx-*, bpw-*): small moving parts only. */
+.as-frame svg [class^="aa-"], .as-frame svg [class*=" aa-"],
+.bp-stage svg [class^="bpx-"], .bp-stage svg [class*=" bpx-"] { transform-box: fill-box; }
+
+/* ---- treasure island (AngleSlider, drawn in parts/art.tsx's flat style) ---- */
+.aa-wave { animation: aaWave 3.2s ease-in-out infinite; }
+@keyframes aaWave { 0%, 100% { translate: 0 0; opacity: 1; } 50% { translate: 5px 1px; opacity: 0.4; } }
+.aa-sway { transform-origin: 50% 50%; animation: aaSway 4s ease-in-out infinite; }
+.aa-sway2 { transform-origin: 50% 50%; animation: aaSway 4.6s ease-in-out -1.5s infinite; }
+@keyframes aaSway { 0%, 100% { rotate: -4deg; } 50% { rotate: 4deg; } }
+.aa-route { animation: aaRoute 1.4s linear infinite; }
+@keyframes aaRoute { to { stroke-dashoffset: -24; } }
+.aa-x { transform-origin: 50% 50%; animation: aaPulse 1.8s ease-in-out infinite; }
+@keyframes aaPulse { 0%, 100% { scale: 1; } 50% { scale: 1.14; } }
+.aa-spark { transform-origin: 50% 50%; animation: aaSpark 1.8s ease-in-out infinite; }
+.aa-spark.s2 { animation-delay: 0.6s; } .aa-spark.s3 { animation-delay: 1.2s; }
+@keyframes aaSpark { 0%, 100% { scale: 0.2; opacity: 0; } 50% { scale: 1; opacity: 1; } }
+.aa-flag { transform-origin: 0% 50%; animation: aaFlag 1.2s ease-in-out infinite; }
+@keyframes aaFlag { 0%, 100% { scale: 1 1; } 50% { scale: 0.82 1.08; } }
+.aa-needle { transform-origin: 50% 50%; animation: aaNeedle 5s ease-in-out infinite; }
+@keyframes aaNeedle { 0%, 100% { rotate: -8deg; } 50% { rotate: 8deg; } }
+.aa-peek { animation: aaPeek 2.6s ease-in-out infinite; }
+@keyframes aaPeek { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+
+/* ---- bridges ---- */
+.bpx-bob { animation: bpxBob 0.3s ease-in-out 0.45s 6 alternate; }
+@keyframes bpxBob { to { translate: 0 -4px; } }
+.bpx-smoke { animation: bpxSmoke 4s ease-in-out infinite; }
+@keyframes bpxSmoke { 0%, 100% { translate: 0 0; opacity: 1; } 50% { translate: 4px -6px; opacity: 0.7; } }
+.bpx-tw { transform-origin: 50% 50%; animation: bpxTw 2s ease-in-out infinite; }
+@keyframes bpxTw { 50% { opacity: 0.2; scale: 0.6; } }
+.bpx-glow { transform-origin: 50% 50%; animation: bpxTw 2.4s ease-in-out infinite reverse; }
+.bpx-shoot { animation: bpxShoot 5s ease-in 1s infinite; }
+@keyframes bpxShoot { 0%, 80% { opacity: 0; translate: 0 0; } 85% { opacity: 0.9; } 100% { opacity: 0; translate: 60px -20px; } }
+.bpx-float { animation: bpxFloat 3.4s ease-in-out infinite; }
+@keyframes bpxFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+
+/* cricket: the scoreboard flips from 3 to 5, the two new runs light up, the ball sails off the bat */
+.bp-stage svg.bpw-cricket .bp-two { animation: none; }
+.bpw-cricket .bpx-from { animation: bpxOut 0.25s ease 1.25s both; }
+.bpw-cricket .bpx-to { transform-origin: 50% 50%; animation: bpxPop 0.45s cubic-bezier(.3, 1.6, .5, 1) 1.3s both; }
+.bpw-cricket .bpx-pop { transform-origin: 50% 50%; animation: bpxPop 0.45s cubic-bezier(.3, 1.6, .5, 1) 0.8s both; }
+.bpw-cricket .bpx-pop.p2 { animation-delay: 1.05s; }
+.bpw-cricket .bpx-arc { stroke-dasharray: 6 6; animation: bpxArc 0.9s ease-out 0.45s both; }
+.bpw-cricket .bpx-swing { transform-origin: 85% 85%; animation: bpxSwing 0.5s cubic-bezier(.3, .8, .4, 1) 0.4s both; }
+@keyframes bpxOut { to { opacity: 0; } }
+@keyframes bpxPop { from { opacity: 0; scale: 0.3; } to { opacity: 1; scale: 1; } }
+@keyframes bpxArc { from { opacity: 0; clip-path: inset(0 0 0 100%); } to { opacity: 0.9; clip-path: inset(0 0 0 0); } }
+@keyframes bpxSwing { from { rotate: 70deg; } to { rotate: 0deg; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .as-frame svg *, .bp-stage svg * { animation: none !important; }
+  .bpw-cricket .bpx-from { opacity: 0; }
+}

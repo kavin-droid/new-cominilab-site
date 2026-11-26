@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- Motion version of worry/worksheet-battle.svg. The scene (7.5s a sheet): a neat worksheet; the pencil tilts into
+       writing, writes two answers (wrong ones, a different pair of sums on each of three sheets), then starts scribbling all over it; the sheet crumples into a ball that
+       flies onto the pile and a fresh sheet slides in. The pile starts empty and grows one ball a sheet (three sheets),
+       then rolls away and it starts again. Classes ws-* are animated in components/lab/motion/motion.css. -->
+  <rect width="600" height="600" fill="#FDE7EF"/>
+  <rect y="84" width="600" height="516" fill="#D49A64"/>
+  <g transform="translate(-8 -100)">
+
+  <!-- paper stack: the sheets underneath stay; the top sheet is the one that gets crumpled -->
+  <g transform="rotate(-9 290 390)">
+    <rect x="150" y="226" width="300" height="340" fill="#B97F4B" transform="translate(10 12)"/>
+    <rect x="132" y="234" width="300" height="340" fill="#E8E7F1" transform="rotate(3 282 404)"/>
+    <g class="ws-sheet">
+      <rect x="140" y="220" width="300" height="340" fill="#FFFFFF"/>
+      <!-- the contents pop in, group by group, once a fresh sheet has slid in -->
+      <g class="ws-c ws-c1"><rect x="164" y="246" width="110" height="8" fill="#CFCDDA"/><rect x="372" y="246" width="48" height="8" fill="#CFCDDA"/></g>
+      <g class="ws-c ws-c2">
+      <circle cx="190" cy="294" r="23" fill="#9C80D8"/>
+      <circle cx="245" cy="294" r="23" fill="#9C80D8"/>
+      <circle cx="300" cy="294" r="23" fill="#9C80D8"/>
+      <circle cx="355" cy="294" r="23" fill="#ECEAF4"/>
+      <circle cx="410" cy="294" r="23" fill="#ECEAF4"/>
+      </g>
+      <g class="ws-c ws-c3">
+      <rect x="168" y="333" width="42" height="42" fill="#7CC46B"/>
+      <rect x="223" y="333" width="42" height="42" fill="#7CC46B"/>
+      <rect x="278" y="333" width="42" height="42" fill="#ECEAF4"/>
+      <rect x="333" y="333" width="42" height="42" fill="#ECEAF4"/>
+      <rect x="388" y="333" width="42" height="42" fill="#ECEAF4"/>
+      </g>
+      <g class="ws-c ws-c4"><rect x="166" y="396" width="250" height="6" fill="#CFCDDA"/></g>
+      <g class="ws-c ws-c5">
+      <g fill="#EFEAFB">
+        <rect x="168" y="420" width="56" height="42"/><rect x="262" y="420" width="56" height="42"/><rect x="358" y="420" width="56" height="42"/>
+        <rect x="168" y="478" width="56" height="42"/><rect x="262" y="478" width="56" height="42"/><rect x="358" y="478" width="56" height="42"/>
+      </g>
+      <g fill="#8C88A2">
+        <rect x="232" y="438" width="22" height="6"/><rect x="240" y="430" width="6" height="22"/>
+        <rect x="327" y="432" width="22" height="6"/><rect x="327" y="444" width="22" height="6"/>
+        <rect x="232" y="496" width="22" height="6"/><rect x="240" y="488" width="6" height="22"/>
+        <rect x="327" y="490" width="22" height="6"/><rect x="327" y="502" width="22" height="6"/>
+      </g>
+      </g>
+      <!-- three sheets in turn, each with its own sums and two wrong answers (2+3=6, 3+1=5 / 4+2=8, 5+1=4 / 3+2=7, 1+4=6) -->
+      <g class="ws-set ws-set1">
+        <g class="ws-c ws-c6" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="700" font-size="30" fill="#3B3757" text-anchor="middle">
+          <text x="196" y="452">2</text><text x="290" y="452">3</text>
+          <text x="196" y="510">3</text><text x="290" y="510">1</text>
+        </g>
+        <g fill="none" stroke="#3B3757" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path class="ws-ink ws-ink1" pathLength="1" d="M395 430 Q386 425 381 436 Q377 448 381 453 Q386 458 392 454 Q397 448 391 443 Q385 440 380 446"/>
+          <path class="ws-ink ws-ink2" pathLength="1" transform="translate(0 58)" d="M395 428 H381 L379 440 Q390 435 395 444 Q397 455 386 456 Q379 456 376 451"/>
+        </g>
+      </g>
+      <g class="ws-set ws-set2">
+        <g class="ws-c ws-c6" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="700" font-size="30" fill="#3B3757" text-anchor="middle">
+          <text x="196" y="452">4</text><text x="290" y="452">2</text>
+          <text x="196" y="510">5</text><text x="290" y="510">1</text>
+        </g>
+        <g fill="none" stroke="#3B3757" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path class="ws-ink ws-ink1" pathLength="1" d="M386 441 Q378 437 379 431 Q381 426 386 426 Q393 426 393 432 Q392 437 386 441 Q378 445 378 450 Q379 456 386 456 Q394 456 394 450 Q393 445 386 441"/>
+          <path class="ws-ink ws-ink2" pathLength="1" transform="translate(0 58)" d="M391 456 V427 L377 447 H398"/>
+        </g>
+      </g>
+      <g class="ws-set ws-set3">
+        <g class="ws-c ws-c6" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="700" font-size="30" fill="#3B3757" text-anchor="middle">
+          <text x="196" y="452">3</text><text x="290" y="452">2</text>
+          <text x="196" y="510">1</text><text x="290" y="510">4</text>
+        </g>
+        <g fill="none" stroke="#3B3757" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+          <path class="ws-ink ws-ink1" pathLength="1" d="M378 428 H397 L385 456"/>
+          <path class="ws-ink ws-ink2" pathLength="1" transform="translate(0 58)" d="M395 430 Q386 425 381 436 Q377 448 381 453 Q386 458 392 454 Q397 448 391 443 Q385 440 380 446"/>
+        </g>
+      </g>
+      <!-- then the scribble, all over it -->
+      <path class="ws-ink ws-ink3" pathLength="1" fill="none" stroke="#E25A4F" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"
+        d="M176 330 L250 372 L190 400 L300 392 L214 440 L340 420 L226 476 L372 452 L250 512 L398 488 L292 540 L410 520"/>
+    </g>
+  </g>
+
+  <!-- the pile: empty at first; each crumpled sheet lands here, three in turn, then they roll away -->
+  <g class="ws-ball ws-ball1"><g>
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#B97F4B" stroke="#B97F4B" stroke-width="12" transform="translate(-8 10)"/>
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="12"/>
+    <g fill="none" stroke="#D5D4E0" stroke-width="4.5"><path d="M492 242 L484 268 L508 278"/><path d="M518 300 L534 282 L530 262"/></g>
+  </g></g>
+  <g class="ws-ball ws-ball2"><g transform="translate(21 121)">
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#B97F4B" stroke="#B97F4B" stroke-width="12" transform="translate(-8 10)"/>
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="12"/>
+    <g fill="none" stroke="#D5D4E0" stroke-width="4.5"><path d="M480 250 L506 268 L532 250"/><path d="M510 282 L520 306"/></g>
+  </g></g>
+  <g class="ws-ball ws-ball3"><g transform="translate(6 296)">
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#B97F4B" stroke="#B97F4B" stroke-width="12" transform="translate(-8 10)"/>
+    <path d="M462 252 L487 226 L522 232 L546 258 L548 296 L522 322 L484 320 L460 298 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="12"/>
+    <g fill="none" stroke="#D5D4E0" stroke-width="4.5"><path d="M492 242 L484 268 L508 278"/><path d="M518 300 L534 282 L530 262"/></g>
+  </g></g>
+
+  <!-- pencil: its own (0,0) is the tip, so it can tilt into writing around the tip -->
+  <g transform="translate(121 511)">
+    <g class="ws-pencil">
+      <g transform="translate(-121 -511)">
+        <g transform="translate(46 334) rotate(67) scale(1.3)">
+          <g transform="translate(5 6)" fill="#B97F4B">
+            <rect x="0" y="-11" width="122" height="22"/><path d="M118 -11 L148 0 L118 11 Z"/>
+          </g>
+          <rect x="0" y="-11" width="28" height="22" fill="#F4A3B4"/>
+          <rect x="20" y="-11" width="16" height="22" fill="#A5A9B8"/>
+          <rect x="36" y="-11" width="86" height="22" fill="#FFD34E"/>
+          <path d="M122 -11 L148 0 L122 11 Z" fill="#FBE3B8"/>
+          <path d="M140 -3.4 L148 0 L140 3.4 Z" fill="#3B3757"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  </g>
+</svg>

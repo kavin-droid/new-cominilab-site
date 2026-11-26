@@ -1,0 +1,91 @@
+/* "Learning has four parts" (components/lab/approach2/FourParts.tsx): one row of four polaroids and a switch.
+   Polaroid cards with the hard grey offset shadow, square corners, yellow notes, teal switch: the story pages' look. */
+
+.pa { display: grid; gap: 40px; margin-top: 40px; color: var(--ink, #0D0D0D); }
+.pa svg { display: block; }
+
+/* a polaroid */
+.pa-card { position: relative; margin: 0; padding: 10px 10px 16px; background: #FFFFFF; box-shadow: 10px 10px 0 #E5E5E5; }
+.pa-pic { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: #F4F3F8; }
+.pa-pic svg { width: 100%; height: 100%; }
+.pa-card figcaption { display: grid; gap: 8px; justify-items: start; align-content: start; margin-top: 14px; padding: 0 4px; }
+.pa-line { font-weight: 700; font-size: 1rem; line-height: 1.38; }
+.pa-body { font-size: 0.86rem; line-height: 1.45; color: #5A5A5A; }
+.pa-note { position: absolute; z-index: 3; top: -20px; left: 50%; translate: -50% 0; rotate: -3deg; white-space: nowrap; box-shadow: 3px 3px 0 rgba(13, 13, 13, 0.12); animation: paNote 0.5s var(--ease-pop) 0.75s both; }
+
+/* the part chip: "#1 Meaning" */
+.pa-tag { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px 3px 3px; font-weight: 800; font-size: 0.85rem; line-height: 1.2; background: #F1EEFB; }
+.pa-tag b { display: grid; place-items: center; min-width: 28px; height: 22px; padding: 0 5px; color: #FFFFFF; font-size: 0.78rem; }
+.pa-tag-meaning { background: #EFEAFB; } .pa-tag-meaning b { background: #8F6CD0; }
+.pa-tag-motivation { background: #FFE6F1; } .pa-tag-motivation b { background: #E0559A; }
+.pa-tag-mechanics { background: #DDF4F3; } .pa-tag-mechanics b { background: #2F9C98; }
+.pa-tag-measurement { background: #FFF1CC; } .pa-tag-measurement b { background: #D99A0B; }
+
+/* the switch: Ava's way / School's way */
+.pa-switch { position: relative; justify-self: center; display: grid; grid-template-columns: 1fr 1fr; background: #FFFFFF; border: 2px solid #0D0D0D; box-shadow: 6px 6px 0 #D8D2F2; }
+.pa-switch button { position: relative; z-index: 1; min-height: 52px; padding: 0 26px; border: 0; background: none; font: inherit; font-weight: 800; font-size: 1.05rem; color: #0D0D0D; cursor: pointer; transition: color 0.3s ease; }
+.pa-switch button.on { color: #FFFFFF; }
+.pa-switch button:focus-visible { outline: 3px solid #8F6CD0; outline-offset: 3px; }
+.pa-knob { position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: #4AC1BD; transition: translate 0.45s var(--ease-pop), background-color 0.3s ease; }
+.is-school .pa-knob { translate: 100% 0; background: #6E6A86; }
+
+/* the row */
+.pa-f-row { list-style: none; margin: 0 auto; padding: 0; width: 100%; max-width: 1180px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+.pa-f-item { position: relative; display: grid; }
+.pa-f-card { rotate: var(--tilt, 0deg); transition: background-color 0.4s ease, box-shadow 0.4s ease, outline-color 0.4s ease; }
+.pa-f .pa-f-card { opacity: 0; translate: 0 18px; }
+.pa-f.is-seen .pa-f-card { animation: paIn 0.55s var(--ease-pop) both; animation-delay: calc(var(--i) * 0.14s); opacity: 1; translate: 0 0; }
+.is-school .pa-f-card { background: #FBFBFD; }
+.pa-f-item.is-never .pa-f-card { box-shadow: none; outline: 3px dashed #C9BEF3; outline-offset: -3px; background: #FAF9FE; }
+.pa-f-pic { position: relative; display: grid; }
+.pa-f-layer { grid-area: 1 / 1; min-width: 0; }
+.pa-f-layer svg { width: 100%; height: 100%; }
+.pa-f-layer.is-out { z-index: 1; animation: paFadeOut 0.55s ease both; }
+.pa-f-layer.is-out svg * { animation: none !important; }
+.pa-f-layer.is-in { animation: paFadeIn 0.5s ease both; }
+.pa-f-item.is-never .pa-f-layer.is-in { opacity: 0.75; animation: none; }
+.pa-f .pa-line { animation: paFadeIn 0.45s ease both; }
+/* the pictures wait until the row is on screen, then play once */
+.pa-f:not(.is-seen) svg * { animation-play-state: paused !important; }
+
+/* ---------- motion inside the pictures ---------- */
+.pa-pop { transform-box: fill-box; transform-origin: 50% 50%; animation: paPop 0.5s var(--ease-pop) both; animation-delay: var(--d, 0.5s); }
+.pa-drop-in { animation: paDrop 0.4s var(--ease-pop) both; animation-delay: var(--d, 0s); }
+svg .pa-bubble { transform-box: fill-box; animation: paIn 0.5s var(--ease-pop) 0.4s both; }
+.pa-stamp { transform-box: fill-box; transform-origin: 50% 50%; animation: paStamp 0.45s var(--ease-pop) 0.6s both; }
+.pa-q { animation: paQ 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.pa-turn { transform-box: fill-box; transform-origin: 50% 50%; animation: paTurn 4s ease-in-out infinite; }
+.pa-grow { transform-box: view-box; transform-origin: 400px 358px; animation: paRise 0.9s var(--ease-rise) 0.2s both; }
+
+@keyframes paIn { from { opacity: 0; translate: 0 14px; scale: 0.96; } to { opacity: 1; translate: 0 0; scale: 1; } }
+@keyframes paFadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes paFadeOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes paNote { from { opacity: 0; scale: 0.6; } to { opacity: 1; scale: 1; } }
+@keyframes paPop { from { scale: 0; } to { scale: 1; } }
+@keyframes paDrop { from { translate: 0 -18px; opacity: 0; } to { translate: 0 0; opacity: 1; } }
+@keyframes paStamp { from { scale: 1.8; opacity: 0; } to { scale: 1; opacity: 1; } }
+@keyframes paQ { 0%, 100% { opacity: 0.7; scale: 1; } 50% { opacity: 1; scale: 1.06; } }
+@keyframes paTurn { 0%, 100% { rotate: -6deg; } 50% { rotate: 6deg; } }
+@keyframes paRise { from { scale: 1 0; } to { scale: 1 1; } }
+
+/* ---------- tablets and phones: a 2 by 2 grid ---------- */
+@media (max-width: 960px) {
+  .pa-f-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; max-width: 680px; }
+}
+@media (max-width: 600px) {
+  .pa { gap: 30px; margin-top: 28px; }
+  .pa-switch button { padding: 0 16px; font-size: 0.98rem; }
+  .pa-f-row { gap: 24px 14px; }
+  .pa-card { padding: 6px 6px 12px; box-shadow: 6px 6px 0 #E5E5E5; }
+  .pa-card figcaption { gap: 6px; margin-top: 9px; padding: 0 2px; }
+  .pa-line { font-size: 0.86rem; line-height: 1.32; }
+  .pa-body { font-size: 0.76rem; line-height: 1.4; }
+  .pa-tag { font-size: 0.74rem; padding-right: 6px; gap: 5px; }
+  .pa-tag b { min-width: 22px; height: 19px; font-size: 0.7rem; }
+  .pa-note { font-size: 0.9rem; top: -16px; padding: 5px 7px 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pa *, .pa *::before { animation: none !important; transition: none !important; }
+  .pa-f .pa-f-card { opacity: 1; translate: 0 0; }
+}

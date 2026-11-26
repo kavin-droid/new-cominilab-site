@@ -1,0 +1,281 @@
+/* "Start in their world": the three short games (WorldGames.tsx). The panel is the site's try-it card; inside it each
+   game is drawn on a fixed board (800 x 450 wide, 360 x 620 upright) in the CominiLab mini-game shell's own look:
+   white bubble with a speaker, the round tick, the yellow score note, the square white final card. */
+
+/* ---------- the panel ---------- */
+.wgx-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(13, 13, 13, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: wgxFade 0.22s ease both; }
+.wgx-card { --tw: min(940px, calc(100vw - 40px), calc((100vh - 130px) * 16 / 9)); width: var(--tw); padding: 12px 12px 0; background: #FFFFFF; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.22); animation: wgxIn 0.42s var(--ease-pop, cubic-bezier(0.34, 1.56, 0.64, 1)) both; }
+.wgx-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; overflow: clip; background: #F2F2F2; }
+.wgx-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 10px 2px 12px 6px; }
+.wgx-bar b { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 800; letter-spacing: -0.01em; }
+.wgx-bar-btns { display: flex; gap: 10px; }
+.wgx-sq { flex: none; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 #E5E5E5; cursor: pointer; transition: translate 0.15s ease, box-shadow 0.15s ease; }
+.wgx-sq:hover { translate: -1px -1px; box-shadow: 5px 5px 0 #E5E5E5; }
+.wgx-sq:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E5E5E5; }
+@media (max-width: 640px) {
+  .wgx-modal { padding: 12px; }
+  .wgx-card { --tw: calc(100vw - 24px); padding: 8px 8px 0; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.22); }
+  .wgx-stage { aspect-ratio: auto; height: min(calc((100vw - 40px) * 620 / 360), calc(100dvh - 24px - 8px - 58px)); }
+  .wgx-bar { min-height: 58px; padding: 6px 0 8px 4px; }
+}
+@keyframes wgxFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wgxIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: none; } }
+
+/* ---------- the board ---------- */
+.wgx-board { position: absolute; inset: 0; overflow: hidden; overflow: clip; font-family: var(--font-lab-sans), "DM Sans", sans-serif; color: #0D0D0D; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.wgx-frame { position: absolute; left: 50%; top: 50%; transform-origin: center center; }
+.wgx-frame > div { position: absolute; inset: 0; }
+.wgx-frame button { font: inherit; color: inherit; }
+.wgx-frame button:focus-visible { outline: 3px solid #2E8E8A; outline-offset: 2px; }
+.wgx-frame img { -webkit-user-drag: none; }
+
+/* the bubble (bs-bub) */
+.wgx-bub { position: absolute; display: flex; align-items: center; gap: 9px; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 5px 5px 0 #E6E6E6; padding: 9px 14px; font-size: 16px; font-weight: 600; line-height: 21px; text-align: left; cursor: pointer; z-index: 30; transition: translate 0.18s var(--ease-pop, ease), box-shadow 0.18s ease; animation: wgxPopIn 0.35s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.wgx-bub:active { translate: 3px 3px; box-shadow: 2px 2px 0 #E6E6E6; }
+.wgx-bub-text { display: inline-block; animation: wgxFade 0.3s ease backwards; }
+.wgx-bub-tail { position: absolute; width: 9px; height: 9px; background: #FFFFFF; border-left: 1.5px solid #D9D9D9; border-bottom: 1.5px solid #D9D9D9; transform: rotate(45deg); }
+
+/* the tick (bs-go) */
+.wgx-go { position: absolute; width: 68px; height: 68px; padding: 0; border: 0; background: transparent; cursor: default; z-index: 25; }
+.wgx-go svg { display: block; overflow: visible; }
+.wgx-go-side { fill: #A3AAB4; transition: fill .25s ease; }
+.wgx-go-face { fill: #BEC4CC; transition: fill .25s ease; }
+.wgx-go-top { transform: translateY(4px); transition: transform .18s cubic-bezier(.34, 1.56, .64, 1); }
+.wgx-go-mark { opacity: .75; transition: opacity .25s ease; }
+.wgx-go.awake { cursor: pointer; animation: wgxWake .35s cubic-bezier(.34, 1.56, .64, 1); }
+.wgx-go.awake .wgx-go-side { fill: #23934A; }
+.wgx-go.awake .wgx-go-face { fill: #3FC46A; }
+.wgx-go.awake .wgx-go-top { transform: translateY(0); }
+.wgx-go.awake .wgx-go-mark { opacity: 1; }
+.wgx-go.awake:active .wgx-go-top { transform: translateY(4px); transition-duration: .06s; }
+@keyframes wgxWake { 0% { transform: scale(.9); } 100% { transform: scale(1); } }
+
+/* the score note */
+.wgx-note { position: absolute; z-index: 26; display: flex; align-items: center; gap: 6px; background: #FFF186; padding: 6px 10px 5px; font-family: var(--font-lab-hand), "Comic Sans MS", cursive; font-size: 22px; line-height: 1; color: #111111; transform: rotate(-2deg); font-variant-numeric: tabular-nums; }
+.wgx-note span { min-width: 12px; }
+.wgx-note.pop { animation: wgxNotePop .45s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes wgxNotePop { 0% { transform: rotate(-2deg) scale(1); } 50% { transform: rotate(-2deg) scale(1.25); } 100% { transform: rotate(-2deg) scale(1); } }
+
+/* the hand */
+.wgx-hand { position: absolute; width: 52px; height: 52px; margin: -6px 0 0 -12px; z-index: 40; pointer-events: none; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .25)); animation: wgxHandTap 2.8s ease-in-out infinite; }
+@keyframes wgxHandTap {
+  0% { opacity: 0; transform: translate(0, 18px) scale(1); }
+  12% { opacity: 1; transform: translate(0, 0) scale(1); }
+  22% { transform: translate(0, 0) scale(.8); }
+  32% { transform: translate(0, 0) scale(1); }
+  46% { transform: translate(0, 0) scale(.8); }
+  56% { opacity: 1; transform: translate(0, 0) scale(1); }
+  80%, 100% { opacity: 0; transform: translate(0, 0) scale(1); }
+}
+
+/* the final card (bs-card) over the dimmed game */
+.wgx-veil { position: absolute; inset: 0; z-index: 60; display: grid; place-items: center; background: rgba(20, 20, 20, .5); animation: wgxFade .25s ease backwards; }
+.wgx-end { position: relative; width: 400px; max-width: calc(100% - 28px); display: flex; flex-direction: column; align-items: center; padding: 26px 22px 20px; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 6px 6px 0 rgba(13, 13, 13, 0.24); text-align: center; animation: wgxPopIn .45s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.wgx-end-face { width: 84px; height: 84px; object-fit: contain; object-position: center top; margin: -66px 0 6px; background: #FFFFFF; border: 1.5px solid #D9D9D9; border-radius: 50%; padding: 6px 6px 0; }
+.wgx-end h3 { margin: 0; font-size: 28px; line-height: 34px; font-weight: 700; letter-spacing: -0.02em; }
+.wgx-end p { margin: 4px 0 0; font-size: 16px; font-weight: 600; color: #4D4D4D; }
+.wgx-stars { display: flex; gap: 4px; margin-top: 8px; }
+.wgx-end-btns { display: flex; gap: 12px; margin-top: 14px; }
+.wgx-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; min-width: 120px; padding: 0 16px; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 4px 4px 0 #E6E6E6; transition: translate .18s cubic-bezier(.34, 1.56, .64, 1), box-shadow .18s ease; }
+.wgx-btn:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E6E6E6; }
+.wgx-btn.primary { min-width: 170px; background: #4AC1BD; color: #FFFFFF !important; border: 1.5px solid #3A9C98; }
+.wgx-btn.ghost { background: #FFFFFF; border: 1.5px solid #D9D9D9; }
+.wgx-tall .wgx-end { width: 320px; padding: 24px 16px 18px; }
+.wgx-tall .wgx-end-btns { flex-direction: column-reverse; width: 100%; gap: 10px; }
+.wgx-tall .wgx-btn { width: 100%; }
+.wgx-pop { animation: wgxPopIn .45s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+@keyframes wgxPopIn { 0% { opacity: 0; transform: scale(.6); } 100% { opacity: 1; transform: scale(1); } }
+
+/* ================= the fruit tart (Gayathri's garden) ================= */
+.wgc-table { position: absolute; inset: -40px; background: repeating-linear-gradient(90deg, #E7B477 0 118px, #DEA968 118px 121px); }
+.wgc-plot { position: absolute; z-index: 5; }
+.wgc-plot.in { animation: wgcIn .55s cubic-bezier(.34, 1.3, .64, 1) backwards; }
+.wgc-plot.out { animation: wgcOut .6s cubic-bezier(.55, 0, .75, .3) forwards; }
+@keyframes wgcIn { from { opacity: 0; transform: translateY(30%) scale(.9); } to { opacity: 1; transform: none; } }
+@keyframes wgcOut { 0% { transform: none; opacity: 1; } 25% { transform: scale(1.03); } 100% { transform: translateY(-40%) scale(.85); opacity: 0; } }
+.wgc-plate { position: absolute; left: 1%; top: 1%; width: 98%; height: 98%; border-radius: 50%; background: #FFFFFF; box-shadow: inset 0 0 0 10px #F1EEE8, 0 8px 0 rgba(0, 0, 0, .1); }
+.wgc-crust { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: contain; pointer-events: none; }
+.wgc-bed { position: absolute; left: 20%; top: 20%; width: 60%; height: 60%; overflow: visible; }
+.wgc-bedfill { fill: #EBC556; }
+.wgc-bedline { fill: none; stroke: #B98A26; stroke-width: 3; pointer-events: none; }
+.wgc-part { fill: transparent; stroke: none; cursor: pointer; transition: fill .2s ease; }
+.wgc-part.planted { fill: #E2B94C; }
+.wgc-plot.holding .wgc-part:not(.planted):hover { fill: rgba(255, 255, 255, .3); }
+.wgc-lines path { fill: none; stroke: #B98A26; stroke-width: 1.8; stroke-linejoin: round; pointer-events: none; }
+.wgc-fruits { pointer-events: none; transform-box: fill-box; transform-origin: 50% 50%; animation: wgcGrow .6s ease-in-out backwards; }
+@keyframes wgcGrow { 0% { transform: scale(0); opacity: 0; } 60% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.wgc-plot.full .wgc-bed { filter: drop-shadow(0 0 6px rgba(255, 255, 255, .95)); animation: wgcCheer .5s ease; }
+@keyframes wgcCheer { 0%, 100% { transform: scale(1); } 45% { transform: scale(1.04); } }
+.wgc-err { fill: none; stroke: #D53232; stroke-width: 4; stroke-linejoin: round; pointer-events: none; animation: wgxFade .5s ease-out; }
+
+.wgc-target { position: absolute; left: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px; background: #FFFFFF; border: 3px solid #EEEEEE; border-left: 0; border-radius: 0 16px 16px 0; box-shadow: 0 5px 0 rgba(0, 0, 0, .08); padding: 12px 18px; animation: wgcCardIn .5s ease-out .2s backwards; }
+.wgx-wide .wgc-target { top: 262px; transform: translateY(-50%); }
+.wgx-tall .wgc-target { top: 92px; padding: 8px 14px; }
+@keyframes wgcCardIn { from { opacity: 0; translate: -100% 0; } to { opacity: 1; translate: 0 0; } }
+.wgc-target-row { display: flex; align-items: center; gap: 10px; }
+.wgc-target-row.ruled { border-top: 3px solid #EEEEEE; padding-top: 8px; }
+.wgc-target-row img { width: 54px; height: 54px; object-fit: contain; }
+.wgx-tall .wgc-target-row img { width: 42px; height: 42px; }
+.wgc-eq { font-size: 34px; font-weight: 700; line-height: 1; }
+.wgc-frac { display: flex; flex-direction: column; align-items: center; }
+.wgc-frac b { font-size: 34px; font-weight: 800; line-height: 1.05; font-variant-numeric: tabular-nums; }
+.wgx-tall .wgc-frac b, .wgx-tall .wgc-eq { font-size: 28px; }
+.wgc-frac i { display: block; width: 30px; height: 4px; background: #0D0D0D; border-radius: 2px; margin: 3px 0; }
+
+.wgc-seeds { position: absolute; z-index: 10; display: flex; gap: 12px; }
+.wgx-wide .wgc-seeds { right: 0; top: 238px; transform: translateY(-50%); flex-direction: column; align-items: flex-end; }
+.wgx-tall .wgc-seeds { right: 12px; top: 510px; flex-direction: row; }
+.wgc-seed { position: relative; width: 92px; height: 96px; padding: 0; background: #FFFFFF; border: 1.5px solid #E4E4E4; border-bottom-width: 4px; border-right: 0; border-radius: 16px 0 0 16px; box-shadow: 0 5px 0 #E4E4E4; display: flex; align-items: center; justify-content: center; cursor: pointer; animation: wgcSeedIn .5s ease-out .3s backwards; transition: width .15s ease, box-shadow .2s ease, border-color .2s ease; }
+.wgc-seed img { width: 72%; height: 72%; object-fit: contain; pointer-events: none; }
+.wgc-seed.on { border-color: #543B24; border-width: 3px; border-bottom-width: 4px; border-right: 0; box-shadow: 0 5px 0 #543B24, 0 0 14px 3px rgba(84, 59, 36, .4); width: 102px; }
+.wgx-tall .wgc-seed { width: 80px; height: 84px; border-right: 1.5px solid #E4E4E4; border-radius: 16px; }
+.wgx-tall .wgc-seed.on { width: 80px; border-right: 3px solid #543B24; }
+@keyframes wgcSeedIn { from { opacity: 0; translate: 60% 0; } to { opacity: 1; translate: 0 0; } }
+.wgx-wide .wgc-bub { left: 50%; top: 14px; transform: translateX(-50%); white-space: nowrap; }
+.wgx-tall .wgc-bub { left: 12px; right: 12px; top: 12px; }
+
+/* ================= the fishing race (Lake Race) ================= */
+.wgr-sky { position: absolute; inset: -60px; }
+.wgr-boats { position: absolute; z-index: 4; display: flex; gap: 24px; transform-origin: 50% 0; transition: top 1.4s cubic-bezier(.4, 0, .2, 1); pointer-events: none; }
+.wgr-boats.sail { top: -160px !important; }
+.wgr-boat { width: 92px; height: 146px; animation: wgrBob 3.4s ease-in-out infinite; }
+.wgr-boat.b2 { animation-delay: .6s; }
+@keyframes wgrBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.wgr-catch { position: absolute; inset: 0; z-index: 6; pointer-events: none; }
+.wgr-net { position: absolute; opacity: .97; animation: wgrCast 1.1s cubic-bezier(.34, 1.2, .5, 1) backwards; }
+@keyframes wgrCast { 0% { transform: translateY(140px) scale(.08); opacity: .15; } 55% { opacity: 1; } 100% { transform: none; opacity: .97; } }
+.wgr-grid { position: absolute; display: flex; }
+.wgr-cell { position: relative; display: grid; place-items: center; margin: 1px; animation: wgrCell .3s ease backwards; }
+.wgr-cell.fish { background: rgba(105, 194, 39, .32); border: 2px solid #69C227; }
+.wgr-cell.rock { background: rgba(245, 166, 35, .34); border: 2px solid #F5A623; }
+.wgr-cell img { width: 86%; height: auto; }
+@keyframes wgrCell { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
+.wgr-rock { display: block; width: 70%; height: 56%; background: radial-gradient(circle at 38% 32%, #A7ADB3, #7D838A); border: 2px solid #626870; border-radius: 48% 52% 46% 54% / 58% 60% 40% 42%; }
+.wgr-rock.sm { width: 40px; height: 32px; }
+.wgr-token { position: absolute; z-index: 8; width: 92px; display: flex; flex-direction: column; align-items: center; gap: 3px; pointer-events: none; transition: transform .85s cubic-bezier(.4, 0, .2, 1), opacity .4s ease; animation: wgxFade .4s ease 1s backwards; }
+.wgr-token img { width: 46px; height: auto; filter: drop-shadow(0 2px 2px rgba(30, 90, 120, .2)); }
+.wgr-token b { background: #FFFFFF; border: 2px solid #48A304; padding: 2px 12px; font-size: 22px; font-weight: 900; color: #48A304; }
+.wgr-token.rock b { border-color: #6E7378; color: #6E7378; }
+.wgr-token.go { opacity: 0; transition: transform .85s cubic-bezier(.4, 0, .2, 1), opacity .3s ease .7s; }
+.wgr-pill { position: absolute; z-index: 12; transform: translate(-50%, -100%); display: flex; flex-direction: column; align-items: center; background: #FFFFFF; border: 2px solid; padding: 4px 14px; }
+.wgr-pill-l { font-size: 11px; font-weight: 700; color: #888888; }
+.wgr-pill-v { display: flex; align-items: center; gap: 6px; }
+.wgr-pill-v img { width: 20px; height: auto; }
+.wgr-pill-v b { font-size: 22px; font-weight: 900; line-height: 1; font-variant-numeric: tabular-nums; }
+.wgr-pill-v b.tick { animation: wgrCount .25s ease; }
+@keyframes wgrCount { 0% { transform: scale(.6); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+.wgr-char { position: absolute; bottom: 0; z-index: 14; width: auto; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .18)); pointer-events: none; animation: wgrRise .4s ease-out backwards; }
+.wgr-char.flip { transform: scaleX(-1); }
+@keyframes wgrRise { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
+.wgr-panel { position: absolute; z-index: 16; left: 50%; transform: translateX(-50%); width: 316px; display: flex; flex-direction: column; align-items: center; gap: 8px; background: rgba(255, 255, 255, .96); border: 1.5px solid #E4E4E4; padding: 10px 16px 14px; animation: wgxFade .3s ease backwards; }
+.wgx-wide .wgr-panel { bottom: 12px; }
+.wgx-tall .wgr-panel { top: 398px; }
+.wgr-panel-q { font-size: 15px; font-weight: 700; color: #000D26; }
+.wgr-keys { display: flex; gap: 14px; }
+.wgr-key { width: 58px; height: 58px; padding: 0; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 #E6E6E6; font-size: 26px !important; font-weight: 800; cursor: pointer; font-variant-numeric: tabular-nums; transition: translate .18s cubic-bezier(.34, 1.56, .64, 1), box-shadow .18s ease; }
+.wgr-key:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E6E6E6; }
+.wgr-key:disabled { cursor: default; }
+.wgr-key.right { background: #EAF8E0; border-color: #48A304; color: #2F7A00 !important; box-shadow: 4px 4px 0 #CDEBB8; }
+.wgr-key.wrong { background: #FFEFEF; border-color: #E8453C; color: #C0322A !important; box-shadow: 4px 4px 0 #F6D2D0; animation: wgxShake .4s ease; }
+.wgx-tall .wgr-bub { left: 12px; right: 12px; top: 12px; }
+.wgx-wide .wgr-bub { max-width: 330px; }
+
+/* ================= Grammy's shopping ================= */
+.wgs-shelves { position: absolute; width: 800px; height: 252px; pointer-events: none; }
+.wgx-wide .wgs-shelves { left: 0; top: 32px; }
+.wgx-tall .wgs-shelves { left: -220px; top: 34px; }
+.wgs-counter { position: absolute; left: -40px; right: -40px; bottom: -40px; background: linear-gradient(to bottom, #9BC4E8 0, #9BC4E8 76px, #648DBB 76px, #648DBB 98px, #406792 98px, #406792 107px, #688EBA 107px, #688EBA 100%); }
+.wgs-basket-slot { position: absolute; z-index: 6; transform-origin: 0 0; transition: transform .7s cubic-bezier(.34, 1.2, .64, 1), opacity .5s ease; }
+.wgx-wide .wgs-basket-slot { left: 346px; top: 47px; scale: .62; }
+.wgx-tall .wgs-basket-slot { left: 104px; top: 72px; scale: .56; }
+.wgs-basket-slot.in { animation: wgsBasketIn .7s cubic-bezier(.34, 1.2, .64, 1) backwards; }
+.wgs-basket-slot.out { transform: translateX(-1500px); opacity: 0; transition: transform .8s cubic-bezier(.55, 0, .75, .3), opacity .8s ease; }
+@keyframes wgsBasketIn { from { transform: translateX(1500px); opacity: 0; } to { transform: none; opacity: 1; } }
+.wgs-shaker { animation: wgxShake .5s ease-in-out; }
+.wgs-basket { position: relative; width: 306px; height: 325px; pointer-events: none; }
+.wgs-basket svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.wgs-basket-fruit { position: absolute; left: 0; right: 0; top: 160px; height: 50px; }
+.wgs-basket-fruit span { position: absolute; font-size: 32px; line-height: 1; filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, .2)); }
+.wgs-price { position: absolute; z-index: 2; left: 68px; top: 242px; width: 133px; height: 52px; display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+
+.wgs-card { position: absolute; z-index: 10; background: #FFFFFF; border: 5px solid #EEEEEE; display: flex; animation: wgsCardIn .5s ease-out .5s backwards; }
+.wgx-wide .wgs-card { right: 0; top: 76px; width: 190px; height: 172px; flex-direction: column; justify-content: space-between; padding: 12px 14px; border-right: 0; border-radius: 12px 0 0 12px; }
+.wgx-tall .wgs-card { left: 10px; top: 292px; width: 262px; height: 58px; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 10px; border-radius: 12px; }
+@keyframes wgsCardIn { from { opacity: 0; translate: 100px 0; } to { opacity: 1; translate: 0 0; } }
+.wgs-row { display: flex; align-items: center; }
+.wgs-row b { flex: 1; text-align: right; font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wgs-eq { width: 32px; text-align: center; font-size: 24px; font-weight: 700; }
+.wgs-ic-note { width: 36px; height: 26px; margin: 0 7px; }
+.wgs-ic-coin { width: 30px; height: 30px; margin: 0 10px; }
+.wgs-paid { width: 50px; font-size: 20px; font-weight: 500; }
+.wgs-rule { margin: 0 -14px; border-top: 3px solid #EEEEEE; }
+.wgx-tall .wgs-row b { font-size: 20px; flex: none; }
+.wgx-tall .wgs-eq { width: 18px; font-size: 18px; }
+.wgx-tall .wgs-ic-note { width: 28px; height: 20px; margin: 0 2px; }
+.wgx-tall .wgs-ic-coin { width: 24px; height: 24px; margin: 0 2px; }
+.wgx-tall .wgs-paid { width: auto; font-size: 16px; }
+.wgx-tall .wgs-rule { margin: 0; width: 3px; align-self: stretch; border-top: 0; background: #EEEEEE; }
+
+.wgs-money { position: absolute; z-index: 12; display: flex; align-items: flex-start; gap: 16px; transition: opacity .5s ease; }
+.wgx-wide .wgs-money { left: 420px; }
+.wgx-tall .wgs-money { left: 30px; }
+.wgs-money.out { opacity: 0; }
+.wgs-money.shake { animation: wgxShake .5s ease-in-out; }
+.wgs-stack { position: relative; }
+.wgs-down { position: absolute; top: 0; padding: 0; border: 0; background: transparent; cursor: pointer; animation: wgsDrop .3s cubic-bezier(.34, 1.4, .64, 1) backwards; }
+.wgs-down.note img { display: block; width: 45px; height: 62px; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .2)); }
+.wgs-down.coin img { display: block; width: 30px; height: 30px; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .2)); }
+@keyframes wgsDrop { from { opacity: 0; transform: translateY(40px) scale(1.3); } to { opacity: 1; transform: none; } }
+
+.wgs-purse { position: absolute; z-index: 15; width: 373px; height: 200px; transform-origin: 50% 0; }
+.wgs-tray { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 98px; pointer-events: none; }
+.wgs-take { position: absolute; bottom: 0; height: 160px; padding: 0; border: 0; background: transparent; cursor: grab; touch-action: none; }
+.wgs-take.notes { left: 0; width: 190px; }
+.wgs-take.coins { left: 190px; width: 183px; }
+.wgs-take img { position: absolute; pointer-events: none; filter: drop-shadow(0 3px 3px rgba(0, 0, 0, .25)); transition: translate .15s ease; }
+.wgs-take.notes img { width: 70px; height: 96px; }
+.wgs-take.coins img { width: 50px; height: 50px; }
+.wgs-take:hover img:last-child { translate: 0 -6px; }
+.wgs-ghost { position: absolute; z-index: 45; pointer-events: none; transform: translate(-50%, -50%); filter: drop-shadow(0 6px 6px rgba(0, 0, 0, .25)); }
+.wgs-ghost.note { width: 66px; height: 90px; }
+.wgs-ghost.coin { width: 48px; height: 48px; }
+
+.wgs-grammy { position: absolute; z-index: 20; pointer-events: none; filter: drop-shadow(0 8px 8px rgba(0, 0, 0, .12)); animation: wgrRise .4s ease-out backwards; }
+.wgx-wide .wgs-grammy { left: 6px; bottom: -10px; height: 172px; }
+.wgx-tall .wgs-grammy { left: 4px; top: 8px; height: 84px; background: #FFFFFF; border: 1.5px solid #D9D9D9; border-radius: 50%; width: 72px; object-fit: cover; object-position: center top; padding: 4px 4px 0; }
+.wgs-grammy.happy { animation: wgsHop .5s ease-in-out 2; }
+@keyframes wgsHop { 0%, 100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+.wgx-wide .wgs-bub { left: 140px; bottom: 122px; white-space: nowrap; }
+.wgx-tall .wgs-bub { left: 88px; right: 10px; top: 10px; }
+.wgs-note-ic { font-size: 22px; line-height: 1; }
+
+@keyframes wgxShake { 0%, 100% { translate: 0 0; } 15% { translate: -8px 0; } 30% { translate: 8px 0; } 45% { translate: -8px 0; } 60% { translate: 8px 0; } 75% { translate: -4px 0; } 90% { translate: 4px 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .wgx-modal, .wgx-card, .wgx-frame *, .wgx-frame *::before { animation: none !important; transition: none !important; }
+}
+
+/* ---------- the card pictures (world-art.tsx): drawn scenes in place of the photos ---------- */
+.wg3-pic { background: #F4F3F8; }
+.wg3-pic svg { display: block; width: 100%; height: 100%; transition: scale 0.4s ease; }
+.wg3-front:hover .wg3-pic svg { scale: 1.04; }
+.wa-hang { transform-box: fill-box; transform-origin: 50% 0; animation: waSwing 3.2s ease-in-out infinite; }
+.wa-hang2 { animation-delay: 0.5s; } .wa-hang3 { animation-delay: 1s; }
+.wa-whisk { transform-box: fill-box; transform-origin: 50% 100%; animation: waWhisk 1.6s ease-in-out infinite; }
+.wa-drift { animation: waDrift 6s ease-in-out infinite; }
+.wa-bounce { animation: waBounce 1.4s ease-in-out infinite; }
+.wa-pulse { transform-box: fill-box; transform-origin: 50% 50%; animation: waPulse 2.4s ease-in-out infinite; }
+.wa-flag { transform-box: fill-box; transform-origin: 0 50%; animation: waFlag 2.6s ease-in-out infinite; }
+.wa-swing { transform-box: fill-box; transform-origin: 50% 0; animation: waSwing 3s ease-in-out infinite; }
+.wa-coin { animation: waCoin 2.8s ease-in-out infinite; }
+@keyframes waSwing { 0%, 100% { rotate: -5deg; } 50% { rotate: 5deg; } }
+@keyframes waWhisk { 0%, 100% { rotate: -6deg; } 50% { rotate: 6deg; } }
+@keyframes waDrift { 0%, 100% { translate: 0 0; } 50% { translate: 16px 0; } }
+@keyframes waBounce { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+@keyframes waPulse { 0%, 70%, 100% { scale: 1; } 82% { scale: 1.14; } }
+@keyframes waFlag { 0%, 100% { scale: 1 1; } 50% { scale: 0.8 1; } }
+@keyframes waCoin { 0%, 60%, 100% { translate: 0 0; } 75% { translate: 0 -8px; } }
+@media (prefers-reduced-motion: reduce) {
+  .wa-hang, .wa-whisk, .wa-drift, .wa-bounce, .wa-pulse, .wa-flag, .wa-swing, .wa-coin { animation: none; }
+  .wg3-pic svg { transition: none; }
+}

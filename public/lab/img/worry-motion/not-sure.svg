@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- Motion version of worry/not-sure.svg. The scene (8s): the report slides in; its header, then each row (shape and
+       lines) fills in; the grades stamp on one by one; only then do the question marks pop up around it; then the report
+       slides away and it starts again. Classes ns-* are animated in components/lab/motion/motion.css. -->
+  <defs>
+    <path id="notsure-q" d="M-22 -34 Q-22 -62 1 -62 Q25 -62 25 -38 Q25 -22 8 -14 Q1 -10 1 2" fill="none" stroke="#8B66C9" stroke-width="16" stroke-linecap="butt" stroke-linejoin="miter"/>
+  </defs>
+  <rect width="600" height="600" fill="#FDF1D4"/>
+
+  <g class="ns-card">
+  <g transform="rotate(-5 305 300)">
+    <rect x="120" y="62" width="370" height="478" fill="#EDD7A2" transform="translate(-12 12)"/>
+    <rect x="120" y="62" width="370" height="478" fill="#FFFFFF"/>
+    <rect class="ns-head" x="152" y="94" width="306" height="32" fill="#9478D6"/>
+
+    <g class="ns-row ns-r1">
+      <rect class="ns-s" x="160" y="154" width="54" height="54" fill="#4FA046"/>
+      <g class="ns-l" fill="#8F8CA6"><rect x="232" y="166" width="118" height="10"/><rect x="232" y="188" width="90" height="10"/></g>
+      <rect class="ns-box" x="370" y="148" width="84" height="66" fill="none" stroke="#E6E2D2" stroke-width="3" stroke-dasharray="8 6"/>
+    </g>
+    <rect class="ns-sep ns-sep1" x="152" y="230" width="306" height="4" fill="#BEBBD0"/>
+    <g class="ns-row ns-r2">
+      <circle class="ns-s" cx="187" cy="277" r="30" fill="#8F6CD0"/>
+      <g class="ns-l" fill="#8F8CA6"><rect x="232" y="262" width="118" height="10"/><rect x="232" y="284" width="90" height="10"/></g>
+      <rect class="ns-box" x="370" y="244" width="84" height="66" fill="none" stroke="#E6E2D2" stroke-width="3" stroke-dasharray="8 6"/>
+    </g>
+    <rect class="ns-sep ns-sep2" x="152" y="325" width="306" height="4" fill="#BEBBD0"/>
+    <g class="ns-row ns-r3">
+      <path class="ns-s" d="M187 344 L219 400 H155 Z" fill="#FF8C2A" stroke="#FF8C2A" stroke-width="6" stroke-linejoin="miter"/>
+      <g class="ns-l" fill="#8F8CA6"><rect x="232" y="358" width="118" height="10"/><rect x="232" y="380" width="90" height="10"/></g>
+      <rect class="ns-box" x="370" y="340" width="84" height="66" fill="none" stroke="#E6E2D2" stroke-width="3" stroke-dasharray="8 6"/>
+    </g>
+    <rect class="ns-sep ns-sep3" x="152" y="420" width="306" height="4" fill="#BEBBD0"/>
+    <g class="ns-row ns-r4">
+      <path class="ns-s" d="M172 444 H202 L217 470 L202 496 H172 L157 470 Z" fill="#A5C82B" stroke="#A5C82B" stroke-width="6" stroke-linejoin="miter"/>
+      <g class="ns-l" fill="#8F8CA6"><rect x="232" y="454" width="118" height="10"/><rect x="232" y="476" width="90" height="10"/></g>
+      <rect class="ns-box" x="370" y="436" width="84" height="66" fill="none" stroke="#E6E2D2" stroke-width="3" stroke-dasharray="8 6"/>
+    </g>
+
+    <g font-family="'DM Sans', Arial, sans-serif" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="700" text-anchor="middle" fill="#26232F">
+      <g class="ns-g ns-g1"><rect x="370" y="148" width="84" height="66" fill="#DCEBB0"/><text x="412" y="197" font-size="46">A</text></g>
+      <g class="ns-g ns-g2"><rect x="370" y="244" width="84" height="66" fill="#FDE68A"/><text x="412" y="293" font-size="46">B</text></g>
+      <g class="ns-g ns-g3"><rect x="370" y="340" width="84" height="66" fill="#FDBDB6"/><text x="412" y="389" font-size="46" fill="#6B2A26">F</text></g>
+      <g class="ns-g ns-g4"><rect x="370" y="436" width="84" height="66" fill="#DCEBB0"/><text x="412" y="485" font-size="42">B+</text></g>
+    </g>
+  </g>
+  </g>
+
+  <g transform="translate(78 236) rotate(-14) scale(0.9)"><g class="ns-q ns-q1"><use href="#notsure-q"/><circle cx="1" cy="30" r="9.5" fill="#8B66C9"/></g></g>
+  <g transform="translate(528 112) rotate(10) scale(1.1)"><g class="ns-q ns-q2"><use href="#notsure-q"/><circle cx="1" cy="30" r="9.5" fill="#8B66C9"/></g></g>
+  <g transform="translate(546 372) rotate(8) scale(0.85)"><g class="ns-q ns-q3"><use href="#notsure-q"/><circle cx="1" cy="30" r="9.5" fill="#8B66C9"/></g></g>
+
+  <g class="ns-burst" stroke="#8B66C9" stroke-width="6" stroke-linecap="butt">
+    <path d="M38 146 L54 160"/><path d="M66 124 L70 146"/><path d="M28 176 L48 182"/>
+    <path d="M506 214 L526 204"/><path d="M510 236 L532 238"/><path d="M506 258 L524 268"/>
+  </g>
+</svg>

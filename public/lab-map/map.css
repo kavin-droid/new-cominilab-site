@@ -1,0 +1,445 @@
+/* CominiLab map: the games' look (Delivery Boxes, Fair Nuts, Roll Call): flat shapes, a faint pastel world, bold
+   saturated landmarks, square corners on the chrome, 1.5px #D9D9D9 borders, hard offset shadows ONLY on things you
+   can press, DM Sans + Patrick Hand, teal #4AC1BD primary, press = translate(3px, 3px). Less boxy than the games: the
+   roads, river and meadows all flow in curves. */
+
+:root {
+  --land: #DFF0D2;
+  --ink: #0D0D0D;
+  --teal: #4AC1BD;
+  --teal-d: #3A9C98;
+  --teal-ink: #2E8E8A;
+}
+
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: var(--land); }
+.cm-app { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: var(--land); font-family: 'DM Sans', sans-serif; color: var(--ink); user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+.cm-app *, .cm-app *::before, .cm-app *::after { box-sizing: border-box; }
+.cm-app button { font: inherit; color: inherit; }
+.cm-app button:focus-visible { outline: 3px solid var(--teal-ink); outline-offset: 2px; }
+
+/* the 800 x 360 design frame, scaled to fit (map.js sets the scale) */
+.cm-frame { position: absolute; left: 50%; top: 50%; width: 800px; height: 360px; transform-origin: center center; overflow: hidden; }
+.cm-map { position: absolute; left: 0; top: 0; width: 800px; height: 360px; overflow: hidden; touch-action: none; }
+
+/* ---------- the top bar (as in the games) ---------- */
+
+/* square buttons with a hard shadow (profile) */
+.cm-sq { position: absolute; width: 44px; height: 44px; padding: 0; border: 1.5px solid #D9D9D9; background: #FFFFFF; box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.16); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 6; transition: translate .18s cubic-bezier(.34, 1.56, .64, 1), box-shadow .18s ease; overflow: hidden; }
+.cm-sq:active { translate: 3px 3px; box-shadow: 1px 1px 0 rgba(13, 13, 13, 0.16); }
+
+/* today's places: one square button bottom right (the app's nav owns the bottom centre, its buttons the top right);
+   a tap opens a row of small thumbnail cards just above it. No container: the cards stand on the map. */
+.cm-cardsbtn { right: 16px; bottom: 14px; width: 52px; height: 52px; }
+.cm-cardsbtn[aria-expanded="true"] { border-color: var(--teal); }
+.cm-cardsbtn.cm-pop { animation: cmCardsPop .45s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmCardsPop { 0%, 100% { scale: 1; } 45% { scale: 1.25; } }
+.cm-cards { position: absolute; right: 16px; bottom: 78px; z-index: 7; display: flex; gap: 8px; align-items: flex-end; animation: cmCardsIn .25s cubic-bezier(.34, 1.56, .64, 1) backwards; transform-origin: 100% 100%; }
+.cm-cards[hidden] { display: none; }
+@keyframes cmCardsIn { from { opacity: 0; transform: translateY(8px) scale(.9); } to { opacity: 1; transform: none; } }
+.cm-card { position: relative; width: 56px; height: 56px; padding: 0; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 3px 3px 0 #E6E6E6; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: translate .15s ease, box-shadow .15s ease; }
+.cm-card:active { translate: 2px 2px; box-shadow: 1px 1px 0 #E6E6E6; }
+.cm-card svg { display: block; }
+/* the suggested next place: a teal outline */
+.cm-card.next { border: 2.5px solid var(--teal); }
+.cm-card-star { position: absolute; right: -8px; top: -8px; width: 22px; height: 22px; border-radius: 50%; background: #FFFFFF; border: 1.5px solid #E0A92A; display: flex; align-items: center; justify-content: center; }
+
+/* ---------- the map ---------- */
+
+/* a place: the whole landmark + its pedestal is the button. The pedestal carries the hard offset shadow (it can be
+   pressed); it sinks when pressed. */
+.cm-place { cursor: pointer; outline: none; }
+.cm-place .cm-lift { transition: transform .18s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-place:active .cm-lift { transform: translate(3px, 4px); }
+.cm-place:focus-visible .cm-ped-top { stroke: var(--teal-ink); stroke-width: 3; }
+.cm-place .cm-ped-shadow { transition: opacity .18s ease; }
+.cm-place:active .cm-ped-shadow { opacity: .05; }
+.cm-place.arrive .cm-bounce { animation: cmArrive .6s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-place .cm-bounce { transform-box: fill-box; transform-origin: 50% 100%; }
+
+/* the suggested place: a soft translucent disc that breathes (the reference's highlight) */
+.cm-halo { transform-box: fill-box; transform-origin: center; animation: cmHalo 2.2s ease-in-out infinite; }
+/* the route to it: white dots marching towards it, an arrow at the end */
+.cm-route { stroke-dasharray: 0.1 11; animation: cmMarch 1s linear infinite; }
+@keyframes cmMarch { to { stroke-dashoffset: -11.1; } }
+
+/* the car bobs gently while it drives */
+.cm-car-body { transform-box: fill-box; transform-origin: 50% 100%; }
+.cm-car.driving .cm-car-body { animation: cmBounce .3s ease-in-out infinite; }
+
+/* gentle life (decor only, never in the way) */
+.cm-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: cmSway 4.5s ease-in-out infinite; }
+.cm-ripple { animation: cmRipple 3.2s ease-in-out infinite; }
+.cm-cloudshadow { animation: cmDrift 40s ease-in-out infinite alternate; }
+.cm-duck { animation: cmDuck 9s ease-in-out infinite alternate; }
+
+/* ---------- Play, and the activity stand-in ---------- */
+
+/* the big round Play button (the games' round green push button, in CominiLab teal) */
+.cm-play { position: absolute; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; border: 2px solid var(--teal-d); background: var(--teal); box-shadow: 0 5px 0 var(--teal-d); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 7; padding: 0 0 0 4px; transition: translate .15s ease, box-shadow .15s ease; }
+.cm-play:active { translate: 0 4px; box-shadow: 0 1px 0 var(--teal-d); }
+.cm-play[hidden] { display: none; }
+.cm-play.cm-play-in { animation: cmPlayIn .45s cubic-bezier(.34, 1.56, .64, 1) backwards, cmPulse 1.6s ease-in-out .6s infinite; }
+
+.cm-activity { position: absolute; inset: -400px; background: rgba(20, 20, 20, .45); z-index: 20; display: flex; align-items: center; justify-content: center; animation: cmFade .25s ease backwards; }
+.cm-activity[hidden] { display: none; }
+.cm-activity-card { width: 360px; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 6px 6px 0 rgba(13, 13, 13, .24); padding: 18px 24px 20px; display: flex; flex-direction: column; align-items: center; animation: cmPop .45s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.cm-activity-art svg { display: block; }
+.cm-activity-note { margin: 6px 0 14px; font-family: 'Patrick Hand', cursive; font-size: 18px; color: #6B6B6B; }
+.cm-btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 44px; min-width: 170px; padding: 0 16px; border: 1.5px solid var(--teal-d); background: var(--teal); color: #FFFFFF !important; font-size: 16px; font-weight: 700; cursor: pointer; box-shadow: 4px 4px 0 #E6E6E6; transition: translate .18s cubic-bezier(.34, 1.56, .64, 1), box-shadow .18s ease; }
+.cm-btn:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E6E6E6; }
+
+/* the done star bursting out of a place */
+.cm-spark { transform-box: fill-box; transform-origin: center; animation: cmSpark .8s ease-out forwards; }
+
+@keyframes cmFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cmPop { 0% { opacity: 0; transform: scale(.6); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes cmPlayIn { 0% { opacity: 0; transform: scale(.3); } 100% { opacity: 1; transform: scale(1); } }
+@keyframes cmPulse { 0%, 100% { box-shadow: 0 5px 0 var(--teal-d), 0 0 0 0 rgba(74, 193, 189, .55); } 50% { box-shadow: 0 5px 0 var(--teal-d), 0 0 0 12px rgba(74, 193, 189, 0); } }
+@keyframes cmArrive { 0%, 100% { transform: translateY(0) scale(1); } 40% { transform: translateY(-10px) scale(1.06); } }
+@keyframes cmHalo { 0%, 100% { transform: scale(1); opacity: .9; } 50% { transform: scale(1.08); opacity: .55; } }
+@keyframes cmBob { from { transform: translateY(0); } to { transform: translateY(-1.6px); } }
+@keyframes cmSway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(1.6deg); } }
+@keyframes cmRipple { 0%, 100% { opacity: .5; } 50% { opacity: .95; } }
+@keyframes cmDrift { from { transform: translateX(-30px); } to { transform: translateX(40px); } }
+@keyframes cmDuck { from { transform: translateX(-10px); } to { transform: translateX(14px); } }
+@keyframes cmSpark { 0% { opacity: 1; transform: translate(0, 0) scale(.6); } 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-app *, .cm-app *::before, .cm-app *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+
+/* the halo holds still once the car has arrived (only Play moves then) */
+.cm-halo.still { animation: none; opacity: .8; }
+/* a tap on a place while the car is busy: a little wiggle, so the tap still shows */
+.cm-place.nudge .cm-bounce { animation: cmNudge .4s ease-in-out; }
+@keyframes cmNudge { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-5deg); } 75% { transform: rotate(5deg); } }
+/* the bear in the profile waves; the car hops */
+.cm-bear { transform-origin: 50% 90%; }
+.cm-bear.cm-wave { animation: cmWave .7s ease-in-out; }
+@keyframes cmWave { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-14deg); } 60% { transform: rotate(12deg); } }
+.cm-car-hop.cm-hop { animation: cmHop .5s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmHop { 0%, 100% { transform: translateY(0); } 45% { transform: translateY(-10px); } }
+/* a place's own star badge settling in after the flying star has landed */
+.cm-badge-in { animation: cmBadge .45s cubic-bezier(.34, 1.56, .64, 1); transform-box: fill-box; transform-origin: center; }
+@keyframes cmBadge { 0% { transform: translate(26px, -4px) scale(0); } 100% { transform: translate(26px, -4px) scale(1); } }
+/* the big star flying from a place to its slot (moved by the Web Animations API in map.js) */
+.cm-flystar { position: absolute; z-index: 8; pointer-events: none; transform: translate(-50%, -50%); filter: drop-shadow(2px 3px 0 rgba(13, 13, 13, .18)); }
+.cm-flystar svg { display: block; }
+/* the end of the day: home hops, the stars in the note are counted one by one */
+.cm-home-hop { transform-box: fill-box; transform-origin: 50% 100%; animation: cmHomeHop .7s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmHomeHop { 0%, 100% { scale: 1; } 45% { scale: 1.12; } }
+@keyframes cmCount { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+
+/* Play shrinks away when the car leaves (no instant hide) */
+.cm-play.cm-play-out { animation: cmPlayOut .18s ease-in forwards; }
+@keyframes cmPlayOut { to { opacity: 0; transform: scale(.3); } }
+
+/* the edge pin: when the suggested place is off screen, a small round pin at the view's edge with the place's
+   picture and an arrow pointing to it; a tap glides the view there (pressable: the hard offset shadow) */
+.cm-edgepin { position: absolute; width: 46px; height: 46px; margin: -23px 0 0 -23px; padding: 0; border-radius: 50%; border: 2px solid #3A9C98; background: #FFFFFF; box-shadow: 3px 3px 0 rgba(13, 13, 13, 0.16); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 6; animation: cmPop .35s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.cm-edgepin[hidden] { display: none; }
+.cm-edgepin:active { translate: 2px 2px; box-shadow: 1px 1px 0 rgba(13, 13, 13, 0.16); }
+.cm-edgepin svg { display: block; position: relative; }
+.cm-edgepin-arrow { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--ang)) translateX(29px); transform-origin: 0 0; }
+.cm-edgepin-arrow::after { content: ''; position: absolute; left: -2px; top: -7px; width: 11px; height: 14px; background: #3A9C98; clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+/* the end of the day: a big star settles over the house and stays */
+.cm-bigstar { transform-box: fill-box; transform-origin: center; animation: cmBigStar .7s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+@keyframes cmBigStar { 0% { opacity: 0; transform: translateY(30px) scale(.2); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* a tap on the map: a white ring opens where the finger landed */
+.cm-tapring { transform-box: fill-box; transform-origin: center; animation: cmTapRing .55s ease-out forwards; }
+@keyframes cmTapRing { 0% { opacity: .95; transform: scale(.4); } 100% { opacity: 0; transform: scale(1.6); } }
+.cm-car { cursor: pointer; }
+
+/* back to my car: bottom right, a square pressable button like the profile */
+.cm-findcar { left: 16px; right: auto; bottom: 14px; width: 52px; height: 52px; animation: cmPop .35s cubic-bezier(.34, 1.56, .64, 1) backwards; }
+.cm-findcar[hidden] { display: none; }
+
+/* the hint hand: appears over what to tap, presses twice, fades */
+.cm-hand { position: absolute; z-index: 9; pointer-events: none; opacity: 0; margin: -6px 0 0 -14px; }
+.cm-hand svg { display: block; filter: drop-shadow(2px 3px 0 rgba(13, 13, 13, .18)); }
+.cm-hand.cm-hand-tap { animation: cmHandTap 1.8s ease-in-out; }
+@keyframes cmHandTap {
+  0% { opacity: 0; transform: translate(18px, 22px); }
+  20% { opacity: 1; transform: translate(0, 0); }
+  32% { transform: translate(0, 0) scale(.86); }
+  44% { transform: translate(0, 0) scale(1); }
+  56% { transform: translate(0, 0) scale(.86); }
+  68% { opacity: 1; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(0, 0); }
+}
+
+/* the car: the body bounces over the sand while the wheels turn (map.js); a little settle when it stops */
+@keyframes cmBounce { 0%, 100% { transform: translateY(0) rotate(0); } 35% { transform: translateY(-2.2px) rotate(-2deg); } 70% { transform: translateY(-.6px) rotate(1deg); } }
+.cm-car-hop.cm-settle { animation: cmSettle .45s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmSettle { 0% { transform: translateY(0) scale(1, 1); } 35% { transform: translateY(1px) scale(1.06, .92); } 100% { transform: translateY(0) scale(1, 1); } }
+.cm-dust { transform-box: fill-box; transform-origin: center; animation: cmDust .7s ease-out forwards; pointer-events: none; }
+@keyframes cmDust { 0% { opacity: .85; transform: translate(0, 0) scale(.5); } 100% { opacity: 0; transform: translate(var(--dx), -6px) scale(1.8); } }
+
+/* toys */
+.cm-toy { cursor: pointer; }
+.cm-toy-in, .cm-hen, .cm-fish, .cm-balloon, .cm-flutter { transform-box: fill-box; transform-origin: 50% 100%; }
+.cm-duckdive { animation: cmDuckDive .9s ease-in-out; }
+@keyframes cmDuckDive { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(3px) rotate(-35deg); opacity: .6; } 60% { transform: translateY(-5px) rotate(10deg); opacity: 1; } }
+.cm-spray circle { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.cm-splash .cm-spray circle { animation: cmSpray .9s ease-out forwards; }
+@keyframes cmSpray { 0% { opacity: 1; transform: translate(0, 0); } 45% { opacity: 1; transform: translate(calc(var(--dx) * .6), calc(var(--h) * -1)); } 100% { opacity: 0; transform: translate(var(--dx), 6px); } }
+.cm-blades { transform-box: fill-box; transform-origin: center; animation: cmSpin 7s linear infinite; }
+.cm-blades.fast { animation-duration: .5s; }
+@keyframes cmSpin { to { transform: rotate(360deg); } }
+.cm-henhop { animation: cmHenHop .5s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmHenHop { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-11px) rotate(-8deg); } 70% { transform: translateY(-3px) rotate(4deg); } }
+.cm-flutter { animation: cmDrift2 5s ease-in-out infinite alternate; }
+@keyframes cmDrift2 { 0% { transform: translate(-8px, 0); } 50% { transform: translate(4px, -7px); } 100% { transform: translate(10px, 2px); } }
+.cm-flap { transform-box: fill-box; transform-origin: 100% 50%; animation: cmFlap .22s ease-in-out infinite alternate; }
+.cm-flap.r { transform-origin: 0% 50%; }
+@keyframes cmFlap { to { transform: scaleX(.35); } }
+.cm-loop { animation: cmLoop 1.6s ease-in-out; }
+@keyframes cmLoop { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(28px, -26px); } 50% { transform: translate(0, -46px); } 75% { transform: translate(-28px, -22px); } }
+.cm-fish { opacity: 0; }
+.cm-fishring { transform-box: fill-box; transform-origin: center; animation: cmFishRing 2.4s ease-out infinite; }
+@keyframes cmFishRing { 0% { opacity: .9; transform: scale(.5); } 100% { opacity: 0; transform: scale(1.6); } }
+.cm-leap .cm-fish { animation: cmLeap .9s ease-in-out; }
+@keyframes cmLeap { 0% { opacity: 0; transform: translate(-14px, 4px) rotate(-40deg); } 15% { opacity: 1; } 50% { opacity: 1; transform: translate(0, -30px) rotate(0); } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(14px, 4px) rotate(40deg); } }
+.cm-balloon { transform-origin: 50% 100%; }
+.cm-balloon:nth-child(3n) { animation: cmSway 3.2s ease-in-out infinite; }
+.cm-balloon.cm-float { animation: cmFloat 2.4s ease-in forwards; }
+@keyframes cmFloat { 0% { opacity: 1; transform: translate(0, 0); } 100% { opacity: 0; transform: translate(18px, -120px) rotate(10deg); } }
+.cm-balloon.cm-regrow { animation: cmRegrow .5s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmRegrow { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: scale(1); } }
+
+/* more toys */
+.cm-cowhead, .cm-bunny, .cm-kite, .cm-dog, .cm-tail, .cm-boat, .cm-bob, .cm-bird, .cm-bees { transform-box: fill-box; }
+.cm-cowhead { transform-origin: 0% 100%; }
+.cm-nod { animation: cmNod .8s ease-in-out; }
+@keyframes cmNod { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(14deg) translateY(1px); } 55% { transform: rotate(-6deg); } 80% { transform: rotate(8deg); } }
+.cm-bunny { transform-origin: 50% 100%; }
+.cm-dig { animation: cmDig 1.4s ease-in-out; }
+@keyframes cmDig { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 20% { transform: translateY(1px) scaleY(1.12); } 40%, 62% { transform: translateY(4px) scaleY(.05); opacity: 0; } 82% { transform: translateY(-4px) scaleY(1.08); opacity: 1; } }
+.cm-bees { transform-origin: center; animation: cmSpin 5s linear infinite; }
+.cm-bees.buzz { animation: cmBuzz .45s linear infinite; }
+@keyframes cmBuzz { from { transform: rotate(0) scale(1.5); } to { transform: rotate(360deg) scale(1.5); } }
+.cm-kite { transform-origin: 50% 40%; animation: cmKiteSway 3.6s ease-in-out infinite; }
+@keyframes cmKiteSway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg) translate(2px, -2px); } }
+.cm-kite.cm-kiteloop { animation: cmKiteLoop 1.3s ease-in-out; }
+@keyframes cmKiteLoop { 0% { transform: rotate(0) translate(0, 0); } 50% { transform: rotate(200deg) translate(0, 16px); } 100% { transform: rotate(360deg) translate(0, 0); } }
+.cm-dog { transform-origin: 50% 100%; }
+.cm-tail { transform-origin: 100% 100%; animation: cmWag .3s ease-in-out infinite alternate; }
+@keyframes cmWag { from { transform: rotate(-18deg); } to { transform: rotate(18deg); } }
+.cm-bob { transform-origin: 50% 100%; animation: cmBoatBob 2.6s ease-in-out infinite; }
+@keyframes cmBoatBob { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(1.5px) rotate(3deg); } }
+.cm-boat.cm-sail { animation: cmSail 3.2s ease-in-out; }
+@keyframes cmSail { 0%, 100% { transform: translateX(0); } 45%, 55% { transform: translateX(46px); } }
+.cm-bird { transform-origin: 50% 100%; animation: cmPeck 1.6s ease-in-out infinite; }
+@keyframes cmPeck { 0%, 60%, 100% { transform: rotate(0); } 70% { transform: rotate(28deg); } 80% { transform: rotate(0); } }
+.cm-scatter .cm-bird { animation: cmFlyOff 1.9s ease-in-out; }
+@keyframes cmFlyOff { 0%, 100% { transform: translate(0, 0); } 35% { transform: translate(var(--fx), var(--fy)) scale(.9); } 65% { transform: translate(calc(var(--fx) * -.5), calc(var(--fy) * .8)); } }
+
+/* the sky: clouds drift, flocks cross the map, never taking a tap */
+.cm-sky { pointer-events: none; }
+.cm-cloud { animation: cmCloud 26s ease-in-out infinite alternate; }
+@keyframes cmCloud { from { transform: translateX(-40px); } to { transform: translateX(50px); } }
+.cm-flyacross { animation: cmAcross 40s linear infinite; }
+@keyframes cmAcross { 0% { transform: translate(-140px, 30px); } 50% { transform: translate(720px, -20px); } 100% { transform: translate(1600px, 20px); } }
+/* sky birds: wings beat down and up from the shoulder (the near one a touch ahead), the body bobs with each beat */
+.cm-wing-near, .cm-wing-far { transform-box: fill-box; transform-origin: 30% 100%; animation: cmWingBeat .36s ease-in-out infinite alternate; }
+.cm-wing-far { animation-duration: .36s; opacity: .95; }
+@keyframes cmWingBeat { from { transform: scaleY(1); } to { transform: scaleY(-.75) translateY(1px); } }
+.cm-skybob { animation: cmSkyBob .72s ease-in-out infinite; }
+@keyframes cmSkyBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
+.cm-launch { animation: cmLaunch 2.5s ease-out forwards; }
+@keyframes cmLaunch { 0% { opacity: 0; transform: translate(0, 10px) scale(.6); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(220px, -40px) scale(1.2); } }
+.cm-mountains { cursor: pointer; }
+/* a word over an animal ("Moo!"): pops, floats up, fades */
+.cm-wordbub { transform-box: fill-box; transform-origin: 50% 100%; animation: cmWord 1.4s ease-out forwards; pointer-events: none; }
+@keyframes cmWord { 0% { opacity: 0; transform: translateY(6px) scale(.5); } 18% { opacity: 1; transform: translateY(0) scale(1.08); } 30% { transform: scale(1); } 75% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px); } }
+
+
+/* ---------- lands ---------- */
+/* the exit gate: doors swing open from their posts; a closed gate rattles when tapped too early; the clouds beyond part */
+.cm-gate { cursor: pointer; }
+.cm-door { transform-box: fill-box; transition: transform .7s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-door.l { transform-origin: 0% 50%; }
+.cm-door.r { transform-origin: 100% 50%; }
+.cm-gate.open .cm-door { transform: scaleX(.12); }
+.cm-gate-rattle .cm-door { animation: cmRattle .4s ease-in-out; }
+@keyframes cmRattle { 0%, 100% { translate: 0 0; } 25% { translate: -1.5px 0; } 75% { translate: 1.5px 0; } }
+.cm-fog circle { transition: transform 1.4s ease-out, opacity 1.4s ease-out; }
+.cm-fog.part circle:nth-child(odd) { transform: translateX(-40px); opacity: .55; }
+.cm-fog.part circle:nth-child(even) { transform: translateX(40px); opacity: .55; }
+.cm-fog-thin circle { opacity: .75; }
+/* clouds over the whole screen between one land and the next */
+.cm-cloudwipe { position: absolute; inset: 0; z-index: 30; pointer-events: none; background: radial-gradient(circle at 20% 30%, #FFFFFF 0 22%, transparent 23%), radial-gradient(circle at 70% 25%, #FFFFFF 0 26%, transparent 27%), radial-gradient(circle at 45% 70%, #FFFFFF 0 30%, transparent 31%), radial-gradient(circle at 90% 75%, #FFFFFF 0 22%, transparent 23%), radial-gradient(circle at 5% 85%, #FFFFFF 0 20%, transparent 21%), #F4F8FB; animation: cmWipeIn .9s ease-in forwards; }
+.cm-cloudwipe.out { animation: cmWipeOut 1.1s ease-out forwards; }
+@keyframes cmWipeIn { from { opacity: 0; transform: scale(1.3); } to { opacity: 1; transform: scale(1); } }
+@keyframes cmWipeOut { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(1.4); } }
+/* falling snow */
+.cm-flake { animation: cmFlake 6s linear infinite; opacity: 0; }
+@keyframes cmFlake { 0% { opacity: 0; transform: translate(0, 0); } 15% { opacity: .9; } 85% { opacity: .9; } 100% { opacity: 0; transform: translate(14px, 70px); } }
+
+/* seaside toys */
+.cm-crab, .cm-claw, .cm-gull, .cm-dolphin, .cm-fin, .cm-castle, .cm-flag, .cm-beam, .cm-ball, .cm-hat, .cm-penguin, .cm-waddle, .cm-deer, .cm-deerhead, .cm-sledride, .cm-peek { transform-box: fill-box; }
+.cm-claw { transform-origin: 50% 100%; animation: cmClaw 1.6s ease-in-out infinite; }
+.cm-claw.r { animation-delay: -.8s; }
+@keyframes cmClaw { 0%, 70%, 100% { transform: rotate(0); } 80% { transform: rotate(-14deg); } 90% { transform: rotate(10deg); } }
+.cm-crab.cm-scuttle { animation: cmScuttle 1s ease-in-out; }
+@keyframes cmScuttle { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-12px) translateY(-1px); } 40% { transform: translateX(-20px); } 70% { transform: translateX(8px) translateY(-1px); } }
+.cm-gull { transform-origin: 50% 100%; animation: cmSkyBob 1.8s ease-in-out infinite; }
+.cm-fin { transform-origin: 50% 100%; animation: cmFin 4s ease-in-out infinite; }
+@keyframes cmFin { 0%, 100% { transform: translateX(-10px); } 50% { transform: translateX(10px); } }
+.cm-dolphin { opacity: 0; }
+.cm-bigleap .cm-dolphin { animation: cmBigLeap 1.2s ease-in-out; }
+.cm-bigleap .cm-fin { opacity: 0; }
+@keyframes cmBigLeap { 0% { opacity: 0; transform: translate(-26px, 6px) rotate(-38deg); } 12% { opacity: 1; } 50% { opacity: 1; transform: translate(0, -40px) rotate(0); } 88% { opacity: 1; } 100% { opacity: 0; transform: translate(26px, 6px) rotate(38deg); } }
+.cm-castle { transform-origin: 50% 100%; }
+.cm-castle.cm-castlepop { animation: cmCastle .6s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-castlepop .cm-flag { animation: cmFlagUp .8s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmCastle { 0%, 100% { transform: scale(1); } 40% { transform: scale(1.1, .92); } }
+@keyframes cmFlagUp { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-12px); } }
+.cm-lamp { animation: cmLamp 2.4s ease-in-out infinite; }
+@keyframes cmLamp { 0%, 100% { opacity: .6; } 50% { opacity: 1; } }
+.cm-beam { transform-origin: 0 0; opacity: 0; }
+.cm-sweep { opacity: 1; animation: cmSweep 2s ease-in-out; }
+@keyframes cmSweep { 0% { opacity: 0; transform: rotate(-30deg); } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: rotate(330deg); } }
+.cm-ball { transform-origin: 50% 100%; }
+.cm-ball.cm-bounce3 { animation: cmBounce3 1s ease-in; }
+@keyframes cmBounce3 { 0% { transform: translateY(0); } 18% { transform: translateY(-26px) rotate(120deg); } 36% { transform: translateY(0) rotate(200deg); } 52% { transform: translateY(-14px) rotate(260deg); } 68% { transform: translateY(0) rotate(320deg); } 80% { transform: translateY(-6px) rotate(350deg); } 100% { transform: translateY(0) rotate(360deg); } }
+
+/* snowy valley toys */
+.cm-hat { transform-origin: 50% 100%; }
+.cm-hat.cm-hathop { animation: cmHatHop .9s ease-in-out; }
+@keyframes cmHatHop { 0%, 100% { transform: translateY(0) rotate(0); } 40% { transform: translateY(-16px) rotate(-200deg); } 70% { transform: translateY(-4px) rotate(-340deg); } 85% { transform: translateY(0) rotate(-360deg); } }
+.cm-waddle { transform-origin: 50% 100%; animation: cmWaddle 1.2s ease-in-out infinite; }
+@keyframes cmWaddle { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg); } }
+.cm-penguin { transform-origin: 50% 100%; }
+.cm-penguin.cm-slide { animation: cmSlide 1.8s ease-in-out; }
+.cm-penguin.cm-slide-l { animation: cmSlideL 1.8s ease-in-out; }
+@keyframes cmSlide { 0%, 100% { transform: translateX(0) rotate(0); } 15% { transform: translateX(4px) rotate(70deg); } 50% { transform: translateX(44px) rotate(80deg); } 70% { transform: translateX(44px) rotate(0); } }
+@keyframes cmSlideL { 0%, 100% { transform: scaleX(-1) translateX(0) rotate(0); } 15% { transform: scaleX(-1) translateX(4px) rotate(70deg); } 50% { transform: scaleX(-1) translateX(44px) rotate(80deg); } 70% { transform: scaleX(-1) translateX(44px) rotate(0); } }
+.cm-deer { transform-origin: 50% 100%; }
+.cm-deerhead { transform-origin: 0% 100%; }
+.cm-deer.cm-deerhop { animation: cmHenHop .6s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-deerhop .cm-deerhead { animation: cmNod .6s ease-in-out; }
+.cm-sledride.cm-sledgo { animation: cmSled 2.2s ease-in-out; }
+@keyframes cmSled { 0%, 100% { transform: translateX(0); } 40% { transform: translateX(-64px); } 55% { transform: translateX(-64px); } }
+.cm-peek { transform-origin: 50% 100%; }
+.cm-peek.cm-peekout { animation: cmPeek 1.6s ease-in-out; }
+@keyframes cmPeek { 0%, 100% { transform: translate(0, 0); } 30%, 70% { transform: translate(11px, -3px); } }
+/* chimney smoke */
+.cm-smoke circle { transform-box: fill-box; transform-origin: center; animation: cmSmoke 2.4s ease-out infinite; }
+@keyframes cmSmoke { 0% { opacity: 0; transform: translate(0, 6px) scale(.5); } 30% { opacity: .85; } 100% { opacity: 0; transform: translate(6px, -10px) scale(1.4); } }
+
+/* jungle, desert and autumn toys */
+.cm-monkey, .cm-parrot, .cm-pwing, .cm-elephant, .cm-trunk, .cm-hippo, .cm-camel, .cm-camelhead, .cm-hotair, .cm-float2, .cm-flame, .cm-meerkat, .cm-tumble, .cm-squirrel, .cm-owl, .cm-blink, .cm-hedgehog, .cm-scarearms, .cm-crows, .cm-wheel2 { transform-box: fill-box; }
+.cm-monkey { transform-origin: 50% 0%; animation: cmSwing 2.6s ease-in-out infinite; }
+@keyframes cmSwing { 0%, 100% { transform: rotate(-14deg); } 50% { transform: rotate(14deg); } }
+.cm-monkey.cm-swinground { animation: cmSwingRound 1.2s ease-in-out; }
+@keyframes cmSwingRound { 0% { transform: rotate(0); } 100% { transform: rotate(360deg); } }
+.cm-parrot { transform-origin: 50% 100%; animation: cmSkyBob 2s ease-in-out infinite; }
+.cm-pwing { transform-origin: 80% 10%; }
+.cm-parrot.cm-flapjump { animation: cmHenHop .6s cubic-bezier(.34, 1.56, .64, 1); }
+.cm-flapjump .cm-pwing { animation: cmWingBeat .12s ease-in-out 5 alternate; }
+.cm-elephant { transform-origin: 50% 100%; }
+.cm-trunk { transform-origin: 0% 0%; }
+.cm-trumpet .cm-trunk { animation: cmTrunk 1s ease-in-out; }
+@keyframes cmTrunk { 0%, 100% { transform: rotate(0); } 30%, 70% { transform: rotate(-120deg); } }
+.cm-spray2 circle { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.cm-trumpet .cm-spray2 circle { animation: cmSpray .9s ease-out .3s forwards; }
+.cm-hippo { transform-origin: 50% 100%; transform: translateY(5px); }
+.cm-hippo.cm-popup { animation: cmPopUp 1.6s ease-in-out; }
+@keyframes cmPopUp { 0%, 100% { transform: translateY(5px); } 25%, 70% { transform: translateY(-6px) scale(1.05); } }
+.cm-camelhead { transform-origin: 0% 100%; }
+.cm-float2 { animation: cmBalloonDrift 6s ease-in-out infinite; }
+@keyframes cmBalloonDrift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(8px, -6px); } }
+.cm-flame { transform-origin: 50% 100%; opacity: .4; }
+.cm-hotair.cm-rise { animation: cmRise 2.4s ease-in-out; }
+.cm-rise .cm-flame { animation: cmFlame .2s ease-in-out 8 alternate; opacity: 1; }
+@keyframes cmRise { 0%, 100% { transform: translateY(0); } 45%, 60% { transform: translateY(-34px); } }
+@keyframes cmFlame { from { transform: scale(1); } to { transform: scale(1.5, 1.8); } }
+.cm-meerkat { transform-origin: 50% 100%; }
+.cm-duckdown .cm-meerkat { animation: cmMeerkat 1.6s ease-in-out backwards; }
+@keyframes cmMeerkat { 0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; } 15%, 55% { transform: translateY(6px) scaleY(.1); opacity: 0; } 75% { transform: translateY(-3px) scaleY(1.05); opacity: 1; } }
+.cm-tumble { transform-origin: 50% 50%; }
+.cm-tumble.cm-roll { animation: cmRoll 2s ease-in-out; }
+@keyframes cmRoll { 0%, 100% { transform: translateX(0) rotate(0); } 45% { transform: translateX(46px) rotate(400deg); } 55% { transform: translateX(46px) rotate(400deg); } }
+.cm-squirrel { transform-origin: 50% 100%; }
+.cm-blink { transform-origin: 50% 50%; animation: cmBlink 4s ease-in-out infinite; }
+@keyframes cmBlink { 0%, 92%, 100% { transform: scaleY(1); } 95% { transform: scaleY(.1); } }
+.cm-owl { transform-origin: 50% 100%; }
+.cm-owl.cm-headturn { animation: cmHeadTurn 1s ease-in-out; }
+@keyframes cmHeadTurn { 0%, 100% { transform: scaleX(1); } 30% { transform: scaleX(-1); } 60% { transform: scaleX(1); } }
+.cm-hedgehog { transform-origin: 50% 80%; }
+.cm-hedgehog.cm-curl { animation: cmCurl 1.6s ease-in-out; }
+@keyframes cmCurl { 0%, 100% { transform: translateX(0) scale(1) rotate(0); } 25% { transform: scale(.8, .85) rotate(0); } 55% { transform: translateX(18px) scale(.8, .85) rotate(360deg); } 80% { transform: translateX(18px) scale(1) rotate(360deg); } }
+.cm-scarearms { transform-origin: 50% 50%; }
+.cm-scare .cm-scarearms { animation: cmNudge .3s ease-in-out 3; }
+.cm-crows { transform-origin: 50% 50%; }
+.cm-scare .cm-crows { animation: cmCrows 2s ease-in-out; }
+@keyframes cmCrows { 0%, 100% { transform: translate(0, 0); opacity: 1; } 30% { transform: translate(30px, -40px); opacity: 0; } 60% { transform: translate(-20px, -30px); opacity: 0; } 85% { opacity: 1; transform: translate(0, -6px); } }
+.cm-leaves path { opacity: 0; transform-box: fill-box; transform-origin: center; }
+.cm-leafburst .cm-leaves path { animation: cmLeaf 1.6s ease-out forwards; }
+@keyframes cmLeaf { 0% { opacity: 1; transform: translate(0, 0) rotate(0); } 35% { opacity: 1; transform: translate(calc(var(--dx) * .7), calc(var(--h) * -1)) rotate(180deg); } 100% { opacity: 0; transform: translate(var(--dx), 2px) rotate(400deg); } }
+.cm-wheel2 { transform-origin: center; animation: cmSpin 6s linear infinite; }
+.cm-wheel2.fast { animation-duration: .6s; }
+/* the jungle waterfall */
+.cm-fall { animation: cmFall .8s linear infinite; }
+@keyframes cmFall { to { stroke-dashoffset: -22; } }
+
+/* india toys */
+.cm-peacock, .cm-pfan, .cm-ptail, .cm-lotus, .cm-swing, .cm-dhol { transform-box: fill-box; }
+.cm-peacock { transform-origin: 50% 100%; }
+.cm-pfan { transform-origin: 50% 100%; transform: scale(.05); opacity: 0; transition: transform .5s cubic-bezier(.34, 1.56, .64, 1), opacity .3s ease; }
+.cm-fanout .cm-pfan { animation: cmFan 2.6s ease-in-out; }
+.cm-fanout .cm-ptail { animation: cmFadeOut 2.6s ease-in-out; }
+@keyframes cmFan { 0% { transform: scale(.05); opacity: 0; } 20%, 75% { transform: scale(1); opacity: 1; } 100% { transform: scale(.05); opacity: 0; } }
+@keyframes cmFadeOut { 0%, 100% { opacity: 1; } 20%, 75% { opacity: 0; } }
+.cm-lotus { transform-origin: 50% 100%; animation: cmSkyBob 3s ease-in-out infinite; }
+.cm-lotus.cm-bloom { animation: cmBloom 1.4s cubic-bezier(.34, 1.56, .64, 1); }
+@keyframes cmBloom { 0%, 100% { transform: scale(1); } 40%, 70% { transform: scale(1.5, 1.35); } }
+.cm-swing { transform-origin: 50% 0%; animation: cmSwingSmall 3s ease-in-out infinite; }
+@keyframes cmSwingSmall { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.cm-swing.cm-swinghigh { animation: cmSwingHigh 2s ease-in-out; }
+@keyframes cmSwingHigh { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(-42deg); } 50% { transform: rotate(36deg); } 75% { transform: rotate(-20deg); } }
+.cm-dhol { transform-origin: 50% 100%; }
+.cm-dhol.cm-drum { animation: cmDrum .7s ease-out; }
+@keyframes cmDrum { 0%, 100% { transform: translateY(0) scale(1); } 15% { transform: translateY(-4px) scale(1.06, .94); } 35% { transform: translateY(0) scale(1); } 55% { transform: translateY(-4px) scale(1.06, .94); } 75% { transform: translateY(0); } }
+/* marigold garland on a gate */
+.cm-toran circle { transform-box: fill-box; transform-origin: center; }
+
+/* ---------- round 7 (owner): the app's map home ---------- */
+/* today's places open to the LEFT of the cards button, inside one white container (no yellow) */
+.cm-cards { right: 80px; bottom: 14px; padding: 7px; gap: 7px; align-items: center; background: #FFFFFF; border: 1.5px solid #D9D9D9; transform-origin: 100% 50%; animation-name: cmCardsInLeft; }
+@keyframes cmCardsInLeft { from { opacity: 0; transform: translateX(10px) scale(.92); } to { opacity: 1; transform: none; } }
+.cm-card { width: 50px; height: 50px; box-shadow: 2px 2px 0 #E6E6E6; }
+.cm-card svg { width: 40px; height: 38px; }
+.cm-card-star { right: -7px; top: -7px; width: 20px; height: 20px; }
+/* while the app's overlay is up (before Play), the map's own chrome steps aside */
+body.cm-overlay #cards-panel, body.cm-overlay #play,
+body.cm-overlay .cm-edgepin, body.cm-overlay .cm-findcar, body.cm-overlay .cm-hand { display: none !important; }
+/* the back and places buttons fade (the app zooms into the map, then they come in; Back fades them as the map dims) */
+#back, #cards { opacity: 1; visibility: visible; transition: opacity .28s cubic-bezier(.23, 1, .32, 1) .12s, visibility 0s, translate .18s cubic-bezier(.34, 1.56, .64, 1), box-shadow .18s ease; }
+body.cm-overlay #back, body.cm-overlay #cards { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .16s ease-out, visibility 0s .16s; }
+
+/* ---------- round 11 (owner): the map's buttons are square like the app's, and the map holds still under the overlay ---------- */
+/* a place's Play: the app's square teal Play (1.5px #2E8E8A line, the app's hard shadow); it eases in, no overshoot */
+.cm-play { width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 0; border: 1.5px solid var(--teal-ink); background: var(--teal); box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.16); padding: 0 0 0 2px; transition: translate .14s cubic-bezier(.23, 1, .32, 1), box-shadow .14s cubic-bezier(.23, 1, .32, 1); }
+.cm-play:active { translate: 3px 3px; box-shadow: 1px 1px 0 rgba(13, 13, 13, 0.16); }
+.cm-play.cm-play-in { animation: cmPlayIn11 .24s cubic-bezier(.23, 1, .32, 1) backwards, cmPulse11 1.8s ease-in-out .5s infinite; }
+@keyframes cmPlayIn11 { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+/* the breathing ring around it is square too (a spread shadow under the hard one) */
+@keyframes cmPulse11 { 0%, 100% { box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.16), 0 0 0 0 rgba(74, 193, 189, .5); } 50% { box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.16), 0 0 0 10px rgba(74, 193, 189, 0); } }
+.cm-play.cm-play-out { animation: cmPlayOut11 .16s cubic-bezier(.23, 1, .32, 1) forwards; }
+@keyframes cmPlayOut11 { to { opacity: 0; transform: scale(.9); } }
+/* the edge pin is a button: square, the app's light line and hard shadow; it eases in without overshoot */
+.cm-edgepin { border-radius: 0; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.16); animation: cmPlayIn11 .24s cubic-bezier(.23, 1, .32, 1) backwards; }
+.cm-edgepin:active { translate: 3px 3px; box-shadow: 1px 1px 0 rgba(13, 13, 13, 0.16); }
+.cm-edgepin-arrow { transform: rotate(var(--ang)) translateX(30px); }
+.cm-edgepin-arrow::after { background: var(--teal-ink); }
+@media (prefers-reduced-motion: reduce) {
+  .cm-play.cm-play-in, .cm-edgepin { animation: cmFade .2s ease backwards; }
+}
+
+/* tour (?tour=1): the site's self-playing day shows the map only */
+body.cm-tour #cards-panel, body.cm-tour #play, body.cm-tour .cm-edgepin, body.cm-tour .cm-findcar, body.cm-tour .cm-hand,
+body.cm-tour #back, body.cm-tour #cards { display: none !important; }

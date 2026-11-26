@@ -1,0 +1,1004 @@
+/* /cominilab/story: only what /next doesn't have. Everything else is home.css, next.css and motion.css. */
+
+/* the three chips under the hero: header-tag icons on white tags; a row that rises in on scroll, a ticker on phones */
+.hc { margin-top: 36px; overflow: hidden; }
+.hc-track { display: flex; justify-content: center; }
+.hc-row { list-style: none; margin: 0; padding: 8px 0 14px; display: flex; gap: 56px; justify-content: center; }
+.hc-row + .hc-row { display: none; }
+.hc-row li { display: inline-flex; align-items: center; gap: 16px; opacity: 0; translate: 0 14px; transition: opacity 0.45s ease, translate 0.55s var(--ease-pop); }
+.hc.on .hc-row li { opacity: 1; translate: 0 0; }
+.hc-ico { line-height: 0; }
+.hc-tag { font-weight: 600; font-size: clamp(1.05rem, 1.3vw, 1.2rem); white-space: nowrap; }
+@media (max-width: 767px) {
+  .hc { margin-top: 24px; mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+  .hc-track { justify-content: flex-start; width: max-content; animation: hcTicker 16s linear infinite; }
+  .hc-row, .hc-row + .hc-row { display: flex; gap: 32px; padding-right: 32px; }
+  .hc-row li { opacity: 1; translate: 0 0; }
+}
+@keyframes hcTicker { to { transform: translateX(-33.333%); } }
+
+.wg-item { opacity: 0; translate: 0 40px; transition: opacity 0.5s ease, translate 0.7s var(--ease-pop); }
+.wg-item.in { opacity: 1; translate: 0 0; }
+.wg-card { width: min(320px, 82vw) !important; }
+.wg-pic { position: relative; }
+.wg-tag { display: grid; }
+.wg-tag > span { grid-area: 1 / 1; transition: opacity 0.3s ease, translate 0.4s var(--ease-pop); }
+.wg-tag-b { opacity: 0; translate: 0 8px; font-weight: 800; }
+.wg-item.calm .wg-tag-a { opacity: 0; translate: 0 -8px; }
+.wg-item.calm .wg-tag-b { opacity: 1; translate: 0 0; transition-delay: 0.35s; }
+.wg-line { font-weight: 600; color: var(--ink-soft); min-height: 1.5em; opacity: 0; transition: opacity 0.45s ease 0.5s; }
+.wg-item.calm .wg-line { opacity: 1; }
+.st-calm { position: absolute; inset: 0; z-index: 2; clip-path: inset(0 100% 0 0); transition: clip-path 0.9s var(--ease-rise); }
+.st-calm.go { clip-path: inset(0 0 0 0); }
+.st-calm svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- 4. learning path: four live screens that come alive when the car gets there ---------- */
+.ls-check .ss-pile i { transition: opacity 0.3s ease calc(var(--i) * 0.18s), scale 0.3s ease calc(var(--i) * 0.18s); }
+.hm-step.reached .ls-check .ss-pile i { opacity: 0; scale: 0.4; }
+.ls-check .ss-plates i { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); place-items: center; padding: 2.4cqw; gap: 0.6cqw; }
+.ls-stone { width: 3.6cqw; height: 2.8cqw; border-radius: 50%; background: #c9ccd0; border: 1.5px solid #6b6f75; opacity: 0; scale: 0.3; transition: opacity 0.3s ease calc(0.3s + var(--i) * 0.18s), scale 0.4s var(--ease-pop) calc(0.3s + var(--i) * 0.18s); }
+.hm-step.reached .ls-stone { opacity: 1; scale: 1; }
+.ls-count { display: inline-grid; }
+.ls-count em { grid-area: 1 / 1; font-style: normal; transition: opacity 0.3s ease 2s; }
+.ls-count em + em { opacity: 0; color: var(--teal-700); }
+.hm-step.reached .ls-count em:first-child { opacity: 0; }
+.hm-step.reached .ls-count em + em { opacity: 1; }
+.ls-meter { position: relative; }
+.ls-meter i { background: #e6e6e6; }
+.ls-pin { position: absolute; top: -0.8cqw; left: 0; width: calc((100% - 8cqw) / 9); height: 3cqw; background: #2f6fd6; transition: left 0.9s var(--ease-rise); }
+.hm-step.reached .ls-pin { left: calc(var(--at) * ((100% - 8cqw) / 9 + 1cqw)); }
+.ls-report .ss-warm ~ .ls-meter .ls-pin, .ls-level:first-of-type .ls-pin { background: #e0a92a; }
+.ls-level .ls-pin { transition-delay: calc(0.2s + var(--i, 0) * 0.25s); }
+.ls-can { opacity: 0.35; translate: 0 6px; transition: opacity 0.4s ease 1.2s, translate 0.4s var(--ease-pop) 1.2s; }
+.hm-step.reached .ls-can { opacity: 1; translate: 0 0; }
+.ls-card { opacity: 0.3; translate: 0 -10px; filter: grayscale(0.6); transition: opacity 0.35s ease calc(var(--i) * 0.22s), translate 0.45s var(--ease-pop) calc(var(--i) * 0.22s), filter 0.35s ease calc(var(--i) * 0.22s); }
+.hm-step.reached .ls-card { opacity: 1; translate: 0 0; filter: none; }
+.ls-keep .ss-bar i { transform-origin: 0 50%; transform: scaleX(0.12); transition: transform 0.6s var(--ease-rise) calc(var(--i) * 0.4s); }
+.hm-step.reached .ls-keep .ss-bar i { transform: scaleX(1); }
+.ls-done { opacity: 0.3; transition: opacity 0.3s ease calc(1.2s + var(--i) * 0.3s); }
+.hm-step.reached .ls-done { opacity: 1; }
+.ls-grow { opacity: 0.35; scale: 0.96; transition: opacity 0.35s ease 2s, scale 0.45s var(--ease-pop) 2s; }
+.hm-step.reached .ls-grow { opacity: 1; scale: 1; }
+
+/* ---------- 6. what you see: "See them grow" and the home ideas ---------- */
+.sg-card { display: grid; gap: 22px; }
+.sg-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.sg-track { position: relative; height: 92px; margin: 0 26px; }
+.sg-line { position: absolute; left: 0; right: 0; top: 38px; height: 8px; background: #ececec; }
+.sg-line i { display: block; height: 100%; background: var(--teal); transition: width 0.8s var(--ease-rise); }
+.sg-node { position: absolute; top: 31px; translate: -50% 0; display: grid; justify-items: center; gap: 12px; }
+.sg-node i { width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid #d9d9d9; transition: border-color 0.3s ease, background 0.3s ease; }
+.sg-node.on i { border-color: var(--teal-700); background: var(--teal); }
+.sg-node em { font-style: normal; font-size: 0.78rem; font-weight: 700; color: var(--ink-muted); white-space: nowrap; }
+.sg-node.on em { color: var(--ink); }
+.sg-kid { position: absolute; top: -10px; translate: -50% 0; width: 46px; height: 46px; border-radius: 50%; border: 3px solid #a98bff; background: #fff; overflow: hidden; box-shadow: 0 3px 0 rgba(13, 13, 13, 0.12); transition: left 0.9s var(--ease-pop); }
+.sg-kid img { width: 100%; height: 100%; object-fit: cover; }
+.sg-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+.sg-day { display: grid; justify-items: center; gap: 6px; }
+.sg-day i { width: 100%; aspect-ratio: 1; display: grid; place-items: center; background: var(--paper-2); border: 1.5px solid var(--line-soft); font-style: normal; font-size: 1.1rem; color: #fff; transition: background 0.3s ease, border-color 0.3s ease; }
+.sg-day.done i { background: var(--k); border-color: transparent; animation: racePop 0.4s var(--ease-pop) both; }
+.sg-day.up i { box-shadow: 0 0 0 3px var(--note); }
+.sg-day em { font-style: normal; font-size: 0.72rem; font-weight: 700; color: var(--ink-muted); }
+.sg-next { display: grid; gap: 4px; padding: 14px 16px; border: 1.5px dashed var(--line); background: var(--paper); transition: background 0.3s ease, border-color 0.3s ease; }
+.sg-next.open { border-style: solid; border-color: var(--teal-700); background: var(--teal-50); animation: racePop 0.5s var(--ease-pop) both; }
+.sg-again { justify-self: start; background: none; border: 0; padding: 0; font: inherit; font-weight: 700; cursor: pointer; }
+.sh2 { display: grid; gap: 22px; }
+@media (min-width: 640px) { .sh2 { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); align-items: start; } }
+.sh2-pic { padding: 8px; animation: racePop 0.45s var(--ease-pop) both; }
+.sh2-pic .lab-card-pic { aspect-ratio: 1; }
+.sh2-pic svg { display: block; width: 100%; height: 100%; font-family: var(--font-lab-sans), "DM Sans", sans-serif; }
+.sh2-text { display: grid; gap: 8px; align-content: start; padding-top: 4px; }
+
+/* ---------- 8. the map, playing a day by itself ---------- */
+.st-maptour > iframe, .st-maptour-still { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+
+/* ---------- 12. questions: no corkboard; one swipe row on phones ---------- */
+.st .nx-notes { background: none; padding: 8px 4px 20px; }
+@media (max-width: 639px) {
+  .st .nx-notes { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 62vw; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; gap: 18px; padding: 12px 4px 22px; }
+  .st .nx-notes::-webkit-scrollbar { display: none; }
+  .st .nx-notes > li { scroll-snap-align: center; }
+  .st .nx-note { aspect-ratio: 4 / 3; }
+}
+
+/* the calm scenes' own motion, once they have wiped in */
+.st-calm .cf-d, .st-calm .cf-n, .st-calm .cf-star, .st-calm .cf-tick, .st-calm .cf-chip, .st-calm .cf-tip, .st-calm .cf-bigstar, .st-calm .cf-t { opacity: 0; }
+.st-calm .cf-d, .st-calm .cf-star, .st-calm .cf-tick, .st-calm .cf-chip, .st-calm .cf-t, .st-calm .cf-bigstar { transform-box: fill-box; transform-origin: 50% 70%; }
+.st-calm .cf-fill { transform-box: fill-box; transform-origin: 0 50%; transform: scaleX(0); }
+.st-calm .cf-wedge { transform-box: view-box; transform-origin: 118px 160px; transform: scale(0); }
+.st-calm.go .cf-d1 { animation: cfPop 0.4s var(--ease-pop) 0.6s both; }
+.st-calm.go .cf-d2 { animation: cfPop 0.4s var(--ease-pop) 0.95s both; }
+.st-calm.go .cf-d3 { animation: cfPop 0.4s var(--ease-pop) 1.3s both; }
+.st-calm.go .cf-d4 { animation: cfPop 0.4s var(--ease-pop) 1.65s both; }
+.st-calm.go .cf-d5 { animation: cfPop 0.4s var(--ease-pop) 2s both; }
+.st-calm.go .cf-n1 { animation: cfOn 0.01s linear 0.75s forwards, cfOff 0.01s linear 1.1s forwards; }
+.st-calm.go .cf-n2 { animation: cfOn 0.01s linear 1.1s forwards, cfOff 0.01s linear 1.45s forwards; }
+.st-calm.go .cf-n3 { animation: cfOn 0.01s linear 1.45s forwards, cfOff 0.01s linear 1.8s forwards; }
+.st-calm.go .cf-n4 { animation: cfOn 0.01s linear 1.8s forwards, cfOff 0.01s linear 2.15s forwards; }
+.st-calm.go .cf-n5 { animation: cfOn 0.01s linear 2.15s forwards; }
+.st-calm.go .cf-s1 { animation: cfPop 0.5s var(--ease-pop) 2.5s both; }
+.st-calm.go .cf-s2 { animation: cfPop 0.5s var(--ease-pop) 2.7s both; }
+.st-calm.go .cf-s3 { animation: cfPop 0.5s var(--ease-pop) 2.9s both; }
+.st-calm.go .cf-tick { animation: cfPop 0.45s var(--ease-pop) 3.3s both; }
+.st-calm.go .cf-m1 .cf-fill { animation: cfGrow 0.7s var(--ease-rise) 0.6s both; }
+.st-calm.go .cf-m2 .cf-fill { animation: cfGrow 0.7s var(--ease-rise) 1s both; }
+.st-calm.go .cf-m3 .cf-fill { animation: cfGrow 0.7s var(--ease-rise) 1.4s both; }
+.st-calm.go .cf-m4 .cf-fill { animation: cfGrow 0.7s var(--ease-rise) 1.8s both; }
+.st-calm.go .cf-c1 { animation: cfPop 0.4s var(--ease-pop) 1s both; }
+.st-calm.go .cf-c2 { animation: cfPop 0.4s var(--ease-pop) 1.4s both; }
+.st-calm.go .cf-c3 { animation: cfPop 0.4s var(--ease-pop) 1.8s both; }
+.st-calm.go .cf-c4 { animation: cfPop 0.4s var(--ease-pop) 2.2s both; }
+.st-calm.go .cf-tip { animation: cfRise 0.5s var(--ease-rise) 2.7s both; }
+.st-calm.go .cf-bigstar { animation: cfSpin 0.7s var(--ease-pop) 3.1s both; }
+.st-calm.go .cf-wedge { animation: cfGrow2 2.6s linear 0.5s both; }
+.st-calm.go .cf-t1 { animation: cfPop 0.4s var(--ease-pop) 0.8s both; }
+.st-calm.go .cf-t2 { animation: cfPop 0.4s var(--ease-pop) 1.3s both; }
+.st-calm.go .cf-t3 { animation: cfPop 0.4s var(--ease-pop) 1.8s both; }
+.st-calm.go .cf-t4 { animation: cfPop 0.4s var(--ease-pop) 2.3s both; }
+.st-calm.go .cf-t5 { animation: cfPop 0.4s var(--ease-pop) 2.8s both; }
+.st-calm.go .cf-steam { animation: cfSteam 2.4s ease-in-out 0.6s infinite; }
+.st-calm.go .cf-st2 { animation-delay: 1.4s; }
+@keyframes cfPop { from { opacity: 0; transform: scale(0.3); } 70% { opacity: 1; transform: scale(1.12); } to { opacity: 1; transform: scale(1); } }
+@keyframes cfOn { to { opacity: 1; } }
+@keyframes cfOff { to { opacity: 0; } }
+@keyframes cfGrow { to { transform: scaleX(1); } }
+@keyframes cfGrow2 { to { transform: scale(1); } }
+@keyframes cfRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes cfSpin { from { opacity: 0; transform: scale(0.2) rotate(-90deg); } to { opacity: 1; transform: none; } }
+@keyframes cfSteam { 0% { opacity: 0; transform: translateY(8px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-14px); } }
+
+/* the try-it modal: the real activity, big */
+
+/* ---------- 4. the map, playing a day by itself ---------- */
+.st-maptour > iframe, .st-maptour-still { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; object-fit: cover; }
+
+
+@media (max-width: 640px) { .sg-track { margin: 0 20px; } .sg-node em { font-size: 0.62rem; max-width: 64px; white-space: normal; text-align: center; line-height: 1.15; } }
+
+/* ======================= round 5 (owner's layout, TV - 26.pdf) ======================= */
+.st-center-head { display: grid; justify-items: center; text-align: center; margin-left: auto; margin-right: auto; }
+.st-center-line { text-align: center; margin: 22px auto 0; max-width: 62ch; }
+
+/* ---------- 1. hero: a real activity in the big card, four thumbnails, windows that minimise into them ---------- */
+.st-hero { padding-bottom: 56px; }
+@keyframes stBar { from { width: 0; } to { width: 100%; } }
+
+/* the facts, a band of their own under the hero */
+.st-chips { background: var(--paper-2); border-top: 1.5px solid var(--line-soft); border-bottom: 1.5px solid var(--line-soft); }
+.st-chips .hc { margin: 0; }
+@media (min-width: 768px) { .st-chips .hc-row { justify-content: space-between; width: 100%; padding: 16px 0; gap: 24px; } .st-chips .hc-track { display: block; } }
+
+/* ---------- 2. the library: a ticker of real activities ---------- */
+.st-lib { overflow: hidden; padding-top: 72px; }
+.st-lib-head { display: grid; justify-items: center; gap: 16px; text-align: center; max-width: 820px; margin-top: 8px; }
+.st-lib-head .lab-body { max-width: 56ch; }
+
+/* ---------- 3. we've been there: the parent bear, the struggles, then "No more" ---------- */
+.st-get-sec { background: var(--paper-2); position: relative; }
+@keyframes wgFloat { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+
+/* ---------- 4. start with your child: the contents come in, then the car drives ---------- */
+.pi .st-how-copy .lab-body { opacity: 0; translate: 0 12px; transition: opacity 0.4s ease 0.35s, translate 0.5s var(--ease-pop) 0.35s; }
+.pi.in .st-how-copy .lab-body { opacity: 1; translate: 0 0; }
+.pi .hm-road-svg { opacity: 0; transition: opacity 0.6s ease 0.4s; }
+.pi.in .hm-road-svg { opacity: 1; }
+
+/* ---------- 5. one idea: the slider ---------- */
+.st-ideas-sec { overflow: hidden; }
+
+/* ---------- 6. fast or slow: the road towards you ---------- */
+/* a soft lavender band (owner, 2026-11-25: the peach read dull) */
+.st-fs-sec { background: #EEECFB; }
+.st-fs-in { display: grid; gap: 44px; align-items: center; }
+@media (min-width: 1024px) { .st-fs-in { grid-template-columns: 5fr 7fr; gap: 64px; } }
+.st-fs-in > * { min-width: 0; }
+.st-fs-copy { display: grid; gap: 18px; }
+.fs { display: grid; gap: 22px; }
+.fs-card { padding: 8px; }
+.fs-scene { position: relative; display: block; aspect-ratio: 600 / 340; overflow: hidden; }
+.fs-land { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fs-stop { position: absolute; z-index: 1; translate: -50% -100%; scale: max(0.78, var(--k)); transform-origin: 50% 100%; }
+.fs-chip { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; padding: 6px 11px; background: #fff; border: 1.5px solid var(--line); font-size: 0.95rem; font-weight: 700; opacity: 0.45; filter: grayscale(1); transition: opacity 0.3s ease, filter 0.3s ease; }
+.fs-chip svg { flex: none; }
+.fs-stop.on .fs-chip { opacity: 1; filter: none; animation: racePop 0.45s var(--ease-pop) both; }
+.fs-stop.check.on .fs-chip { background: var(--note); border-color: var(--gold-deep); }
+.fs-stop.story.on .fs-chip { background: var(--story-soft); color: #5a3fc0; border-color: #d9cffd; }
+.fs-stop.game.on .fs-chip { background: var(--teal-50); color: #1f6f6c; border-color: #bfe6e3; }
+.fs-chip b { color: #e0a92a; }
+@keyframes racePop { from { scale: 0.7; } 60% { scale: 1.08; } to { scale: 1; } }
+.fs-speed { position: absolute; top: 26px; left: -30px; right: -30px; display: flex; justify-content: space-between; pointer-events: none; }
+.fs-speed i { display: block; width: 4px; height: 34px; background: #fff; border-radius: 2px; animation: fsLine 0.35s linear infinite; }
+.fs-speed i:nth-child(2) { animation-delay: 0.12s; height: 24px; }
+.fs-speed i:nth-child(3) { animation-delay: 0.24s; }
+@keyframes fsLine { from { opacity: 1; translate: 0 -8px; } to { opacity: 0; translate: 0 18px; } }
+.fs-note { position: absolute; z-index: 5; top: 10px; left: 50%; width: min(86%, 380px); display: grid; gap: 2px; padding: 10px 14px 12px; background: rgba(255, 255, 255, 0.97); border-radius: 16px; box-shadow: 0 14px 32px -10px rgba(13, 13, 13, 0.35); translate: -50% -150%; transition: translate 0.55s var(--ease-pop); text-align: left; }
+.fs-note.on { translate: -50% 0; }
+.fs-note-app { display: flex; align-items: center; gap: 8px; font-size: 0.74rem; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.fs-note-app img { width: 28px; height: auto; }
+.fs-note-app em { margin-left: auto; font-style: normal; text-transform: none; letter-spacing: 0; }
+.fs-note b { font-size: 1rem; }
+.fs-note > span:last-child { font-size: 0.88rem; color: var(--ink-soft); line-height: 1.35; }
+@media (max-width: 640px) { .fs-note { width: 92%; padding: 8px 10px; } .fs-note b { font-size: 0.86rem; } .fs-note > span:last-child { font-size: 0.76rem; } .fs-chip { font-size: 0.8rem; } }
+
+/* ---------- 7. but does it actually work? ---------- */
+.st-dw-sec { background: var(--paper-2); }
+@keyframes dwkTap { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+
+@keyframes stFadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* the walkthrough card (owner, 2026-11-24): a soft cream inside a thick white frame, like a polaroid */
+@keyframes stRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes dwTime { from { transform: scaleX(1); } to { transform: scaleX(0); } }
+@keyframes dwEq { to { opacity: 1; scale: 1; } }
+@keyframes dwLink { to { transform: scaleY(1); } }
+
+/* ---------- 8. what you see: the widget on the left, the list on the right ---------- */
+@media (min-width: 1024px) { .st-know .hm-panel { order: -1 !important; } }
+.st-know .hm-parents-title { max-width: 860px; }
+
+/* ---------- 9. the map first, then its line lands on it ---------- */
+.st-map-sec { background: var(--paper); }
+
+.fs-cloud { animation: fsCloud 26s linear infinite; }
+@keyframes fsCloud { from { transform: translateX(-80px); } to { transform: translateX(680px); } }
+
+/* ---- polaroid cards (owner's PDF, 2026-11-24): at a 1280 page a card is 332 wide, an 11px white frame on the top and sides
+   round a square picture, a 70px blank strip under it, and a flat 10px #E5E5E5 shadow down and right. Every size below is a
+   share of the card width so the shape holds at any width. ---- */
+.pol { --pw: var(--card-w, clamp(220px, 25.94vw, 332px)); --u: calc(var(--pw) / 332); margin: 0; display: block; width: var(--pw); padding: calc(11 * var(--u)) calc(11 * var(--u)) calc(70 * var(--u)); background: #fff; box-shadow: calc(10 * var(--u)) calc(10 * var(--u)) 0 #E5E5E5; position: relative; }
+.pol-pic { display: block; position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #D9D9D9; }
+.pol-pic > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.pol-label { position: absolute; left: 0; right: 0; bottom: 0; height: calc(70 * var(--u)); display: flex; align-items: center; justify-content: center; font-size: max(14px, calc(18 * var(--u))); font-weight: 500; color: #0D0D0D; line-height: 1; }
+
+/* ---- "One idea" slider: the same polaroids, the middle card centred, the row running off both edges ---- */
+.is-card { border: 0; cursor: pointer; font: inherit; color: inherit; text-align: center; }
+.is-card:focus-visible { outline: 3px solid var(--teal); outline-offset: 6px; }
+.is-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity 0.45s ease; }
+.is-poster.gone { opacity: 0; }
+
+/* ---- fast or slow: the riders (owner, 2026-11-24): the bear's red car on the city street, Pip hopping in the country ---- */
+.fs-rider { position: absolute; z-index: 2; left: 50%; translate: -50% -100%; scale: var(--k); transform-origin: 50% 100%; display: grid; justify-items: center; }
+.fs-rider.car { width: 30%; }
+.fs-rider.pip { width: 17%; }
+.fs-car { display: block; width: 100%; height: auto; overflow: visible; }
+.fs-blink { transform-box: fill-box; transform-origin: 50% 50%; animation: fsBlink 4.2s infinite; }
+@keyframes fsBlink { 0%, 94%, 100% { scale: 1 1; } 97% { scale: 1 0.15; } }
+.fs-pip { position: relative; display: block; width: 100%; }
+.fs-pip img { display: block; width: 100%; height: auto; position: relative; z-index: 1; }
+.fs-pip-shadow { display: block; width: 76%; height: 12px; margin: -6px auto 0; border-radius: 50%; background: rgba(13, 13, 13, 0.18); }
+.fs-rider.car .fs-speed { top: 30%; left: -16%; right: -16%; }
+.fs-rider.car .fs-speed i:nth-child(2) { visibility: hidden; }
+@media (max-width: 640px) { .fs-chip { font-size: 0.68rem; padding: 4px 7px; gap: 4px; } .fs-chip svg { width: 13px; height: 13px; } .fs-stop { scale: max(0.7, var(--k)); } }
+
+/* ---- hero (owner's PDF, 2026-11-24): the heading big on the left; on the right a polaroid, 482 wide at a 1280 page:
+   an 11px frame round a 460 x 525 picture where the activity plays, the four thumbnails (97px squares in a 7px white
+   frame, 14px apart, 16px in from the picture's left and bottom) sitting inside the picture's bottom edge ---- */
+
+/* ---- the try modal: a polaroid centred over the dimmed page, the activity at 800 x 360 ---- */
+.st-try-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(13, 13, 13, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: stFadeIn 0.22s ease both; }
+.st-try-card { --tw: min(1120px, calc(100vw - 40px), calc((100vh - 150px) * 800 / 360)); width: var(--tw); padding: 12px 12px 0; background: #fff; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.22); animation: stTryIn 0.42s var(--ease-pop) both; }
+@keyframes stTryIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
+.st-try-stage { position: relative; width: 100%; aspect-ratio: 800 / 360; overflow: hidden; background: #F2F2F2; }
+.st-try-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+.st-try-host { position: absolute; inset: 0; }
+.st-try-mount { position: relative; width: 100%; height: 100%; }
+.st-try-mount > * { width: 100% !important; height: 100% !important; }
+.st-try-cover { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 12px; background: #fff; }
+.st-try-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; padding: 10px 2px 12px 6px; }
+.st-try-bar b { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 800; letter-spacing: -0.01em; }
+.st-try-x { flex: none; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; background: #fff; border: 1.5px solid var(--line); box-shadow: 4px 4px 0 #E5E5E5; cursor: pointer; transition: translate 0.15s ease, box-shadow 0.15s ease; }
+.st-try-x:hover { translate: -1px -1px; box-shadow: 5px 5px 0 #E5E5E5; }
+.st-try-x:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E5E5E5; }
+@media (max-width: 640px) { .st-try-modal { padding: 12px; } .st-try-card { --tw: calc(100vw - 24px); padding: 8px 8px 0; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.22); } .st-try-bar { min-height: 56px; } }
+
+@media (max-width: 767px) { .hc-ico svg { width: 44px; height: 44px; } .hc-tag { font-size: 1.05rem; } }
+
+/* ---- the polaroid arc (library + one idea), laid out like the app's cards home ---- */
+.parc { --card-w: clamp(220px, 25.94vw, 332px); position: relative; isolation: isolate; height: calc(var(--card-w) * 1.244 + 130px); touch-action: pan-y; cursor: grab; user-select: none; -webkit-user-select: none; overflow: hidden; }
+.parc.dragging { cursor: grabbing; }
+.parc.dragging .is-card { pointer-events: none; }
+.parc-slot { position: absolute; left: 0; top: 22px; transform-origin: 50% 50%; will-change: transform, opacity; }
+.parc-slot img { -webkit-user-drag: none; }
+.is { margin-top: clamp(20px, 3vw, 40px); }
+.is-item { transition: translate 0.35s var(--ease-pop); }
+.is-item:hover { translate: 0 -10px; }
+
+/* ---- we've been there (owner, 2026-11-24): bear alone, photos rise in, bear up, heading, then the cards under it ---- */
+.wg2.sticky { height: 520vh; }
+.wg2-stick { position: sticky; top: var(--nav-h, 68px); height: calc(100vh - var(--nav-h, 68px)); overflow: hidden; }
+.wg2-photo { position: absolute; z-index: 1; width: clamp(180px, 15vw, 240px); will-change: transform, opacity; }
+.wg2-float { animation: wgFloat 6s ease-in-out infinite; }
+.wg2-bigbear { position: absolute; left: 0; top: 0; z-index: 3; line-height: 0; transform-origin: 50% 50%; will-change: transform; }
+.wg2-col { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 12px 0 20px; pointer-events: none; }
+.wg2-col > * { pointer-events: auto; }
+.wg2-slot { flex: none; }
+.wg2-h { margin: 0; text-align: center; font-size: clamp(2.4rem, 4vw, 3.6rem); line-height: 1.06; }
+.wg2-row.hm-pains { margin: 14px 0 0; width: min(1080px, 94%); grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; justify-items: center; gap: 20px; }
+.wg2-row .wg-card { width: min(280px, 23vw) !important; }
+@media (max-height: 820px) and (min-width: 900px) { .wg2-row .wg-card { width: min(230px, 19vw) !important; } .wg2-photo { width: clamp(160px, 13vw, 200px); } .wg2-h { font-size: clamp(2rem, 3.4vw, 3rem); } }
+.wg2.flow { padding: 72px 0; display: grid; gap: 32px; justify-items: center; text-align: center; }
+.wg2-bear-flow { line-height: 0; }
+.wg2-photos-flow { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+@media (min-width: 900px) { .wg2-photos-flow { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.wg2.flow .wg2-row.hm-pains { margin: 0; width: 100%; grid-template-columns: 1fr; gap: 40px; }
+@media (min-width: 768px) { .wg2.flow .wg2-row.hm-pains { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.wg2.flow .wg-item { opacity: 1; translate: 0 0; }
+.wg2.flow .wg-card { width: min(320px, 82vw) !important; }
+
+/* ---- start with your child (owner's PDF): a big centred heading, a little tilted, the first line marked. The heading
+   comes in, then the road and the car; each stop's card fades in with its own animation as the car reaches it ---- */
+.st-how-copy { text-align: center; justify-items: center; }
+.st-pathh { margin: 0 auto; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 1.12; rotate: -2deg; }
+.pi .st-pathh { opacity: 0; translate: 0 18px; transition: opacity 0.45s ease, translate 0.6s var(--ease-pop); }
+.pi.in .st-pathh { opacity: 1; translate: 0 0; }
+.pi .hm-road-car { opacity: 0; scale: 0.6; transition: opacity 0.35s ease, scale 0.45s var(--ease-pop); }
+.pi.car .hm-road-car { opacity: 1; scale: 1; }
+.pi .hm-step > :not(.hm-stop) { opacity: 0; translate: 0 26px; transition: opacity 0.5s ease, translate 0.6s var(--ease-pop); }
+.pi .hm-step.reached > :not(.hm-stop) { opacity: 1; translate: 0 0; }
+.pi .hm-step.reached > h3 { transition-delay: 0.12s; }
+.pi .hm-step.reached > p { transition-delay: 0.2s; }
+
+/* ---- fast or slow: the living bits of the scenery (CSS, so the scenery itself is drawn once) ---- */
+.fs-dashes { pointer-events: none; }
+.fs-pip-body { display: block; transform-origin: 50% 100%; will-change: transform; }
+.fs-rays { transform-box: view-box; transform-origin: 110px 44px; animation: fsSpin 30s linear infinite; }
+.fs-mill { animation: fsSpin 6s linear infinite; }
+@keyframes fsSpin { to { rotate: 360deg; } }
+.fs-birds { animation: fsBirds 22s linear infinite; }
+@keyframes fsBirds { from { transform: translateX(-120px); } to { transform: translateX(720px); } }
+.fs-bird { transform-box: fill-box; transform-origin: 50% 50%; animation: fsFlap 0.5s ease-in-out infinite alternate; }
+@keyframes fsFlap { to { scale: 1 0.45; } }
+.fs-fly { animation: fsFly 7s ease-in-out infinite; }
+@keyframes fsFly { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(18px, -12px); } 50% { transform: translate(34px, 2px); } 75% { transform: translate(14px, 10px); } }
+.fs-wings { transform-box: fill-box; transform-origin: 50% 50%; animation: fsFlap 0.22s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .fs-rays, .fs-mill, .fs-birds, .fs-bird, .fs-fly, .fs-wings, .fs-cloud { animation: none; } }
+
+/* does it work: the faded words rise in one by one; Coco slides up with the scroll (DoesItWork.tsx) */
+
+/* ---- the map (owner, 2026-11-24): the frame fits the map exactly, rises in on scroll, holds, then the note lands ---- */
+.st-map-sec { padding: 56px 0; }
+.mr { --mw: 100%; --mh: min(calc(100vh - var(--nav-h, 68px) - 56px), 780px); }
+.mr.sticky::after { content: ""; display: block; height: 70vh; }
+.mr-stick { position: relative; width: var(--mw); margin: 0 auto; }
+.mr.sticky .mr-stick { position: sticky; top: calc(var(--nav-h, 68px) + (100vh - var(--nav-h, 68px) - var(--mh)) / 2); }
+.mr-frame { width: 100%; opacity: 0; transform: translateY(60px) scale(0.94); transition: opacity 0.6s ease, transform 0.9s var(--ease-pop); }
+.mr.in .mr-frame { opacity: 1; transform: none; }
+.mr .hm-mapstick { position: relative; top: auto; width: 100%; height: var(--mh); aspect-ratio: auto; max-height: none; margin: 0; border: 0; box-shadow: none; }
+.mr-note { margin: 0; z-index: 4; text-align: center; background: var(--note); padding: 18px 34px 20px; max-width: 760px; font-size: clamp(1.6rem, 3.4vw, 3rem); line-height: 1.12; font-weight: 800; letter-spacing: -0.03em; box-shadow: 10px 10px 0 rgba(13, 13, 13, 0.14); pointer-events: none; }
+.mr.sticky .mr-note { position: absolute; left: 50%; top: 50%; translate: -50% -50%; rotate: -3deg; opacity: var(--k); transform: scale(calc(0.6 + 0.4 * var(--k))); width: max-content; max-width: min(760px, 86%); }
+.mr:not(.sticky) .mr-note { width: 100%; margin: 24px auto 0; rotate: -2deg; font-size: 1.5rem; }
+@media (max-width: 899px) { .mr { --mh: min(120vw, 520px); } }
+
+/* one idea: bigger cards (owner, 2026-11-24) */
+.is-arc { --card-w: clamp(250px, 30vw, 420px); }
+
+/* ---- cover-fit for a live activity (owner, 2026-11-24): the activity keeps its own 800 x 360 shape and is scaled to
+   fill the frame like object-fit: cover; --fx / --fy say which part stays in view (0 = left/top, 1 = right/bottom) ---- */
+.cov { position: absolute; inset: 0; overflow: hidden; container-type: size; pointer-events: none; }
+.cov-in { position: absolute; display: block; width: max(100cqw, 100cqh * var(--ar, 2.2222)); height: max(100cqh, 100cqw / var(--ar, 2.2222)); left: calc((100cqw - max(100cqw, 100cqh * var(--ar, 2.2222))) * var(--fx, 0.5)); top: calc((100cqh - max(100cqh, 100cqw / var(--ar, 2.2222))) * var(--fy, 0.5)); }
+/* the day map keeps its land's own shape (2120 x 960) and covers the frame */
+.st-maptour .cov { --ar: 2.2083; }
+.cov-in > * { width: 100% !important; height: 100% !important; }
+.cov-in iframe, iframe.cov-in { border: 0; background: #fff; }
+
+/* the "No more" cards as polaroids (owner, 2026-11-24): the scene sits inside the frame; the strip shows "No more …"
+   once the scene has resolved */
+.wg-pol { --card-w: min(330px, 26vw); display: block; }
+.wg-pol .pol-pic { display: grid; place-items: center; }
+.wg-pol .pol-pic > * { position: absolute; inset: 0; }
+.wg-pol .mo-art, .wg-pol .mo-art > span { display: block; width: 100%; height: 100%; }
+.wg-pol .pol-pic svg { display: block; width: 100%; height: 100%; }
+.wg-label { font-weight: 700; opacity: 0; translate: 0 6px; transition: opacity 0.35s ease 0.3s, translate 0.45s var(--ease-pop) 0.3s; }
+.wg-item.calm .wg-label { opacity: 1; translate: 0 0; }
+.wg2-row .wg-pol { --card-w: min(330px, 26vw); }
+@media (max-height: 820px) and (min-width: 900px) { .wg2-row .wg-pol { --card-w: min(270px, 21vw); } }
+.wg2.flow .wg-pol { --card-w: min(330px, 82vw); }
+
+
+/* fast or slow, endless: the crossing light (red, then green as the car gets there) and the car's bounce */
+.fs-red { fill: #FF4D4D; } .fs-green { fill: #1F4D33; }
+g.go .fs-red { fill: #5B2A2A; } g.go .fs-green { fill: #3CE07A; }
+.fs-carbody { animation: fsCarBob 0.32s ease-in-out infinite alternate; }
+@keyframes fsCarBob { to { transform: translateY(1.6px); } }
+.fs-stop { transition: none; }
+@media (prefers-reduced-motion: reduce) { .fs-carbody { animation: none; } }
+
+/* ---- hero (owner's wireframe, 2026-11-25): heading left and the line with the two buttons right, then a landscape phone
+   in the middle with the activity clips on a wheel through it (HeroWindows.tsx) ---- */
+.st-hero3 { position: relative; overflow: clip; padding: clamp(36px, 5vw, 60px) 0 clamp(28px, 3.5vw, 44px); }
+.st-hero3-top { display: grid; gap: 24px; align-items: end; }
+@media (min-width: 960px) { .st-hero3-top { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 56px; } }
+.st-hero3-h { margin: 0; font-size: clamp(2.4rem, 4.4vw, 4.25rem); line-height: 1.06; }
+.st-hero3-side { display: grid; gap: 22px; padding-bottom: 6px; }
+.st-hero3-side .lab-lede { margin: 0; max-width: 34em; }
+.st-hero3-ctas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.st-hero3-ctas .lab-btn { justify-content: center; }
+@media (max-width: 520px) { .st-hero3-ctas { grid-template-columns: 1fr; } }
+.hw3 { --sw: min(760px, calc(100vw - 96px)); --sh: calc(var(--sw) * 9 / 16); --bx: clamp(20px, 2.8vw, 38px); --by: clamp(9px, 1.1vw, 15px);
+  position: relative; height: calc(var(--sh) + 2 * var(--by) + 10px); margin-top: clamp(28px, 4vw, 48px); margin-bottom: clamp(20px, 4vw, 56px); }
+.hw3-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+.hw3-row { position: absolute; left: 0; top: 0; width: 100%; height: calc(100% + 70px); filter: url(#hw3-bend); }
+.hw3-clip { position: absolute; left: 50%; top: calc(var(--by) + var(--sh) / 2); width: var(--sw); height: var(--sh); padding: 0; border: 0; overflow: hidden; background: #D9D9D9; cursor: pointer; will-change: transform, opacity; }
+.hw3-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: calc(var(--fx, 0.5) * 100%) 50%; transition: opacity 0.5s ease; }
+.hw3-poster.gone { opacity: 0; }
+/* the phone: a white bezel round a see-through screen, in front of the clips */
+/* the phone: a slim dark-grey body with square corners, a darker rim round the screen, a camera dot, a speaker slit and
+   two keys on the top edge */
+.hw3-phone { position: absolute; left: 50%; top: 0; z-index: 20; translate: -50% 0; width: calc(var(--sw) + 2 * var(--bx)); height: calc(var(--sh) + 2 * var(--by)); box-sizing: border-box; border: solid #34383E; border-width: var(--by) var(--bx); pointer-events: none; }
+.hw3-phone::before { content: ""; position: absolute; inset: -3px; border: 3px solid #23262A; pointer-events: none; }
+.hw3-phone::after { content: ""; position: absolute; inset: calc(-1 * var(--by)) calc(-1 * var(--bx)); border-top: 2px solid #4A4F57; pointer-events: none; }
+.hw3-keys { position: absolute; top: calc(-1 * var(--by) - 4px); left: 18%; width: 64px; height: 4px; background: #34383E; box-shadow: 84px 0 0 #34383E; }
+.hw3-cam { position: absolute; left: calc(var(--bx) * -0.55); top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: #1C1E21; box-shadow: 0 0 0 2px #4A4F57; }
+.hw3-bar { position: absolute; right: calc(var(--bx) * -0.55); top: 50%; width: 4px; height: 22%; translate: 0 -50%; border-radius: 2px; background: #1C1E21; }
+.hw3-tap { position: absolute; inset: 0; padding: 0; border: 0; background: none; cursor: pointer; pointer-events: auto; }
+.hw3-play { position: absolute; left: 50%; top: 50%; width: 72px; height: 72px; display: grid; place-items: center; background: #FFFFFF; box-shadow: 5px 5px 0 rgba(13, 13, 13, 0.22); translate: -50% -50%; scale: 0.8; opacity: 0; transition: opacity 0.2s ease, scale 0.3s var(--ease-pop); }
+.hw3-tap:hover .hw3-play, .hw3-tap:focus-visible .hw3-play { opacity: 1; scale: 1; }
+@media (hover: none) { .hw3-play { opacity: 1; scale: 0.65; left: auto; top: auto; right: 4%; bottom: 6%; translate: 0 0; } }
+
+/* ---- made at a real school (owner's wireframe, 2026-11-25): centred heading and line, the photos on the arc ---- */
+.st-school-head { display: grid; justify-items: center; gap: 16px; text-align: center; max-width: 820px; }
+.st-school-head .lab-body { max-width: 46ch; }
+.sch-arc { margin-top: 4px; }
+.st-school .lab-wrap.st-school-head { padding-bottom: 0; }
+.sch-arc, .lt-arc, .is-arc { overflow: clip; }
+/* the map runs the full width of the screen (owner, 2026-11-25) */
+.st-map-sec { overflow: clip; }
+.mr-frame { transform-origin: 50% 50%; }
+
+/* ---- but does it actually work (owner's wireframes, 2026-11-25): huge faded words, a polaroid of Coco on pale green
+   over them; the card grows into the walkthrough (DoesItWork.tsx) ---- */
+.dwk2 { position: relative; min-height: min(86vh, 760px); display: grid; place-items: center; padding: 80px 16px; overflow: clip; }
+.dwk2-words { position: absolute; inset: 0; display: grid; place-content: center; text-align: center; line-height: 0.88; pointer-events: none; }
+.dwk2-words span { font-size: clamp(4.6rem, 13vw, 11.5rem); font-weight: 800; letter-spacing: -0.05em; color: rgba(13, 13, 13, 0.09); opacity: 0; translate: 0 60px; filter: blur(6px); transition: opacity 0.7s ease, translate 0.9s var(--ease-pop), filter 0.7s ease; }
+.dwk2-words.in span { opacity: 1; translate: 0 0; filter: none; }
+.dwk2-words.in span:nth-child(2) { transition-delay: 0.18s; }
+.dwk2-words.in span:nth-child(3) { transition-delay: 0.36s; }
+.dwk2-slide { position: relative; z-index: 1; display: block; opacity: 0; translate: 0 38vh; transition: translate 0.9s cubic-bezier(.2, .85, .25, 1), opacity 0.4s ease; }
+.dwk2-slide.in { opacity: 1; translate: 0 0; }
+@media (prefers-reduced-motion: reduce) { .dwk2-slide { transition: none; } }
+.dwk2-card { display: block; width: clamp(220px, 22vw, 290px); padding: 12px 12px 0; background: #FFFFFF; border: 0; box-shadow: 10px 10px 0 rgba(13, 13, 13, 0.12); rotate: -3deg; cursor: pointer; font: inherit; color: inherit; transition: rotate 0.35s var(--ease-pop), translate 0.35s var(--ease-pop); }
+.dwk2-card:hover, .dwk2-card:focus-visible { rotate: 0deg; translate: 0 -6px; }
+.dwk2-card.away { visibility: hidden; }
+.dwk2-pic { display: grid; place-items: center; aspect-ratio: 1; background: #E8F2DA; }
+.dwk2-cap { display: grid; place-items: center; height: 62px; font-weight: 600; font-size: 1.08rem; }
+
+/* the walkthrough: a white frame round a pale green panel; it grows out of the card */
+.dw2-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(13, 13, 13, 0.45); animation: stFadeIn 0.3s ease both; transition: opacity 0.4s ease; }
+.dw2-modal.out { opacity: 0; transition-delay: 0.16s; }
+.dw2-panel { width: min(1080px, calc(100vw - 40px), calc((100vh - 40px) * 1.84)); aspect-ratio: 1.84; box-sizing: border-box; padding: clamp(8px, 1.3vw, 14px); background: #FFFFFF; transform-origin: 0 0; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.2); }
+.dw2-in { position: relative; height: 100%; box-sizing: border-box; background: #E8F2DA; padding: clamp(18px, 3vw, 40px); display: grid; grid-template-rows: auto 1fr; gap: 10px; overflow: auto; }
+.dw2-in > * { opacity: 0; transition: opacity 0.3s ease; }
+.dw2-in.shown > * { opacity: 1; }
+.dw2-in.s3 { grid-template-rows: auto auto; align-content: center; justify-items: center; gap: 24px; }
+.dw2-x { position: absolute; top: clamp(12px, 2vw, 24px); right: clamp(12px, 2vw, 24px); z-index: 2; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; background: #FFFFFF; border: 0; box-shadow: 4px 4px 0 #D3DCC5; cursor: pointer; transition: translate 0.15s ease, box-shadow 0.15s ease; }
+.dw2-x:active { translate: 3px 3px; box-shadow: 1px 1px 0 #D3DCC5; }
+.dw2-coco { display: flex; align-items: center; gap: 22px; padding-right: 64px; }
+.dw2-coco-img { line-height: 0; flex: none; }
+.dw2-bubble { position: relative; margin: 0; padding: 16px 24px; background: #FFFFFF; border: 1.5px solid #D9D9D9; font-size: clamp(1.05rem, 1.8vw, 1.4rem); font-weight: 600; line-height: 1.3; animation: stRise 0.35s var(--ease-pop) both; }
+.dw2-bubble::before { content: ""; position: absolute; left: -9px; top: 50%; width: 14px; height: 14px; background: #FFFFFF; border-left: 1.5px solid #D9D9D9; border-bottom: 1.5px solid #D9D9D9; transform: translateY(-50%) rotate(45deg); }
+.dw2-coco.big { flex-direction: column; padding: 0; gap: 24px; text-align: center; }
+.dw2-coco.big .dw2-bubble::before { left: 50%; top: -9px; transform: translateX(-50%) rotate(135deg); }
+.dw2-board { display: grid; justify-items: center; align-content: center; gap: clamp(24px, 4.5vw, 60px); animation: stRise 0.4s var(--ease-pop) both; }
+.dw2-sum { display: flex; align-items: center; justify-content: center; gap: clamp(22px, 5vw, 76px); }
+.dw2-g { font-family: var(--font-lab-hand), "Patrick Hand", cursive; font-size: clamp(3.6rem, 8vw, 7rem); line-height: 1; color: #4B5E35; }
+.dw2-g.op { font-size: clamp(3rem, 6vw, 5.4rem); }
+.dw2-g.sm { font-size: clamp(2.4rem, 4.6vw, 4rem); }
+.dw2-box { width: clamp(72px, 9vw, 120px); aspect-ratio: 1; display: grid; place-items: center; background: #F7FBEF; border: 3px dashed #4B5E35; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; color: #4B5E35; }
+.dw2-box b { animation: racePop 0.45s var(--ease-pop) both; }
+.dw2-opts { display: flex; gap: clamp(14px, 2vw, 26px); }
+.dw2-opt { width: clamp(72px, 10vw, 128px); aspect-ratio: 1; display: grid; place-items: center; padding: 0; background: #FFFFFF; border: 0; box-shadow: 10px 10px 0 #D3DCC5; cursor: pointer; font: inherit; font-size: clamp(1.8rem, 3.6vw, 3rem); font-weight: 800; color: #26232F; transition: translate 0.18s var(--ease-pop), box-shadow 0.18s ease, background-color 0.2s ease; }
+.dw2-opt:hover { translate: 0 -4px; }
+.dw2-opt:active { translate: 5px 5px; box-shadow: 5px 5px 0 #D3DCC5; }
+.dw2-opt.picked { background: #FFF6C2; }
+.dw2-opt.right { background: #4AC1BD; color: #FFFFFF; animation: racePop 0.45s var(--ease-pop) both; }
+/* the counters: two on a slant, three in a triangle, five as three and two */
+.dw2-dots { --d: clamp(42px, 6vw, 72px); display: grid; gap: calc(var(--d) * 0.1); justify-items: center; }
+.dw2-dots i { display: block; width: var(--d); height: var(--d); line-height: 0; animation: cfPop 0.4s var(--ease-pop) calc(var(--i) * 0.12s) both; }
+.dw2-dots.n2 { grid-template-columns: repeat(2, var(--d)); }
+.dw2-dots.n2 i:nth-child(2) { translate: 0 60%; }
+.dw2-dots.n3 { grid-template-columns: repeat(2, var(--d)); }
+.dw2-dots.n3 i:first-child { grid-column: 1 / span 2; }
+.dw2-dots.n5 { grid-template-columns: repeat(3, var(--d)); }
+.dw2-match { gap: 10px; }
+.dw2-match .dw2-g { font-size: clamp(2.6rem, 5vw, 4.4rem); }
+.dw2-match .dw2-g.op { font-size: clamp(2.2rem, 4vw, 3.6rem); }
+.dw2-match .dw2-dots { --d: clamp(20px, 2.6vw, 32px); }
+.dw2-row, .dw2-links { display: grid; grid-template-columns: 150px 64px 150px 64px 170px; align-items: center; justify-items: center; justify-content: center; }
+.dw2-cell { position: relative; display: grid; justify-items: center; }
+.dw2-cell em { position: absolute; bottom: -10px; right: -26px; display: grid; place-items: center; width: 42px; height: 42px; background: var(--note); font-style: normal; font-size: 1.45rem; font-weight: 800; rotate: -6deg; box-shadow: 3px 3px 0 rgba(13, 13, 13, 0.15); opacity: 0; scale: 0.3; animation: dwEq 0.5s var(--ease-pop) calc(0.6s + var(--i) * 0.7s) both; }
+.dw2-links { height: 44px; }
+.dw2-links i:nth-child(1) { grid-column: 1; } .dw2-links i:nth-child(2) { grid-column: 3; } .dw2-links i:nth-child(3) { grid-column: 5; }
+.dw2-links i { display: block; width: 0; height: 100%; border-left: 3px dashed #4B5E35; transform-origin: 50% 0; transform: scaleY(0); animation: dwLink 0.5s ease-out calc(0.9s + var(--i) * 0.7s) both; }
+.dw2-say { margin: 16px auto 0; max-width: 52ch; text-align: center; color: #3F4A33; opacity: 0; animation: stRise 0.5s ease 3.2s both; }
+.dw2-end { display: grid; justify-items: center; gap: 22px; text-align: center; }
+.dw2-end .lab-body { max-width: 46ch; margin: 0; }
+.dw2-end-ctas { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+@media (max-width: 700px) {
+  .dw2-panel { aspect-ratio: auto; width: calc(100vw - 24px); height: min(640px, calc(100vh - 24px)); }
+  .dw2-coco { padding-right: 54px; gap: 12px; }
+  .dw2-coco-img .coco { width: 64px !important; height: 60px !important; }
+  .dw2-row, .dw2-links { grid-template-columns: 64px 30px 64px 30px 90px; }
+  .dw2-cell em { width: 32px; height: 32px; font-size: 1.1rem; right: -14px; }
+}
+.dw2-dots svg { width: 100%; height: 100%; display: block; }
+
+/* ---- fast or slow (owner, 2026-11-25): streaks round the racing car; the milestone heads-up, sharp with a solid shadow ---- */
+.fs-speed { display: none; }
+.fs-streaks { position: absolute; inset: 0; pointer-events: none; }
+.fs-streaks i { position: absolute; top: calc(4% + var(--k) * 8%); width: 6px; height: 42%; border-radius: 3px; background: #FFFFFF; box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.4); opacity: 0; animation: fsStreak 0.5s linear calc(var(--k) * -0.07s) infinite; }
+.fs-streaks i:nth-child(odd) { left: calc(-6% - var(--k) * 2.6%); --dx: 34px; --r: 24deg; }
+.fs-streaks i:nth-child(even) { right: calc(-6% - var(--k) * 2.6%); --dx: -34px; --r: -24deg; }
+@keyframes fsStreak { 0% { opacity: 0; transform: translate(0, 40%) rotate(var(--r)) scaleY(1); } 15% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--dx), -110%) rotate(var(--r)) scaleY(0.3); } }
+.fs-note { border-radius: 0; box-shadow: 5px 5px 0 rgba(13, 13, 13, 0.2); border: 1.5px solid var(--line); background: #FFFFFF; gap: 6px; padding: 10px 14px 12px; width: min(78%, 330px); }
+.fs-note-k { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; font-weight: 700; color: var(--ink-muted); }
+.fs-note-tick { display: grid; place-items: center; width: 18px; height: 18px; background: var(--teal); color: #FFFFFF; font-size: 0.7rem; }
+.fs-note-t { font-size: 1.02rem; }
+.fs-note-steps { display: flex; gap: 5px; }
+.fs-note-steps i { flex: 1; height: 5px; background: #ECECEC; }
+.fs-note-steps i.on { background: var(--teal); }
+@media (max-width: 640px) { .fs-note-t { font-size: 0.86rem; } .fs-note-k { font-size: 0.68rem; } }
+@media (prefers-reduced-motion: reduce) { .fs-streaks { display: none; } }
+
+/* ---- the library (owner, 2026-11-25): a wall of activity cards, rows sliding with the scroll, the heading in a white
+   card over it (LibraryGrid.tsx) ---- */
+.st-lib2 { position: relative; overflow: clip; padding: clamp(40px, 5vw, 64px) 0; background: #EAF4F3; }
+.lg { position: relative; }
+.lg-wall { display: grid; gap: clamp(12px, 1.4vw, 20px); }
+.lg-row { display: flex; gap: clamp(12px, 1.4vw, 20px); width: max-content; margin-left: 50%; translate: -50% 0; will-change: transform; }
+.lg-card { flex: none; width: clamp(130px, 13vw, 190px); aspect-ratio: 1; padding: 6px; box-sizing: border-box; background: #FFFFFF; box-shadow: 6px 6px 0 rgba(13, 13, 13, 0.08); border: 1px solid #ECECEC; }
+.lg-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.lg-head { position: absolute; left: 50%; top: 50%; z-index: 2; width: min(680px, calc(100% - 40px)); box-sizing: border-box; padding: clamp(24px, 3.4vw, 44px); background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.12); display: grid; gap: 14px; justify-items: center; text-align: center; will-change: transform, opacity; }
+.lg-head .lab-h2 { margin: 0; }
+.lg-head .lab-body { margin: 0; max-width: 48ch; }
+
+/* the "No more" cards: the line sits in the card's strip, in 0.5s after the card starts (owner, 2026-11-25) */
+.wg-pol { padding-bottom: 0 !important; }
+.wg-cap { display: grid; gap: 4px; padding: calc(14 * var(--u)) 8px calc(18 * var(--u)); text-align: center; }
+.wg-cap b { font-size: clamp(1rem, 1.3vw, 1.15rem); font-weight: 800; }
+.wg-cap span { font-size: clamp(0.86rem, 1vw, 0.95rem); color: var(--ink-soft); line-height: 1.35; }
+.wg-cap > * { opacity: 0; translate: 0 8px; transition: opacity 0.4s ease 0.5s, translate 0.5s var(--ease-pop) 0.5s; }
+.wg-cap > span { transition-delay: 0.7s; }
+.wg-item.in .wg-cap > * { opacity: 1; translate: 0 0; }
+
+/* one idea (owner, 2026-11-25): a line under the heading, a short line on each card, a handwritten note pointing at the
+   middle card, and tighter spacing */
+.st-ideas-sec .st-center-head { display: grid; gap: 22px; justify-items: center; text-align: center; }
+.st-ideas-sec .st-center-head .lab-body { margin: 0; }
+.is { margin-top: clamp(4px, 1vw, 14px); }
+.is-arc { height: calc(var(--card-w) * 1.244 + 64px); }
+.is-cap { position: absolute; left: 0; right: 0; bottom: 0; height: calc(70 * var(--u)); display: grid; align-content: center; justify-items: center; gap: 2px; }
+.is-cap b { font-size: max(15px, calc(19 * var(--u))); font-weight: 700; }
+.is-cap span { font-size: max(12px, calc(14 * var(--u))); color: var(--ink-muted); }
+.is-tap { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; margin: -8px auto 0; font-family: var(--font-lab-hand), "Patrick Hand", cursive; font-size: clamp(1.3rem, 1.8vw, 1.6rem); color: #3B3F57; rotate: -2deg; }
+.is-tap svg { color: #3B3F57; }
+
+/* the walkthrough's contents come in each step: Coco and the bubble, then the sum piece by piece, then the answers */
+.dw2-in.shown .dw2-coco-img { animation: cfPop 0.45s var(--ease-pop) both; }
+.dw2-in.shown .dw2-sum > *, .dw2-in.shown .dw2-row > * { animation: dw2In 0.45s var(--ease-pop) both; }
+.dw2-in.shown .dw2-sum > :nth-child(2), .dw2-in.shown .dw2-row > :nth-child(2) { animation-delay: 0.1s; }
+.dw2-in.shown .dw2-sum > :nth-child(3), .dw2-in.shown .dw2-row > :nth-child(3) { animation-delay: 0.2s; }
+.dw2-in.shown .dw2-sum > :nth-child(4), .dw2-in.shown .dw2-row > :nth-child(4) { animation-delay: 0.3s; }
+.dw2-in.shown .dw2-sum > :nth-child(5), .dw2-in.shown .dw2-row > :nth-child(5) { animation-delay: 0.4s; }
+.dw2-in.shown .dw2-opts > * { animation: dw2In 0.45s var(--ease-pop) both; }
+.dw2-in.shown .dw2-opts > :nth-child(1) { animation-delay: 0.55s; }
+.dw2-in.shown .dw2-opts > :nth-child(2) { animation-delay: 0.65s; }
+.dw2-in.shown .dw2-opts > :nth-child(3) { animation-delay: 0.75s; }
+.dw2-in.shown .dw2-end > * { animation: dw2In 0.45s var(--ease-pop) both; }
+.dw2-in.shown .dw2-end > :nth-child(2) { animation-delay: 0.15s; }
+@keyframes dw2In { from { opacity: 0; transform: translateY(18px) scale(0.92); } to { opacity: 1; transform: none; } }
+.dw2-dots img { display: block; width: 100%; height: 100%; }
+@media (prefers-reduced-motion: reduce) { .dw2-in * { animation: none !important; } }
+
+/* ---- know what they're learning (owner, 2026-11-25) ---- */
+/* the tick note sits at the left, under its heading */
+.st-know .nx-try { display: block; justify-self: start; align-self: start; text-align: left; }
+/* see them grow: the card under the week tells each day as it fills */
+.sg-log { border-style: solid; }
+.sg-log.on { animation: dw2In 0.4s var(--ease-pop) both; }
+.sg-log.up { border-color: var(--gold-deep, #e0a92a); background: #FFFFFF; } /* white, not the panel's own yellow (owner, 2026-11-25) */
+/* ideas to try at home: a flip card, the picture on the front and the idea on the back */
+.sh3 { display: grid; gap: 16px; justify-items: center; perspective: 1400px; animation: dw2In 0.45s var(--ease-pop) both; }
+.sh3-card { position: relative; width: min(340px, 100%); aspect-ratio: 340 / 410; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: inherit; text-align: left; transform-style: preserve-3d; transition: transform 0.7s var(--ease-pop); }
+.sh3-card.flipped { transform: rotateY(180deg); }
+.sh3-face { position: absolute; inset: 0; display: flex; flex-direction: column; background: #FFFFFF; box-shadow: 10px 10px 0 rgba(13, 13, 13, 0.1); backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.sh3-front { padding: 11px 11px 0; }
+.sh3-pic { display: block; aspect-ratio: 1; overflow: hidden; }
+.sh3-pic svg { display: block; width: 100%; height: 100%; }
+.sh3-strip { flex: 1; display: grid; place-content: center; justify-items: center; gap: 2px; font-weight: 700; font-size: 1.02rem; }
+.sh3-strip em { font-style: normal; font-weight: 600; font-size: 0.8rem; color: var(--ink-muted); }
+.sh3-back { transform: rotateY(180deg); padding: 26px 24px; gap: 8px; justify-content: center; }
+.sh3-back .pp-tag { margin-top: 6px; }
+.sh3-back .pp-say { font-family: var(--font-lab-hand), "Patrick Hand", cursive; font-size: 1.2rem; line-height: 1.35; }
+.sh3-hint { margin-top: auto; font-style: normal; font-size: 0.8rem; font-weight: 600; color: var(--ink-muted); }
+.sh3-acts { justify-content: center; }
+/* the pictures play a little */
+.sh3-hop { animation: sh3Hop 2.1s ease-in-out infinite both; }
+@keyframes sh3Hop { 0% { translate: 0 0; opacity: 0; } 15% { opacity: 1; } 55% { translate: 70px -60px; } 85% { translate: 112px 16px; opacity: 1; } 100% { translate: 112px 16px; opacity: 0; } }
+.sh3-hop2 { animation: sh3Hop2 1.8s ease-in-out infinite both; }
+@keyframes sh3Hop2 { 0% { translate: 0 0; opacity: 0; } 15% { opacity: 1; } 55% { translate: 70px -110px; } 85% { translate: 130px -150px; opacity: 1; } 100% { translate: 130px -150px; opacity: 0; } }
+.sh3-bob { animation: sh3Bob 1.6s ease-in-out infinite; }
+@keyframes sh3Bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+@media (prefers-reduced-motion: reduce) { .sh3-hop, .sh3-hop2, .sh3-bob { animation: none; } .sh3-card { transition: none; } }
+
+/* pricing (owner, 2026-11-25): the free plan brings two of the app's friends, the full plan the whole cast */
+.hm-pricing { background: #FFFCF5; }
+
+/* ---- phones (owner, 2026-11-25: the scroll effects run on phones too) ---- */
+@media (max-width: 899px) {
+  .wg2-photo { width: clamp(104px, 30vw, 200px); }
+  .wg2-photo .uc-cap { font-size: 0.72rem; padding: 6px 4px 8px; }
+  .wg2-photo .uc { padding: 6px 6px 0; }
+  .wg2-h { font-size: clamp(1.9rem, 8vw, 2.6rem); }
+  .wg2-row.hm-pains { grid-template-columns: 1fr; width: 100%; }
+  .wg2-row .wg-pol { --card-w: min(290px, 70vw); }
+  /* the "No more" cards in a row you can swipe (owner, 2026-11-25): each new one comes in beside the last and the row
+     slides along to it (WeGetYou.tsx); cards not in yet take no room */
+  .wg2.sticky .wg2-row.hm-pains { display: flex; align-items: flex-start; gap: 16px; width: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 8px 15vw 18px; box-sizing: border-box; }
+  .wg2.sticky .wg2-row.hm-pains::-webkit-scrollbar { display: none; }
+  .wg2.sticky .wg2-row .wg-item { flex: none; scroll-snap-align: center; }
+  .wg2.sticky .wg2-row .wg-item:not(.in) { display: none; }
+  .wg2.sticky .wg2-row .wg-pol { --card-w: 66vw; }
+  .wg2.sticky .wg2-row .wg-item.in { animation: wgSideIn 0.6s var(--ease-pop) 0.15s both; }
+  .mr-note { font-size: 1.35rem; padding: 12px 18px 14px; }
+}
+
+/* ---- hero (owner's wireframe, 2026-11-25): the heading on the left, a big landscape phone under it, and activity
+   cards floating round it; drag a card into the phone to play it (HeroDeck.tsx) ---- */
+.hx { position: relative; overflow: clip; padding: clamp(36px, 5vw, 72px) 0 clamp(48px, 6vw, 88px); }
+.hx-text { position: relative; z-index: 2; display: grid; gap: 22px; justify-items: start; }
+.hx-text > * { max-width: min(760px, 58%); }
+.hx-text > .hx-h { max-width: none; }
+/* the heading keeps the design's two lines (each line on its own, never wrapping, on a wide screen) */
+.hx-h { margin: 0; font-size: clamp(2.4rem, 4.25vw, 5.4rem); line-height: 1.04; }
+.hx-line { display: block; overflow: hidden; padding-bottom: 0.08em; }
+.hx-line > span { display: inline-block; white-space: nowrap; translate: 0 105%; animation: hxUp 0.8s cubic-bezier(.2, .85, .25, 1) both; }
+.hx-line + .hx-line > span { animation-delay: 0.1s; }
+.hx-rise { animation: hxRise 0.7s cubic-bezier(.2, .85, .25, 1) 0.3s both; }
+.hx-ctas.hx-rise { animation-delay: 0.42s; }
+@keyframes hxUp { to { translate: 0 0; } }
+@keyframes hxRise { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
+/* the phone slides up from behind a mask; the cards rise in from below the screen, one after another */
+.hx-mask { overflow: hidden; padding: 12px 18px 18px; margin: -12px -18px -18px; }
+.hx-stage .hx-phone { translate: 0 110%; transition: translate 1s cubic-bezier(.2, .85, .25, 1) 0.35s; }
+.hx-stage.in .hx-phone { translate: 0 0; }
+.hx-stage .hx-slot { opacity: 0; transform: translateY(100vh); transition: transform 1.1s cubic-bezier(.2, .85, .25, 1), opacity 0.3s ease; }
+.hx-stage.in .hx-slot { opacity: 1; transform: none; }
+.hx-stage.in .hx-slot.s0 { transition-delay: 0.6s; } .hx-stage.in .hx-slot.s1 { transition-delay: 0.75s; } .hx-stage.in .hx-slot.s2 { transition-delay: 0.9s; } .hx-stage.in .hx-slot.s3 { transition-delay: 1.05s; } .hx-stage.in .hx-slot.s4 { transition-delay: 1.2s; }
+@media (max-width: 900px) { .hx-line > span { white-space: normal; } }
+@media (prefers-reduced-motion: reduce) { .hx-line > span, .hx-rise { animation: none; translate: none; } .hx-stage .hx-phone, .hx-stage .hx-slot { transition: none; translate: none; transform: none; opacity: 1; } }
+.hx-text .lab-lede { margin: 0; max-width: min(36em, 58%); }
+.hx-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.hx-stage { margin-top: clamp(40px, 6vw, 90px); }
+.hx-phone { position: relative; z-index: 3; width: min(940px, calc(100vw - 32px)); margin: 0 auto; box-sizing: border-box; padding: clamp(8px, 0.9vw, 13px) clamp(26px, 3.2vw, 46px) clamp(8px, 0.9vw, 13px) clamp(8px, 0.9vw, 13px); background: #555555; box-shadow: 12px 12px 0 #E5E5E5; }
+.hx-keys { position: absolute; top: -8px; left: 20%; width: 54px; height: 8px; background: #555555; box-shadow: 78px 0 0 #555555, 110px 0 0 #555555, 144px 0 0 #555555; }
+.hx-screen { position: relative; display: block; width: 100%; aspect-ratio: 2.05; padding: 0; border: 0; overflow: hidden; background: #D9D9D9; cursor: pointer; --fy: 0.5; }
+.hx-poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: calc(var(--fx, 0.5) * 100%) 50%; transition: opacity 0.5s ease; }
+.hx-poster.gone { opacity: 0; }
+.hx-screen .cov { --ar: 2.2222; }
+.hx-cam { position: absolute; z-index: 2; left: 14px; top: 50%; width: 12px; height: 12px; margin-top: -6px; border-radius: 50%; background: rgba(13, 13, 13, 0.25); }
+.hx-bar { position: absolute; z-index: 2; right: 18px; top: 50%; width: 5px; height: 26%; translate: 0 -50%; border-radius: 3px; background: rgba(13, 13, 13, 0.22); }
+.hx-play { position: absolute; z-index: 3; left: 50%; top: 50%; width: 72px; height: 72px; display: grid; place-items: center; background: #FFFFFF; box-shadow: 5px 5px 0 rgba(13, 13, 13, 0.22); translate: -50% -50%; scale: 0.8; opacity: 0; transition: opacity 0.2s ease, scale 0.3s var(--ease-pop); }
+.hx-screen:hover .hx-play, .hx-screen:focus-visible .hx-play { opacity: 1; scale: 1; }
+/* the floating cards: placed round the hero as in the wireframe, each bobbing gently */
+.hx-deck { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.hx-slot { position: absolute; width: clamp(96px, 10vw, 180px); pointer-events: auto; animation: hxBob 5.5s ease-in-out infinite; }
+.hx-slot.s0 { left: 77%; top: 7%; rotate: 2deg; animation-delay: -1s; }
+.hx-slot.s1 { left: min(calc(50% + 562px), calc(100% - 10vw - 16px)); top: 66%; rotate: -1.5deg; animation-delay: -2.5s; }
+.hx-slot.s2 { left: 88%; top: 40%; rotate: -2.5deg; animation-delay: -4s; }
+.hx-slot.s3 { left: max(16px, calc(50% - 870px)); top: 9%; rotate: 2deg; animation-delay: -3s; }
+/* owner 2026-11-25: a fifth card under it, left of the phone (FrogCross to start with) */
+.hx-slot.s4 { left: max(16px, calc(50% - 850px)); top: 62%; rotate: -2deg; animation-delay: -1.8s; }
+@keyframes hxBob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -10px; } }
+.hx-card { display: block; width: 100%; padding: 7% 7% 22%; border: 0; background: #FFFFFF; box-shadow: 8px 8px 0 #E5E5E5; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; transition: scale 0.2s var(--ease-pop); }
+.hx-card:hover { scale: 1.04; }
+.hx-card img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; pointer-events: none; }
+.hx-card.dragging { cursor: grabbing; position: relative; z-index: 30; box-shadow: 14px 14px 0 rgba(13, 13, 13, 0.12); }
+.hx-card.flying { position: relative; z-index: 30; pointer-events: none; }
+.hx-slot:has(.dragging), .hx-slot:has(.flying) { z-index: 30; animation-play-state: paused; }
+@media (max-width: 900px) {
+  .hx-text > *, .hx-text .lab-lede { max-width: 100%; }
+  /* on a phone the cards sit in a row under the phone */
+  .hx-deck { position: static; display: flex; justify-content: center; gap: 14px; margin-top: 26px; padding: 0 16px; }
+  .hx-slot { position: static; width: 21vw; max-width: 120px; }
+  /* the four corners round the small phone are taken: the fifth card waits for a big screen */
+  .hx-slot.s4 { display: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hx-slot { animation: none; } }
+
+/* the strip under the hero has no grey band; the FAQ sits on white (owner, 2026-11-25) */
+.st-chips { background: transparent; }
+#faq.hm-faqband { background: #FFFFFF; }
+
+/* a character peeks out from behind a school photo now and then (SchoolArc.tsx) */
+.sch-arc { height: calc(var(--card-w) * 1.244 + 200px); }
+.sch-arc .parc-slot { top: 104px; }
+.sch-peek { position: absolute; top: 4px; width: min(34%, 84px); height: auto; pointer-events: none; animation: schPeek 2.8s cubic-bezier(.34, 1.4, .64, 1) both; }
+.sch-peek.l { left: 14%; rotate: -8deg; }
+.sch-peek.r { right: 14%; rotate: 8deg; }
+@keyframes schPeek { 0% { translate: 0 30%; } 22%, 70% { translate: 0 var(--up, -70%); } 82% { translate: 0 calc(var(--up, -70%) + 8%); } 100% { translate: 0 30%; } }
+.st-school .sch-arc { margin-top: -24px; }
+
+/* pricing (owner, 2026-11-25): the cards rise in; on the full plan Coco strikes the old price, pushes it aside and
+   pulls the new one in (PriceReveal.tsx) */
+.pl-in .hm-plan { opacity: 0; translate: 0 50px; rotate: -1.5deg; transition: opacity 0.5s ease, translate 0.8s var(--ease-pop), rotate 0.8s var(--ease-pop); }
+.pl-in .hm-plan.featured { rotate: 1.5deg; }
+.pl-in.in .hm-plan { opacity: 1; translate: 0 0; rotate: 0deg; }
+.pl-in.in .hm-plan.featured { transition-delay: 0.15s; }
+.pz { position: relative; flex-wrap: nowrap; transition: opacity 0.25s ease; }
+/* the loop: the line fades out, everything snaps back to ₹2,988 unseen, and the line fades in again */
+.pz.p6 { opacity: 0; }
+.pz.p0.snap * { transition: none !important; }
+.pz-new { display: inline-block; max-width: 0; overflow: hidden; opacity: 0; translate: -24px 0; white-space: nowrap; transition: max-width 0.5s var(--ease-pop), opacity 0.3s ease, translate 0.5s var(--ease-pop); }
+.pz.p4 .pz-new, .pz.p5 .pz-new { max-width: 8ch; opacity: 1; translate: 0 0; }
+.pz-old { position: relative; display: inline-block; font-size: 2.6rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--ink); transition: font-size 0.5s var(--ease-pop), color 0.4s ease, translate 0.5s var(--ease-pop); }
+.pz.p3 .pz-old, .pz.p4 .pz-old, .pz.p5 .pz-old { font-size: 1.35rem; font-weight: 700; color: var(--ink-muted); }
+.pz-strike { position: absolute; left: -4%; top: 52%; height: 3px; width: 0; background: #E5484D; rotate: -6deg; transition: width 0.45s ease; }
+.pz.p2 .pz-strike, .pz.p3 .pz-strike, .pz.p4 .pz-strike, .pz.p5 .pz-strike { width: 108%; }
+.pz.p3 .pz-strike, .pz.p4 .pz-strike, .pz.p5 .pz-strike { background: var(--ink-muted); height: 2px; rotate: 0deg; }
+.pz-coco { position: absolute; left: 10em; top: -6px; line-height: 0; opacity: 0; translate: 60px 0; transition: opacity 0.3s ease, translate 0.5s var(--ease-pop), left 0.5s var(--ease-pop); }
+.pz.p1 .pz-coco { opacity: 1; translate: 0 0; }
+.pz.p2 .pz-coco { opacity: 1; translate: 0 0; left: 4.5em; }
+.pz.p3 .pz-coco { opacity: 1; translate: 0 0; left: 11.5em; }
+.pz.p4 .pz-coco { opacity: 1; translate: 0 0; left: 14em; }
+.pz.p5 .pz-coco { opacity: 0; translate: 30px -10px; left: 14em; }
+@media (prefers-reduced-motion: reduce) { .pl-in .hm-plan { opacity: 1; translate: none; rotate: none; } }
+
+/* ---- the hero centred, with a parallax scroll out of it (owner, 2026-11-25) ----
+   the heading, line and buttons centred on the page. HeroParallax.tsx moves the words, the phone and the cards (each
+   card's .hx-par) as the scroll starts; --hold-pad is the room the phone's offset needs at the end. */
+.st .hx-text { justify-items: center; text-align: center; }
+.st .hx-text > * { max-width: min(760px, 92%); }
+.st .hx-text > .hx-h { max-width: none; }
+.st .hx-text .lab-lede { max-width: min(38em, 92%); }
+.st .hx-ctas { justify-content: center; }
+.st .hx { padding-bottom: clamp(20px, 2vw, 32px); }
+.st .hx-text, .st .hx-mask, .st .hx-par { will-change: transform; }
+
+/* the try-outs in the modal show no Pause or full screen button (owner, 2026-11-25); every game labels them the same
+   way. A story's own play/pause (.cs-play) stays, since it is how the story is played. */
+.st-try-host button:is([aria-label="Pause"], [aria-label="Full screen"], [aria-label="Leave full screen"]):not(.cs-play) { display: none !important; }
+
+@keyframes wgSideIn { from { opacity: 0; translate: 60px 0; } to { opacity: 1; translate: 0 0; } }
+
+/* ideas to try at home: another idea is a plain refresh icon (owner, 2026-11-25) */
+.sh3-refresh { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+/* a shuffle icon (owner, 2026-11-25); it gives a little hop when pressed */
+.sh3-refresh svg { transition: scale 0.18s var(--ease-pop); }
+.sh3-refresh:hover svg { scale: 1.12; }
+.sh3-refresh:not(:first-of-type) svg { animation: sh3Hop3 0.45s var(--ease-pop); }
+@keyframes sh3Hop3 { 0% { translate: 0 0; } 40% { translate: 0 -6px; } 100% { translate: 0 0; } }
+@keyframes sh3Spin { from { rotate: -270deg; } to { rotate: 0deg; } }
+
+/* the try-out's shape per kind (TryModal.tsx): an explainer gets a 16 : 10 stage so it isn't squished; on a phone the
+   explainer and the story open upright, filling the screen */
+.st-try-card.k-explainer { --tw: min(1040px, calc(100vw - 40px), calc((100vh - 150px) * 1.6)); }
+.st-try-card.k-explainer .st-try-stage { aspect-ratio: 16 / 10; }
+@media (max-width: 640px) {
+  .st-try-card.k-explainer, .st-try-card.k-story { --tw: calc(100vw - 24px); }
+  .st-try-card.k-explainer .st-try-stage, .st-try-card.k-story .st-try-stage { aspect-ratio: auto; height: calc(100dvh - 24px - 8px - 56px - 8px); }
+}
+
+/* a character peeking over a school photo is never clipped at the top of the row (only its sides are clipped) */
+.st-school .sch-arc { overflow-x: clip; overflow-y: visible; position: relative; z-index: 2; }
+
+/* ---- phones, round 2 (owner, 2026-11-25) ---- */
+@media (max-width: 900px) {
+  /* the hero: the phone first, the words under it; the cards smaller, spread round the phone like on a big screen */
+  .st .hx { display: flex; flex-direction: column; padding-top: 70px; padding-bottom: 28px; }
+  .st .hx-stage { order: -1; margin-top: 0; --pb: calc(70px + (100vw - 32px - 34px) / 2.05 + 16px); }
+  .st .hx-text { margin-top: 74px; }
+  .st .hx-deck { position: absolute; inset: 0; display: block; margin: 0; padding: 0; }
+  .st .hx-slot { position: absolute; width: 18vw; max-width: 110px; }
+  .st .hx-slot.s0 { left: 5%; top: 8px; }
+  .st .hx-slot.s1 { left: 75%; top: 16px; }
+  .st .hx-slot.s2 { left: 74%; top: calc(var(--pb) - 26px); }
+  .st .hx-slot.s3 { left: 7%; top: calc(var(--pb) - 20px); }
+  .st .hx-card { padding: 5% 5% 18%; box-shadow: 4px 4px 0 #E5E5E5; }
+  /* softer, closer shadows and thinner frames on the cards */
+  .st .pol { padding: calc(7 * var(--u)) calc(7 * var(--u)) calc(60 * var(--u)); box-shadow: calc(5 * var(--u)) calc(5 * var(--u)) 0 #E5E5E5; }
+  .st .hx-phone { box-shadow: 6px 6px 0 #E5E5E5; }
+  .st-try-card { box-shadow: 5px 5px 0 rgba(13, 13, 13, 0.22); }
+  .st .mr-note, .st .dwk2-card, .st .lg-head, .st .sh3-face, .dw2-panel { box-shadow: 5px 5px 0 rgba(13, 13, 13, 0.12); }
+  .st .dwk2-card { padding: 8px 8px 0; }
+  .dw2-opt { box-shadow: 5px 5px 0 #D3DCC5; }
+  .st .lg-card { box-shadow: 4px 4px 0 #E5E5E5; }
+  /* the map is taller on a phone */
+  .st .mr { --mh: 72vh; }
+}
+
+/* does it work, on a phone: the cookie sum fits the card (owner, 2026-11-25: it ran off the side) */
+@media (max-width: 700px) {
+  .dw2-sum { gap: 10px; flex-wrap: wrap; }
+  .dw2-dots { --d: 30px; }
+  .dw2-g.op { font-size: 2.4rem; }
+  .dw2-box { width: 58px; }
+}
+
+/* ideas at home: the cups-of-ten picture is layered (wall, the bunny, the table in front: HomeArt.tsx) */
+.sh3-layers { position: relative; display: block; width: 100%; height: 100%; }
+.sh3-layers > svg { position: absolute; inset: 0; }
+.sh3-friend { position: absolute; left: 9.4%; top: 12.6%; width: 30.2%; height: auto; rotate: 5deg; }
+.sh3-listen { font-size: 0.86rem; color: var(--ink-soft, #4a4a4a); }
+.sh3-listen b { color: var(--ink); }
+
+/* ---- owner review, 2026-11-25 (round 3) ---- */
+/* the phone waits fully below its mask before it rises: at 110% its keys peeked out on a small phone */
+.hx-stage .hx-phone { translate: 0 calc(100% + 40px); }
+.hx-stage.in .hx-phone { translate: 0 0; }
+/* "But does it actually work?" holds still for about a screen of scrolling, so the card has time to come in */
+.st-dw-sec { height: calc(100vh + 90vh); height: calc(100svh + 90svh); }
+.st-dw-sec .dwk2 { position: sticky; top: var(--nav-h, 68px); min-height: 0; height: calc(100vh - var(--nav-h, 68px)); height: calc(100svh - var(--nav-h, 68px)); box-sizing: border-box; }
+@media (max-width: 900px) {
+  /* a smaller logo; the hero fills the screen under the nav */
+  .lab-nav-story .lab-logo { width: 72px; }
+  .st .hx { min-height: calc(100vh - var(--nav-h, 68px)); min-height: calc(100svh - var(--nav-h, 68px)); box-sizing: border-box; }
+}
+@media (max-width: 700px) {
+  /* the walkthrough sits in the middle: its panel fills the frame instead of overflowing it on the right */
+  .dw2-modal { padding: 12px; }
+  .dw2-panel { width: 100%; }
+}
+@media (max-width: 900px) {
+  /* "Start with your child": the road's line starts above its box, so the heading gets room before it; the stop
+     cards are a little smaller */
+  .st .hm-how .hm-road { margin-top: 96px; }
+  .st .hm-how .hm-step-card { width: 82%; }
+}
+@media (max-width: 900px) {
+  /* "One idea": the caption keeps room round its two lines when the card is small (its text has a minimum size) */
+  .st .is-card { padding-bottom: max(calc(60 * var(--u)), 62px); }
+  .st .is-cap { height: max(calc(60 * var(--u)), 62px); gap: 4px; line-height: 1.2; }
+}
+/* trying an activity in the modal: the game's own controls go (owner, 2026-11-25): its Pause (and the pause card it
+   opens), full screen and the story's Close. The modal's own close button is the way out; the game's buttons that are
+   part of playing (Undo, Show me, Hear it again, the story's line buttons) stay. */
+.st-try-modal :is(button[aria-label="Pause"], button[aria-label="Full screen"], button[aria-label="Exit full screen"], button[aria-label="Close the story"]) { display: none !important; }
+/* "One idea": the explainer's and the story's cards loop a recorded clip (IdeaSlider.tsx), under the poster until it plays */
+.is-clip { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #FFFFFF; }
+.is-poster { z-index: 1; }
+
+/* a try-out ends after three rounds with this card (TryModal.tsx) */
+.st-try-end { gap: 10px; padding: 20px; text-align: center; animation: dw2In 0.45s var(--ease-pop) both; }
+.st-try-end-h { margin: 6px 0 0; font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
+.st-try-end-p { margin: 0; max-width: 34ch; }
+.st-try-end-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
+
+/* ---- the hero on a phone, to the owner's wireframe (2026-11-25, round 4) ----
+   the phone near full width at the top, the five cards tucked behind it (two above, three below), then the heading,
+   the line and two full-width buttons; it all fits one screen. The cards sit under the phone and come over it while
+   they are dragged or flying in. */
+@media (max-width: 900px) {
+  .st .hx { --pt: 92px; padding-top: var(--pt); padding-bottom: 24px; }
+  .st .hx-stage { --pb: calc(var(--pt) + (100vw - 34px - 34px) / 2.05 + 16px); }
+  .st .hx-phone { width: calc(100vw - 34px); }
+  .st .hx-mask { position: relative; z-index: 3; }
+  .st .hx-deck { z-index: auto; }
+  .st .hx-slot { z-index: 1; width: 19vw; max-width: 120px; }
+  .st .hx-slot:has(.dragging), .st .hx-slot:has(.flying) { z-index: 30; }
+  .st .hx-slot.s0 { left: 7%; top: 30px; rotate: 3deg; }
+  .st .hx-slot.s1 { left: 64%; top: 12px; rotate: -1.5deg; }
+  .st .hx-slot.s2 { left: -1%; top: calc(var(--pb) - 12px); rotate: 3deg; }
+  .st .hx-slot.s3 { left: 40%; top: calc(var(--pb) - 26px); rotate: -2deg; }
+  .st .hx-slot.s4 { display: block; left: 77%; top: calc(var(--pb) - 12px); rotate: -3deg; }
+  .st .hx-text { margin-top: 104px; gap: 18px; }
+  .st .hx-h { font-size: 8.3vw; line-height: 1.08; }
+  .st .hx-line > span { white-space: nowrap; }
+  .st .hx-text .lab-lede { max-width: 100%; font-size: 1rem; }
+  .st .hx-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: none; gap: 14px; }
+  .st .hx-ctas .lab-btn { justify-content: center; min-height: 58px; font-size: 1.1rem; }
+  /* the nav shows Sign in beside the menu, as a white button */
+  .lab-nav-story .lab-nav-cta { display: inline-flex; margin-left: auto; background: #FFFFFF; color: #0D0D0D; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 #E6E6E6; }
+  .lab-nav-story .lab-menu-btn { margin-left: 10px; }
+}
+/* short phones: the same layout, a little tighter, so the buttons still show on the first screen */
+@media (max-width: 900px) and (max-height: 720px) {
+  .st .hx { --pt: 70px; }
+  .st .hx-slot { width: 16vw; }
+  .st .hx-text { margin-top: 84px; gap: 12px; }
+  .st .hx-h { font-size: 7.6vw; }
+  .st .hx-text .lab-lede { font-size: 0.92rem; }
+  .st .hx-ctas { gap: 10px; }
+  .st .hx-ctas .lab-btn { min-height: 50px; }
+}
+/* the phone hero fills the screen it is on (owner, 2026-11-25: empty space under the buttons on a tall phone): the
+   room above the phone, the gap to the heading, the heading, the cards and the buttons grow with the screen's height,
+   and whatever is left is shared out round the words */
+@media (max-width: 900px) {
+  .st .hx { --pt: clamp(64px, 11.5svh, 130px); }
+  .st .hx-slot { width: clamp(16vw, 2.6svh + 12vw, 24vw); }
+  .st .hx-text { flex: 1; align-content: center; margin-top: clamp(80px, 12.5svh, 150px); gap: clamp(12px, 2.2svh, 24px); }
+  .st .hx-h { font-size: min(9.2vw, 4.7svh); }
+  .st .hx-text .lab-lede { font-size: clamp(0.92rem, 1.9svh, 1.12rem); }
+  .st .hx-ctas { gap: clamp(10px, 1.8svh, 18px); }
+  .st .hx-ctas .lab-btn { min-height: clamp(50px, 7.4svh, 66px); }
+}
+/* owner, 2026-11-25: everything a little lower on a phone: more room above the phone, the words settle toward the
+   bottom of the screen */
+@media (max-width: 900px) {
+  .st .hx { --pt: clamp(70px, 14.5svh, 170px); padding-bottom: 20px; }
+  .st .hx-text { align-content: end; }
+}
+/* owner, 2026-11-25: the phone and its cards a little lower again on a phone, nearer the heading (the words stay put) */
+@media (max-width: 900px) {
+  .st .hx { --pt: clamp(78px, 18.5svh, 210px); }
+  .st .hx-text { margin-top: clamp(72px, 10svh, 120px); }
+}
+@media (max-width: 900px) and (max-height: 720px) { .st .hx { --pt: 66px; } }
+/* owner, 2026-11-25: the top two cards hug the phone's top edge; the words and buttons sit just under the lower cards */
+@media (max-width: 900px) {
+  .st .hx-slot.s0 { top: calc(var(--pt) - 92px); }
+  .st .hx-slot.s1 { top: calc(var(--pt) - 104px); }
+  .st .hx-text { align-content: start; margin-top: clamp(66px, 9svh, 100px); }
+}
+@media (max-width: 900px) {
+  .st .hx-slot.s0 { top: max(10px, calc(var(--pt) - 92px)); }
+  .st .hx-slot.s1 { top: max(4px, calc(var(--pt) - 104px)); }
+}
+
+/* "The little changes that make the difference" (owner, 2026-11-25): the heading in the middle, the arrows either
+   side of the dots */
+.hm-quotes.centred .hm-quotes-head { justify-content: center; text-align: center; }
+.hm-dots-row { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 8px; }
+.hm-dots-row .hm-dots { margin-top: 0; }
+.hm-dots-row .hm-arrow { flex: none; }
+
+/* the parent bear's note (WeGetYou.tsx): Patrick Hand words and an arrow that draws itself toward the bear */
+.wg2-who { position: absolute; z-index: 3; left: var(--l); top: var(--t); translate: -100% -100%; display: grid; justify-items: start; pointer-events: none; }
+.wg2-who-t { font-family: var(--font-lab-hand), "Patrick Hand", cursive; font-size: clamp(1.3rem, 2.2vw, 1.8rem); color: #3B3F57; white-space: nowrap; rotate: -4deg; opacity: 0; translate: 0 8px; transition: opacity 0.5s ease 0.75s, translate 0.5s ease 0.75s; }
+.wg2-who-arrow { margin: 2px 0 0 auto; }
+.wg2-who-arrow path { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 0.7s cubic-bezier(.45, 0, .2, 1); }
+.wg2-who-arrow path + path { transition-delay: 0.65s; transition-duration: 0.25s; }
+.wg2-who.on .wg2-who-t { opacity: 1; translate: 0 0; }
+.wg2-who.on .wg2-who-arrow path { stroke-dashoffset: 0; }
+@media (prefers-reduced-motion: reduce) { .wg2-who-t, .wg2-who-arrow path { transition: none; } }
+@media (max-width: 700px) {
+  /* on a phone the note sits above the bear, the arrow pointing down at it */
+  .wg2-who { left: var(--c); top: var(--tt); translate: -62% -100%; }
+  .wg2-who-arrow { width: 84px; height: 63px; }
+}
+
+/* Coco on his way from the card to the walkthrough's top left (DoesItWork.tsx) */
+.dw2-fly { position: fixed; z-index: 1001; line-height: 0; transform-origin: 0 0; pointer-events: none; }
+.dw2-fly .coco, .dw2-fly svg { width: 100% !important; height: auto !important; }
+/* a photo with a character peeking out from behind it comes in front of its neighbours, so they don't cover the
+   character's face (owner, 2026-11-25: the bunny showed only its ears) */
+.sch-arc .parc-slot:has(.sch-peek) { z-index: 200 !important; }
+
+/* the closing section's app download (AppDownload.tsx): scan the QR, pick the store; on a phone, the store button */
+.ad { display: grid; justify-items: center; gap: 14px; }
+.ad-lead { margin: 0; font-weight: 600; }
+.ad-switch { display: inline-flex; padding: 4px; gap: 4px; background: #F6F6F6; border: 1.5px solid var(--line); }
+.ad-switch button { display: inline-flex; align-items: center; gap: 8px; min-height: 42px; padding: 0 16px; border: 0; background: transparent; font: inherit; font-weight: 700; font-size: 0.95rem; color: var(--ink-soft, #4a4a4a); cursor: pointer; }
+.ad-switch button.on { background: #FFFFFF; color: var(--ink); box-shadow: 3px 3px 0 #E6E6E6; }
+.ad-qr { display: block; width: 168px; height: 168px; padding: 12px; background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 6px 6px 0 #E6E6E6; }
+.ad-qr svg { display: block; width: 100%; height: 100%; }
+.ad-store { gap: 10px; }
+@media (max-width: 520px) {
+  .hm-dots-row { gap: 6px; }
+  .hm-dots-row .hm-dots { flex-wrap: nowrap; gap: 0; }
+  .hm-dots-row .hm-dots button { width: 24px; }
+  .hm-dots-row .hm-dots button::before { width: 16px; }
+}
+/* the walkthrough's contents stay hidden while the panel opens out of the card (only Coco flies in), then animate in
+   once (owner, 2026-11-25: they showed, vanished and came back) */
+.dw2-in:not(.shown) > *:not(.dw2-coco), .dw2-in:not(.shown) .dw2-bubble { visibility: hidden; }
+
+/* ---- the story header (owner, 2026-11-25): an app button beside Sign in that shows the two store logos in turn and
+   opens a list of the stores; where the menu shows (tablets and phones), the app button sits beside the menu and Sign in
+   moves into the menu ---- */
+.lab-nav-story .lab-nav-in { gap: 10px; }
+.lab-store { position: relative; }
+.lab-store-btn { position: relative; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 4px 4px 0 #E6E6E6; cursor: pointer; }
+.lab-store-btn:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E6E6E6; }
+.lab-store-ico { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; scale: 0.6; transition: opacity 0.35s ease, scale 0.45s var(--ease-pop); }
+.lab-store-ico.on { opacity: 1; scale: 1; }
+.lab-store-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 60; display: grid; min-width: 250px; padding: 6px; background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 6px 6px 0 #E6E6E6; animation: dw2In 0.25s var(--ease-pop) both; }
+.lab-store-menu a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 12px; color: var(--ink); font-weight: 700; text-decoration: none; }
+.lab-store-menu a:hover, .lab-store-menu a:focus-visible { background: #E8F7F6; }
+@media (max-width: 1023px) {
+  .lab-nav-story .lab-nav-cta { display: none !important; }
+  .lab-nav-story .lab-store { margin-left: auto; }
+  .lab-nav-story .lab-menu-btn { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .lab-store-ico { transition: none; } }
+.lab-store-menu a { white-space: nowrap; }
+.dw2-in.shown .dw2-coco-img { animation: none; } /* Coco has just flown in; no second pop */

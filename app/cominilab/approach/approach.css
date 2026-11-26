@@ -1,0 +1,133 @@
+/* /cominilab/approach: page-only styles. Shared tokens and classes live in ../lab.css. */
+
+.ap-center { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 16px; }
+.ap-lede-c { margin: 0 auto; max-width: 46ch; }
+.ap-band { background: var(--paper-2); }
+.ap-deco { position: absolute; pointer-events: none; }
+.ap ol, .ap ul { list-style: none; margin: 0; padding: 0; }
+.ap figure { margin: 0; }
+
+/* ---------- hero ---------- */
+.ap-hero { padding: 56px 0 72px; }
+@media (min-width: 1024px) { .ap-hero { padding: 80px 0 96px; } }
+.ap-hero-head { position: relative; text-align: center; }
+.ap-hero-head .lab-h1 { max-width: 12ch; margin: 0 auto; }
+.ap-deco-hero-l { left: var(--gutter); top: -18px; display: none; }
+.ap-deco-hero-r { right: var(--gutter); top: 24px; display: none; }
+@media (min-width: 900px) { .ap-deco-hero-l, .ap-deco-hero-r { display: block; } }
+
+.ap-hero-foot { display: flex; flex-direction: column; align-items: center; gap: 24px; text-align: center; }
+.ap-hero-foot .lab-lede { max-width: 44ch; }
+
+/* ---------- ticker: two copies of the row slide left by half; reduced motion makes it a plain scroll row ---------- */
+@keyframes apTicker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.ap-ticker { overflow: hidden; padding: 28px 0 44px; }
+.ap-ticker-track { display: flex; width: max-content; animation: apTicker 44s linear infinite; }
+.ap-ticker:hover .ap-ticker-track { animation-play-state: paused; }
+.ap-ticker-hero { margin: 36px 0 20px; }
+.ap-hero-card { flex: none; width: min(72vw, 300px); margin-right: 22px; }
+.ap-hero-card .lab-card-pic { aspect-ratio: 4 / 3; }
+@media (min-width: 768px) { .ap-hero-card { width: 380px; margin-right: 32px; } }
+@media (prefers-reduced-motion: reduce) {
+  .ap-ticker { overflow-x: auto; }
+  .ap-ticker-track { animation: none; padding: 0 var(--gutter); }
+  .ap-dup { display: none !important; }
+}
+
+/* ---------- four parts ---------- */
+.ap-parts { display: grid; gap: 56px; margin-top: 48px !important; }
+@media (min-width: 720px) { .ap-parts { grid-template-columns: 1fr 1fr; gap: 64px 44px; margin-top: 64px !important; } }
+@media (min-width: 1024px) { .ap-parts { max-width: 1000px; margin-left: auto !important; margin-right: auto !important; } }
+.ap-part { position: relative; display: flex; flex-direction: column; gap: 34px; }
+.ap-part .lab-card-tag { font-size: 1.05rem; font-weight: 700; }
+.ap-part-body { font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.4; font-weight: 500; padding: 0 4px; }
+.ap-part-note { position: absolute; z-index: 2; top: -16px; right: -4px; rotate: 4deg; }
+
+/* ---------- start in their world ---------- */
+.ap-world { display: grid; gap: 64px; margin-top: 56px !important; }
+@media (min-width: 800px) { .ap-world { grid-template-columns: repeat(3, 1fr); gap: 40px; } }
+.ap-world-item { position: relative; display: flex; flex-direction: column; gap: 36px; text-align: center; }
+.ap-world-art { position: absolute; z-index: 2; top: -46px; left: -6px; }
+.ap-world-body { font-size: 1.1rem; color: var(--ink-soft); }
+
+/* ---------- keep the whole experience ---------- */
+.ap-compare { display: grid; gap: 48px; margin-top: 48px; justify-items: center; }
+@media (min-width: 640px) { .ap-compare { grid-template-columns: 1fr 1fr; gap: 56px; max-width: 760px; margin: 56px auto 0; } }
+.ap-cmp { display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; max-width: 330px; }
+.ap-cmp .lab-card { width: 100%; }
+.ap-cmp-pic { aspect-ratio: 4 / 5 !important; }
+.ap-cmp-pic img { object-position: top; }
+.ap-cmp-plain .ap-cmp-pic img { filter: grayscale(1) brightness(0.8); }
+.ap-cmp figcaption { font-size: 1.2rem; font-weight: 700; text-align: center; }
+.ap-cmp-plain figcaption { color: var(--ink-soft); font-weight: 500; }
+.ap-cmp-badge { position: absolute; top: -16px; right: -16px; line-height: 0; }
+.ap-cmp-x { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #5c5c5c; border: 2px solid #fff; }
+
+/* ---------- practice has its moment: four steps on a dashed route ---------- */
+.ap-steps { position: relative; display: grid; gap: 56px 24px; margin-top: 56px !important; grid-template-columns: 1fr; max-width: 360px; margin-left: auto !important; margin-right: auto !important; }
+@media (min-width: 560px) { .ap-steps { grid-template-columns: 1fr 1fr; max-width: 640px; } }
+@media (min-width: 1000px) {
+  .ap-steps { grid-template-columns: repeat(4, 1fr); max-width: none; gap: 32px; }
+  .ap-steps::before { content: ""; position: absolute; left: 6%; right: 6%; top: 18px; border-top: 2.5px dashed var(--line); }
+}
+.ap-step { position: relative; display: flex; flex-direction: column; align-items: center; gap: 34px; text-align: center; }
+.ap-step .lab-card { width: 100%; margin-top: 4px; }
+.ap-step-num { position: relative; z-index: 1; display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: -18px; background: var(--paper); border: 1.5px solid var(--line); font-weight: 800; font-size: 1.05rem; }
+.ap-step-tag { color: var(--ink-soft); font-size: 1.05rem; }
+
+/* ---------- every child needs a different bridge ---------- */
+.ap-bridge { padding-bottom: 56px; }
+.ap-bridge-head { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; }
+.ap-bridge-head .lab-h2 { max-width: 16ch; }
+.ap-ticker-bridge { margin-top: 24px; }
+.ap-bridge-item { flex: none; width: 240px; margin-right: 36px; display: flex; flex-direction: column; gap: 34px; }
+@media (min-width: 768px) { .ap-bridge-item { width: 290px; margin-right: 48px; } }
+.ap-bridge-item p { font-size: 1rem; line-height: 1.4; text-align: center; color: var(--ink-soft); padding: 0 6px; }
+
+/* ---------- the bridge can now happen seamlessly ---------- */
+.ap-tech { display: grid; gap: 48px; align-items: center; }
+@media (min-width: 900px) { .ap-tech { grid-template-columns: 1.15fr 1fr; gap: 72px; } }
+.ap-tech-pics { position: relative; padding-bottom: 0; }
+.ap-tech-card { width: 100%; }
+.ap-tech-tablet { display: none; }
+@media (min-width: 900px) {
+  .ap-tech-pics { padding-bottom: 70px; }
+  .ap-tech-tablet { display: block; position: absolute; right: -36px; bottom: 0; width: 46%; padding: 8px; border-radius: 16px; rotate: 3deg; }
+  .ap-tech-tablet .lab-tablet-screen { border-radius: 6px; }
+}
+.ap-tech-copy { display: flex; flex-direction: column; gap: 18px; }
+
+/* ---------- closing call ---------- */
+.ap-close { position: relative; }
+.ap-close-h { max-width: 20ch; }
+.ap-stars { display: flex; align-items: flex-end; gap: 6px; }
+.ap-close-btn { margin-top: 12px; }
+.ap-deco-close-l { left: 3%; bottom: 40px; display: none; }
+.ap-deco-close-r { right: 4%; top: 72px; display: none; }
+@media (min-width: 1000px) { .ap-deco-close-l, .ap-deco-close-r { display: block; } }
+@media (max-width: 420px) { .ap-close-btn { width: 100%; } }
+
+/* round 4: phones. Picture cards keep a card's size instead of filling the screen. */
+@media (max-width: 719px) {
+  .ap-part, .ap-world-item { width: 100%; max-width: 320px; margin-left: auto; margin-right: auto; }
+  .ap-parts, .ap-world { gap: 48px; }
+  .ap-cmp { max-width: 280px; }
+}
+
+/* round 6: below 1000px the four steps are a stepper (numbers joined by a line) over one card at a time */
+.ap-stepper-nav { display: none; }
+@media (max-width: 999px) {
+  .ap-stepper { margin-top: 40px; }
+  .ap-stepper-nav { position: relative; display: flex; justify-content: space-between; max-width: 300px; margin: 0 auto; }
+  .ap-stepper-nav::before { content: ""; position: absolute; left: 22px; right: 22px; top: 50%; border-top: 2.5px dashed var(--line); }
+  .ap-stepper-dot { position: relative; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; background: var(--paper); border: 1.5px solid var(--line); font: inherit; font-weight: 800; color: var(--ink-muted); cursor: pointer; transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease; }
+  .ap-stepper-dot.done { background: var(--teal-50); border-color: var(--teal); color: var(--teal-700); }
+  .ap-stepper-dot.on { background: var(--note); border-color: var(--ink); color: var(--ink); }
+  .ap-stepper-dot:focus-visible { outline: 2px solid var(--teal-700); outline-offset: 3px; }
+  .ap-steps { grid-template-columns: 1fr !important; max-width: 300px; margin-top: 28px !important; }
+  .ap-step { display: none; }
+  .ap-step.on { display: flex; animation: apStepIn 0.45s var(--ease-rise) both; }
+  .ap-step-num { display: none; }
+}
+@keyframes apStepIn { from { opacity: 0; translate: 24px 0; } to { opacity: 1; translate: 0 0; } }
+@media (prefers-reduced-motion: reduce) { .ap-step.on { animation: none; } }

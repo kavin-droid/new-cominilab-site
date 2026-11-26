@@ -1,0 +1,87 @@
+/* The struggle photos (Struggles.tsx): a polaroid with a scene inside and one motion each. */
+.uc { margin: 0; padding: 10px 10px 0; background: #fff; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.1); display: grid; }
+.uc-pic { position: relative; display: block; aspect-ratio: 5 / 4; overflow: hidden; }
+.uc-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.uc-cap { padding: 10px 6px 12px; text-align: center; font-weight: 700; font-size: 0.98rem; line-height: 1.25; }
+
+/* 1. the homework standoff: the clock runs on, the pencil taps, the scribble scrawls, the tries pile up */
+.uc .uc-min, .uc .uc-hour { transform-box: view-box; transform-origin: 326px 70px; }
+.uc.go .uc-min { animation: ucSpin 4s linear infinite; }
+.uc.go .uc-hour { animation: ucSpin 48s linear infinite; }
+@keyframes ucSpin { to { transform: rotate(360deg); } }
+.uc .uc-pencil { transform-box: fill-box; transform-origin: 10% 90%; }
+.uc.go .uc-pencil { animation: ucTap 0.9s ease-in-out infinite; }
+@keyframes ucTap { 0%, 100% { transform: rotate(0); } 30% { transform: rotate(-6deg) translateY(-4px); } 55% { transform: rotate(2deg); } }
+.uc .uc-scrib { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.uc.go .uc-scrib { animation: ucScrib 4s ease-in-out infinite; }
+@keyframes ucScrib { 0%, 20% { stroke-dashoffset: 1; } 55%, 90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 1; opacity: 0; } }
+.uc .uc-ball1, .uc .uc-ball2, .uc .uc-ball3 { transform-box: fill-box; transform-origin: 50% 100%; }
+.uc.go .uc-ball1 { animation: ucBall 4s ease-out infinite; }
+.uc.go .uc-ball2 { animation: ucBall 4s ease-out 1.3s infinite; }
+.uc.go .uc-ball3 { animation: ucBall 4s ease-out 2.6s infinite; }
+@keyframes ucBall { 0%, 60% { transform: translateY(-70px) scale(0.4); opacity: 0; } 72% { transform: translateY(4px) scale(1.05); opacity: 1; } 80%, 100% { transform: none; opacity: 1; } }
+
+/* 2. "Good" at what: the stamp lands, then the question marks pop one by one */
+.uc .uc-stamp, .uc .uc-q { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-stamp { animation: ucStamp 4.4s cubic-bezier(.34, 1.56, .64, 1) infinite; }
+@keyframes ucStamp { 0%, 8% { transform: scale(1.8); opacity: 0; } 18%, 92% { transform: none; opacity: 1; } 100% { opacity: 0; } }
+.uc .uc-q { opacity: 0; }
+.uc.go .uc-q1 { animation: ucQ 4.4s ease-out 0.9s infinite; }
+.uc.go .uc-q2 { animation: ucQ 4.4s ease-out 1.3s infinite; }
+.uc.go .uc-q3 { animation: ucQ 4.4s ease-out 1.7s infinite; }
+@keyframes ucQ { 0% { transform: scale(0.2); opacity: 0; } 12% { transform: scale(1.15); opacity: 1; } 20%, 70% { transform: scale(1) rotate(0); opacity: 1; } 76% { transform: rotate(-8deg); } 82% { transform: rotate(6deg); } 92%, 100% { transform: scale(0.8); opacity: 0; } }
+
+/* 3. no time to plan: the jobs go round and round (each stays upright), the phone rings, the list's cursor waits */
+.uc .uc-orbit { transform-box: view-box; transform-origin: 200px 164px; }
+.uc.go .uc-orbit { animation: ucSpin 12s linear infinite; }
+.uc .uc-keep { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-keep { animation: ucSpin 12s linear infinite reverse; }
+.uc .uc-ring { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-ring { animation: ucRing 1.8s ease-in-out infinite; }
+@keyframes ucRing { 0%, 50%, 100% { transform: none; } 55%, 65%, 75% { transform: rotate(-9deg); } 60%, 70%, 80% { transform: rotate(9deg); } }
+.uc.go .uc-cursor { animation: ucBlink 1s steps(1) infinite; }
+@keyframes ucBlink { 50% { opacity: 0; } }
+
+/* 4. screen time: coins rain, the ad shakes for attention, the play timer keeps refilling, +50 pops */
+.uc .uc-coin { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-coin { animation: ucCoin 1.6s ease-in infinite; }
+.uc.go .uc-c1 { animation-delay: 0.25s; } .uc.go .uc-c2 { animation-delay: 0.5s; } .uc.go .uc-c3 { animation-delay: 0.75s; } .uc.go .uc-c4 { animation-delay: 1s; } .uc.go .uc-c5 { animation-delay: 1.25s; }
+@keyframes ucCoin { 0% { transform: translateY(-20px) scaleX(1); opacity: 0; } 20% { opacity: 1; } 50% { transform: translateY(8px) scaleX(0.2); } 100% { transform: translateY(26px) scaleX(1); opacity: 0; } }
+.uc .uc-ad { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-ad { animation: ucAd 2.2s ease-in-out infinite; }
+@keyframes ucAd { 0%, 60%, 100% { transform: none; } 66% { transform: rotate(-3deg) scale(1.04); } 72% { transform: rotate(3deg) scale(1.04); } 78% { transform: rotate(-2deg); } 84% { transform: none; } }
+.uc .uc-timer { transform-box: fill-box; transform-origin: 0 50%; }
+.uc.go .uc-timer { animation: ucTimer 3s linear infinite; }
+@keyframes ucTimer { from { transform: scaleX(1); } to { transform: scaleX(0.04); } }
+.uc .uc-plus { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.uc.go .uc-plus { animation: ucPop 2.2s ease-out infinite; }
+@keyframes ucPop { 0% { transform: translateY(14px) scale(0.5); opacity: 0; } 15% { transform: none; opacity: 1; } 70% { opacity: 1; } 100% { transform: translateY(-16px); opacity: 0; } }
+
+/* 5. which app: the badges flash one after another, the claims pop, the magnifier looks from app to app */
+.uc .uc-badge, .uc .uc-say { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-badge { animation: ucBadge 2.7s ease-in-out infinite; }
+.uc.go .uc-b1 { animation-delay: 0.3s; } .uc.go .uc-b2 { animation-delay: 0.6s; } .uc.go .uc-b3 { animation-delay: 0.9s; } .uc.go .uc-b4 { animation-delay: 1.2s; } .uc.go .uc-b5 { animation-delay: 1.5s; } .uc.go .uc-b6 { animation-delay: 1.8s; } .uc.go .uc-b7 { animation-delay: 2.1s; } .uc.go .uc-b8 { animation-delay: 2.4s; }
+@keyframes ucBadge { 0%, 20%, 100% { transform: none; } 8% { transform: scale(1.45); } }
+.uc .uc-say { opacity: 0; }
+.uc.go .uc-s1 { animation: ucSay 4.5s ease-out infinite; }
+.uc.go .uc-s2 { animation: ucSay 4.5s ease-out 1.2s infinite; }
+.uc.go .uc-s3 { animation: ucSay 4.5s ease-out 2.4s infinite; }
+@keyframes ucSay { 0% { transform: scale(0.3); opacity: 0; } 10% { transform: scale(1.1); opacity: 1; } 16%, 70% { transform: none; opacity: 1; } 80%, 100% { transform: scale(0.9); opacity: 0; } }
+.uc .uc-mag { transform: translate(162px, 72px); }
+.uc.go .uc-mag { animation: ucMag 6s ease-in-out infinite; }
+@keyframes ucMag { 0%, 12% { transform: translate(162px, 72px); } 25%, 37% { transform: translate(238px, 128px); } 50%, 62% { transform: translate(200px, 184px); } 75%, 87% { transform: translate(162px, 240px); } 100% { transform: translate(162px, 72px); } }
+
+/* 6. the group chat: the messages slide in one after another, someone is typing, the unread count goes up */
+.uc .uc-msg { transform-box: fill-box; transform-origin: 0 100%; opacity: 0; }
+.uc.go .uc-m1 { animation: ucMsg 7s ease-out infinite; }
+.uc.go .uc-m2 { animation: ucMsg 7s ease-out 1.2s infinite; }
+.uc.go .uc-m3 { animation: ucMsg 7s ease-out 2.4s infinite; }
+.uc.go .uc-m4 { animation: ucMsg 7s ease-out 3.6s infinite; }
+@keyframes ucMsg { 0% { transform: translateY(12px) scale(0.7); opacity: 0; } 6% { transform: none; opacity: 1; } 78% { opacity: 1; } 86%, 100% { opacity: 0; } }
+.uc.go .uc-dot { animation: ucDot 0.9s ease-in-out infinite; }
+.uc.go .uc-d2 { animation-delay: 0.15s; } .uc.go .uc-d3 { animation-delay: 0.3s; }
+@keyframes ucDot { 0%, 100% { opacity: 0.35; } 40% { opacity: 1; } }
+.uc .uc-badge2 { transform-box: fill-box; transform-origin: center; }
+.uc.go .uc-badge2 { animation: ucBadge 1.2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) { .uc * { animation: none !important; } .uc .uc-q, .uc .uc-msg, .uc .uc-say, .uc .uc-plus { opacity: 1; } .uc .uc-scrib { stroke-dashoffset: 0; } }

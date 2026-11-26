@@ -1,0 +1,210 @@
+{
+  "Pick a place to go!": {
+    "file": "5a3a6e1975ac3be5.mp3",
+    "secs": 1
+  },
+  "See you tomorrow!": {
+    "file": "21a80ef81bd96d19.mp3",
+    "secs": 0.9
+  },
+  "Tap play!": {
+    "file": "1b89173c4cea5784.mp3",
+    "secs": 0.9
+  },
+  "You got a star!": {
+    "file": "6bf04f2faaf57e25.mp3",
+    "secs": 1.7
+  },
+  "Get all the stars to open the gate!": {
+    "file": "f02040a72e7e4254.mp3",
+    "secs": 2.6
+  },
+  "All done! The gate is opening!": {
+    "file": "5ae96692bffb5ae0.mp3",
+    "secs": 2.8
+  },
+  "A new land!": {
+    "file": "a6b1244d2ffc791f.mp3",
+    "secs": 1.2
+  },
+  "Play again?": {
+    "file": "c50080a0c651bb4d.mp3",
+    "secs": 0.8
+  },
+  "Off we go!": {
+    "file": "c0001464f71d510a.mp3",
+    "secs": 1
+  },
+  "A new land for tomorrow!": {
+    "file": "fd15d1ba65c98a6f.mp3",
+    "secs": 2.5
+  },
+  "Another star!": {
+    "file": "15839a7e903dfd19.mp3",
+    "secs": 1.5
+  },
+  "Off to the ducks!": {
+    "file": "74de0b8aaa74a0e9.mp3",
+    "secs": 1
+  },
+  "Off to the fruit!": {
+    "file": "6291c765de58f3f7.mp3",
+    "secs": 1.4
+  },
+  "Off to the sheep!": {
+    "file": "de793522195c85e7.mp3",
+    "secs": 1.3
+  },
+  "Off to the chicks!": {
+    "file": "66cfc7db25250ff7.mp3",
+    "secs": 1.3
+  },
+  "Off to the pairs!": {
+    "file": "dfe07a3e9f2a759d.mp3",
+    "secs": 1.1
+  },
+  "Off to the socks!": {
+    "file": "39cdc4dc37cfa6a3.mp3",
+    "secs": 1.2
+  },
+  "Off to the raccoons!": {
+    "file": "65c83ddbd48b157f.mp3",
+    "secs": 1.5
+  },
+  "Off to the frog!": {
+    "file": "ce71b61f058406ab.mp3",
+    "secs": 1.9
+  },
+  "Off to the apples!": {
+    "file": "71f286059e5542b4.mp3",
+    "secs": 1.2
+  },
+  "Off to the toys!": {
+    "file": "edf428f29734939b.mp3",
+    "secs": 1.2
+  },
+  "Off to the van!": {
+    "file": "662ac51b474a369f.mp3",
+    "secs": 1
+  },
+  "Off to the jumps!": {
+    "file": "f63e5929a37b1704.mp3",
+    "secs": 1.2
+  },
+  "Off to the bunny!": {
+    "file": "0d8d5088662efa3a.mp3",
+    "secs": 0.9
+  },
+  "Off to the blocks!": {
+    "file": "bd5bffb97356b477.mp3",
+    "secs": 1.1
+  },
+  "Off to the ball!": {
+    "file": "e4a2e4582090c484.mp3",
+    "secs": 1.2
+  },
+  "Off to the eggs!": {
+    "file": "46c24e945dfe4cb6.mp3",
+    "secs": 1.1
+  },
+  "Off to the dots!": {
+    "file": "808ec5cbd2bccd5f.mp3",
+    "secs": 1.3
+  },
+  "Off to the juice!": {
+    "file": "fecafe495ced0105.mp3",
+    "secs": 1.2
+  },
+  "Off to the tart!": {
+    "file": "434bbfab9a6c4cdd.mp3",
+    "secs": 1.2
+  },
+  "Off to the piggy banks!": {
+    "file": "242878a4da30d5e5.mp3",
+    "secs": 1.3
+  },
+  "Off to the treasure!": {
+    "file": "fb504a3782fb16ec.mp3",
+    "secs": 1.3
+  },
+  "Off to the flowers!": {
+    "file": "453888c89ef606d3.mp3",
+    "secs": 1.2
+  },
+  "Off to the dice!": {
+    "file": "55a9aa3425be1ba9.mp3",
+    "secs": 1.4
+  },
+  "Off to the cookies!": {
+    "file": "c182edf010227028.mp3",
+    "secs": 1.2
+  },
+  "Off to the lantern!": {
+    "file": "d6339be459412255.mp3",
+    "secs": 1.7
+  },
+  "Off to the cupcakes!": {
+    "file": "3b4c6b6c6aad4f6f.mp3",
+    "secs": 1.2
+  },
+  "Off to the pizza!": {
+    "file": "d6c0359380adbcb9.mp3",
+    "secs": 1.2
+  },
+  "Off to the stars!": {
+    "file": "fbd2c1929c214f33.mp3",
+    "secs": 1.5
+  },
+  "Off to the chart!": {
+    "file": "a917fb7b1d2a69b9.mp3",
+    "secs": 1.5
+  },
+  "Off to the flag!": {
+    "file": "eae0eb0a3ebcda8d.mp3",
+    "secs": 1
+  },
+  "Off to the sweets!": {
+    "file": "c6403b9922eb6471.mp3",
+    "secs": 1.3
+  },
+  "Off to the chocolate!": {
+    "file": "714f39ac2d76b8db.mp3",
+    "secs": 1.5
+  },
+  "Off to the scales!": {
+    "file": "f753f7506fb6dcd6.mp3",
+    "secs": 1.3
+  },
+  "Off to the garden!": {
+    "file": "3e0260eedd5f3f2e.mp3",
+    "secs": 1.1
+  },
+  "Off to the strawberries!": {
+    "file": "7f5438cf2439e579.mp3",
+    "secs": 1.4
+  },
+  "Off to the books!": {
+    "file": "735f076391393c3e.mp3",
+    "secs": 1.2
+  },
+  "Off to the jar!": {
+    "file": "a6c1cdf70a6aa90f.mp3",
+    "secs": 1
+  },
+  "Off to the snacks!": {
+    "file": "28fbc701662227fd.mp3",
+    "secs": 1.2
+  },
+  "Off to the burger!": {
+    "file": "1c280dd0951a884e.mp3",
+    "secs": 1.3
+  },
+  "Off to the bread!": {
+    "file": "d3984d1fc29a7327.mp3",
+    "secs": 1
+  },
+  "Off to the boat!": {
+    "file": "02bc5f655f8a60ba.mp3",
+    "secs": 1.2
+  }
+}

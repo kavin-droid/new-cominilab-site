@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- "No more guessing": the same report card as not-sure.svg, but each row now names the maths idea and says where
+       the child is on it; the meters fill and the status chips stamp on one by one, and a star takes the place of the
+       question marks. Classes cf-* are animated in app/cominilab/story/story.css. -->
+  <rect width="600" height="600" fill="#FDF1D4"/>
+  <g transform="rotate(-5 305 300)">
+    <rect x="120" y="62" width="370" height="478" fill="#EDD7A2" transform="translate(-12 12)"/>
+    <rect x="120" y="62" width="370" height="478" fill="#FFFFFF"/>
+    <rect x="152" y="94" width="306" height="40" fill="#9478D6"/>
+    <g font-family="'DM Sans', Arial, sans-serif" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="700" fill="#26232F">
+      <text x="168" y="121" font-size="20" fill="#FFFFFF">Sara · Maths</text>
+
+      <rect x="160" y="160" width="40" height="40" fill="#4FA046"/>
+      <text x="214" y="176" font-size="19">Counting</text>
+      <g class="cf-m cf-m1"><rect x="214" y="186" width="120" height="8" fill="#E6E2D2"/><rect class="cf-fill" x="214" y="186" width="120" height="8" fill="#4AC1BD"/></g>
+      <g class="cf-chip cf-c1"><rect x="356" y="164" width="98" height="34" fill="#CFEFED"/><text x="405" y="187" font-size="15" text-anchor="middle" fill="#1F6F6C">Can do</text></g>
+      <rect x="152" y="222" width="306" height="3" fill="#E6E2D2"/>
+
+      <circle cx="180" cy="266" r="21" fill="#8F6CD0"/>
+      <text x="214" y="258" font-size="19">Counting on</text>
+      <g class="cf-m cf-m2"><rect x="214" y="268" width="120" height="8" fill="#E6E2D2"/><rect class="cf-fill" x="214" y="268" width="72" height="8" fill="#FDBE35"/></g>
+      <g class="cf-chip cf-c2"><rect x="356" y="246" width="98" height="34" fill="#FDE68A"/><text x="405" y="269" font-size="13" text-anchor="middle" fill="#7A5A00">Getting there</text></g>
+      <rect x="152" y="304" width="306" height="3" fill="#E6E2D2"/>
+
+      <path d="M180 322 L203 364 H157 Z" fill="#FF8C2A"/>
+      <text x="214" y="340" font-size="19">Shapes</text>
+      <g class="cf-m cf-m3"><rect x="214" y="350" width="120" height="8" fill="#E6E2D2"/><rect class="cf-fill" x="214" y="350" width="110" height="8" fill="#4AC1BD"/></g>
+      <g class="cf-chip cf-c3"><rect x="356" y="328" width="98" height="34" fill="#CFEFED"/><text x="405" y="351" font-size="15" text-anchor="middle" fill="#1F6F6C">Can do</text></g>
+      <rect x="152" y="386" width="306" height="3" fill="#E6E2D2"/>
+
+      <path d="M168 412 H192 L204 432 L192 452 H168 L156 432 Z" fill="#A5C82B"/>
+      <text x="214" y="422" font-size="19">Tens and ones</text>
+      <g class="cf-m cf-m4"><rect x="214" y="432" width="120" height="8" fill="#E6E2D2"/><rect class="cf-fill" x="214" y="432" width="10" height="8" fill="#BEBBD0"/></g>
+      <g class="cf-chip cf-c4"><rect x="356" y="410" width="98" height="34" fill="#ECEAF4"/><text x="405" y="433" font-size="15" text-anchor="middle" fill="#4A4A4A">Next</text></g>
+
+      <!-- what to try tonight -->
+      <g class="cf-tip"><rect x="152" y="470" width="306" height="44" fill="#E8F7F6"/><text x="168" y="498" font-size="15" fill="#1F6F6C">Try tonight: count on from 5</text></g>
+    </g>
+  </g>
+  <g class="cf-bigstar" transform="translate(522 118)">
+    <path d="M0 -40 L11.7 -12.6 L39.6 -11.7 L18 7.2 L25.2 36 L0 19.8 L-25.2 36 L-18 7.2 L-39.6 -11.7 L-11.7 -12.6 Z" fill="#FFC93C" stroke="#E0A92A" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>CominiLab Map</title>
+  <meta name="description" content="CominiLab landing map: today's 5 activities are places on a little map; tap one and the car drives there." />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- not render-blocking (app round 15): a blocking stylesheet holds back map.js until the fonts' CSS arrives, and on a
+       slow phone connection the map never drew. The text swaps to the web fonts when they come. -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+  <link rel="stylesheet" href="map.css" />
+</head>
+<body>
+  <div id="app" class="cm-app">
+    <!-- the 800 x 360 design frame (CominiLab's), scaled to fit; the land colour fills the rest of the screen -->
+    <div id="frame" class="cm-frame">
+      <svg id="map" class="cm-map" viewBox="0 0 800 360" aria-label="Today's map"></svg>
+
+      <!-- embedded in the app: a back button top left (the app owns the top right and the bottom centre) -->
+      <button type="button" id="back" class="cm-sq" aria-label="Back" style="left:16px;top:12px">
+        <svg width="26" height="26" aria-hidden="true" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M31 36L19 24L31 12" stroke="#2E8E8A" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <!-- today's places: one square button bottom right; a tap opens a row of small cards just above it -->
+      <div id="cards-panel" class="cm-cards" aria-label="Today's places" hidden></div>
+      <button type="button" id="cards" class="cm-sq cm-cardsbtn" aria-label="Today's places" aria-expanded="false" aria-controls="cards-panel">
+        <svg width="28" height="28" aria-hidden="true" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.85786 32.7574C6.23858 33.8432 4 35.3432 4 37C4 40.3137 12.9543 43 24 43C35.0457 43 44 40.3137 44 37C44 35.3432 41.7614 33.8432 38.1421 32.7574" stroke="#B85A52" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M24 35C24 35 37 26.504 37 16.6818C37 9.67784 31.1797 4 24 4C16.8203 4 11 9.67784 11 16.6818C11 26.504 24 35 24 35Z" fill="#FF8A80" stroke="#B85A52" stroke-width="3.4" stroke-linejoin="round"/><path d="M24 22C26.7614 22 29 19.7614 29 17C29 14.2386 26.7614 12 24 12C21.2386 12 19 14.2386 19 17C19 19.7614 21.2386 22 24 22Z" fill="#FFFFFF" stroke="white" stroke-width="3.4" stroke-linejoin="round"/></svg>
+      </button>
+
+      <!-- after arriving: the big round Play button beside the place -->
+      <button type="button" id="play" class="cm-play" aria-label="Play" hidden>
+        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round" /></svg>
+      </button>
+
+      <!-- the activity (simulated in this prototype): a card standing in for the game -->
+      <div id="activity" class="cm-activity" hidden>
+        <div class="cm-activity-card">
+          <div id="activity-art" class="cm-activity-art"></div>
+          <p class="cm-activity-note">The activity opens here.</p>
+          <button type="button" id="finish" class="cm-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Finish
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="map.js"></script>
+</body>
+</html>

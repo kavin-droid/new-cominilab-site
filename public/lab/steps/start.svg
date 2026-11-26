@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320">
+  <!-- "Where Sara starts": a starting point per idea, with no level words. Same look as the other step screens. -->
+  <rect width="320" height="320" fill="#FFFFFF"/>
+  <rect x="16" y="16" width="176" height="28" fill="#FFF186"/>
+  <text x="26" y="36" font-family="Patrick Hand, Comic Sans MS, cursive" font-size="17" fill="#111">Where Sara starts</text>
+  <g font-family="DM Sans, Arial, sans-serif" font-size="14" font-weight="700" fill="#0D0D0D">
+    <text x="16" y="82">Counting</text>
+    <text x="16" y="146">Place value</text>
+    <text x="16" y="210">Comparing</text>
+  </g>
+  <!-- tracks: 9 steps each, the marker shows where the path begins -->
+  <g fill="#ECECEC">
+    <rect x="16" y="94" width="28" height="8"/><rect x="48" y="94" width="28" height="8"/><rect x="80" y="94" width="28" height="8"/><rect x="112" y="94" width="28" height="8"/><rect x="144" y="94" width="28" height="8"/><rect x="176" y="94" width="28" height="8"/><rect x="208" y="94" width="28" height="8"/><rect x="240" y="94" width="28" height="8"/><rect x="272" y="94" width="32" height="8"/>
+    <rect x="16" y="158" width="28" height="8"/><rect x="48" y="158" width="28" height="8"/><rect x="80" y="158" width="28" height="8"/><rect x="112" y="158" width="28" height="8"/><rect x="144" y="158" width="28" height="8"/><rect x="176" y="158" width="28" height="8"/><rect x="208" y="158" width="28" height="8"/><rect x="240" y="158" width="28" height="8"/><rect x="272" y="158" width="32" height="8"/>
+    <rect x="16" y="222" width="28" height="8"/><rect x="48" y="222" width="28" height="8"/><rect x="80" y="222" width="28" height="8"/><rect x="112" y="222" width="28" height="8"/><rect x="144" y="222" width="28" height="8"/><rect x="176" y="222" width="28" height="8"/><rect x="208" y="222" width="28" height="8"/><rect x="240" y="222" width="28" height="8"/><rect x="272" y="222" width="32" height="8"/>
+  </g>
+  <g fill="#4AC1BD">
+    <rect x="16" y="94" width="92" height="8"/>
+    <rect x="16" y="158" width="188" height="8"/>
+    <rect x="16" y="222" width="188" height="8"/>
+  </g>
+  <!-- start pins -->
+  <g fill="#E8453C">
+    <path d="M124 92 L115 80 A11 11 0 1 1 133 80 Z"/>
+    <path d="M220 156 L211 144 A11 11 0 1 1 229 144 Z"/>
+    <path d="M220 220 L211 208 A11 11 0 1 1 229 208 Z"/>
+  </g>
+  <g fill="#FFFFFF"><circle cx="124" cy="74" r="4"/><circle cx="220" cy="138" r="4"/><circle cx="220" cy="202" r="4"/></g>
+  <!-- next step note -->
+  <rect x="16" y="256" width="288" height="48" fill="#E8F7F6"/>
+  <text x="30" y="285" font-family="DM Sans, Arial, sans-serif" font-size="14" font-weight="700" fill="#2E8E8A">Next up: counting past 100</text>
+</svg>

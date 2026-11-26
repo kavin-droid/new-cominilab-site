@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+  <!-- "No more bargaining": the same desk as worksheet-battle.svg, now with the tablet. The ducks come home one by
+       one, the count card ticks up to 5, three stars pop; the old worksheet sits folded to the side with a tick.
+       Classes cf-* are animated in app/cominilab/story/story.css (only once the card has resolved). -->
+  <defs>
+    <g id="cw-duck">
+      <ellipse cx="0" cy="6" rx="24" ry="15" fill="#FFD23F"/>
+      <path d="M-20 4 Q-30 -6 -24 -12 Q-14 -2 -6 2 Z" fill="#FFD23F"/>
+      <path d="M-6 6 Q4 -2 16 4 Q8 14 -6 12 Z" fill="#F2B81F"/>
+      <circle cx="16" cy="-12" r="12" fill="#FFD23F"/>
+      <circle cx="20" cy="-15" r="2.4" fill="#26232F"/>
+      <path d="M26 -11 L38 -8 L26 -4 Z" fill="#FF8C2A"/>
+      <ellipse cx="0" cy="22" rx="26" ry="4" fill="#7FC0E3"/>
+    </g>
+    <path id="cw-star" d="M0 -22 L6.5 -7 L22 -6.5 L10 4 L14 20 L0 11 L-14 20 L-10 4 L-22 -6.5 L-6.5 -7 Z"/>
+  </defs>
+  <rect width="600" height="600" fill="#FDE7EF"/>
+  <rect y="84" width="600" height="516" fill="#D49A64"/>
+  <rect y="84" width="600" height="10" fill="#C2864F"/>
+
+  <!-- the old worksheet, folded away with a tick -->
+  <g transform="rotate(10 486 470)">
+    <rect x="420" y="396" width="150" height="170" fill="#B97F4B" transform="translate(6 8)"/>
+    <rect x="420" y="396" width="150" height="170" fill="#FFFFFF"/>
+    <rect x="438" y="418" width="70" height="7" fill="#CFCDDA"/>
+    <rect x="438" y="440" width="112" height="7" fill="#ECEAF4"/>
+    <rect x="438" y="458" width="96" height="7" fill="#ECEAF4"/>
+    <rect x="438" y="476" width="104" height="7" fill="#ECEAF4"/>
+    <g class="cf-tick"><circle cx="530" cy="528" r="22" fill="#4AC1BD"/><path d="M518 528 L527 537 L543 519" fill="none" stroke="#FFFFFF" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </g>
+  <!-- the pencil, put down -->
+  <g transform="rotate(-24 120 520)">
+    <rect x="40" y="508" width="150" height="22" fill="#FFC93C"/>
+    <rect x="40" y="508" width="150" height="7" fill="#FFDC73"/>
+    <rect x="22" y="508" width="20" height="22" fill="#F49AB3"/>
+    <rect x="40" y="508" width="10" height="22" fill="#BFC3CF"/>
+    <path d="M190 508 L222 519 L190 530 Z" fill="#F3D6A8"/>
+    <path d="M211 515 L222 519 L211 523 Z" fill="#3A3646"/>
+  </g>
+
+  <!-- the tablet, playing -->
+  <g transform="rotate(-5 280 300)">
+    <rect x="78" y="146" width="408" height="300" fill="#B97F4B" transform="translate(10 12)"/>
+    <rect x="78" y="146" width="408" height="300" rx="26" fill="#1F2326"/>
+    <rect x="98" y="166" width="368" height="260" rx="10" fill="#DCEEF8"/>
+    <rect x="98" y="336" width="368" height="90" fill="#BFE3B0"/>
+    <ellipse cx="282" cy="330" rx="150" ry="62" fill="#9FD3EE"/>
+    <ellipse cx="282" cy="330" rx="150" ry="62" fill="none" stroke="#FFFFFF" stroke-width="5" opacity=".6"/>
+    <!-- the count card -->
+    <rect x="232" y="182" width="100" height="62" fill="#FFFFFF"/>
+    <g font-family="'DM Sans', Arial, sans-serif" style="font-family: var(--font-lab-sans), 'DM Sans', Arial, sans-serif" font-weight="800" text-anchor="middle" fill="#26232F" font-size="44">
+      <text class="cf-n cf-n1" x="282" y="230">1</text>
+      <text class="cf-n cf-n2" x="282" y="230">2</text>
+      <text class="cf-n cf-n3" x="282" y="230">3</text>
+      <text class="cf-n cf-n4" x="282" y="230">4</text>
+      <text class="cf-n cf-n5" x="282" y="230">5</text>
+    </g>
+    <use class="cf-d cf-d1" href="#cw-duck" x="196" y="306"/>
+    <use class="cf-d cf-d2" href="#cw-duck" x="262" y="296"/>
+    <use class="cf-d cf-d3" href="#cw-duck" x="328" y="306"/>
+    <use class="cf-d cf-d4" href="#cw-duck" x="226" y="352"/>
+    <use class="cf-d cf-d5" href="#cw-duck" x="300" y="354"/>
+  </g>
+
+  <!-- three stars, earned -->
+  <g fill="#FFC93C" stroke="#E0A92A" stroke-width="3" stroke-linejoin="round">
+    <g transform="translate(150 86)"><use class="cf-star cf-s1" href="#cw-star"/></g>
+    <g transform="translate(286 62) scale(1.25)"><use class="cf-star cf-s2" href="#cw-star"/></g>
+    <g transform="translate(420 86)"><use class="cf-star cf-s3" href="#cw-star"/></g>
+  </g>
+</svg>
