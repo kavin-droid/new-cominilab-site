@@ -1,5 +1,8 @@
 // Shared site constants for the CominiLab pages. Kept out of the client Nav component so server pages can read them.
-export const LAB_URL = "https://comini-lab-redesign.web.app/";
+// The website and the app share one address (owner, 2026-11-26; the app's scripts/build-web.mjs lays this site over the
+// app for the web deploy): every button opens the app's landing page, where a parent chooses Get started or Sign in.
+// On the standalone review link (here.now) this path doesn't exist: the app isn't there.
+export const LAB_URL = "/TSplashBlue";
 
 export const LAB_PAGES = [
   { href: "/cominilab", label: "Home" },
