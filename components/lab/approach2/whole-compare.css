@@ -1,0 +1,57 @@
+/* "Keep the whole experience" (WholeCompare.tsx): the old site's plain vs whole cards, in the CominiLab story look */
+.wc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(28px, 5vw, 72px); max-width: 940px; margin: 56px auto 0; align-items: start; }
+.wc-card { margin: 0; display: flex; flex-direction: column; gap: 22px; }
+.wc-sheet { position: relative; padding: 11px; background: #FFFFFF; box-shadow: 10px 10px 0 #F1E29A; }
+.wc-plain .wc-sheet { rotate: -1.4deg; }
+.wc-whole .wc-sheet { rotate: 1.1deg; transition: translate 0.35s var(--ease-rise), box-shadow 0.35s var(--ease-rise); }
+.wc-photo { position: relative; aspect-ratio: 4 / 4.4; overflow: hidden; background: #F6F6F6; }
+.wc-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
+
+/* plain: greyed and dimmed, like the old card (grayscale + a dark scrim) */
+.wc-plain .wc-photo img { filter: grayscale(1); }
+.wc-plain .wc-photo::after { content: ""; position: absolute; inset: 0; background: rgba(13, 13, 13, 0.22); }
+
+/* whole: lifts a touch on hover */
+@media (hover: hover) {
+  .wc-whole:hover .wc-sheet { translate: -3px -4px; box-shadow: 14px 14px 0 #F1E29A; }
+}
+
+/* badges: square, sitting on the top right corner */
+.wc-badge { position: absolute; top: -16px; right: -16px; z-index: 2; display: grid; place-items: center; width: 46px; height: 46px; box-shadow: 4px 4px 0 rgba(13, 13, 13, 0.14); }
+.wc-badge.x { background: #FF6B6B; }
+.wc-badge.ok { background: var(--teal); }
+
+.wc-cap { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.wc-tag { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); }
+.wc-line { font-size: clamp(1.25rem, 2.1vw, 1.6rem); line-height: 1.25; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); }
+.wc-plain .wc-line { color: var(--ink-soft); }
+
+/* reveal: the plain sheet greys out and its cross stamps on, then the map comes up in colour and its tick lands */
+@media (prefers-reduced-motion: no-preference) {
+  .wc-plain .wc-photo img { transition: filter 0.9s ease 0.3s; }
+  .wc-plain .wc-photo::after { transition: opacity 0.9s ease 0.3s; }
+  .wc:not(.in) .wc-plain .wc-photo img { filter: none; }
+  .wc:not(.in) .wc-plain .wc-photo::after { opacity: 0; }
+  .wc:not(.in) .wc-badge { opacity: 0; scale: 0.3; }
+  .wc.in .wc-badge { animation: wcStamp 0.5s var(--ease-pop) both; }
+  .wc.in .wc-plain .wc-badge { animation-delay: 0.7s; }
+  .wc.in .wc-whole .wc-badge { animation-delay: 1.15s; }
+  .wc:not(.in) .wc-whole .lab-mark { background-size: 0% 100%; }
+  .wc-whole .lab-mark { background-repeat: no-repeat; background-size: 100% 100%; transition: background-size 0.7s var(--ease-rise) 1.3s; }
+}
+@keyframes wcStamp {
+  0% { opacity: 0; scale: 1.8; rotate: -14deg; }
+  60% { opacity: 1; scale: 0.92; rotate: 4deg; }
+  100% { opacity: 1; scale: 1; rotate: 0deg; }
+}
+
+@media (max-width: 900px) {
+  .wc-sheet { box-shadow: 5px 5px 0 #F1E29A; }
+  @media (hover: hover) { .wc-whole:hover .wc-sheet { box-shadow: 8px 8px 0 #F1E29A; } }
+}
+@media (max-width: 640px) {
+  .wc { grid-template-columns: minmax(0, 1fr); gap: 52px; max-width: 420px; margin-top: 40px; padding: 0 8px; }
+  .wc-sheet { padding: 8px; }
+  .wc-badge { width: 40px; height: 40px; top: -12px; right: -10px; }
+  .wc-photo { aspect-ratio: 4 / 3.6; }
+}

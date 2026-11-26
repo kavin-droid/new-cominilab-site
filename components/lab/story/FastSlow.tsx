@@ -451,7 +451,7 @@ function Runner({ world, running, still }: { world: World; running: boolean; sti
           {world === "city" ? <span className="fs-streaks" aria-hidden="true">{[0, 1, 2, 3, 4, 5, 6, 7].map((k) => <i key={k} style={{ ["--k" as string]: k }} />)}</span> : null}
         </span>
         <span className={`fs-note${note ? " on" : ""}`} role="status">
-          <span className="fs-note-k"><b className="fs-note-tick" aria-hidden="true">✓</b>{WHO[world]} covered a milestone</span>
+          <span className="fs-note-k"><b className="fs-note-tick" aria-hidden="true">✓</b>{WHO[world]} reached a milestone</span>
           <b className="fs-note-t">{MILES[world][mile]}</b>
           <span className="fs-note-steps" aria-label={`${mile + 1} of ${MILES[world].length}`}>{MILES[world].map((m, i) => <i key={m} className={i <= mile ? "on" : ""} />)}</span>
         </span>

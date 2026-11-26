@@ -1,14 +1,15 @@
 "use client";
 
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { createPortal } from "react-dom";
 import "./world-games.css";
-import { GroundArt, KitchenArt, ShopArt } from "./world-art";
 
 /**
- * "Start in their world" (owner's comment on the approach redesign, 2026-11-25): each card is a child's interest (drawn
- * scenes from world-art.tsx since the owner's 2026-11-25 note, in the four-parts illustrations' style);
- * pressing it opens a short version of one of the app's own games, with that game's art, layout and feedback
+ * "Start in their world" (owner's comment on the approach redesign, 2026-11-25), laid out like the home page's "Know
+ * what they're learning" section (owner, 2026-11-26): the home page's tabs (ParentTabs' hm-* classes and behaviour),
+ * one per child's interest, each with the old site's photo as its icon, and a cream panel per tab whose card shows
+ * that world's little game playing itself (owner, 2026-11-26: "the card in the yellow should have the game
+ * autoplaying in it").
+ * Each game is a short version of one of the app's own games, with that game's art, layout and feedback
  * (owner, 2026-11-25: "borrow assets from our games inside the app and create short versions here"):
  * - Love Cooking: Gayathri's garden (garden-planning) made into a fruit tart: the same round bed cut into parts, the
  *   fraction card, the fruit cards and the tick. 2 tarts.
@@ -16,45 +17,261 @@ import { GroundArt, KitchenArt, ShopArt } from "./world-art";
  *   net brings up fish (+) and then rocks (-), and the child says the new score. 2 catches.
  * - Enjoy Shopping: Grammy's Shopping: the shelves, the basket with its price, the purse of ₹10 notes and ₹1 coins,
  *   the counter card and the tick, Grammy in her own voice. 2 baskets.
- * Each one plays on a fixed board (800 x 450 wide, 360 x 620 upright on a phone) scaled to the panel. Art and voice
- * clips are copied into public/lab/approach-games/.
+ * Each one plays on a fixed board (800 x 450 wide, 360 x 620 upright) scaled to its card. Art and voice clips are
+ * copied into public/lab/approach-games/.
+ *
+ * The demo: the real game, unchanged, inside an `inert` box (no focus, no taps, hidden from screen readers), driven
+ * by a short script (DEMO below) that moves a hand to the next button and taps it by dispatching that button's own
+ * click (or Enter for the purse). It loops by remounting the game, stops when the card leaves the screen or the tab
+ * changes (the game unmounts), and is silent (audio.on stays false). With reduced motion the first frame stays still.
  */
 const WORLD = [
-  { title: "Love Cooking?", body: "Fractions helps with the recipes!", Art: KitchenArt, tilt: -2, game: "tart" as const, name: "Gayathri's fruit tart" },
-  { title: "Always at the ground?", body: "Addition & subtraction help with the score.", Art: GroundArt, tilt: 1, game: "race" as const, name: "The fishing race" },
-  { title: "Enjoy Shopping?", body: "Adding & subtracting helps shop smart.", Art: ShopArt, tilt: 2, game: "shop" as const, name: "Grammy's shopping" },
+  { key: "cooking", photo: "/images/approach/philosophyCooking.webp", title: "Love Cooking?", body: "Fractions helps with the recipes!", game: "tart" as const, name: "Gayathri's fruit tart" },
+  { key: "ground", photo: "/images/approach/philosophyGround.webp", title: "Always at the ground?", body: "Addition & subtraction help with the score.", game: "race" as const, name: "The fishing race" },
+  { key: "shopping", photo: "/images/approach/philosophyShopping.webp", title: "Enjoy Shopping?", body: "Adding & subtracting helps shop smart.", game: "shop" as const, name: "Grammy's shopping" },
 ];
 type GameId = (typeof WORLD)[number]["game"];
 
 const A = "/lab/approach-games";
 
 export function WorldGames() {
-  const [open, setOpen] = useState<number | null>(null);
+  const [on, setOn] = useState(0);
+  const refs = useRef<(HTMLButtonElement | null)[]>([]);
+  const w = on >= 0 ? WORLD[on] : null;
+
+  // the same keys as the home page's tabs
+  const onKey = (e: React.KeyboardEvent, i: number) => {
+    const next = e.key === "ArrowDown" || e.key === "ArrowRight" ? i + 1 : e.key === "ArrowUp" || e.key === "ArrowLeft" ? i - 1 : null;
+    if (next === null) return;
+    e.preventDefault();
+    const n = (next + WORLD.length) % WORLD.length;
+    setOn(n);
+    refs.current[n]?.focus();
+  };
+
   return (
-    <>
-      <ul className="wg3">
-        {WORLD.map((w, i) => (
-          <li key={w.title} className="wg3-item">
-            <div className="wg3-card" style={{ rotate: `${w.tilt}deg` }}>
-              <button type="button" className="wg3-face wg3-front" onClick={() => setOpen(i)} aria-label={`${w.title} Play ${w.name}`} aria-haspopup="dialog">
-                <span className="wg3-pic"><w.Art /></span>
-                <span className="wg3-name">{w.title}</span>
-                <span className="wg3-play" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="#FFFFFF" /></svg></span>
-              </button>
-            </div>
-            <p className="wg3-body">{w.body}</p>
-          </li>
+    <div className="hm-tabs wt">
+      <div className="hm-tablist" role="tablist" aria-label="A child's world" aria-orientation="vertical">
+        {WORLD.map((t, i) => (
+          <button
+            key={t.key}
+            ref={(el) => { refs.current[i] = el; }}
+            role="tab"
+            id={`world-tab-${t.key}`}
+            aria-selected={on === i}
+            aria-controls="world-panel"
+            tabIndex={(on < 0 ? i === 0 : on === i) ? 0 : -1}
+            className="hm-tab"
+            style={{ order: i * 2 }}
+            // on a phone the open row closes again when tapped (the panel sits right under it there)
+            onClick={() => setOn(on === i && window.innerWidth < 1024 ? -1 : i)}
+            onKeyDown={(e) => onKey(e, i)}
+          >
+            <span className="hm-tab-ic wt-thumb">
+              <img src={t.photo} alt="" width={128} height={128} loading="lazy" draggable={false} />
+            </span>
+            <span>
+              <b>{t.title}</b>
+              <span className="hm-tab-body">{t.body}</span>
+            </span>
+          </button>
         ))}
-      </ul>
-      {open !== null ? <GameModal title={WORLD[open].name} game={WORLD[open].game} onClose={() => setOpen(null)} /> : null}
-    </>
+      </div>
+      {w ? (
+        <div className="hm-panel" id="world-panel" role="tabpanel" aria-labelledby={`world-tab-${w.key}`} style={{ order: on * 2 + 1 }}>
+          <div className="hm-panel-stage wt-stage" key={w.key}>
+            <figure className="wt-card">
+              <WorldDemo game={w.game} name={w.name} />
+            </figure>
+          </div>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
 // ---------------------------------------------------------------------------------------------------------------
-// sound: the games' own right / wrong sounds and their recorded lines (one line at a time; a muted panel is silent)
+// the demo: the game playing itself
 
-const audio = { on: true, voice: null as HTMLAudioElement | null };
+type Step = {
+  /** the button to tap: the `nth` match of `sel` inside the game */
+  sel: string;
+  nth?: number;
+  /** "enter" presses Enter on it instead of clicking (the purse, whose tap is a pointer drag) */
+  how?: "click" | "enter";
+  /** a pause before the hand starts moving */
+  wait?: number;
+  /** only tap once this is true too (a new round is in) */
+  gate?: (root: HTMLElement) => boolean;
+};
+
+const priceIs = (p: number) => (root: HTMLElement) => root.querySelector(".wgs-price")?.textContent === `₹${p}` && !root.querySelector(".wgx-go.awake");
+
+/** each game's run: a right first tart / catch / basket, then a slip the game catches, then the fix */
+const DEMO: Record<GameId, Step[]> = {
+  tart: [
+    { sel: ".wgc-part", nth: 0, wait: 1200 },
+    { sel: ".wgx-go.awake" },
+    // the second tart: grapes 1/4, watermelon 2/4. One watermelon too many first, then clear it and add grapes.
+    { sel: ".wgc-seed", nth: 1, wait: 600 },
+    { sel: ".wgc-part", nth: 1 },
+    { sel: ".wgc-part", nth: 2 },
+    { sel: ".wgc-part", nth: 3 },
+    { sel: ".wgx-go.awake" },
+    { sel: ".wgc-part", nth: 3, wait: 1600 },
+    { sel: ".wgc-seed", nth: 0 },
+    { sel: ".wgc-part", nth: 3 },
+    { sel: ".wgx-go.awake" },
+  ],
+  race: [
+    { sel: '.wgr-key[aria-label="8 fish"]', wait: 1400 },
+    // the rocks: 7 first (a slip), then 6
+    { sel: '.wgr-key[aria-label="5 fish"] ~ .wgr-key[aria-label="7 fish"]', wait: 1400 },
+    { sel: '.wgr-key[aria-label="5 fish"] ~ .wgr-key[aria-label="6 fish"]', wait: 1500 },
+  ],
+  shop: [
+    { sel: ".wgs-take.notes", how: "enter", wait: 2600 },
+    { sel: ".wgs-take.coins", how: "enter" },
+    { sel: ".wgs-take.coins", how: "enter" },
+    { sel: ".wgx-go.awake" },
+    // ₹21: two notes is not quite enough, then a coin
+    { sel: ".wgs-take.notes", how: "enter", gate: priceIs(21), wait: 400 },
+    { sel: ".wgs-take.notes", how: "enter" },
+    { sel: ".wgx-go.awake" },
+    { sel: ".wgs-take.coins", how: "enter", wait: 1500 },
+    { sel: ".wgx-go.awake" },
+  ],
+};
+
+/** how long the final card stays up before the game starts again */
+const END_HOLD = 3200;
+
+function WorldDemo({ game, name }: { game: GameId; name: string }) {
+  const box = useRef<HTMLDivElement>(null);
+  const hand = useRef<HTMLImageElement>(null);
+  const [seen, setSeen] = useState(false);
+  const [live, setLive] = useState(false);
+  const [run, setRun] = useState(0);
+
+  // plays only while the card is on screen and the page is visible, and never with reduced motion; each time it
+  // starts playing the game starts from the top (a fresh mount), and off screen the game is not mounted at all
+  useEffect(() => {
+    const el = box.current;
+    if (!el) return;
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let vis = false;
+    let was = false;
+    const update = () => {
+      setSeen(vis);
+      const now = vis && !document.hidden && !still.matches;
+      if (now === was) return;
+      was = now;
+      setLive(now);
+      if (now) setRun((n) => n + 1);
+    };
+    const io = new IntersectionObserver(([e]) => { vis = e.isIntersecting; update(); }, { threshold: 0.2 });
+    io.observe(el);
+    document.addEventListener("visibilitychange", update);
+    still.addEventListener("change", update);
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", update);
+      still.removeEventListener("change", update);
+    };
+  }, []);
+
+  // the script: find the next button, move the hand there, tap it; at the end hold the final card and start again
+  useEffect(() => {
+    if (!live) return;
+    let dead = false;
+    const ts: number[] = [];
+    const sleep = (ms: number) => new Promise<void>((res) => void ts.push(window.setTimeout(res, ms)));
+    const root = () => box.current?.querySelector<HTMLElement>(".wt-game") ?? null;
+    const find = async (s: Step) => {
+      for (let t = 0; t < 120 && !dead; t++) {
+        const r = root();
+        const el = r ? (r.querySelectorAll<HTMLElement | SVGElement>(s.sel)[s.nth ?? 0] ?? null) : null;
+        if (el && r && !(el as HTMLButtonElement).disabled && (!s.gate || s.gate(r))) return el;
+        await sleep(100);
+      }
+      return null;
+    };
+    const point = (el: Element | null, press = false) => {
+      const h = hand.current;
+      const b = box.current;
+      if (!h || !b) return;
+      if (!el) { h.classList.remove("show", "press"); return; }
+      const r = el.getBoundingClientRect();
+      const o = b.getBoundingClientRect();
+      // position with `translate` (not `transform`): the press shrink (`scale`) then shrinks the hand in place instead of
+      // scaling its position too, which made it jump toward the corner on every tap
+      h.style.translate = `${r.left + r.width / 2 - o.left}px ${r.top + r.height / 2 - o.top}px`;
+      h.classList.add("show");
+      h.classList.toggle("press", press);
+    };
+    // wait until the button has stopped moving (games slide their buttons in), so the hand goes straight to it once
+    const settle = async (el: Element) => {
+      let last = "";
+      for (let t = 0; t < 20 && !dead; t++) {
+        const r = el.getBoundingClientRect();
+        const now = `${Math.round(r.left)},${Math.round(r.top)},${Math.round(r.width)}`;
+        if (now === last && r.width > 0) return;
+        last = now;
+        await sleep(90);
+      }
+    };
+    // the hand starts low in the middle (not flying in from the corner)
+    const h0 = hand.current, b0 = box.current;
+    if (h0 && b0) { h0.style.transition = "none"; h0.style.translate = `${b0.clientWidth / 2}px ${b0.clientHeight * 0.85}px`; void h0.offsetWidth; h0.style.transition = ""; }
+    (async () => {
+      await sleep(400);
+      for (const s of DEMO[game]) {
+        if (s.wait) await sleep(s.wait);
+        const el = await find(s);
+        if (dead) return;
+        if (!el) break;
+        await settle(el);
+        if (dead) return;
+        point(el);
+        await sleep(650);
+        if (dead) return;
+        point(el, true);
+        await sleep(140);
+        if (dead) return;
+        if (s.how === "enter") el.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true, cancelable: true }));
+        else el.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, view: window }));
+        await sleep(160);
+        point(el);
+        await sleep(260);
+      }
+      point(null);
+      for (let t = 0; t < 80 && !dead && !box.current?.querySelector(".wgx-end"); t++) await sleep(100);
+      await sleep(END_HOLD);
+      if (!dead) setRun((n) => n + 1);
+    })();
+    return () => {
+      dead = true;
+      ts.forEach((t) => window.clearTimeout(t));
+      point(null);
+    };
+  }, [live, run, game]);
+
+  const props = { key: run, onAgain: () => {}, onDone: () => {} };
+  return (
+    <div ref={box} className="wt-demo" role="img" aria-label={`${name}, playing by itself`}>
+      {/* the game itself: no focus, no taps, nothing read out; it remounts (starts again) each loop */}
+      <div className="wt-game" inert>
+        {seen ? (game === "tart" ? <TartGame {...props} /> : game === "race" ? <RaceGame {...props} /> : <ShopGame {...props} />) : null}
+      </div>
+      <img ref={hand} className="wt-hand" src={`${A}/cooking/hand.svg`} alt="" aria-hidden="true" draggable={false} />
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------------------------
+// sound: the games' own right / wrong sounds and their recorded lines. The demos are silent, so audio.on stays false.
+
+const audio = { on: false, voice: null as HTMLAudioElement | null };
 function playSfx(name: "correct" | "wrong" | "plant", vol = 0.5) {
   if (!audio.on) return;
   try {
@@ -86,52 +303,6 @@ function useClock() {
   return useMemo(() => ({ after: (ms: number, fn: () => void) => void ts.current.push(window.setTimeout(fn, ms)) }), []);
 }
 
-// ---------------------------------------------------------------------------------------------------------------
-// the panel: the site's try-it card, centred over the dimmed page
-
-function GameModal({ title, game, onClose }: { title: string; game: GameId; onClose: () => void }) {
-  const [run, setRun] = useState(0);
-  const [sound, setSound] = useState(audio.on);
-  const close = useRef(onClose);
-  close.current = onClose;
-  const [host, setHost] = useState<Element | null>(null);
-  useEffect(() => setHost(document.querySelector(".lab") ?? document.body), []);
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close.current();
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-      stopVoice();
-    };
-  }, []);
-  if (!host) return null;
-  const props = { key: run, onAgain: () => setRun((r) => r + 1), onDone: onClose };
-  return createPortal(
-    <div className="wgx-modal" role="dialog" aria-modal="true" aria-label={title} onPointerDown={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="wgx-card">
-        <div className="wgx-stage">{game === "tart" ? <TartGame {...props} /> : game === "race" ? <RaceGame {...props} /> : <ShopGame {...props} />}</div>
-        <div className="wgx-bar">
-          <b>{title}</b>
-          <div className="wgx-bar-btns">
-            <button type="button" className="wgx-sq" aria-label={sound ? "Sound off" : "Sound on"} aria-pressed={sound} onClick={() => { audio.on = !sound; if (!audio.on) stopVoice(); setSound(!sound); }}>
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0D0D0D" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M11 5 6 9H2v6h4l5 4V5z" />
-                {sound ? <><path d="M15.5 8.5a5 5 0 0 1 0 7" /><path d="M19 5a10 10 0 0 1 0 14" /></> : <path d="m16 9 6 6M22 9l-6 6" />}
-              </svg>
-            </button>
-            <button type="button" className="wgx-sq" onClick={onClose} autoFocus aria-label="Close">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="#0D0D0D" strokeWidth="2.6" strokeLinecap="round" /></svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>,
-    host,
-  );
-}
 
 // ---------------------------------------------------------------------------------------------------------------
 // the board: a fixed frame scaled to the panel (wide on a computer, upright on a phone), its scene bleeding past it

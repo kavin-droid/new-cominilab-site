@@ -15,7 +15,7 @@ const QUOTES: Quote[] = [
   { quote: "I stopped having to plan anything myself. I check in once a week, see where she stands, and the rest just shows up matched to her.", name: "Devika, mother of a 6-year-old", bg: "#FFFCE5" },
   { quote: "My daughter struggled with maths at school, but she'll happily sit through a story problem here without even noticing it's the same maths.", name: "Karan, father of a 7-year-old", bg: "#FFF5FA" },
   { quote: "The parent report is the first thing that's actually changed how we talk about learning at home. Less ‘did you finish it’, more ‘what did you figure out’.", name: "Priya, mother of two, ages 5 and 7", bg: "#FAF7FD" },
-  { quote: "He plays the games thinking they're just games. I'm the one who noticed he'd quietly started counting in tens along the way.", name: "Sanjay, father of a 6-year-old", bg: "#F2FBF9" },
+  { quote: "Halfway through a game he looked up and said, ‘Appa, this is maths!’ Then he grinned and kept playing. He's been counting in tens ever since.", name: "Sanjay, father of a 6-year-old", bg: "#F2FBF9" },
   { quote: "We tried a few apps before this. Comini's the only one where she asks to go back to something instead of me having to remind her.", name: "Aisha, mother of a 7-year-old", bg: "#F6F9FF" },
 ];
 const TILTS = [-1.6, 1.2, -0.8, 1.8, -1.4, 0.9, -1.9, 1.3];

@@ -5,7 +5,8 @@
 .uc-cap { padding: 10px 6px 12px; text-align: center; font-weight: 700; font-size: 0.98rem; line-height: 1.25; }
 
 /* 1. the homework standoff: the clock runs on, the pencil taps, the scribble scrawls, the tries pile up */
-.uc .uc-min, .uc .uc-hour { transform-box: view-box; transform-origin: 326px 70px; }
+/* each hand turns round its own foot, the clock centre (fill-box: the hand runs from the centre straight up) */
+.uc .uc-min, .uc .uc-hour { transform-box: fill-box; transform-origin: 50% 100%; }
 .uc.go .uc-min { animation: ucSpin 4s linear infinite; }
 .uc.go .uc-hour { animation: ucSpin 48s linear infinite; }
 @keyframes ucSpin { to { transform: rotate(360deg); } }

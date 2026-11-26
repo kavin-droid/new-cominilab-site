@@ -2,25 +2,64 @@
 .as-frame svg [class^="aa-"], .as-frame svg [class*=" aa-"],
 .bp-stage svg [class^="bpx-"], .bp-stage svg [class*=" bpx-"] { transform-box: fill-box; }
 
-/* ---- treasure island (AngleSlider, drawn in parts/art.tsx's flat style) ---- */
-.aa-wave { animation: aaWave 3.2s ease-in-out infinite; }
-@keyframes aaWave { 0%, 100% { translate: 0 0; opacity: 1; } 50% { translate: 5px 1px; opacity: 0.4; } }
-.aa-sway { transform-origin: 50% 50%; animation: aaSway 4s ease-in-out infinite; }
-.aa-sway2 { transform-origin: 50% 50%; animation: aaSway 4.6s ease-in-out -1.5s infinite; }
-@keyframes aaSway { 0%, 100% { rotate: -4deg; } 50% { rotate: 4deg; } }
-.aa-route { animation: aaRoute 1.4s linear infinite; }
-@keyframes aaRoute { to { stroke-dashoffset: -24; } }
+/* ---- treasure map (AngleSlider): the CominiLab map's own motion (lab-map/map.css cm-sway, cm-ripple, cm-route, cm-halo, cm-bob) ---- */
+.aa-sway { transform-origin: 50% 100%; animation: aaSway 4.5s ease-in-out infinite; }
+@keyframes aaSway { 0%, 100% { rotate: 0deg; } 50% { rotate: 1.6deg; } }
+.aa-ripple { animation: aaRipple 3.2s ease-in-out infinite; }
+@keyframes aaRipple { 0%, 100% { opacity: 0.5; } 50% { opacity: 0.95; } }
+.aa-route { stroke-dasharray: 0.1 11; animation: aaMarch 1s linear infinite; }
+@keyframes aaMarch { to { stroke-dashoffset: -11.1; } }
+.aa-halo { transform-origin: 50% 50%; animation: aaHalo 2.2s ease-in-out infinite; }
+@keyframes aaHalo { 0%, 100% { scale: 1; opacity: 0.9; } 50% { scale: 1.08; opacity: 0.55; } }
+.aa-bob { animation: aaBob 2.6s ease-in-out infinite alternate; }
+@keyframes aaBob { to { translate: 0 -1.6px; } }
 .aa-x { transform-origin: 50% 50%; animation: aaPulse 1.8s ease-in-out infinite; }
-@keyframes aaPulse { 0%, 100% { scale: 1; } 50% { scale: 1.14; } }
+@keyframes aaPulse { 0%, 100% { scale: 1; } 50% { scale: 1.12; } }
 .aa-spark { transform-origin: 50% 50%; animation: aaSpark 1.8s ease-in-out infinite; }
-.aa-spark.s2 { animation-delay: 0.6s; } .aa-spark.s3 { animation-delay: 1.2s; }
-@keyframes aaSpark { 0%, 100% { scale: 0.2; opacity: 0; } 50% { scale: 1; opacity: 1; } }
-.aa-flag { transform-origin: 0% 50%; animation: aaFlag 1.2s ease-in-out infinite; }
-@keyframes aaFlag { 0%, 100% { scale: 1 1; } 50% { scale: 0.82 1.08; } }
+.aa-spark { animation-duration: 2.4s; }
+.aa-spark.s2 { animation-delay: 0.8s; }
+.aa-spark.s3 { animation-delay: 1.6s; }
+@keyframes aaSpark { 0%, 100% { scale: 0.2; opacity: 0; rotate: 0deg; } 50% { scale: 1; opacity: 1; rotate: 45deg; } }
+/* the diamond floats gently over its pedestal; its shadow breathes with it */
+.aa-gem { animation: aaGem 2.8s ease-in-out infinite; }
+@keyframes aaGem { 0%, 100% { translate: 0 0; } 50% { translate: 0 -2.5px; } }
+.aa-shade { transform-origin: 50% 50%; animation: aaShade 2.8s ease-in-out infinite; }
+@keyframes aaShade { 0%, 100% { scale: 1; } 50% { scale: 0.8; } }
 .aa-needle { transform-origin: 50% 50%; animation: aaNeedle 5s ease-in-out infinite; }
 @keyframes aaNeedle { 0%, 100% { rotate: -8deg; } 50% { rotate: 8deg; } }
-.aa-peek { animation: aaPeek 2.6s ease-in-out infinite; }
-@keyframes aaPeek { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+/* round 8 (worksheet vs treasure hunt map): clouds drift, the star treasure twinkles */
+.aa-drift { animation: aaDrift 7s ease-in-out infinite alternate; }
+@keyframes aaDrift { to { translate: 6px 0; } }
+.aa-twinkle { transform-origin: 50% 50%; animation: aaTwinkle 2.4s ease-in-out infinite; }
+@keyframes aaTwinkle { 0%, 100% { scale: 1; rotate: 0deg; } 50% { scale: 1.15; rotate: 10deg; } }
+/* round 9 (sheets on a table): one drawing for wide frames, one for phones (bigger sheet, four angles) */
+.as-frame svg.aa-v-narrow { display: none; }
+@media (max-width: 600px) {
+  .as-frame svg.aa-v-wide { display: none; }
+  .as-frame svg.aa-v-narrow { display: block; }
+}
+/* round 10: hard shadows are the thing's own shape, flat black (the group sets 12%), never blurred */
+.as-frame .aa-shd [fill]:not([fill="none"]) { fill: #0D0D0D; }
+.as-frame .aa-shd [stroke]:not([stroke="none"]) { stroke: #0D0D0D; }
+.as-frame .aa-shd * { fill-opacity: 1; stroke-opacity: 1; opacity: 1; animation: none; }
+/* round 10: the picture builds itself once (aa-go on .as when it scrolls into view); before that every part waits at
+   its first frame. Table, then the sheet drops, then the printing draws in, then the props drop and settle. */
+.as .aa-k { transform-origin: 50% 50%; animation-fill-mode: both; animation-play-state: paused; }
+.as.aa-go .aa-k { animation-play-state: running; }
+.aa-fade { animation: aaFade 0.4s ease-out; }
+@keyframes aaFade { from { opacity: 0; } }
+.aa-sheet { animation: aaSheet 0.55s cubic-bezier(0.2, 0.8, 0.3, 1); }
+@keyframes aaSheet { from { opacity: 0; translate: 0 -26px; scale: 1.04; } 40% { opacity: 1; } }
+.aa-draw { animation: aaDraw 0.4s cubic-bezier(0.45, 0, 0.25, 1); }
+@keyframes aaDraw {
+  0% { stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: 0; }
+  1% { opacity: 1; }
+  100% { stroke-dasharray: 1 1; stroke-dashoffset: 0; opacity: 1; }
+}
+.aa-pop { animation: aaPop 0.36s cubic-bezier(0.3, 1.5, 0.5, 1); }
+@keyframes aaPop { from { opacity: 0; scale: 0.3; } 50% { opacity: 1; } }
+.aa-drop { animation: aaDrop 0.5s cubic-bezier(0.3, 0.7, 0.4, 1); }
+@keyframes aaDrop { 0% { opacity: 0; translate: 0 -22px; scale: 1.06; } 60% { opacity: 1; translate: 0 2px; scale: 0.99; } 100% { translate: 0 0; scale: 1; } }
 
 /* ---- bridges ---- */
 .bpx-bob { animation: bpxBob 0.3s ease-in-out 0.45s 6 alternate; }
@@ -49,6 +88,6 @@
 @keyframes bpxSwing { from { rotate: 70deg; } to { rotate: 0deg; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .as-frame svg *, .bp-stage svg * { animation: none !important; }
+  .as-frame svg *, .bp-stage svg *, .as .aa-k { animation: none !important; }
   .bpw-cricket .bpx-from { opacity: 0; }
 }

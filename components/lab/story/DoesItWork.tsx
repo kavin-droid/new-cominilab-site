@@ -108,11 +108,19 @@ function Walkthrough({ from, onClosed }: { from: () => Rect | null; onClosed: ()
     return () => window.clearTimeout(t);
   }, [step]);
 
-  const say: [string, string, CocoMood][] = [
+  // the last slide (owner, 2026-11-26): Coco asks "So, does it actually work?", then the bubble turns over to the answer
+  const [answered, setAnswered] = useState(false);
+  useEffect(() => {
+    setAnswered(false);
+    if (step !== 3) return;
+    const t = window.setTimeout(() => setAnswered(true), 1700);
+    return () => window.clearTimeout(t);
+  }, [step]);
+  const say: [string, string | null, CocoMood][] = [
     ["Can you try solving this?", `You have ${left}s`, "look"],
     ["How about this one?", pick !== null ? "Easy, right?" : `You have ${left}s`, "wink"],
     ["What if I told you", "both are the same sum?", "wow"],
-    ["Yes, it works.", "Seeing it first makes it stick.", "happy"],
+    answered ? ["Yes. And it lasts.", null, "happy"] : ["So, does it actually work?", null, "think"],
   ];
   const [l1, l2, mood] = say[step];
 
@@ -127,7 +135,7 @@ function Walkthrough({ from, onClosed }: { from: () => Rect | null; onClosed: ()
           </button>
           <div className={`dw2-coco${step === 3 ? " big" : ""}`}>
             <span className="dw2-coco-img" style={flyer ? { visibility: "hidden" } : undefined}><Coco size={step === 3 ? 150 : 96} mood={mood} /></span>
-            <p className="dw2-bubble" key={step} aria-live="polite">{l1}<br />{l2}</p>
+            <p className={`dw2-bubble${step === 3 ? " turn" : ""}`} key={step === 3 ? `3${answered}` : step} aria-live="polite">{l1}{l2 ? <><br />{l2}</> : null}</p>
           </div>
 
           {step === 0 ? (
@@ -178,10 +186,10 @@ function Walkthrough({ from, onClosed }: { from: () => Rect | null; onClosed: ()
           ) : null}
 
           {step === 3 ? (
-            <div className="dw2-end">
-              <p className="lab-body">Your child sees and counts first, then meets the symbols once they mean something.</p>
+            <div className={`dw2-end${answered ? " on" : ""}`}>
+              <p className="lab-body">Because this way, they don&apos;t memorise, but they understand.</p>
               <div className="dw2-end-ctas">
-                <Link className="lab-btn lab-btn-teal" href="/cominilab/story/approach">Learn more</Link>
+                <Link className="lab-btn lab-btn-teal" href="/approach">Learn more</Link>
                 <button type="button" className="lab-btn lab-btn-white" onClick={() => { setStep(0); setPick(null); }}>Try it again</button>
               </div>
             </div>

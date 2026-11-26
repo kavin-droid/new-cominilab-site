@@ -44,7 +44,7 @@ export function FinalScene({
             </a>
           )}
           {note ? <p className="lab-small">{note}</p> : null}
-          {link ? <a className="lab-link" href="/cominilab/curriculum">Or see what they learn at each age</a> : null}
+          {link ? <a className="lab-link" href="/curriculum">Or see what they learn at each age</a> : null}
         </div>
       </div>
     </div>

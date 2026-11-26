@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Star } from "@/components/lab/Card";
 import { ChevronDown, Send } from "@/components/lab/Icons";
+import { saveContactMessage } from "@/lib/lab/contact-store";
 
 /*
- * Same fields and the same submit as components/contact/ContactForm.tsx: nothing is sent anywhere; submitting a
- * valid form only swaps in the thank-you state. The fields are checked here (not by the browser's own bubbles) so
- * each error shows under its box in plain words.
+ * The contact form. The fields are checked here (not by the browser's own bubbles) so each error shows under its box
+ * in plain words. A valid form is saved to Firestore (lib/lab/contact-store.ts, owner 2026-11-26); the thank-you shows
+ * only once it is saved, and if saving fails the form stays filled in with a clear line to try again.
  */
 type TextField = { id: string; label: string; type: "text" | "email"; placeholder: string; required: boolean; autoComplete?: string };
 type SelectField = { id: string; label: string; type: "select"; options: string[]; required: boolean };
@@ -25,10 +26,10 @@ const ROWS: Field[][] = [
 ];
 
 const MESSAGES: Record<string, { missing: string; bad?: string }> = {
-  name: { missing: "Please add your name." },
-  email: { missing: "Please add your email.", bad: "This email looks off. Please check it." },
-  role: { missing: "Please pick one." },
-  message: { missing: "Please write a short message." },
+  name: { missing: "Please enter your name." },
+  email: { missing: "Please enter your email address.", bad: "Please enter a valid email address, like name@example.com." },
+  role: { missing: "Please choose your role." },
+  message: { missing: "Please enter a message." },
 };
 
 type Errors = Record<string, string>;
@@ -52,6 +53,8 @@ function Required() {
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const doneRef = useRef<HTMLDivElement>(null);
 
@@ -59,8 +62,10 @@ export function ContactForm() {
     if (submitted) doneRef.current?.focus();
   }, [submitted]);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
+    const form = e.currentTarget;
     const els = [...e.currentTarget.elements].filter((el): el is Ctl => "name" in el && !!(el as Ctl).name) as Ctl[];
     const next: Errors = {};
     let first: Ctl | null = null;
@@ -76,7 +81,17 @@ export function ContactForm() {
       first.focus();
       return;
     }
-    setSubmitted(true);
+    const v = (k: string) => String(new FormData(form).get(k) ?? "").trim();
+    setSending(true);
+    setFailed(false);
+    try {
+      await saveContactMessage({ name: v("name"), email: v("email"), role: v("role"), schoolName: v("schoolName"), message: v("message") });
+      setSubmitted(true);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   }
 
   /** Clear a field's error as soon as it is fixed. */
@@ -110,8 +125,8 @@ export function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="ct-form">
       <p className="lab-small ct-key">
-        Boxes marked <span className="ct-req" aria-hidden="true">*</span>
-        <span className="ct-vh">with a star</span> are needed.
+        Fields marked <span className="ct-req" aria-hidden="true">*</span>
+        <span className="ct-vh">with a star</span> are required.
       </p>
 
       {ROWS.map((row, i) => (
@@ -191,12 +206,16 @@ export function ContactForm() {
       </div>
 
       <div className="ct-send">
-        <button type="submit" className="lab-btn lab-btn-teal lab-btn-lg">
-          Send message
-          <Send size={20} color="#fff" />
+        <button type="submit" className="lab-btn lab-btn-teal lab-btn-lg" disabled={sending} aria-busy={sending || undefined}>
+          {sending ? "Sending…" : "Send message"}
+          {sending ? null : <Send size={20} color="#fff" />}
         </button>
         <p className="ct-summary" role="alert">
-          {errCount ? (errCount === 1 ? "One box needs a fix." : `${errCount} boxes need a fix.`) : ""}
+          {errCount
+            ? (errCount === 1 ? "Please correct the field marked above." : `Please correct the ${errCount} fields marked above.`)
+            : failed
+              ? "Your message couldn’t be sent. Please check your connection and try again."
+              : ""}
         </p>
       </div>
     </form>

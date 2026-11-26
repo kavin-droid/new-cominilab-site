@@ -402,18 +402,15 @@ const WORLDS: World[] = [
 // a card holds the ticker and plays that one. The five, twice over, so the loop turns out of sight.
 const SLOTS = WORLDS.length * 2;
 
+// the owner's photos for each world (owner, 2026-11-26: back to the images we had)
+const PHOTO: Record<string, string> = { dino: "bridgeDinosaur", cricket: "bridgeCricket", space: "bridgeAstronaut", blocks: "bridgeBlock", treats: "bridgeTreat" };
+
 function BridgeCard({ w, i, playing, onHover }: { w: World; i: number; playing: boolean; onHover: (i: number | null) => void }) {
-  const dark = w.tag === "Space";
   return (
     <div className={`is-item bt-item${playing ? " playing" : ""}`} onMouseEnter={() => onHover(i)} onMouseLeave={() => onHover(null)}>
       <figure className="pol bt-card">
-        <span className="pol-pic bt-pic" style={{ background: w.bg }}>
-          <svg key={playing ? `p${w.key}` : w.key} className={`bpw-${w.key}${playing ? " bt-play" : " bt-still"}`} viewBox="0 0 480 260" preserveAspectRatio="xMidYMid slice" role="img" aria-label={`${w.tag}: three, and two more join them, make five`}>
-            <g className="bpx-scene">{w.scene}</g>
-            <g className="bp-three">{w.three}</g>
-            <g className={`bp-two${w.tag === "Blocks" ? " down" : ""}`}>{w.two}</g>
-          </svg>
-          {playing ? <span className={`bp-sum${dark ? " dark" : ""}`}>3 + 2 = 5</span> : null}
+        <span className="pol-pic bt-pic">
+          <img src={`/images/approach/${PHOTO[w.key]}.webp`} alt={`${w.tag}: ${w.caption}`} width={960} height={600} loading="lazy" draggable={false} />
         </span>
         <figcaption className="bt-cap"><b>{w.tag}</b><span>{w.caption}</span></figcaption>
       </figure>

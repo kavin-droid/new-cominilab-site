@@ -10,10 +10,11 @@ export const LAB_PAGES = [
   { href: "/cominilab/contact", label: "Contact" },
 ];
 
-/** the story version (/cominilab/story) is its own small site (owner, 2026-11-25): its pages live under it, so its links
- *  stay inside it. The blog is not part of it. */
+/** the site is the story version alone, on short URLs (owner, 2026-11-26): "/", "/approach", "/our-story",
+ *  "/curriculum", "/contact". LAB_PAGES keeps the old /cominilab paths as ids; storyHref turns one into its short URL.
+ *  The blog is not part of the site. */
 export const STORY_PAGES = ["/cominilab", "/cominilab/approach", "/cominilab/our-story", "/cominilab/curriculum", "/cominilab/contact"];
-export const storyHref = (href: string) => (href === "/cominilab" ? "/cominilab/story" : href.replace(/^\/cominilab\//, "/cominilab/story/"));
+export const storyHref = (href: string) => (href === "/cominilab" ? "/" : href.replace(/^\/cominilab\//, "/"));
 
 /** the app's store pages (owner, 2026-11-25: the closing section shows a QR to install the app). Empty until the
  *  listings are live; while empty, the QR and buttons point at the web app instead. */

@@ -15,7 +15,7 @@ const Clock = ({ x, y, r = 40 }: { x: number; y: number; r?: number }) => (
   <g transform={`translate(${x} ${y})`}>
     <circle r={r} fill="#FFFFFF" stroke="#8B74D2" strokeWidth="7" />
     {Array.from({ length: 12 }, (_, k) => <circle key={k} cx={Math.sin((k * Math.PI) / 6) * r * 0.74} cy={-Math.cos((k * Math.PI) / 6) * r * 0.74} r={k % 3 ? 2 : 3.2} fill={k % 3 ? "#CFC6F4" : "#8B74D2"} />)}
-    <path className="uc-hour" d={`M0 0 V${-r * 0.45}`} stroke="#26232F" strokeWidth="5.5" strokeLinecap="round" />
+    <g transform="rotate(125)"><path className="uc-hour" d={`M0 0 V${-r * 0.45}`} stroke="#26232F" strokeWidth="5.5" strokeLinecap="round" /></g>
     <path className="uc-min" d={`M0 0 V${-r * 0.7}`} stroke="#26232F" strokeWidth="3.5" strokeLinecap="round" />
     <circle r="4.5" fill="#26232F" />
   </g>

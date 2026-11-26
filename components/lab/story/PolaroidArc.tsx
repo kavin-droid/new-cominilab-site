@@ -23,6 +23,8 @@ type Props = {
   start?: number;
   apiRef?: MutableRefObject<ArcApi | null>;
   onSettle?: (i: number) => void;
+  /** on first view the cards glide in along the curve from this many places to the right (owner, 2026-11-26) */
+  enter?: number;
   /** the card passing the middle changed (a drifting arc), as its index */
   onCentre?: (i: number) => void;
   /** "down" bends the arc the other way: the middle card lowest, the outer ones higher and turned in */
@@ -33,7 +35,7 @@ type Props = {
 const APP_CARD = 196; // the app's card width; its arc numbers are for this size
 const K = 120; // spring stiffness (as the app's carousel)
 
-export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start = 0, apiRef, onSettle, onCentre, curve = "up", className = "" }: Props) {
+export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start = 0, apiRef, onSettle, onCentre, curve = "up", enter = 0, className = "" }: Props) {
   const box = useRef<HTMLDivElement>(null);
   const cards = useRef<(HTMLDivElement | null)[]>([]);
   const settle = useRef(onSettle);
@@ -41,7 +43,7 @@ export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start =
   const centre = useRef(onCentre);
   centre.current = onCentre;
   const lastCentre = useRef(-1);
-  const s = useRef({ p: start, target: start, vel: 0, hover: false, seen: false, resting: true, justDragged: false, drag: null as null | { id: number; x: number; p0: number; moved: boolean; samples: { t: number; x: number }[] } });
+  const s = useRef({ off: 0, enterT0: 0, entered: !enter, p: start, target: start, vel: 0, hover: false, seen: false, resting: true, justDragged: false, drag: null as null | { id: number; x: number; p0: number; moved: boolean; samples: { t: number; x: number }[] } });
 
   useEffect(() => {
     const el = box.current;
@@ -58,7 +60,7 @@ export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start =
       const vis = mid / step + 0.85;
       cards.current.forEach((c, i) => {
         if (!c) return;
-        let t = i - st.p;
+        let t = i - (st.p + st.off);
         if (wrap) { t = ((t % n) + n) % n; if (t > n / 2) t -= n; }
         const a = Math.abs(t);
         const x = mid + t * step - cw / 2;
@@ -81,6 +83,16 @@ export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start =
     const frame = (now: number) => {
       const dt = Math.min(0.05, (now - last) / 1000 || 0.016);
       last = now;
+      // the entrance: an offset that eases from `enter` places back to none, so every card travels along the curve
+      if (!st.entered) {
+        if (still) { st.off = 0; st.entered = true; }
+        else {
+          if (!st.enterT0) st.enterT0 = now;
+          const k = Math.min(1, (now - st.enterT0) / 1700);
+          st.off = -enter * Math.pow(1 - k, 3);
+          if (k >= 1) { st.off = 0; st.entered = true; }
+        }
+      }
       if (!st.drag) {
         if (drift && !st.hover && !still) {
           st.p += drift * dt;
@@ -105,6 +117,7 @@ export function PolaroidArc({ n, render, label, drift = 0, wrap = false, start =
     };
     const run = () => { if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); } };
     const halt = () => { cancelAnimationFrame(raf); raf = 0; };
+    if (!st.entered) st.off = -enter; // until it's on screen the cards wait off to the right
     place();
     const io = new IntersectionObserver(([e]) => { st.seen = e.isIntersecting; if (st.seen) run(); else halt(); });
     io.observe(el);

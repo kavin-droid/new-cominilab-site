@@ -1,0 +1,23 @@
+/* the approach page's last word (WorthFlip.tsx): one big line that holds still while its letters turn over */
+.wf { position: relative; height: 180vh; background: #FFFFFF; }
+.wf.still { height: auto; }
+.wf-stick { position: sticky; top: var(--nav-h, 68px); height: calc(100vh - var(--nav-h, 68px)); height: calc(100svh - var(--nav-h, 68px)); display: grid; place-items: center; padding: 0 24px; box-sizing: border-box; }
+.wf.still .wf-stick { position: static; height: auto; padding: 120px 24px; }
+.wf-line { margin: 0; max-width: 14ch; text-align: center; font-size: clamp(2rem, 8.4vw, 6.4rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.045em; color: #0D0D0D; }
+.wf-word { display: inline-block; white-space: nowrap; }
+.wf-hl { background: linear-gradient(#FFF186, #FFF186) no-repeat 0 88% / 0% 82%; -webkit-box-decoration-break: clone; box-decoration-break: clone; animation: wfSweep 0.7s cubic-bezier(.2, .85, .25, 1) 0.6s forwards; }
+@keyframes wfSweep { to { background-size: 100% 82%; } }
+/* each letter is a little board tile that flips over when it changes */
+.wf-ch { display: inline-block; transform-origin: 50% 55%; }
+.wf-ch.flip { animation: wfFlip 0.42s cubic-bezier(.3, .7, .3, 1) both; }
+@keyframes wfFlip {
+  0% { transform: perspective(600px) rotateX(90deg); opacity: 0.2; color: #8a8a8a; }
+  60% { transform: perspective(600px) rotateX(-14deg); opacity: 1; }
+  100% { transform: none; }
+}
+@media (max-width: 600px) { .wf-line { max-width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .wf-ch.flip { animation: none; } .wf-hl { animation: none; background-size: 100% 82%; } }
+/* word by word (owner, 2026-11-26): a new word turns over like a board tile */
+.wf-w { display: inline-block; transform-origin: 50% 55%; }
+.wf-w.turn { animation: wfFlip 0.5s cubic-bezier(.3, .7, .3, 1) both; }
+@media (prefers-reduced-motion: reduce) { .wf-w.turn { animation: none; } }

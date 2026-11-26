@@ -1,0 +1,157 @@
+/* "Can you try putting these in order?" (components/lab/approach2/ArrangeIntro.tsx): four cards, four numbered slots, the slap, then the four parts.
+   The cards are the same polaroids as "Learning has four parts" below (parts/parts.css .pa-card), sized and drawn like
+   the relief cards on the home page: a square picture on a soft colour and a few words under it. */
+
+.ar { --ar-gap: 34px; --card-w: min(272px, 19vw, var(--fit-w, 999px)); --tray-w: var(--card-w); color: var(--ink, #0D0D0D); }
+
+/* the sticky stage (like CareFlip / BridgePhone): the section is a tall run, the stage holds still under the nav while
+   the reader plays, then the rest of the run plays the reveal one beat per scroll step (ArrangeIntro.tsx). --ar-run is
+   that run in px, set from the viewport's height; --fit-w shrinks the cards when the stage is too short for them. */
+.ar.is-sticky { padding: 0; height: calc(100vh - var(--nav-h, 68px) + var(--ar-run, 0px)); height: calc(100svh - var(--nav-h, 68px) + var(--ar-run, 0px)); }
+.ar.is-sticky .ar-pin { position: sticky; top: var(--nav-h, 68px); height: calc(100vh - var(--nav-h, 68px)); height: calc(100svh - var(--nav-h, 68px)); display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+.ar.is-sticky .ar-inner { padding-block: 28px; }
+/* the heading's spot: the invitation, then (after the slap and a scroll) "Learning has four parts." in the same place.
+   Both sit in one grid cell so the spot keeps its height and nothing below moves. */
+.ar-head { display: grid; max-width: 860px; margin: 0 auto; text-align: center; }
+.ar-h { grid-area: 1 / 1; display: grid; justify-items: center; align-content: center; gap: 16px; }
+.ar-h .lab-h2, .ar-h .lab-lede { margin: 0; }
+.ar-h .lab-lede { max-width: 52ch; text-wrap: balance; }
+@media (min-width: 961px) { .ar-h .lab-lede { max-width: none; } }
+.ar-h-ask { transition: opacity 0.3s ease, translate 0.4s var(--ease-rise, ease), visibility 0s; }
+.ar:not(.is-play) .ar-h-ask { opacity: 0; translate: 0 -16px; visibility: hidden; transition: opacity 0.3s ease, translate 0.4s ease, visibility 0s linear 0.4s; }
+.ar-h-parts { visibility: hidden; }
+.ar.is-parts .ar-h-parts { visibility: visible; }
+.ar-h-parts > * { opacity: 0; }
+.ar.is-parts .ar-h-parts .lab-h2 { animation: arIn 0.45s var(--ease-pop) 0.15s both; }
+
+.ar-board { width: 100%; margin: 32px auto 0; user-select: none; -webkit-user-select: none; display: grid; gap: 34px; }
+.ar-stage { position: relative; }
+
+/* the slots */
+.ar-slots { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, var(--card-w)); justify-content: center; gap: var(--ar-gap); }
+.ar-slot { position: relative; display: grid; min-width: 0; }
+.ar-slot > :not(.ar-num) { grid-area: 1 / 1; }
+/* the slot's stand-in: every caption stacked in one cell, so it is as tall as the tallest card */
+.ar-stack { display: grid; }
+.ar-stack > * { grid-area: 1 / 1; display: grid; gap: inherit; justify-items: center; align-content: center; }
+.ar-stack .ar-short { opacity: 1; }
+.ar-num { position: absolute; z-index: 4; top: -15px; left: -9px; display: grid; place-items: center; width: 34px; height: 34px; background: #0D0D0D; color: #FFFFFF; font-weight: 800; font-size: 1.05rem; pointer-events: none; transition: background-color 0.25s ease; }
+.ar-slot.is-full .ar-num { background: #4AC1BD; }
+.ar-empty { position: relative; display: grid; outline: 3px dashed #CFC6F1; outline-offset: -3px; background: #FAF9FE; transition: background-color 0.2s ease, outline-color 0.2s ease; }
+.ar-ghost { visibility: hidden; display: block; }
+.ar-big { position: absolute; inset: 0; display: grid; place-items: center; font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 800; color: #DCD4F7; }
+.ar-slot.is-over .ar-empty { background: #EFEAFB; outline-color: #8F6CD0; }
+.ar-slot.is-over .ar-card { outline: 3px solid #8F6CD0; outline-offset: 3px; }
+
+/* the tray: what's left to place, centred, the same width as a slot */
+.ar-tray { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ar-gap); min-height: 40px; }
+.ar-tray > .ar-card { flex: 0 0 var(--tray-w); }
+/* the foot: the tray while playing, then (keeping the tray's height so nothing jumps) the way on */
+.ar-foot { display: grid; align-content: start; }
+.ar-foot > * { grid-area: 1 / 1; }
+.ar-tray.is-ghost { visibility: hidden; pointer-events: none; }
+.ar.is-packed .ar-tray.is-ghost { display: none; }
+/* the grey lines only take room once the tray has gone (they show with the labels) */
+.ar:not(.is-packed) .ar-short { display: none; }
+.ar-btns:not(.is-on) { visibility: hidden; animation: none !important; }
+/* once the tray has gone the invitation (already faded out) gives up its room, so the stage re-centres as the cards
+   glide into the story order */
+.ar.is-packed .ar-h-ask { display: none; }
+.ar-foot > .ar-btns { align-self: center; }
+
+/* a card: a polaroid like the relief cards (story.css .pol), its frame scaled by --u */
+.ar-card, .ar-ghost { --u: calc(var(--card-w) / 332); width: var(--card-w); padding: calc(11 * var(--u)) calc(11 * var(--u)) 0; }
+.ar-tray .ar-card { --u: calc(var(--tray-w) / 332); width: var(--tray-w); }
+.ar-tray .ar-short { display: none; }
+.ar-card { position: relative; display: flex; flex-direction: column; justify-content: flex-start; transform-origin: 0 0; margin: 0; background: #FFFFFF; border: 0; box-shadow: calc(10 * var(--u)) calc(10 * var(--u)) 0 #E5E5E5; font: inherit; color: inherit; text-align: center; cursor: grab; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; transition: translate 0.2s var(--ease-pop), box-shadow 0.2s ease, rotate 0.25s var(--ease-pop); }
+.ar-card:hover { translate: 0 -3px; box-shadow: calc(10 * var(--u) + 2px) calc(10 * var(--u) + 3px) 0 #E5E5E5; }
+.ar-card:focus-visible { outline: 3px solid #8F6CD0; outline-offset: 3px; }
+.ar-card.is-lifted { z-index: 40; cursor: grabbing; box-shadow: 16px 18px 0 rgba(13, 13, 13, 0.12); transition: box-shadow 0.2s ease; }
+.ar-card.is-lifted:hover { translate: none; }
+.ar-pic { display: block; aspect-ratio: 1 / 1; overflow: hidden; background: #F4F3F8; pointer-events: none; }
+.ar-pic svg { display: block; width: 100%; height: 100%; }
+/* the pictures hold still here; they play in the four parts below */
+.ar-pic svg * { animation: none !important; }
+/* the caption matches the school cards below (parts.css .pa-card figcaption) so both sections' cards are the same size */
+.ar-cap { flex: 1 0 auto; display: grid; gap: 4px; justify-items: center; align-content: center; min-height: calc(92 * var(--u)); padding: calc(12 * var(--u)) 8px calc(16 * var(--u)); }
+.ar-line { display: block; font-weight: 800; font-size: clamp(0.98rem, 1.25vw, 1.12rem); line-height: 1.3; }
+.ar-short { display: block; font-size: clamp(0.84rem, 1vw, 0.95rem); line-height: 1.35; color: var(--ink-soft, #4A4A4A); opacity: 0; }
+.ar-board.is-dragging .ar-card:not(.is-lifted) { pointer-events: none; }
+
+/* all four placed: the cards are locked while they find the story's order */
+.ar.is-full .ar-card { cursor: default; }
+.ar.is-full .ar-card:hover { translate: none; box-shadow: calc(10 * var(--u)) calc(10 * var(--u)) 0 #E5E5E5; }
+
+/* the slap: a big yellow note, the map note's look (story.css .mr-note), dropped from above onto the row. It falls in
+   large and tilted, hits (the row gives a little jolt), wobbles once and settles at a tilt. On the next scroll it peels off. */
+.ar-slap { position: absolute; z-index: 20; left: 50%; top: 50%; translate: -50% -50%; width: max-content; max-width: min(1000px, 92%); margin: 0; pointer-events: none; }
+.ar-slap > span { display: block; text-align: center; background: var(--note, #fff186); padding: 18px 34px 20px; font-size: clamp(1.6rem, 3.4vw, 3rem); line-height: 1.12; font-weight: 800; letter-spacing: -0.03em; text-wrap: balance; box-shadow: 10px 10px 0 rgba(13, 13, 13, 0.14); rotate: -3deg; animation: arSlap 0.6s both; }
+.ar.is-slap .ar-slots { animation: arJolt 0.34s ease-out 0.3s; }
+.ar.is-parts .ar-slap > span { animation: arPeel 0.35s ease-in forwards; }
+@keyframes arSlap {
+  0% { opacity: 0; scale: 2.2; rotate: -12deg; animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.5); }
+  50% { opacity: 1; scale: 0.94; rotate: -2deg; translate: 0 0; animation-timing-function: ease-out; }
+  64% { scale: 1.03; translate: -4px 0; }
+  78% { scale: 0.99; translate: 3px 0; rotate: -3.4deg; }
+  100% { opacity: 1; scale: 1; translate: 0 0; rotate: -3deg; }
+}
+@keyframes arJolt { 0% { translate: 0 0; } 30% { translate: 0 6px; } 65% { translate: 0 -2px; } 100% { translate: 0 0; } }
+@keyframes arPeel { to { opacity: 0; scale: 0.86; rotate: 3deg; translate: 0 -24px; } }
+
+/* the four parts, in beats, each on its own scroll step: the heading (above), then one yellow label per step lands on
+   its card with the card's grey line, then the way on */
+.ar-card .pa-tag { transform-origin: 30% 60%; animation: arTag 0.42s both; }
+.ar-short { transition: opacity 0.2s ease; }
+.ar-card.is-tagged .ar-short { opacity: 1; animation: arIn 0.35s var(--ease-rise) 0.12s both; }
+.ar-slot.is-tagged .ar-num { opacity: 0; transition: opacity 0.15s ease; }
+.ar-btns { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 18px; padding-top: 4px; animation: arIn 0.4s var(--ease-rise) both; user-select: text; -webkit-user-select: text; }
+.ar-again { min-height: 44px; padding: 0 10px; border: 0; background: none; font: inherit; font-weight: 700; font-size: 1rem; color: var(--ink-soft, #4A4A4A); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
+.ar-again:hover { color: var(--ink, #0D0D0D); }
+.ar-again:focus-visible { outline: 3px solid #8F6CD0; outline-offset: 2px; }
+@keyframes arIn { from { opacity: 0; translate: 0 14px; } to { opacity: 1; translate: 0 0; } }
+@keyframes arTag {
+  0% { opacity: 0; scale: 1.8; animation-timing-function: cubic-bezier(0.55, 0, 0.9, 0.5); }
+  60% { opacity: 1; scale: 0.93; animation-timing-function: ease-out; }
+  100% { opacity: 1; scale: 1; }
+}
+
+/* tablets and phones: two by two */
+@media (max-width: 960px) {
+  .ar { --ar-gap: 26px; --card-w: min(280px, calc((100vw - 2 * var(--gutter, 16px) - 26px) / 2), var(--fit-w, 999px)); --tray-w: min(calc(var(--card-w) * 0.8), calc((100vw - 2 * var(--gutter, 16px) - 36px) / 4)); }
+  /* the tray is one row of four smaller cards, so the stage fits a screen */
+  .ar-tray { flex-wrap: nowrap; gap: 12px; }
+  .ar-tray .ar-cap { min-height: 0; padding: 7px 2px 9px; }
+  .ar-tray .ar-line { font-size: clamp(0.7rem, 2.2vw, 0.9rem); line-height: 1.25; }
+  .ar-slots { grid-template-columns: repeat(2, var(--card-w)); row-gap: 34px; }
+}
+@media (max-width: 600px) {
+  .ar { --ar-gap: 14px; --card-w: min(calc((100vw - 2 * var(--gutter, 16px) - 14px) / 2), var(--fit-w, 999px)); --tray-w: calc((100vw - 2 * var(--gutter, 16px) - 24px) / 4); }
+  .ar-tray { gap: 8px; }
+  .ar.is-sticky .ar-inner { padding-block: 18px 14px; }
+  .ar.is-sticky .lab-h2 { font-size: clamp(1.6rem, 7.4vw, 2rem); }
+  .ar.is-sticky .ar-h .lab-lede { font-size: 1rem; }
+  .ar-board { margin-top: 20px; gap: 20px; }
+  .ar-h { gap: 12px; }
+  .ar-slap { max-width: 94%; }
+  .ar-slap > span { font-size: 1.4rem; padding: 12px 16px 14px; box-shadow: 6px 6px 0 rgba(13, 13, 13, 0.14); }
+  .ar-slots { row-gap: 22px; }
+  .ar-card { box-shadow: 6px 6px 0 #E5E5E5; }
+  .ar-card:hover { translate: none; box-shadow: 6px 6px 0 #E5E5E5; }
+  .ar.is-full .ar-card:hover { box-shadow: 6px 6px 0 #E5E5E5; }
+  .ar-cap { gap: 3px; min-height: 0; padding: 8px 3px 10px; }
+  .ar-line { font-size: 0.8rem; line-height: 1.26; }
+  .ar-short { font-size: 0.74rem; line-height: 1.3; }
+  .ar-num { width: 28px; height: 28px; font-size: 0.92rem; top: -12px; left: -6px; }
+}
+
+/* short phones: the tray shows its pictures only (each card's line shows once it is in a slot) */
+@media (max-width: 600px) and (max-height: 760px) {
+  .ar-tray .ar-cap { display: none; }
+  .ar-tray .ar-card { padding-bottom: calc(11 * var(--u)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ar *, .ar *::before { animation: none !important; transition: none !important; }
+  .ar-card.is-tagged .ar-short, .ar-h-parts > * { opacity: 1; }
+  .ar-card:hover { translate: none; }
+}

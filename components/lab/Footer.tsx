@@ -7,7 +7,7 @@ import { LAB_PAGES, STORY_PAGES, storyHref } from "@/lib/lab/site";
 export function LabFooter() {
   // on the story version, its own pages only, linking inside it
   const p = usePathname() || "";
-  const story = p === "/" || p.startsWith("/cominilab/story");
+  const story = p !== null; // the whole site is the story version now (short URLs)
   const pages = story ? LAB_PAGES.filter((p) => STORY_PAGES.includes(p.href)).map((p) => ({ ...p, href: storyHref(p.href) })) : LAB_PAGES;
   return (
     <footer className="lab-foot">

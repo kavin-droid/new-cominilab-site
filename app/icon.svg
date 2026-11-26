@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-5 -3 110 110">
+  <!-- Coco (components/lab/motion/CocoLive.tsx, resting face) on a transparent background: the site's favicon -->
+  <g transform="translate(60 24) rotate(-40) scale(1.05)"><path d="M0 0 Q10 -14 26 -12 Q16 2 0 0 Z" fill="#5FB26B"/><path d="M2 -1 Q12 -9 23 -10.5" stroke="#4F9D69" stroke-width="1.4" fill="none" stroke-linecap="round"/></g>
+  <g transform="translate(56 26) rotate(-78) scale(0.8)"><path d="M0 0 Q10 -14 26 -12 Q16 2 0 0 Z" fill="#5FB26B"/><path d="M2 -1 Q12 -9 23 -10.5" stroke="#4F9D69" stroke-width="1.4" fill="none" stroke-linecap="round"/></g>
+  <circle cx="50" cy="60" r="41" fill="#8E5D3A"/>
+  <circle cx="50" cy="60" r="38" fill="#B07A4E"/>
+  <ellipse cx="50" cy="26" rx="27" ry="8" fill="#FFFBF2"/>
+  <ellipse cx="50" cy="27" rx="20" ry="5" fill="#F2E8D2"/>
+  <circle cx="38" cy="58" r="4.2" fill="#2B1A10"/>
+  <circle cx="62" cy="58" r="4.2" fill="#2B1A10"/>
+  <path d="M39 70 Q50 80 61 70" stroke="#2B1A10" stroke-width="3.6" fill="none" stroke-linecap="round"/>
+</svg>

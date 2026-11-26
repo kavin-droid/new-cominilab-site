@@ -1,25 +1,8 @@
-/* "Start in their world": the three short games (WorldGames.tsx). The panel is the site's try-it card; inside it each
+/* "Start in their world": the three short games (WorldGames.tsx), each playing itself in the panel's card. Each
    game is drawn on a fixed board (800 x 450 wide, 360 x 620 upright) in the CominiLab mini-game shell's own look:
    white bubble with a speaker, the round tick, the yellow score note, the square white final card. */
 
-/* ---------- the panel ---------- */
-.wgx-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(13, 13, 13, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: wgxFade 0.22s ease both; }
-.wgx-card { --tw: min(940px, calc(100vw - 40px), calc((100vh - 130px) * 16 / 9)); width: var(--tw); padding: 12px 12px 0; background: #FFFFFF; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.22); animation: wgxIn 0.42s var(--ease-pop, cubic-bezier(0.34, 1.56, 0.64, 1)) both; }
-.wgx-stage { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; overflow: clip; background: #F2F2F2; }
-.wgx-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 66px; padding: 10px 2px 12px 6px; }
-.wgx-bar b { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 800; letter-spacing: -0.01em; }
-.wgx-bar-btns { display: flex; gap: 10px; }
-.wgx-sq { flex: none; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; background: #FFFFFF; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 #E5E5E5; cursor: pointer; transition: translate 0.15s ease, box-shadow 0.15s ease; }
-.wgx-sq:hover { translate: -1px -1px; box-shadow: 5px 5px 0 #E5E5E5; }
-.wgx-sq:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E5E5E5; }
-@media (max-width: 640px) {
-  .wgx-modal { padding: 12px; }
-  .wgx-card { --tw: calc(100vw - 24px); padding: 8px 8px 0; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.22); }
-  .wgx-stage { aspect-ratio: auto; height: min(calc((100vw - 40px) * 620 / 360), calc(100dvh - 24px - 8px - 58px)); }
-  .wgx-bar { min-height: 58px; padding: 6px 0 8px 4px; }
-}
 @keyframes wgxFade { from { opacity: 0; } to { opacity: 1; } }
-@keyframes wgxIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } to { opacity: 1; transform: none; } }
 
 /* ---------- the board ---------- */
 .wgx-board { position: absolute; inset: 0; overflow: hidden; overflow: clip; font-family: var(--font-lab-sans), "DM Sans", sans-serif; color: #0D0D0D; user-select: none; -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -252,30 +235,46 @@
 @keyframes wgxShake { 0%, 100% { translate: 0 0; } 15% { translate: -8px 0; } 30% { translate: 8px 0; } 45% { translate: -8px 0; } 60% { translate: 8px 0; } 75% { translate: -4px 0; } 90% { translate: 4px 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .wgx-modal, .wgx-card, .wgx-frame *, .wgx-frame *::before { animation: none !important; transition: none !important; }
+  .wgx-frame *, .wgx-frame *::before { animation: none !important; transition: none !important; }
 }
 
-/* ---------- the card pictures (world-art.tsx): drawn scenes in place of the photos ---------- */
-.wg3-pic { background: #F4F3F8; }
-.wg3-pic svg { display: block; width: 100%; height: 100%; transition: scale 0.4s ease; }
-.wg3-front:hover .wg3-pic svg { scale: 1.04; }
-.wa-hang { transform-box: fill-box; transform-origin: 50% 0; animation: waSwing 3.2s ease-in-out infinite; }
-.wa-hang2 { animation-delay: 0.5s; } .wa-hang3 { animation-delay: 1s; }
-.wa-whisk { transform-box: fill-box; transform-origin: 50% 100%; animation: waWhisk 1.6s ease-in-out infinite; }
-.wa-drift { animation: waDrift 6s ease-in-out infinite; }
-.wa-bounce { animation: waBounce 1.4s ease-in-out infinite; }
-.wa-pulse { transform-box: fill-box; transform-origin: 50% 50%; animation: waPulse 2.4s ease-in-out infinite; }
-.wa-flag { transform-box: fill-box; transform-origin: 0 50%; animation: waFlag 2.6s ease-in-out infinite; }
-.wa-swing { transform-box: fill-box; transform-origin: 50% 0; animation: waSwing 3s ease-in-out infinite; }
-.wa-coin { animation: waCoin 2.8s ease-in-out infinite; }
-@keyframes waSwing { 0%, 100% { rotate: -5deg; } 50% { rotate: 5deg; } }
-@keyframes waWhisk { 0%, 100% { rotate: -6deg; } 50% { rotate: 6deg; } }
-@keyframes waDrift { 0%, 100% { translate: 0 0; } 50% { translate: 16px 0; } }
-@keyframes waBounce { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
-@keyframes waPulse { 0%, 70%, 100% { scale: 1; } 82% { scale: 1.14; } }
-@keyframes waFlag { 0%, 100% { scale: 1 1; } 50% { scale: 0.8 1; } }
-@keyframes waCoin { 0%, 60%, 100% { translate: 0 0; } 75% { translate: 0 -8px; } }
-@media (prefers-reduced-motion: reduce) {
-  .wa-hang, .wa-whisk, .wa-drift, .wa-bounce, .wa-pulse, .wa-flag, .wa-swing, .wa-coin { animation: none; }
-  .wg3-pic svg { transition: none; }
+/* ---------- the section: the home page's "Know what they're learning" tabs (home.css hm-*), a game per world ---------- */
+/* the heading on one line (story.css .st-center-head is a grid, which put "their world" on a line of its own) */
+h2.wt-head { display: block; white-space: nowrap; }
+@media (max-width: 479px) { h2.wt-head { font-size: min(2rem, 8.2vw); } }
+/* the panel on the left and the list on the right, as on the home page (story.css .st-know) */
+@media (min-width: 1024px) { .wt .hm-panel { order: -1 !important; } .wt .hm-tablist { align-content: start; } }
+/* the tab icon: the old site's photo of that world, a small rounded thumbnail */
+.wt .hm-tab { grid-template-columns: 60px 1fr; align-items: center; }
+.wt .hm-tab-ic.wt-thumb { width: 60px; height: 60px; padding: 0; border-radius: 12px; overflow: hidden; background: var(--paper-2); border: 2px solid var(--line); }
+.wt .hm-tab[aria-selected="true"] .hm-tab-ic.wt-thumb { background: var(--paper-2); border-color: var(--note); box-shadow: 0 0 0 2px var(--note); }
+.wt-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 1023px) { .wt .hm-tab { grid-template-columns: 52px 1fr; } .wt .hm-tab-ic.wt-thumb { width: 52px; height: 52px; border-radius: 10px; } }
+
+/* the card: the game playing itself, with its name under it */
+.wt-card { margin: 0; width: 100%; background: var(--paper); border: 1.5px solid var(--line); padding: 10px 10px 0; box-shadow: 6px 6px 0 rgba(13, 13, 13, 0.08); }
+.wt-demo { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; overflow: clip; background: #F2F2F2; pointer-events: none; }
+.wt-game { position: absolute; inset: 0; }
+.wt-game .wgx-hand { display: none; }
+.wt-hand { position: absolute; left: 0; top: 0; z-index: 70; width: 40px; height: 40px; margin: -4px 0 0 -9px; opacity: 0; filter: drop-shadow(0 3px 4px rgba(0, 0, 0, .25)); transition: translate .6s cubic-bezier(.45, 0, .2, 1), opacity .3s ease, scale .12s ease; }
+.wt-hand.show { opacity: 1; }
+.wt-hand.press { scale: .82; transition: translate .6s cubic-bezier(.45, 0, .2, 1), opacity .3s ease, scale .12s ease; }
+.wt-cap { display: flex; align-items: center; gap: 8px; padding: 10px 2px 12px; font-size: 0.98rem; font-weight: 700; color: var(--ink); }
+.wt-cap i { width: 8px; height: 8px; border-radius: 50%; background: #3FC46A; box-shadow: 0 0 0 3px rgba(63, 196, 106, .22); }
+/* the demo card fills the cream panel (no 560px minimum: that left empty cream above and below it) */
+@media (min-width: 1024px) { #world-panel.hm-panel { min-height: 0; padding: 28px; } }
+/* owner 2026-11-26: heading and line closer; no game name under the demo; on desktop the tab rows share the cream
+   panel's height (each row grows, the list ends where the panel ends) */
+h2.wt-head + .hm-parents-line { margin-top: 6px; }
+.wt-card { padding: 10px; }
+@media (min-width: 1024px) {
+  .wt .hm-tablist { grid-auto-rows: 1fr; align-content: stretch; }
+  .wt .hm-tab { align-items: center; }
 }
+/* bigger tab photos (owner, 2026-11-26) */
+.wt .hm-tab { grid-template-columns: 88px 1fr; gap: 18px; }
+.wt .hm-tab-ic.wt-thumb { width: 88px; height: 88px; border-radius: 14px; }
+@media (max-width: 1023px) { .wt .hm-tab { grid-template-columns: 68px 1fr; gap: 14px; } .wt .hm-tab-ic.wt-thumb { width: 68px; height: 68px; border-radius: 12px; } }
+/* square photos (owner, 2026-11-26) */
+.wt .hm-tab-ic.wt-thumb, .wt .hm-tab[aria-selected="true"] .hm-tab-ic.wt-thumb { border-radius: 0; }
+@media (max-width: 1023px) { .wt .hm-tab-ic.wt-thumb { border-radius: 0; } }

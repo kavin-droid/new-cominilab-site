@@ -12,7 +12,7 @@ const CAST = ["squirrelHappy", "raccoonHappy", "penguinHappy", "giraffeHappy", "
 // below them clear the card's top edge (owner, 2026-11-25). The bunny is left out: its tall ears hid its face
 const EYES: Record<string, number> = { squirrelHappy: 0.56, bunnyHappy: 0.7, raccoonHappy: 0.55, penguinHappy: 0.53, giraffeHappy: 0.55, meerkatHappy: 0.45, polarBearHappy: 0.56, arcticFoxHappy: 0.51, sealHappy: 0.5 };
 
-export function SchoolArc({ imgs, label = "A day at Comini Microschool" }: { imgs: string[]; label?: string }) {
+export function SchoolArc({ imgs, label = "A day at Comini Microschool", enter = 0 }: { imgs: string[]; label?: string; enter?: number }) {
   const [peek, setPeek] = useState<{ card: number; who: string; side: number; n: number } | null>(null);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -35,6 +35,7 @@ export function SchoolArc({ imgs, label = "A day at Comini Microschool" }: { img
       wrap
       drift={0.16}
       curve="down"
+      enter={enter}
       start={0}
       render={(i) => (
         <>

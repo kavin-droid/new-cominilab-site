@@ -1,0 +1,78 @@
+/* "Told, then cared" (CareFlip.tsx): one big line that holds still while Coco hops along it, word by word */
+.cf { position: relative; height: 280vh; background: #FFFFFF; }
+.cf.still { height: auto; }
+.cf-stick { position: sticky; top: var(--nav-h, 68px); height: calc(100vh - var(--nav-h, 68px)); height: calc(100svh - var(--nav-h, 68px)); overflow: hidden; }
+.cf.still .cf-stick { position: relative; height: auto; }
+.cf-stage { position: relative; height: 100%; display: grid; place-items: center; padding: 0 24px; box-sizing: border-box; }
+.cf.still .cf-stage { min-height: 640px; }
+
+/* the line: two rows, the type as it was (tight lines); every word starts in the faint grey of "But does it actually work?" */
+.cf-line { position: relative; z-index: 2; margin: 0; text-align: center; font-size: clamp(2rem, 9vw, 7rem); line-height: 1.08; font-weight: 800; letter-spacing: -0.045em; color: rgba(13, 13, 13, 0.09); }
+.cf-row { display: block; white-space: nowrap; }
+.cf-hl { background: linear-gradient(#FFF186, #FFF186) no-repeat 0 88% / 0% 82%; -webkit-box-decoration-break: clone; box-decoration-break: clone; transition: background-size 0.7s cubic-bezier(.2, .85, .25, 1) 0.4s; }
+.cf.done .cf-hl { background-size: 100% 82%; }
+
+/* a word goes black as Coco lands on it (just after his jump); where it changes, the old word drops away and the new
+   one slides up from below, and the line settles round it */
+.cf-w { position: relative; display: inline-block; transition: color 0.25s ease 0.38s; }
+.cf-w.on { color: #0D0D0D; }
+.cf-w.swap:not(.on) .cf-to { display: none; }
+.cf-w.swap.on .cf-from { position: absolute; left: 50%; bottom: 0; translate: -50% 0; animation: cfOut 0.3s ease 0.3s both; color: rgba(13, 13, 13, 0.09); }
+.cf-w.swap.on .cf-to { display: inline-block; animation: cfIn 0.46s cubic-bezier(.3, 1.3, .5, 1) 0.36s both; }
+.cf-w.new:not(.on) { display: none; }
+.cf-w.on:not(.swap) { animation: cfPress 0.36s ease 0.36s; }
+@keyframes cfIn { from { transform: translateY(60%); opacity: 0; } to { transform: none; opacity: 1; } }
+@keyframes cfOut { to { transform: translateY(-50%); opacity: 0; } }
+@keyframes cfPress { 40% { transform: translateY(5px) scaleY(0.95); } }
+
+/* "care", one hand per letter, as if a child wrote it (same size as the rest, so the lines keep their spacing) */
+.cf-h { display: inline-block; letter-spacing: 0; }
+.cf-h.h-hand { font-family: var(--font-lab-hand), "Patrick Hand", cursive; font-weight: 400; rotate: -8deg; }
+.cf-h.h-serif { font-family: Georgia, "Times New Roman", serif; font-weight: 900; rotate: 5deg; }
+.cf-h.h-mono { font-family: "Courier New", Courier, monospace; font-weight: 700; rotate: -4deg; letter-spacing: -0.06em; }
+.cf-h.h-round { font-family: "Segoe Print", "Comic Sans MS", "Chalkboard SE", cursive; font-weight: 700; rotate: 9deg; }
+
+/* Coco: appears on "Children", then hops from word to word (sideways glide + a jump arc on the inner span) */
+.cf-coco { position: absolute; z-index: 3; left: 0; top: 0; width: 64px; line-height: 0; pointer-events: none; opacity: 0; scale: 0.4; translate: calc(var(--x, 50vw) - 32px) calc(var(--y, 40vh) - 60px); transform-origin: 50% 100%; transition: translate 0.5s cubic-bezier(.45, .05, .55, .95), opacity 0.25s ease, scale 0.35s cubic-bezier(.3, 1.5, .5, 1); }
+.cf.arrived .cf-coco { opacity: 1; scale: 1; }
+.cf-coco-jump { display: block; transform-origin: 50% 100%; animation: cfJump 0.5s cubic-bezier(.3, .6, .4, 1) both; }
+@keyframes cfJump {
+  0% { transform: translateY(0) scale(1.08, 0.9); }
+  15% { transform: translateY(-10px) scale(0.94, 1.08); }
+  50% { transform: translateY(-64px) scale(1); }
+  85% { transform: translateY(0) scale(1.1, 0.86); }
+  100% { transform: translateY(0) scale(1); }
+}
+@media (max-width: 600px) { .cf.arrived .cf-coco { scale: 0.6; } }
+
+/* the cast: plain faces peeking in at the edges, then happy faces gathering round the line */
+.cf-cast { position: absolute; z-index: 1; width: clamp(64px, 7vw, 104px); aspect-ratio: 1; transition: left 1s cubic-bezier(.3, .9, .3, 1), top 1s cubic-bezier(.3, .9, .3, 1), translate 1s cubic-bezier(.3, .9, .3, 1), rotate 0.8s ease; transition-delay: calc(var(--i) * 0.08s); }
+.cf-cast img { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity 0.35s ease; }
+.cf-cast .happy { opacity: 0; }
+.cf.done .cf-cast .happy { opacity: 1; }
+.cf.done .cf-cast .plain { opacity: 0; }
+.cf-cast.from-left { left: 0; top: var(--top); translate: -62% 0; rotate: 14deg; animation: cfPeekL 3.4s ease-in-out calc(var(--i) * -0.7s) infinite; }
+.cf-cast.from-right { left: 100%; top: var(--top); translate: -38% 0; rotate: -14deg; animation: cfPeekR 3.4s ease-in-out calc(var(--i) * -0.7s) infinite; }
+.cf-cast.from-bottom { top: 100%; left: var(--left); translate: -50% -40%; animation: cfPeekB 3.4s ease-in-out calc(var(--i) * -0.7s) infinite; }
+@keyframes cfPeekL { 0%, 100% { transform: translateX(0); } 45%, 60% { transform: translateX(14px); } }
+@keyframes cfPeekR { 0%, 100% { transform: translateX(0); } 45%, 60% { transform: translateX(-14px); } }
+@keyframes cfPeekB { 0%, 100% { transform: translateY(0); } 45%, 60% { transform: translateY(-14px); } }
+.cf.done .cf-cast { animation: cfBob 1.2s ease-in-out calc(var(--i) * -0.2s) infinite; }
+.cf.gather .cf-cast { rotate: 0deg; translate: -50% -50%; animation: cfBob 2.4s ease-in-out calc(var(--i) * -0.4s) infinite; }
+.cf.gather .cf-cast.c0 { left: 14%; top: 26%; }
+.cf.gather .cf-cast.c1 { left: 32%; top: 80%; }
+.cf.gather .cf-cast.c2 { left: 86%; top: 26%; }
+.cf.gather .cf-cast.c3 { left: 68%; top: 80%; }
+.cf.gather .cf-cast.c4 { left: 10%; top: 62%; }
+.cf.gather .cf-cast.c5 { left: 90%; top: 62%; }
+@keyframes cfBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@media (max-width: 600px) {
+  .cf-line { font-size: clamp(1.6rem, 8.4vw, 2.4rem); }
+  .cf.gather .cf-cast.c0 { left: 18%; top: 22%; } .cf.gather .cf-cast.c2 { left: 82%; top: 22%; }
+  .cf.gather .cf-cast.c4 { left: 14%; top: 78%; } .cf.gather .cf-cast.c5 { left: 86%; top: 78%; }
+  .cf.gather .cf-cast.c1 { left: 38%; top: 84%; } .cf.gather .cf-cast.c3 { left: 62%; top: 84%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cf-w, .cf-w > span, .cf-cast, .cf.done .cf-cast, .cf.gather .cf-cast, .cf-coco-jump { animation: none !important; }
+  .cf-hl, .cf-cast, .cf-coco, .cf-w > span, .cf-cast img { transition: none; }
+}

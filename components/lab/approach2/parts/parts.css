@@ -1,37 +1,25 @@
-/* "Learning has four parts" (components/lab/approach2/FourParts.tsx): one row of four polaroids and a switch.
+/* "And this is how school teaches the same addition." (components/lab/approach2/FourParts.tsx): one row of four polaroids and a switch.
    Polaroid cards with the hard grey offset shadow, square corners, yellow notes, teal switch: the story pages' look. */
 
-.pa { display: grid; gap: 40px; margin-top: 40px; color: var(--ink, #0D0D0D); }
+.pa { --card-w: min(272px, 19vw, 33vh); display: grid; gap: 48px; margin-top: 40px; color: var(--ink, #0D0D0D); }
 .pa svg { display: block; }
 
-/* a polaroid */
-.pa-card { position: relative; margin: 0; padding: 10px 10px 16px; background: #FFFFFF; box-shadow: 10px 10px 0 #E5E5E5; }
-.pa-pic { display: block; aspect-ratio: 3 / 2; overflow: hidden; background: #F4F3F8; }
+/* a polaroid, sized and drawn like the relief cards on the home page (story.css .pol / .wg-cap): a square picture and
+   a short strip of words under it. --u scales the frame with the card. */
+.pa-card { --u: calc(var(--card-w) / 332); position: relative; width: var(--card-w); margin: 0; padding: calc(11 * var(--u)) calc(11 * var(--u)) 0; background: #FFFFFF; box-shadow: calc(10 * var(--u)) calc(10 * var(--u)) 0 #E5E5E5; }
+.pa-pic { display: block; aspect-ratio: 1 / 1; overflow: hidden; background: #F4F3F8; }
 .pa-pic svg { width: 100%; height: 100%; }
-.pa-card figcaption { display: grid; gap: 8px; justify-items: start; align-content: start; margin-top: 14px; padding: 0 4px; }
-.pa-line { font-weight: 700; font-size: 1rem; line-height: 1.38; }
-.pa-body { font-size: 0.86rem; line-height: 1.45; color: #5A5A5A; }
-.pa-note { position: absolute; z-index: 3; top: -20px; left: 50%; translate: -50% 0; rotate: -3deg; white-space: nowrap; box-shadow: 3px 3px 0 rgba(13, 13, 13, 0.12); animation: paNote 0.5s var(--ease-pop) 0.75s both; }
+.pa-card figcaption { display: grid; gap: 4px; justify-items: center; align-content: center; min-height: calc(92 * var(--u)); padding: calc(12 * var(--u)) 8px calc(16 * var(--u)); text-align: center; }
+.pa-line { font-weight: 800; font-size: clamp(0.98rem, 1.25vw, 1.12rem); line-height: 1.3; }
+.pa-body { font-size: clamp(0.84rem, 1vw, 0.95rem); line-height: 1.35; color: var(--ink-soft, #4A4A4A); }
 
-/* the part chip: "#1 Meaning" */
-.pa-tag { display: inline-flex; align-items: center; gap: 7px; padding: 3px 10px 3px 3px; font-weight: 800; font-size: 0.85rem; line-height: 1.2; background: #F1EEFB; }
-.pa-tag b { display: grid; place-items: center; min-width: 28px; height: 22px; padding: 0 5px; color: #FFFFFF; font-size: 0.78rem; }
-.pa-tag-meaning { background: #EFEAFB; } .pa-tag-meaning b { background: #8F6CD0; }
-.pa-tag-motivation { background: #FFE6F1; } .pa-tag-motivation b { background: #E0559A; }
-.pa-tag-mechanics { background: #DDF4F3; } .pa-tag-mechanics b { background: #2F9C98; }
-.pa-tag-measurement { background: #FFF1CC; } .pa-tag-measurement b { background: #D99A0B; }
-
-/* the switch: Ava's way / School's way */
-.pa-switch { position: relative; justify-self: center; display: grid; grid-template-columns: 1fr 1fr; background: #FFFFFF; border: 2px solid #0D0D0D; box-shadow: 6px 6px 0 #D8D2F2; }
-.pa-switch button { position: relative; z-index: 1; min-height: 52px; padding: 0 26px; border: 0; background: none; font: inherit; font-weight: 800; font-size: 1.05rem; color: #0D0D0D; cursor: pointer; transition: color 0.3s ease; }
-.pa-switch button.on { color: #FFFFFF; }
-.pa-switch button:focus-visible { outline: 3px solid #8F6CD0; outline-offset: 3px; }
-.pa-knob { position: absolute; top: 0; bottom: 0; left: 0; width: 50%; background: #4AC1BD; transition: translate 0.45s var(--ease-pop), background-color 0.3s ease; }
-.is-school .pa-knob { translate: 100% 0; background: #6E6A86; }
+/* the part label: "#1 Meaning", a yellow note on the card's top left edge, styled like "Sara's Report" on the home page
+   (home.css .pp-title on lab.css .lab-note) (owner, 2026-11-26) */
+.pa-tag { position: absolute; z-index: 4; top: -15px; left: -10px; font-size: 1.3rem; rotate: -2deg; white-space: nowrap; pointer-events: none; }
 
 /* the row */
-.pa-f-row { list-style: none; margin: 0 auto; padding: 0; width: 100%; max-width: 1180px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
-.pa-f-item { position: relative; display: grid; }
+.pa-f-row { list-style: none; margin: 0 auto; padding: 0; width: 100%; display: grid; grid-template-columns: repeat(4, var(--card-w)); justify-content: center; gap: 34px; }
+.pa-f-item { position: relative; display: grid; justify-items: center; }
 .pa-f-card { rotate: var(--tilt, 0deg); transition: background-color 0.4s ease, box-shadow 0.4s ease, outline-color 0.4s ease; }
 .pa-f .pa-f-card { opacity: 0; translate: 0 18px; }
 .pa-f.is-seen .pa-f-card { animation: paIn 0.55s var(--ease-pop) both; animation-delay: calc(var(--i) * 0.14s); opacity: 1; translate: 0 0; }
@@ -55,7 +43,6 @@ svg .pa-bubble { transform-box: fill-box; animation: paIn 0.5s var(--ease-pop) 0
 .pa-stamp { transform-box: fill-box; transform-origin: 50% 50%; animation: paStamp 0.45s var(--ease-pop) 0.6s both; }
 .pa-q { animation: paQ 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
 .pa-turn { transform-box: fill-box; transform-origin: 50% 50%; animation: paTurn 4s ease-in-out infinite; }
-.pa-grow { transform-box: view-box; transform-origin: 400px 358px; animation: paRise 0.9s var(--ease-rise) 0.2s both; }
 
 @keyframes paIn { from { opacity: 0; translate: 0 14px; scale: 0.96; } to { opacity: 1; translate: 0 0; scale: 1; } }
 @keyframes paFadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -66,23 +53,19 @@ svg .pa-bubble { transform-box: fill-box; animation: paIn 0.5s var(--ease-pop) 0
 @keyframes paStamp { from { scale: 1.8; opacity: 0; } to { scale: 1; opacity: 1; } }
 @keyframes paQ { 0%, 100% { opacity: 0.7; scale: 1; } 50% { opacity: 1; scale: 1.06; } }
 @keyframes paTurn { 0%, 100% { rotate: -6deg; } 50% { rotate: 6deg; } }
-@keyframes paRise { from { scale: 1 0; } to { scale: 1 1; } }
 
 /* ---------- tablets and phones: a 2 by 2 grid ---------- */
 @media (max-width: 960px) {
-  .pa-f-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; max-width: 680px; }
+  .pa { --card-w: min(280px, calc((100vw - 2 * var(--gutter, 16px) - 26px) / 2)); }
+  .pa-f-row { grid-template-columns: repeat(2, var(--card-w)); gap: 44px 26px; }
 }
 @media (max-width: 600px) {
-  .pa { gap: 30px; margin-top: 28px; }
-  .pa-switch button { padding: 0 16px; font-size: 0.98rem; }
-  .pa-f-row { gap: 24px 14px; }
-  .pa-card { padding: 6px 6px 12px; box-shadow: 6px 6px 0 #E5E5E5; }
-  .pa-card figcaption { gap: 6px; margin-top: 9px; padding: 0 2px; }
-  .pa-line { font-size: 0.86rem; line-height: 1.32; }
-  .pa-body { font-size: 0.76rem; line-height: 1.4; }
-  .pa-tag { font-size: 0.74rem; padding-right: 6px; gap: 5px; }
-  .pa-tag b { min-width: 22px; height: 19px; font-size: 0.7rem; }
-  .pa-note { font-size: 0.9rem; top: -16px; padding: 5px 7px 4px; }
+  .pa { --card-w: calc((100vw - 2 * var(--gutter, 16px) - 14px) / 2); gap: 44px; margin-top: 28px; }
+  .pa-f-row { gap: 34px 14px; }
+  .pa-card figcaption { gap: 3px; min-height: calc(148 * var(--u)); padding: 9px 4px 11px; }
+  .pa-line { font-size: 0.86rem; line-height: 1.28; }
+  .pa-body { font-size: 0.74rem; line-height: 1.3; }
+  .pa-tag { font-size: 1.02rem; top: -12px; left: -6px; padding: 6px 8px 5px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

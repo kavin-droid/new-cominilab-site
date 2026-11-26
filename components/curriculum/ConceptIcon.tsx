@@ -1,4 +1,5 @@
 import { conceptIconPath, markForConcept } from "@/lib/curriculum/icons";
+import { LITERACY_SCIENCE_ICONS } from "@/lib/lab/concept-icons-literacy-science";
 import { cn } from "@/lib/utils";
 
 /*
@@ -17,7 +18,10 @@ const CSS = `
 .concept-icon .q { opacity: 0.4; }
 `;
 
-/** `mark` names the drawing directly (the app hands one per concept); otherwise it is looked up from the concept name. */
+/**
+ * `mark` names the drawing directly (the app hands one per concept); otherwise it is looked up from the concept name.
+ * Reading, language and science marks (`lit-*`, `sci-*`) come from the app's own set, the same way the app looks them up.
+ */
 export function ConceptIcon({ concept, mark: given, className }: { concept: string; mark?: string; className?: string }) {
   const mark = given ?? markForConcept(concept);
 
@@ -30,7 +34,7 @@ export function ConceptIcon({ concept, mark: given, className }: { concept: stri
         className={cn("concept-icon", className)}
         aria-hidden="true"
         dangerouslySetInnerHTML={{
-          __html: `<svg viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true">${conceptIconPath(mark)}</svg>`,
+          __html: `<svg viewBox="0 0 24 24" stroke-width="1.6" aria-hidden="true">${LITERACY_SCIENCE_ICONS[mark] ?? conceptIconPath(mark)}</svg>`,
         }}
       />
     </>

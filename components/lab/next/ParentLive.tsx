@@ -44,7 +44,6 @@ function Report() {
           </div>
         ))}
       </div>
-      <p className="nx-try">Tap an idea to open it.</p>
     </div>
   );
 }

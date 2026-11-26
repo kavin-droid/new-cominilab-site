@@ -9,7 +9,7 @@ import { LAB_PAGES, LAB_URL, storyHref } from "@/lib/lab/site";
 
 function isCurrent(path: string, href: string) {
   const p = path.replace(/\/$/, "") || "/";
-  return href === "/cominilab" ? p === href : p === href || p.startsWith(href + "/");
+  return href === "/" ? p === href : p === href || p.startsWith(href + "/");
 }
 
 // the story version of the landing page has its own, shorter bar (owner, 2026-11-24):
@@ -49,12 +49,12 @@ export function LabNav() {
   const path = usePathname() || "/";
   const [open, setOpen] = useState(false);
   useEffect(() => setOpen(false), [path]);
-  const story = path === "/" || path.replace(/\/$/, "").startsWith("/cominilab/story"); // "/" is the story home too
+  const story = true; // the whole site is the story version now (short URLs, owner 2026-11-26)
   if (story) {
     return (
       <header className="lab-nav lab-nav-story">
         <div className="lab-wrap lab-nav-in">
-          <Link className="lab-logo-link" href="/cominilab/story" aria-label="CominiLab home">
+          <Link className="lab-logo-link" href="/" aria-label="CominiLab home">
             <img className="lab-logo" src="/lab/logo.png" alt="CominiLab" width={92} height={44} />
           </Link>
           <nav className="lab-nav-links" aria-label="Main">

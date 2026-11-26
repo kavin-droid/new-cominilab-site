@@ -1,0 +1,15 @@
+// The contactMessages block to ADD inside `match /databases/{database}/documents { ... }` of the target project's
+// CURRENT rules (read them in the console first: a rules deploy replaces the whole ruleset).
+    // The website's contact form (comini-site, 2026-11-26): anyone can ADD one message; nobody can read, change or
+    // delete one from outside (read them in the Firebase console). Only these fields, sensible lengths, server time.
+    match /contactMessages/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['name', 'email', 'role', 'schoolName', 'message', 'page', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() > 0 && request.resource.data.name.size() <= 200
+        && request.resource.data.email is string && request.resource.data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$') && request.resource.data.email.size() <= 320
+        && request.resource.data.role in ['Parent', 'Educator', 'Organization']
+        && request.resource.data.schoolName is string && request.resource.data.schoolName.size() <= 200
+        && request.resource.data.message is string && request.resource.data.message.size() > 0 && request.resource.data.message.size() <= 5000
+        && request.resource.data.page is string && request.resource.data.page.size() <= 500
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if false;
+    }

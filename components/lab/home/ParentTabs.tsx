@@ -10,7 +10,7 @@ export type Tab = { id: string; icon: ReactNode; title: string; body: string; al
 // child is now and what comes next), its Support and Reflect tabs (written from the Comini Guides), Ask Coco and the
 // Curriculum.
 const DEFAULT_TABS: Tab[] = [
-  { id: "report", icon: <Chart />, title: "A clear report", body: "Each maths idea marked Getting there, On track or Advanced, with what they can do now.", alt: "Sara's report: maths on track for ages 6 to 7, and what she can do now" },
+  { id: "report", icon: <Chart />, title: "A clear report", body: "Each idea is marked as Getting there, On track or Advanced, along with what they can do now.", alt: "Sara's report: maths on track for ages 6 to 7, and what she can do now" },
   { id: "progress", icon: <Sprout />, title: "See them grow", body: "Where your child is now and what comes next. Their level moves up as they play.", alt: "Counting for Sara: getting there. Now she counts, reads and writes to 20; next, to 100" },
   { id: "home", icon: <Home />, title: "Ideas to try at home", body: "Simple things to set up and say together, for every idea.", alt: "Things to try together: put out 100 acorns and 10 paper cups, then ask how to be sure there are 100" },
   { id: "reflect", icon: <Target />, title: "Know when they've got it", body: "Clear signs it's going well, or that they need more time.", alt: "Sara has got this when she counts aloud from 1 to 100 smoothly, with signs it is going well and signs she needs more time" },

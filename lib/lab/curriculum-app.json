@@ -31,13 +31,13 @@
      "s4": {
       "headline": "Counts, reads, writes to 10,000",
       "points": [
-       "Says, reads and writes 4-digit numbers.",
        "6,038 = six thousand thirty-eight."
       ]
      },
      "s5": {
       "headline": "Goes to 10,00,000 and below zero",
       "points": [
+       "Reads and writes numbers up to 10,00,000 (ten lakh).",
        "Counts on and back in equal steps, past zero: 6, 3, 0, -3, -6."
       ]
      },
@@ -351,14 +351,12 @@
      "s3": {
       "headline": "Explains even and odd patterns",
       "points": [
-       "Explores number patterns.",
        "Even numbers end in 0, 2, 4, 6, 8: 12, 14, 16."
       ]
      },
      "s4": {
       "headline": "Predicts even or odd answers",
       "points": [
-       "Knows the pattern when adding and subtracting even and odd numbers.",
        "4 + 6 = 10 (even + even = even); 3 + 5 = 8 (odd + odd = even); 3 + 4 = 7 (odd + even = odd)."
       ]
      },
@@ -409,21 +407,18 @@
      "s2": {
       "headline": "Rounds 2-digit numbers to nearest 10",
       "points": [
-       "Rounds up or down to the nearest ten.",
        "47 -> 50; 23 -> 20; 35 -> 40."
       ]
      },
      "s3": {
       "headline": "Rounds to nearest 10 or 100",
       "points": [
-       "Picks the closest ten or hundred.",
        "462 -> 460 (nearest 10); 462 -> 500 (nearest 100)."
       ]
      },
      "s4": {
       "headline": "Rounds to 10, 100, and 1000",
       "points": [
-       "Rounds to the nearest ten, hundred or thousand.",
        "3,462 -> 3,460; 3,500; 3,000."
       ]
      },
@@ -613,6 +608,7 @@
      "s5": {
       "headline": "Multiplies up to 4-digit numbers",
       "points": [
+       "Multiplies by 1- or 2-digit numbers.",
        "1,234 × 6 = 7,404; 345 × 12 = 4,140."
       ]
      },
@@ -655,7 +651,6 @@
      "s2": {
       "headline": "Understands sharing and grouping",
       "points": [
-       "Shares equally or makes equal groups.",
        "12 shared by 3 = 4 each; 12 in groups of 4 = 3 groups."
       ]
      },
@@ -676,7 +671,6 @@
      "s5": {
       "headline": "Divides with remainders",
       "points": [
-       "Gives the leftover as a remainder.",
        "17 ÷ 5 = 3 r 2; 100 ÷ 8 = 12 r 4."
       ]
      },
@@ -791,6 +785,7 @@
      "s6": {
       "headline": "Counts through negatives and decimals",
       "points": [
+       "Counts forward and backward, including fractions, decimals and negatives.",
        "-1.5, -1, -0.5, 0, 0.5; 1/2, 0, -1/2."
       ]
      }
@@ -921,7 +916,6 @@
      "s7": {
       "headline": "Applies BODMAS with integers",
       "points": [
-       "Follows the correct sequence.",
        "2 + 3 × 4 = 14; (2 + 3) × 4 = 20; -3 + 2 × 5 = 7."
       ]
      },
@@ -1122,14 +1116,12 @@
      "s3": {
       "headline": "Recognises and draws 3D shapes",
       "points": [
-       "Names and sketches common solids.",
        "Names a pyramid; sketches a cube."
       ]
      },
      "s4": {
       "headline": "Finds 2D faces and matches nets",
       "points": [
-       "Sees which flat shapes make a 3D shape, and matches nets to shapes.",
        "Cuboid: 6 rectangle faces; triangular prism: 2 triangles + 3 rectangles."
       ]
      },
@@ -1173,7 +1165,6 @@
      "s1": {
       "headline": "Spots shapes unchanged by turning",
       "points": [
-       "Sees a shape looks identical after a turn.",
        "A square turned a quarter turn looks the same."
       ]
      },
@@ -1251,7 +1242,6 @@
      "s4": {
       "headline": "Names acute, right, obtuse angles",
       "points": [
-       "Sorts angles by size.",
        "45° is acute, 90° is right, 120° is obtuse."
       ]
      },
@@ -1419,7 +1409,6 @@
      "s1": {
       "headline": "Extends number and shape patterns",
       "points": [
-       "Spots what comes next.",
        "2, 4, 6, __ -> 8; ▲ ● ▲ ● ▲ -> ●."
       ]
      },
@@ -1447,7 +1436,6 @@
      "s5": {
       "headline": "Describes patterns using letters",
       "points": [
-       "Generates and analyses number patterns with variables.",
        "3, 6, 9, 12 is 3 × n; n = 5 gives 15."
       ]
      },
@@ -1461,14 +1449,12 @@
      "s7": {
       "headline": "Describes patterns using letters",
       "points": [
-       "Generates and analyses number patterns with variables.",
        "5, 7, 9, 11: add 2, or 2n + 3."
       ]
      },
      "s8": {
       "headline": "Finds term-to-term and nth term rules",
       "points": [
-       "Generates sequences and writes the rule for any term.",
        "4, 7, 10, 13: add 3; nth term = 3n + 1."
       ]
      }
@@ -1576,7 +1562,6 @@
      "s8": {
       "headline": "Converts between different length units",
       "points": [
-       "Changes a length from one unit to another.",
        "3.2 km = 3,200 m = 320,000 cm."
       ]
      }
@@ -1605,7 +1590,6 @@
      "s3": {
       "headline": "Uses g and kg",
       "points": [
-       "Says mass in standard units.",
        "An apple is about 150 g; a bag of flour is 1 kg."
       ]
      },
@@ -1619,7 +1603,6 @@
      "s5": {
       "headline": "Solves mass problems in mixed units",
       "points": [
-       "Works with g and kg together.",
        "1 kg 200 g + 300 g = 1 kg 500 g."
       ]
      },
@@ -1640,7 +1623,6 @@
      "s8": {
       "headline": "Converts between different mass units",
       "points": [
-       "Changes a mass from one unit to another.",
        "2 kg = 2000 g; 0.5 t = 500 kg."
       ]
      }
@@ -1669,7 +1651,6 @@
      "s3": {
       "headline": "Uses l and ml",
       "points": [
-       "Says capacity in standard units.",
        "A bottle holds 1 l; a teaspoon holds 5 ml."
       ]
      },
@@ -1791,7 +1772,6 @@
      "s4": {
       "headline": "Adds and subtracts time intervals",
       "points": [
-       "Finds how long something lasts.",
        "2:15 to 2:50 = 35 minutes."
       ]
      },
@@ -1805,7 +1785,6 @@
      "s6": {
       "headline": "Converts time intervals",
       "points": [
-       "Switches between decimal and mixed units of time.",
        "2.5 hours = 2 h 30 min; 1 h 45 min = 105 min."
       ]
      }
@@ -1848,7 +1827,6 @@
      "s5": {
       "headline": "Converts units and solves time problems",
       "points": [
-       "Handles multi-step problems.",
        "3 h 20 min = 200 min; a 90-min film from 2:15 ends at 3:45."
       ]
      },
@@ -1891,7 +1869,6 @@
      "s4": {
       "headline": "Solves everyday money problems",
       "points": [
-       "Works out costs in shopping situations.",
        "3 pens at 12 each = 36; 100 - 36 = 64."
       ]
      },
@@ -1904,7 +1881,6 @@
      "s6": {
       "headline": "Uses decimal operations with money",
       "points": [
-       "Solves real-world money problems.",
        "4 × 2.25 = 9; 20 - 9 = 11."
       ]
      }
@@ -1926,14 +1902,12 @@
      "s2": {
       "headline": "Investigates a question",
       "points": [
-       "Collects data to answer a statistical question.",
        "\"Which pet is most popular in our class?\""
       ]
      },
      "s3": {
       "headline": "Collects categorical and numerical data",
       "points": [
-       "Organises data as categories or numbers.",
        "Favourite colour (red, blue) vs. number of siblings (0, 1, 2)."
       ]
      },
@@ -1992,14 +1966,12 @@
      "s3": {
       "headline": "Creates tally charts, pictographs, bar graphs",
       "points": [
-       "Turns collected data into a graph.",
        "Bar for apples reaches 6 on the scale."
       ]
      },
      "s4": {
       "headline": "Creates tally charts, pictographs, bar graphs",
       "points": [
-       "Shows data with the right symbols.",
        "Pictograph: 1 star = 2 votes, so 3 stars = 6 votes."
       ]
      },
@@ -2056,14 +2028,12 @@
      "s3": {
       "headline": "Reads graphs to draw conclusions",
       "points": [
-       "Answers questions using a graph.",
        "6 apples vs. 4 bananas -> 2 more apples."
       ]
      },
      "s4": {
       "headline": "Interprets categorical and numerical data",
       "points": [
-       "Answers statistical questions from the data.",
        "Most shoe sizes in the class are 3 or 4."
       ]
      },
@@ -2303,6 +2273,7 @@
      "s3": {
       "headline": "Spells using patterns and word parts",
       "points": [
+       "Spells words with patterns and word parts, including words that sound alike.",
        "to/too/two; there/their; jumping/jumped."
       ]
      },
@@ -2416,13 +2387,13 @@
      "s5": {
       "headline": "Reads aloud at the right pace",
       "points": [
+       "Reads aloud smoothly, with good expression and at the right speed.",
        "Slows down for a sad part, speeds up for a chase."
       ]
      },
      "s6": {
       "headline": "Reads aloud and self-corrects",
       "points": [
-       "Reads aloud smoothly and accurately, fixing mistakes as they happen.",
        "Changes tone for different purposes: a news report vs a funny poem."
       ]
      },
@@ -2464,28 +2435,24 @@
      "s3": {
       "headline": "Reads varied books from around the world",
       "points": [
-       "Reads different types of books and stories from many cultures.",
        "Fairy tales, myths, poems and how-to books."
       ]
      },
      "s4": {
       "headline": "Reads varied books independently",
       "points": [
-       "Reads and enjoys books, poems and plays on their own.",
        "Notices what makes each special: a play is mostly dialogue with character names; a poem has lines and rhyme."
       ]
      },
      "s5": {
       "headline": "Reads and understands varied texts",
       "points": [
-       "Reads and understands stories, poems, plays and information books at their age-level.",
        "Reads books from different cultures, in print and on screen."
       ]
      },
      "s6": {
       "headline": "Reads challenging books independently",
       "points": [
-       "Reads and understands harder stories, poems, plays and information books on their own.",
        "Learns what makes each type special; reads books from many cultures and time periods.",
        "An old folk tale, then a modern science article."
       ]
@@ -2618,13 +2585,13 @@
      "s3": {
       "headline": "Learns words from sentence clues",
       "points": [
+       "Uses clues in the sentence or looks the word up.",
        "\"The cat was ravenous, so it gobbled all its food\": ravenous = very hungry."
       ]
      },
      "s4": {
       "headline": "Uses nearby words and word parts",
       "points": [
-       "Works out meanings from surrounding words and word parts.",
        "unkind: un- means not, so \"not kind\".",
        "\"The room was silent; no one made a sound\": silent = quiet."
       ]
@@ -2640,7 +2607,7 @@
       "headline": "Uses word origins and subject terms",
       "points": [
        "Works out meanings from text clues and dictionaries; learns where words come from.",
-       "thermometer: therm- (heat) + -metre (measure).",
+       "thermometer: therm- (heat) + -meter (measure).",
        "Uses subject terms correctly."
       ]
      },
@@ -2677,7 +2644,6 @@
      "s2": {
       "headline": "Answers and explains thinking",
       "points": [
-       "Answers questions about a text and explains how they know.",
        "\"Why was Sam sad?\" \"His kite broke - it says so on page 3.\""
       ]
      },
@@ -2703,14 +2669,12 @@
      "s6": {
       "headline": "Explains ideas using the text",
       "points": [
-       "Uses words and examples from the text to explain ideas and support answers.",
        "\"Max was brave\": he walked into the dark cave first (page 12)."
       ]
      },
      "s7": {
       "headline": "Finds and explains stated details",
       "points": [
-       "Identifies and explains information stated directly in a text.",
        "Finds the date, cause or person named in an article and explains what it shows."
       ]
      },
@@ -2773,7 +2737,6 @@
      "s7": {
       "headline": "Draws logical conclusions",
       "points": [
-       "Makes inferences and draws conclusions using clues in the text.",
        "A sailor's letters grow shorter and shorter: he may be losing hope."
       ]
      },
@@ -2826,7 +2789,6 @@
      "s8": {
       "headline": "Explains how a central idea develops",
       "points": [
-       "Identifies the main theme or central idea and explains how it develops across the whole text.",
        "A novel: early chapters show loneliness, later ones show friendship easing it."
       ]
      }
@@ -2853,6 +2815,7 @@
      "s5": {
       "headline": "Compares themes across texts",
       "points": [
+       "Compares characters, settings, events and themes in different texts.",
        "Two stories show kindness being rewarded, in different settings and with different events."
       ]
      },
@@ -2865,7 +2828,6 @@
      "s7": {
       "headline": "Traces a theme through details",
       "points": [
-       "Determines themes and traces how they develop.",
        "Each time the hero is helped by a friend, the theme \"we need each other\" grows."
       ]
      },
@@ -2898,7 +2860,6 @@
      "s5": {
       "headline": "Uses details from reading",
       "points": [
-       "Answers questions about stories and texts using details from what they read.",
        "\"How do you know it was cold?\" \"Mia put on her scarf and her breath made fog.\""
       ]
      },
@@ -2911,7 +2872,6 @@
      "s7": {
       "headline": "Supports ideas with specific evidence",
       "points": [
-       "Backs up interpretations and responses with specific evidence from the text.",
        "Quotes \"she folded the letter twice and hid it\" to show a character is secretive."
       ]
      },
@@ -2938,7 +2898,6 @@
      "s2": {
       "headline": "Retells with characters and settings",
       "points": [
-       "Retells a story and describes the characters and where it happens.",
        "Hansel and Gretel: two children lost in a dark forest, a witch's candy house."
       ]
      },
@@ -2992,7 +2951,6 @@
      "s1": {
       "headline": "Names main characters and events",
       "points": [
-       "Says who is in the story and what happens.",
        "Red Riding Hood: Red, Grandma and the wolf; the wolf tricks Red."
       ]
      },
@@ -3027,7 +2985,6 @@
      "s6": {
       "headline": "Compares characters, settings and events",
       "points": [
-       "Describes and compares them using details from the text.",
        "Ana plans ahead, but Ben rushes in; both want to win the race."
       ]
      },
@@ -3041,7 +2998,6 @@
      "s8": {
       "headline": "Explains how story elements interact",
       "points": [
-       "Shows how characters, setting and events influence each other.",
        "A line of dialogue or one incident can move the plot or reveal character: a refused apology leads to the later fight and shows pride."
       ]
      }
@@ -3070,14 +3026,12 @@
      "s3": {
       "headline": "Links stories to life and other books",
       "points": [
-       "Relates stories to their own life and compares different books.",
        "\"This is like Charlotte's Web because both have animal friends.\""
       ]
      },
      "s4": {
       "headline": "Links reading to life and other books",
       "points": [
-       "Connects what they read to their own experiences and to other books.",
        "A clever girl in a new book reminds them of Matilda and of a time they solved a hard puzzle."
       ]
      },
@@ -3104,7 +3058,6 @@
      "s8": {
       "headline": "Links texts to the real world",
       "points": [
-       "Analyses how texts, themes and real-world situations connect.",
        "A novel about unfair rules compared with a news story on a school policy."
       ]
      }
@@ -3154,13 +3107,13 @@
      "s7": {
       "headline": "Identifies author's viewpoint and purpose",
       "points": [
+       "Names the author's viewpoint, purpose and main arguments.",
        "Explains how authors give a narrator or character a distinctive voice, such as a sarcastic narrator who mocks everyone."
       ]
      },
      "s8": {
       "headline": "Evaluates bias and perspectives",
       "points": [
-       "Recognises bias and judges different perspectives and authors' viewpoints.",
        "An ad saying \"best snack ever\" with no proof is biased; a news story quoting only one side is one-sided."
       ]
      }
@@ -3188,7 +3141,6 @@
      "s7": {
       "headline": "Explains narrator and speaker voice",
       "points": [
-       "Understands how authors develop a narrator's or speaker's perspective and voice.",
        "A narrator who is a character (\"I was scared\") only knows what that character knows."
       ]
      },
@@ -3217,7 +3169,6 @@
      "s4": {
       "headline": "Explains how visuals help understanding",
       "points": [
-       "Says how pictures, charts and other visuals help them understand the text.",
        "A diagram of a life cycle shows the order the text describes."
       ]
      },
@@ -3231,7 +3182,6 @@
      "s6": {
       "headline": "Understands metaphors, similes and sayings",
       "points": [
-       "Spots special language that goes beyond the literal meaning.",
        "Simile: \"as fast as lightning\"; metaphor: \"The classroom was a zoo\"; saying: \"break the ice\"."
       ]
      },
@@ -3269,7 +3219,6 @@
      "s2": {
       "headline": "Finds information in visuals",
       "points": [
-       "Gets facts from visuals like diagrams.",
        "A labelled plant diagram shows where the roots are."
       ]
      },
@@ -3295,7 +3244,6 @@
      "s6": {
       "headline": "Judges facts, opinions and arguments",
       "points": [
-       "Tells fact from opinion and decides if an argument makes sense.",
        "\"We need longer recess because kids focus better after play\" gives a reason; \"because I said so\" does not."
       ]
      },
@@ -3331,7 +3279,6 @@
      "s4": {
       "headline": "Compares stories, characters and ideas",
       "points": [
-       "Looks at how different books are alike and different.",
        "Two books about a lost pet: one is funny, one is sad."
       ]
      },
@@ -3345,7 +3292,6 @@
      "s6": {
       "headline": "Compares texts on similar topics",
       "points": [
-       "Compares different books, stories or articles about the same topic.",
        "A book and an article on volcanoes: one has more photos, the other explains more."
       ]
      },
@@ -3374,7 +3320,6 @@
      "s2": {
       "headline": "Notices cultural settings of stories",
       "points": [
-       "Recognises the culture and customs a story comes from.",
        "A story about Diwali shows lamps, sweets and family gatherings."
       ]
      },
@@ -3394,14 +3339,12 @@
      "s5": {
       "headline": "Combines main ideas across texts",
       "points": [
-       "Finds the main ideas and connects information from different books or articles.",
        "A book and an article on recycling both say sorting trash helps the planet."
       ]
      },
      "s6": {
       "headline": "Combines information from sources",
       "points": [
-       "Uses information from different sources to learn about a topic.",
        "A report on volcanoes uses facts from a book, a website and a video."
       ]
      },
@@ -3415,7 +3358,6 @@
      "s8": {
       "headline": "Builds understanding from many sources",
       "points": [
-       "Pulls together information from multiple sources to understand a topic fully.",
        "Reads an article, a graph and an interview on recycling, then writes one explanation using all three."
       ]
      }
@@ -3443,7 +3385,6 @@
      "s2": {
       "headline": "Compares plant and animal needs",
       "points": [
-       "Explains that plants and animals meet their needs in different ways.",
        "Plants take in water through roots; animals drink and eat."
       ]
      },
@@ -3464,14 +3405,12 @@
      "s5": {
       "headline": "Classifies unfamiliar organisms",
       "points": [
-       "Uses known features to place organisms never seen before.",
        "A new beetle photo: six legs and wings, so it is an insect."
       ]
      },
      "s6": {
       "headline": "Uses classification to explore biodiversity",
       "points": [
-       "Uses groups to describe the variety of life (biodiversity) in a place.",
        "Sorts schoolyard finds into insects, spiders, plants and fungi."
       ]
      },
@@ -3501,7 +3440,6 @@
      "s2": {
       "headline": "Links plant parts to survival",
       "points": [
-       "Explores how parts help a plant live in its local habitat.",
        "A cactus stem stores water; broad leaves catch light in shade."
       ]
      },
@@ -3515,7 +3453,6 @@
      "s4": {
       "headline": "Explains plant adaptations to habitats",
       "points": [
-       "Investigates how plant structures suit different environments.",
        "A water lily has floating leaves; a cactus has spines and a thick stem."
       ]
      },
@@ -3604,7 +3541,6 @@
      "s8": {
       "headline": "Explains organelles and cell specialisation",
       "points": [
-       "Describes organelles (cell parts with jobs) in detail and how plant and animal cells specialise.",
        "Mitochondria release energy from glucose; chloroplasts make glucose by photosynthesis."
       ]
      }
@@ -3626,14 +3562,12 @@
      "s2": {
       "headline": "Compares parents and offspring",
       "points": [
-       "Notices how young are like and unlike their parents.",
        "A puppy has its mother's brown fur but is much smaller."
       ]
      },
      "s3": {
       "headline": "Tracks simple life cycles",
       "points": [
-       "Puts the growth stages of an animal in order.",
        "Butterfly: egg -> caterpillar -> chrysalis -> adult. Frog: egg -> tadpole -> froglet -> frog."
       ]
      },
@@ -3662,7 +3596,6 @@
      "s7": {
       "headline": "Knows offspring match their species",
       "points": [
-       "Understands that organisms produce young of the same species.",
        "Horses have foals, never calves."
       ]
      }
@@ -3699,14 +3632,12 @@
      "s1": {
       "headline": "Explores local habitats",
       "points": [
-       "Notices where animals and plants live nearby.",
        "Worms under a log; ducks on the pond."
       ]
      },
      "s2": {
       "headline": "Explains how environments affect organisms",
       "points": [
-       "Tells how different places change what can live there.",
        "Camels live in hot deserts; penguins live in cold places."
       ]
      },
@@ -3764,7 +3695,6 @@
      "s1": {
       "headline": "Sees plants need sunlight",
       "points": [
-       "Observes that plants need light to grow.",
        "Cress on a sunny sill grows; cress in a dark cupboard turns pale and weak."
       ]
      },
@@ -3778,7 +3708,6 @@
      "s3": {
       "headline": "Describes simple feeding relationships",
       "points": [
-       "Says what eats what between plants and animals.",
        "A caterpillar eats a leaf; a bird eats the caterpillar."
       ]
      },
@@ -3827,7 +3756,6 @@
      "s7": {
       "headline": "Knows body systems work together",
       "points": [
-       "Explains that organ systems cooperate.",
        "Running: muscles move, lungs take in oxygen, the heart pumps blood to the muscles."
       ]
      },
@@ -3850,7 +3778,6 @@
      "s1": {
       "headline": "Knows healthy food and water matter",
       "points": [
-       "Says a healthy diet and water keep us well.",
        "Fruit, vegetables and a glass of water."
       ]
      },
@@ -3877,7 +3804,6 @@
      "s5": {
       "headline": "Chooses healthy foods using nutrient facts",
       "points": [
-       "Names nutrients and uses what they do to make healthy choices.",
        "Protein for growth and repair; carbohydrates for energy."
       ]
      },
@@ -3934,21 +3860,18 @@
      "s6": {
       "headline": "Weighs positive and negative human impacts",
       "points": [
-       "Identifies good and bad effects of people on habitats.",
        "Planting trees helps; draining wetlands for buildings harms."
       ]
      },
      "s7": {
       "headline": "Recognises how human activity affects environment",
       "points": [
-       "Names ways everyday activity changes the environment.",
        "Car exhaust adds air pollution; farming clears land."
       ]
      },
      "s8": {
       "headline": "Describes human impacts on ecosystems",
       "points": [
-       "Explains how human activity and pollution damage ecosystems.",
        "Fertiliser runoff causes algae blooms that use up a pond's oxygen."
       ]
      }
@@ -3984,14 +3907,12 @@
      "s4": {
       "headline": "Compares solids, liquids and gases",
       "points": [
-       "Describes what sets each state apart.",
        "A solid keeps its shape; a liquid takes the shape of its container; a gas fills the whole container."
       ]
      },
      "s5": {
       "headline": "Tests materials fairly for a purpose",
       "points": [
-       "Tests properties systematically and picks materials that suit a job.",
        "Test which fabric is most waterproof, then choose it for a tent."
       ]
      },
@@ -4057,14 +3978,12 @@
      "s2": {
       "headline": "Observes heating, cooling and dissolving",
       "points": [
-       "Sees what heating and cooling do to materials and that some things dissolve in water.",
        "Chocolate melts in the sun; sugar dissolves in warm water."
       ]
      },
      "s3": {
       "headline": "Explains freezing, melting and solutions",
       "points": [
-       "Knows water freezes and ice melts, and explores dissolving.",
        "Water freezes at 0 °C; sugar dissolved in water makes a solution."
       ]
      },
@@ -4115,21 +4034,19 @@
      "s1": {
       "headline": "Recognises pushes and pulls",
       "points": [
-       "Sees how pushes and pulls make things move.",
        "Push a swing away; pull a wagon along."
       ]
      },
      "s2": {
       "headline": "Shows forces change shape and speed",
       "points": [
-       "Investigates how forces squash, stretch, speed up and slow down objects.",
        "Squeeze clay, stretch a rubber band, push a ball harder to make it faster."
       ]
      },
      "s3": {
       "headline": "Measures forces and explores friction",
       "points": [
-       "Measures force with simple tools such as a spring balance (newton metre).",
+       "Measures force with simple tools such as a spring balance (newton meter).",
        "A toy car slows faster on carpet than on a smooth floor."
       ]
      },
@@ -4275,7 +4192,7 @@
      "s4": {
       "headline": "Explores instruments and sound levels",
       "points": [
-       "Explores how instruments make sound and measures loudness with a sound metre.",
+       "Explores how instruments make sound and measures loudness with a sound meter.",
        "A thinner guitar string gives a higher note; an app reads loudness in decibels (dB)."
       ]
      },
@@ -4288,7 +4205,6 @@
      "s6": {
       "headline": "Applies sound ideas to real life",
       "points": [
-       "Uses sound knowledge in real-world situations.",
        "Earmuffs cut noise; carpets and curtains reduce echo in a classroom."
       ]
      },
@@ -4317,7 +4233,6 @@
      "s1": {
       "headline": "Notices what sunlight does",
       "points": [
-       "Sees that sunlight lights up and warms things.",
        "A sunny playground feels warmer than a shady one."
       ]
      },
@@ -4445,7 +4360,6 @@
      "s6": {
       "headline": "Fixes circuits to solve problems",
       "points": [
-       "Changes a circuit to get a different result.",
        "Adds a second battery for a brighter bulb; adds a switch to turn it off."
       ]
      },
@@ -4495,14 +4409,12 @@
      "s4": {
       "headline": "Analyses weather and climate",
       "points": [
-       "Finds weather patterns and compares climate in different regions.",
        "A chart of daily rain and temperature; deserts are dry, rainforests are wet."
       ]
      },
      "s5": {
       "headline": "Models Earth's rotation",
       "points": [
-       "Shows how Earth's spin gives day and night.",
        "Globe and flashlight: the lit side is day, the dark side is night."
       ]
      },
@@ -4538,7 +4450,6 @@
      "s1": {
       "headline": "Notices sunlight warms things",
       "points": [
-       "Feels that the sun heats surfaces.",
        "A metal slide is warm after sitting in the sun."
       ]
      },
@@ -4551,7 +4462,6 @@
      "s3": {
       "headline": "Knows energy makes things happen",
       "points": [
-       "Understands that changes need energy.",
        "A toy car needs a battery to move; a plant needs light to grow."
       ]
      },
@@ -4565,7 +4475,6 @@
      "s5": {
       "headline": "Shows energy transfer and change",
       "points": [
-       "Demonstrates energy moving between objects and changing form.",
        "A battery powers a motor: stored energy → movement; a fan turns electricity into air movement."
       ]
      },
@@ -4586,7 +4495,6 @@
      "s8": {
       "headline": "Tracks energy transformations",
       "points": [
-       "Keeps following energy through changes, in more detail.",
        "Roller coaster: stored energy at the top → movement → heat from friction."
       ]
      }
@@ -4601,14 +4509,12 @@
      "s1": {
       "headline": "Asks questions about what they see",
       "points": [
-       "Wonders about things they notice.",
        "Why does the ice melt in my hand?"
       ]
      },
      "s2": {
       "headline": "Asks questions and suggests ways to answer",
       "points": [
-       "Asks a question and says how to find out.",
        "Do plants grow better in light? Grow two plants and compare."
       ]
      },
@@ -4629,14 +4535,12 @@
      "s5": {
       "headline": "Predicts using science knowledge",
       "points": [
-       "Uses science ideas and patterns to predict outcomes.",
        "Metal conducts heat, so a metal spoon will get hot faster than a wooden one."
       ]
      },
      "s6": {
       "headline": "Forms testable questions with reasons",
       "points": [
-       "Writes a question that can be tested and gives reasons for the hypothesis.",
        "Does salt change how fast ice melts? Salt lowers the freezing point, so I think yes."
       ]
      },
@@ -4665,14 +4569,12 @@
      "s1": {
       "headline": "Answers questions by observing",
       "points": [
-       "Uses looking and watching to find answers.",
        "Watch an ant trail to see what the ants carry."
       ]
      },
      "s2": {
       "headline": "Uses experience; suggests methods",
       "points": [
-       "Draws on firsthand experience and suggests ways to collect information.",
        "How tall is the bean plant? Measure it every day."
       ]
      },
@@ -4692,7 +4594,6 @@
      "s5": {
       "headline": "Plans fair tests with one variable",
       "points": [
-       "Controls everything except one variable (the thing that changes).",
        "Seeds with different amounts of water; same soil, light and seeds."
       ]
      },
@@ -4742,14 +4643,12 @@
      "s3": {
       "headline": "Measures with rulers and timers",
       "points": [
-       "Uses simple equipment correctly.",
        "A pencil is 15 cm long; a ball rolls for 4 seconds."
       ]
      },
      "s4": {
       "headline": "Observes in order; measures several things",
       "points": [
-       "Observes in an organised way and measures more than one variable.",
        "Each day, record plant height and the amount of water given."
       ]
      },
@@ -4763,14 +4662,12 @@
      "s6": {
       "headline": "Chooses and uses tools correctly",
       "points": [
-       "Picks the right tool for the job and uses it properly.",
        "Thermometer for temperature, balance for mass, measuring cylinder for volume."
       ]
      },
      "s7": {
       "headline": "Records observations with units",
       "points": [
-       "Notes useful details and writes measurements with correct units.",
        "25 mL, 3.2 g, 18 °C, 45 s - not just '25'."
       ]
      },
@@ -4792,21 +4689,18 @@
      "s1": {
       "headline": "Records work with pictures",
       "points": [
-       "Draws the stages of what they did.",
        "Three pictures: seed, root, shoot."
       ]
      },
      "s2": {
       "headline": "Uses labelled drawings and simple tables",
       "points": [
-       "Labels drawings and fills in a simple table.",
        "A plant drawing with 'leaf' and 'stem' labels; a table of day and height."
       ]
      },
      "s3": {
       "headline": "Presents results in charts and tables",
       "points": [
-       "Shows results as drawings, bar charts or tables.",
        "A bar chart of how far three toy cars rolled."
       ]
      },
@@ -4820,14 +4714,12 @@
      "s5": {
       "headline": "Makes data tables; picks graphs",
       "points": [
-       "Builds detailed tables and chooses a suitable graph.",
        "Line graph for temperature over time; bar chart to compare groups."
       ]
      },
      "s6": {
       "headline": "Organises larger data sets",
       "points": [
-       "Uses more advanced displays for complex data.",
        "A table of 5 trials per ramp height and a scatter graph of height against distance."
       ]
      },
@@ -4856,14 +4748,12 @@
      "s1": {
       "headline": "Makes simple comparisons",
       "points": [
-       "Says how things are the same or different.",
        "The big ball bounces higher than the small ball."
       ]
      },
      "s2": {
       "headline": "Spots basic patterns",
       "points": [
-       "Notices things that go together.",
        "Plants in more light are taller."
       ]
      },
@@ -4884,7 +4774,6 @@
      "s5": {
       "headline": "Analyses complex patterns; predicts",
       "points": [
-       "Studies patterns in more detail and uses them to predict.",
        "Temperature rises 2 °C every minute, so expect about 10 °C more after 5 minutes."
       ]
      },
@@ -4898,7 +4787,6 @@
      "s7": {
       "headline": "Finds patterns, spots unusual results",
       "points": [
-       "Looks over collected data for patterns and results that don't fit.",
        "A spring stretches more with more mass, except one reading that is off."
       ]
      },
@@ -4920,21 +4808,18 @@
      "s1": {
       "headline": "Compares results with predictions",
       "points": [
-       "Checks what happened against what they thought would happen.",
        "I thought the boat would float, and it did."
       ]
      },
      "s2": {
       "headline": "Explains what happened",
       "points": [
-       "Looks back and says what happened and why.",
        "The ice melted because the room was warm."
       ]
      },
      "s3": {
       "headline": "Draws conclusions using science ideas",
       "points": [
-       "Uses what they know to explain results.",
        "The magnet picked up only things that contain iron."
       ]
      },
@@ -4962,7 +4847,6 @@
      "s7": {
       "headline": "Begins evidence-based conclusions",
       "points": [
-       "Writes a conclusion that points to the data.",
        "More salt melted ice faster: 10 g took 4 min, 20 g took 2 min."
       ]
      },
@@ -4985,7 +4869,7 @@
       "headline": "Measures with five common tools",
       "points": [
        "Measures volume, temperature, time, length and force.",
-       "Measuring cylinder (mL), thermometer (°C), stopwatch (s), ruler (cm), force metre (N)."
+       "Measuring cylinder (mL), thermometer (°C), stopwatch (s), ruler (cm), force meter (N)."
       ]
      },
      "s6": {
@@ -5019,7 +4903,6 @@
      "s1": {
       "headline": "Shares ideas by talking and drawing",
       "points": [
-       "Tells and draws what they found.",
        "Draws a seed with a root and tells the class."
       ]
      },
@@ -5033,7 +4916,6 @@
      "s3": {
       "headline": "Presents findings clearly",
       "points": [
-       "Tells others what they did and what they found.",
        "Shows a chart and says, 'The red car went farthest.'"
       ]
      },
@@ -5047,28 +4929,24 @@
      "s5": {
       "headline": "Presents detailed findings with data",
       "points": [
-       "Backs up findings with tables or graphs.",
        "A poster with a bar chart of results and a one-line conclusion."
       ]
      },
      "s6": {
       "headline": "Explains complex ideas with science terms",
       "points": [
-       "Communicates clearly using scientific vocabulary.",
        "Says 'evaporation' and 'condensation' instead of 'drying up' and 'getting wet'."
       ]
      },
      "s7": {
       "headline": "Begins using science vocabulary correctly",
       "points": [
-       "Uses science words in the right way.",
        "Sugar dissolves in water; ice melts."
       ]
      },
      "s8": {
       "headline": "Presents findings clearly and fully",
       "points": [
-       "Gives the right amount of detail.",
        "A report with aim, method, results table and conclusion."
       ]
      }
@@ -5083,14 +4961,12 @@
      "s5": {
       "headline": "Supports ideas with evidence",
       "points": [
-       "Starts backing up a claim with something observed.",
        "This magnet is strong: it picked up 8 paper clips."
       ]
      },
      "s6": {
       "headline": "Backs arguments with data and models",
       "points": [
-       "Uses measurements and models to support a claim.",
        "A temperature graph and a particle diagram show why hot water dissolves sugar faster."
       ]
      },
@@ -5119,21 +4995,18 @@
      "s1": {
       "headline": "Spots simple problems",
       "points": [
-       "Names a problem to solve.",
        "The teddy keeps falling off the shelf."
       ]
      },
      "s2": {
       "headline": "Recognises problems needing solutions",
       "points": [
-       "Sees when something needs fixing.",
        "The playground is too sunny, so it needs shade."
       ]
      },
      "s3": {
       "headline": "Asks questions about the problem",
       "points": [
-       "Asks what the solution must do.",
        "For a toy-car bridge: how wide? how strong? which materials?"
       ]
      },
@@ -5188,7 +5061,6 @@
      "s2": {
       "headline": "Designs simple devices",
       "points": [
-       "Plans and makes a simple device.",
        "A shade structure for a toy; a sound maker from a tin and rubber bands."
       ]
      },
@@ -5201,7 +5073,6 @@
      "s4": {
       "headline": "Generates ideas, picks the best",
       "points": [
-       "Comes up with several ideas and chooses the best approach.",
        "Sketches three bridge designs and picks one to test."
       ]
      },
@@ -5215,14 +5086,12 @@
      "s6": {
       "headline": "Designs efficient, sustainable solutions",
       "points": [
-       "Considers efficiency and sustainability in more advanced designs.",
        "A solar-powered phone charger built from recycled parts."
       ]
      },
      "s7": {
       "headline": "Brainstorms several solutions",
       "points": [
-       "Offers many ideas before choosing.",
        "Keeping a drink cold: foil wrap, wet cloth, insulated sleeve, ice pack."
       ]
      },
@@ -5244,14 +5113,12 @@
      "s1": {
       "headline": "Builds simple structures",
       "points": [
-       "Builds with blocks and other materials.",
        "A tower made from blocks."
       ]
      },
      "s2": {
       "headline": "Builds and tests simple designs",
       "points": [
-       "Makes a design and checks whether it works.",
        "Does the paper tower stay up when you blow on it?"
       ]
      },
@@ -5277,7 +5144,6 @@
      "s6": {
       "headline": "Builds complex systems; tests thoroughly",
       "points": [
-       "Builds multi-part systems and plans full test routines.",
        "A model lift with pulleys, tested with 3 loads, 3 times each."
       ]
      },
@@ -5306,7 +5172,6 @@
      "s2": {
       "headline": "Discusses improvements",
       "points": [
-       "Talks about how to make a design better.",
        "The tower fell, so make the base wider."
       ]
      },
@@ -5320,14 +5185,12 @@
      "s4": {
       "headline": "Analyses results; finds improvements",
       "points": [
-       "Reads test results to decide what to change.",
        "The boat sank with 12 marbles, so make the hull wider."
       ]
      },
      "s5": {
       "headline": "Refines designs through testing",
       "points": [
-       "Tests, improves and tests again.",
        "Test 1: parachute falls in 2 s. Bigger canopy, test 2: 3 s."
       ]
      },
@@ -5341,7 +5204,6 @@
      "s7": {
       "headline": "Compares strengths and weaknesses",
       "points": [
-       "Judges each solution's good and weak points.",
        "A foam cup keeps heat best but is the least eco-friendly."
       ]
      },
@@ -5363,28 +5225,24 @@
      "s1": {
       "headline": "Uses models to show relationships",
       "points": [
-       "Uses a picture or object to show how things relate.",
        "Arrows between pictures show a rabbit eating grass."
       ]
      },
      "s2": {
       "headline": "Makes simple physical models",
       "points": [
-       "Builds a model from everyday objects.",
        "A clay volcano; a cardboard sun and Earth."
       ]
      },
      "s3": {
       "headline": "Uses models to explain ideas",
       "points": [
-       "Uses a model to show others how something works.",
        "A flashlight and a ball show why the moon has phases."
       ]
      },
      "s4": {
       "headline": "Develops models to explain phenomena",
       "points": [
-       "Makes a model that explains something they see.",
        "A bottle with a lid and warm water models the water cycle."
       ]
      },
@@ -5398,7 +5256,6 @@
      "s6": {
       "headline": "Designs models; knows their limits",
       "points": [
-       "Builds detailed models and understands what they leave out.",
        "A model solar system is not to scale: real distances are far bigger."
       ]
      },
@@ -5520,28 +5377,24 @@
      "s4": {
       "headline": "Writes to teach with facts",
       "points": [
-       "Teaches others about a topic using facts and helpful details.",
        "\"Frogs lay eggs in water. The eggs hatch into tadpoles.\""
       ]
      },
      "s5": {
       "headline": "Writes to teach with facts",
       "points": [
-       "Teaches others about a topic using facts and details.",
        "\"Honeybees live in hives and make honey from nectar.\""
       ]
      },
      "s6": {
       "headline": "Writes information texts that explain",
       "points": [
-       "Teaches a topic using facts and clear explanations.",
        "\"Leaves change colour in fall because shorter days make the green chlorophyll fade, showing yellow and orange.\""
       ]
      },
      "s7": {
       "headline": "Writes informative texts with definitions",
       "points": [
-       "Examines a topic using facts, definitions, details and examples.",
        "Defines \"habitat\" (a place where an animal lives), then gives a coral reef as an example."
       ]
      },
@@ -5569,7 +5422,6 @@
      "s4": {
       "headline": "Gives reasons for opinions",
       "points": [
-       "Supports their opinion with clear reasons and examples.",
        "\"I like our school garden because we grow food and learn about plants.\""
       ]
      },
@@ -5596,21 +5448,18 @@
      "s6": {
       "headline": "Writes arguments with both sides",
       "points": [
-       "Presents both sides and convinces readers with logical points.",
        "\"Some think phones help learning; others find them distracting.\" Then explains why one view is stronger."
       ]
      },
      "s7": {
       "headline": "Writes arguments with claims and evidence",
       "points": [
-       "States a clear claim with reasons and relevant evidence, organised logically.",
        "Claim: school should start later. Evidence: teens need 8 to 10 hours of sleep."
       ]
      },
      "s8": {
       "headline": "Addresses opposing views",
       "points": [
-       "Writes a clear claim, acknowledges opposing views and uses logical evidence.",
        "\"Some say later starts hurt sports, but practices can move to the afternoon.\""
       ]
      }
@@ -5744,7 +5593,6 @@
      "s6": {
       "headline": "Guides readers with paragraphs and sections",
       "points": [
-       "Organises ideas so readers can follow the thinking.",
        "Adds section headings such as \"Where Bears Live\"."
       ]
      },
@@ -5758,7 +5606,6 @@
      "s8": {
       "headline": "Writes introduction, body and conclusion",
       "points": [
-       "Organises writing with a clear introduction, logical body paragraphs and strong conclusion.",
        "Transition words: however, for example, as a result, in contrast."
       ]
      }
@@ -5837,14 +5684,12 @@
      "s5": {
       "headline": "Changes style for different readers",
       "points": [
-       "Writes for different people and purposes, changing style as needed.",
        "A chatty note to a friend; a polite letter to the principal."
       ]
      },
      "s6": {
       "headline": "Changes style and content for readers",
       "points": [
-       "Adjusts style and content to fit who will read it and why they are writing.",
        "A silly poster for classmates; a serious request to the mayor."
       ]
      },
@@ -5873,28 +5718,24 @@
      "s2": {
       "headline": "Uses descriptive words",
       "points": [
-       "Adds describing words and phrases to make writing clearer.",
        "\"a fluffy white rabbit\" instead of \"a rabbit\"."
       ]
      },
      "s3": {
       "headline": "Chooses interesting words",
       "points": [
-       "Swaps plain words for stronger ones.",
        "rushed instead of went; gigantic instead of big."
       ]
      },
      "s4": {
       "headline": "Chooses specific, exciting words",
       "points": [
-       "Picks specific words that make writing clear and exciting.",
        "walked -> marched; big -> enormous."
       ]
      },
      "s5": {
       "headline": "Chooses words to express feelings",
       "points": [
-       "Picks the best words to show ideas and feelings clearly.",
        "upset -> heartbroken; happy -> thrilled."
       ]
      },
@@ -5915,7 +5756,6 @@
      "s8": {
       "headline": "Chooses precise words, cuts wordiness",
       "points": [
-       "Uses exact, varied words for specific effects, and removes wordiness and repetition.",
        "\"Due to the fact that\" -> \"because\"; \"the sad, unhappy girl\" -> \"the sad girl\"."
       ]
      }
@@ -5930,7 +5770,6 @@
      "s3": {
       "headline": "Adapts writing to readers",
       "points": [
-       "Changes writing to fit different readers and purposes.",
        "A thank-you note to Grandma vs a sign for the playground."
       ]
      },
@@ -5963,7 +5802,6 @@
      "s8": {
       "headline": "Adjusts formality, vocabulary and tone",
       "points": [
-       "Writes for different audiences, adjusting formality, vocabulary and tone.",
        "Text to a friend: \"Thanks a ton!\"; email to a teacher: \"Thank you for your help.\""
       ]
      }
@@ -5992,6 +5830,7 @@
      "s6": {
       "headline": "Takes notes from several sources",
       "points": [
+       "Uses several sources, takes notes to organise information and uses evidence to support ideas.",
        "Note card: \"Octopus has 3 hearts\" (Ocean Book, p. 12)."
       ]
      },
@@ -6035,7 +5874,6 @@
      "s5": {
       "headline": "Uses digital tools to present writing",
       "points": [
-       "Writes, shares and presents work using computers.",
        "Types a report and adds pictures for a slideshow."
       ]
      },
@@ -6049,7 +5887,6 @@
      "s7": {
       "headline": "Produces and publishes writing digitally",
       "points": [
-       "Uses technology to create, publish and co-write.",
        "Co-writes in a shared document, then publishes an article online."
       ]
      },
@@ -6071,7 +5908,6 @@
      "s7": {
       "headline": "Presents writing in suitable formats",
       "points": [
-       "Picks a layout and design that fit the writing.",
        "Newsletter with a title and columns; letter in letter format."
       ]
      },
@@ -6093,21 +5929,18 @@
      "s1": {
       "headline": "Speaks in conversations and presentations",
       "points": [
-       "Builds spoken language through talk, discussion and short presentations.",
        "Tells the class about a favourite toy."
       ]
      },
      "s2": {
       "headline": "Speaks fluently in varied settings",
       "points": [
-       "Keeps developing smooth, clear speech in different speaking situations.",
        "Talks with a partner, then shares with the whole class."
       ]
      },
      "s3": {
       "headline": "Speaks in structured discussions",
       "points": [
-       "Sharpens spoken language in organised discussions and presentations.",
        "Takes turns in a group talk, then presents a topic to the class."
       ]
      },
@@ -6121,7 +5954,6 @@
      "s5": {
       "headline": "Speaks confidently in many contexts",
       "points": [
-       "Uses spoken language well in different situations.",
        "Chats with friends, answers a teacher, tells a story to the class."
       ]
      },
@@ -6157,7 +5989,6 @@
      "s1": {
       "headline": "Shares thoughts on stories and events",
       "points": [
-       "Says what they think and feel about a story or an event.",
        "\"The pig was funny because he fell in the mud.\""
       ]
      },
@@ -6178,21 +6009,18 @@
      "s4": {
       "headline": "Shares ideas respectfully",
       "points": [
-       "States own thoughts while respecting different ideas from others.",
        "\"I see it differently. I think the fox was kind.\""
       ]
      },
      "s5": {
       "headline": "Joins group discussions",
       "points": [
-       "Listens to others and shares own ideas.",
        "Waits for a turn, then adds: \"I think it is because...\""
       ]
      },
      "s6": {
       "headline": "Joins group discussions clearly",
       "points": [
-       "Listens to others and states own thoughts clearly.",
        "\"Ben said the dam broke. I think it was the rain, because...\""
       ]
      },
@@ -6206,7 +6034,6 @@
      "s8": {
       "headline": "Weighs several viewpoints in discussion",
       "points": [
-       "Brings together different perspectives and adds meaningful points.",
        "Sums up what two classmates said, then adds a new point."
       ]
      }
@@ -6221,14 +6048,12 @@
      "s1": {
       "headline": "Answers simple questions about texts",
       "points": [
-       "Responds to simple questions after hearing or reading a text.",
        "\"Who is the story about?\" -> \"A lost puppy.\""
       ]
      },
      "s2": {
       "headline": "Answers questions and explains thinking",
       "points": [
-       "Answers questions about texts and says why.",
        "\"Why was the girl sad?\" -> \"Her kite flew away.\""
       ]
      },
@@ -6263,7 +6088,6 @@
      "s7": {
       "headline": "Listens actively in discussions",
       "points": [
-       "Pays close attention and responds to what is said.",
        "Takes notes, then asks a follow-up question."
       ]
      },
@@ -6285,12 +6109,14 @@
      "s1": {
       "headline": "Uses words for familiar topics",
       "points": [
+       "Uses topic words and starts using set phrases.",
        "Pets: fur, paw, feed; \"Once upon a time\", \"Can I have...?\""
       ]
      },
      "s2": {
       "headline": "Uses time words and topic words",
       "points": [
+       "Begins sentences with time words and uses descriptive words and topic vocabulary.",
        "\"First, we...\"; \"After lunch, I...\"; \"a shiny red apple\"."
       ]
      },
@@ -6324,7 +6150,6 @@
      "s7": {
       "headline": "Uses academic and subject vocabulary",
       "points": [
-       "Learns and uses age-level academic and subject-specific words.",
        "\"analyse\" in English; \"photosynthesis\" in science."
       ]
      },
@@ -6345,7 +6170,6 @@
      "s1": {
       "headline": "Retells familiar stories",
       "points": [
-       "Includes the important information when retelling.",
        "Goldilocks: tries three bowls, breaks a chair, runs away."
       ]
      },
@@ -6367,28 +6191,24 @@
      "s1": {
       "headline": "Compares stories with own life",
       "points": [
-       "Shares thoughts and links stories to their own life or to other stories.",
        "\"Like Max, I was scared of the dark.\""
       ]
      },
      "s2": {
       "headline": "Explains thinking about texts",
       "points": [
-       "Says why they think something about a text.",
        "\"The wolf was mean because he blew the house down.\""
       ]
      },
      "s3": {
       "headline": "Builds on others' ideas",
       "points": [
-       "Adds to others' ideas while sharing own thoughts clearly and politely.",
        "\"I agree with Ana, and I think the boy was brave because he went back.\""
       ]
      },
      "s4": {
       "headline": "Shares detailed information and stories",
       "points": [
-       "Includes interesting details that listeners can follow.",
        "\"My dog is a fluffy brown terrier who digs holes in the garden.\""
       ]
      },
@@ -6415,7 +6235,6 @@
      "s8": {
       "headline": "Expresses complex ideas with support",
       "points": [
-       "Explains complex ideas and opinions with supporting details.",
        "\"Homework can help learning, but too much leaves no time to rest.\""
       ]
      }
@@ -6442,7 +6261,6 @@
      "s3": {
       "headline": "Asks and answers to show understanding",
       "points": [
-       "Asks questions to check understanding and learn more.",
        "\"Why did the character leave?\"; \"What does that mean?\""
       ]
      },
@@ -6456,14 +6274,12 @@
      "s5": {
       "headline": "Follows rules and asks questions",
       "points": [
-       "Follows classroom discussion rules and asks when they do not understand.",
        "Raises a hand, then asks \"What does migration mean?\""
       ]
      },
      "s6": {
       "headline": "Asks and answers to clarify",
       "points": [
-       "Asks and answers questions to learn more or clear up confusion.",
        "\"Do you mean the first map or the second?\""
       ]
      }
@@ -6492,14 +6308,12 @@
      "s5": {
       "headline": "Listens and shares in discussions",
       "points": [
-       "Listens to others, shares own ideas, follows discussion rules and asks when unsure.",
        "Waits for a turn; asks \"Can you explain that?\""
       ]
      },
      "s6": {
       "headline": "Takes roles and includes others",
       "points": [
-       "Follows discussion rules, takes different roles and helps others join in.",
        "Acts as note-taker or leader; asks \"What do you think, Tia?\""
       ]
      },
@@ -6542,7 +6356,6 @@
      "s5": {
       "headline": "Presents in order using media",
       "points": [
-       "Shares information in clear order with details, using pictures, videos and effects.",
        "Volcano slides: what it is, how it erupts, a photo."
       ]
      },
@@ -6585,7 +6398,6 @@
      "s4": {
       "headline": "Speaks clearly for different listeners",
       "points": [
-       "Speaks clearly and confidently, changing how they talk for different people and situations.",
        "\"Hi, Grandma!\" vs \"Good morning, Mr. Lee.\""
       ]
      },
@@ -6599,14 +6411,12 @@
      "s6": {
       "headline": "Adjusts talk to listener and situation",
       "points": [
-       "Changes how they speak for different people and situations.",
        "Chats casually at recess; speaks formally when presenting."
       ]
      },
      "s7": {
       "headline": "Adapts pace, tone and volume",
       "points": [
-       "Changes speaking style for different audiences and purposes.",
        "Slower and louder for a big crowd; softer and warmer to comfort a friend."
       ]
      },
@@ -6641,7 +6451,6 @@
      "s3": {
       "headline": "Writes legibly and fluently",
       "points": [
-       "Writes clearly at a speed that suits the task.",
        "Quick, neat writing for notes; slower, careful writing for a poster.",
        "Milestone: Letter formation and handwriting are mastered by the end of ages 7–8."
       ]
@@ -6684,14 +6493,12 @@
      "s5": {
       "headline": "Spells age-level words with rules",
       "points": [
-       "Uses spelling patterns and rules.",
        "happy -> happier (y changes to i); receive (i before e, except after c)."
       ]
      },
      "s6": {
       "headline": "Spells using word parts and rules",
       "points": [
-       "Uses word parts, patterns and rules, including tricky sound-alike words.",
        "their/there/they're; its/it's; unbelievable."
       ]
      },
@@ -6705,7 +6512,6 @@
      "s8": {
       "headline": "Spells complex, unfamiliar words",
       "points": [
-       "Uses patterns, word roots and strategies to spell hard words.",
        "bio (life) + logy (study) -> biology; phenomenon."
       ]
      }
@@ -6720,14 +6526,12 @@
      "s1": {
       "headline": "Explores nouns and verbs",
       "points": [
-       "Notices naming words and action words in texts.",
        "\"The dog runs\": dog is a noun, runs is a verb."
       ]
      },
      "s2": {
       "headline": "Identifies nouns, pronouns, adjectives",
       "points": [
-       "Finds each of these in texts.",
        "\"She has a red hat\": She is a pronoun, red an adjective, hat a noun."
       ]
      },
@@ -6795,7 +6599,6 @@
      "s3": {
       "headline": "Writes varied sentences with joining words",
       "points": [
-       "Writes different kinds of sentences and joins ideas with connecting words, in complete sentences.",
        "\"I was cold, so I wore my coat.\""
       ]
      },
@@ -6845,14 +6648,12 @@
      "s1": {
       "headline": "Joins ideas with \"and\"",
       "points": [
-       "Uses \"and\" to join words and parts of sentences.",
        "\"cats and dogs\"; \"I ran and I jumped.\""
       ]
      },
      "s2": {
       "headline": "Uses because, if, when",
       "points": [
-       "Joins ideas with connecting words.",
        "\"I took an umbrella because it was raining.\" \"If it rains, we stay in.\""
       ]
      },
@@ -6866,14 +6667,12 @@
      "s4": {
       "headline": "Matches subjects and verbs",
       "points": [
-       "Makes sure sentences make sense by agreeing subject and verb.",
        "\"She runs\" not \"She run\"; \"They play\" not \"They plays\"."
       ]
      },
      "s5": {
       "headline": "Uses past, present, future tenses",
       "points": [
-       "Uses correct grammar across tenses.",
        "\"I walked\"; \"I walk\"; \"I will walk\"."
       ]
      },
@@ -6929,7 +6728,6 @@
      "s4": {
       "headline": "Uses commas, apostrophes, dialogue marks",
       "points": [
-       "Punctuates accurately for clarity and meaning.",
        "don't; Sam's hat; \"Look out!\" she yelled."
       ]
      },
@@ -6972,27 +6770,25 @@
      "s1": {
       "headline": "Uses \"the\" and \"a/an\"",
       "points": [
-       "Uses articles appropriately.",
        "\"an apple\", \"a pear\", \"the sun\"."
       ]
      },
      "s2": {
       "headline": "Uses plurals, verb endings, comparing words",
       "points": [
+       "Uses irregular plurals, verb endings -s, -ed, -ing, quantifiers (some, most) and comparing words.",
        "mouse -> mice; walk, walks, walked, walking; tall, taller, tallest."
       ]
      },
      "s3": {
       "headline": "Uses correct grammar in speech and writing",
       "points": [
-       "Applies grammar rules when talking and writing.",
        "\"We went to the park\" not \"We goed to the park\"."
       ]
      },
      "s4": {
       "headline": "Matches subjects and verbs",
       "points": [
-       "Checks that sentences make sense by agreeing subject and verb.",
        "\"The birds sing\" not \"The birds sings\"."
       ]
      },
@@ -7005,7 +6801,6 @@
      "s6": {
       "headline": "Uses English grammar rules accurately",
       "points": [
-       "Follows grammar and language rules in writing and speaking.",
        "\"Ana and I are going\" not \"Me and Ana is going\"."
       ]
      },
@@ -7018,7 +6813,6 @@
      "s8": {
       "headline": "Keeps standard English accurate",
       "points": [
-       "Maintains standard English grammar across all writing.",
        "\"between you and me\"; \"fewer apples, less water\"."
       ]
      }
@@ -7039,28 +6833,24 @@
      "s2": {
       "headline": "Alphabetises words, uses time words",
       "points": [
-       "Puts words in ABC order by first letter and begins sentences with time words.",
        "ant, bus, cat; \"Later, we ate.\""
       ]
      },
      "s3": {
       "headline": "Matches language to context",
       "points": [
-       "Uses language that suits the situation.",
        "\"Hi!\" to a friend; \"Good morning, Mrs. Lee\" to a teacher."
       ]
      },
      "s4": {
       "headline": "Uses synonyms to avoid repetition",
       "points": [
-       "Finds and uses words with similar meanings.",
        "big -> huge, large; said -> whispered."
       ]
      },
      "s5": {
       "headline": "Chooses best words with tools",
       "points": [
-       "Picks words that express ideas and feelings clearly, using dictionaries and other tools.",
        "sad -> gloomy; looks up a word in a thesaurus."
       ]
      },
@@ -7096,7 +6886,6 @@
      "s2": {
       "headline": "Rereads and proofreads own writing",
       "points": [
-       "Reads writing aloud and checks for errors.",
        "Hears a missing word and adds it; fixes a capital letter."
       ]
      },
@@ -7110,7 +6899,6 @@
      "s4": {
       "headline": "Improves writing with feedback",
       "points": [
-       "Makes changes and fixes mistakes with help from others.",
        "Writes two versions of a story scene; uses a book example to support an idea."
       ]
      },
@@ -7131,14 +6919,12 @@
      "s7": {
       "headline": "Strengthens writing over several drafts",
       "points": [
-       "Revises and edits multiple drafts and evaluates own and others' writing.",
        "Draft 2 adds evidence; draft 3 cuts repeated sentences and fixes errors."
       ]
      },
      "s8": {
       "headline": "Revises for clarity and correctness",
       "points": [
-       "Improves clarity, word choice, organisation and correctness.",
        "\"very big\" -> \"enormous\"; reorders paragraphs; fixes comma errors."
       ]
      }
