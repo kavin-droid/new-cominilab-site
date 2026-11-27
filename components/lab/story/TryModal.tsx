@@ -102,7 +102,6 @@ export function TryModal({ title, activity, onClose }: { title: string; activity
             <div className="st-try-cover st-try-end" ref={end}>
               <Coco size={110} mood="happy" />
               <p className="st-try-end-h">Enjoyed that? There&apos;s a new plan every day.</p>
-              <p className="lab-body st-try-end-p">Each one is picked for what your child knows.</p>
               <div className="st-try-end-ctas">
                 <a className="lab-btn lab-btn-teal" href={LAB_URL}>Start with your child <ArrowRight color="#FFFFFF" /></a>
               </div>
