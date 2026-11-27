@@ -14,6 +14,9 @@ export function MapTour() {
   const box = useRef<HTMLDivElement>(null);
   const [go, setGo] = useState(false);
   const [still, setStill] = useState(false);
+  // the still picture stays over the map until the map has drawn, then fades away (owner, 2026-11-27: the map's own
+  // back button showed while it loaded)
+  const [ready, setReady] = useState(false);
   useEffect(() => {
     const el = box.current;
     if (!el) return;
@@ -33,10 +36,9 @@ export function MapTour() {
   return (
     <div className="hm-mapstick st-maptour" ref={box}>
       {go ? (
-        <span className="cov"><iframe className="cov-in" src={`/lab-map/${process.env.NODE_ENV === "development" ? "index.html" : ""}?tour=1&day=2`} title="A day in CominiLab: the car visits today's five places and the gate opens" tabIndex={-1} style={{ pointerEvents: "none" }} /></span>
-      ) : (
-        <img className="st-maptour-still" src="/lab/img/map-day.webp" alt={still ? "Today's map: five places along a road, and a gate to the next land" : ""} width={2120} height={960} />
-      )}
+        <span className="cov"><iframe className="cov-in" src={`/lab-map/${process.env.NODE_ENV === "development" ? "index.html" : ""}?tour=1&day=2`} title="A day in CominiLab: the car visits today's five places and the gate opens" tabIndex={-1} style={{ pointerEvents: "none" }} onLoad={() => window.setTimeout(() => setReady(true), 350)} /></span>
+      ) : null}
+      <img className={`st-maptour-still${ready ? " gone" : ""}`} src="/lab/img/map-day.webp" alt={still ? "Today's map: five places along a road, and a gate to the next land" : ""} width={2120} height={960} />
     </div>
   );
 }

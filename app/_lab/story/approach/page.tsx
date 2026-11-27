@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ChevronDown } from "@/components/lab/Icons";
 import { SchoolArc } from "@/components/lab/story/SchoolArc";
 import { FinalScene } from "@/components/lab/home/FinalScene";
+import { LazyClip } from "@/components/lab/approach2/LazyClip";
 import { WorthFlip } from "@/components/lab/approach2/WorthFlip";
 import { FourParts } from "@/components/lab/approach2/FourParts";
 import { ArrangeIntro } from "@/components/lab/approach2/ArrangeIntro";
@@ -21,19 +22,14 @@ import "./approach2.css";
 export const metadata: Metadata = {
   title: "Our approach",
   description: "Meaning before mechanics. How CominiLab starts maths from what your child loves, so ideas make sense before the practice begins.",
-  robots: { index: false, follow: false },
 };
 
 const HERO_PHOTOS = ["heroColoring", "heroStories", "heroGroup", "heroMap", "heroCricket", "heroMuseum", "heroArt"].map((f) => `/images/approach/${f}.webp`);
 
 // practice has its moment: the home page's road with the car, one stop per kind of activity, Practice last; each
 // stop shows a short looping preview of the real activity (owner, 2026-11-26)
-const clip = (name: string, alt: string) => (
-  <video className="ap2-clip" autoPlay muted loop playsInline preload="none" poster={`/lab/video/${name}-poster.jpg`} aria-label={alt}>
-    <source src={`/lab/video/${name}.webm`} type="video/webm" />
-    <source src={`/lab/video/${name}.mp4`} type="video/mp4" />
-  </video>
-);
+// each practice stop's preview clip downloads only when it scrolls near (LazyClip)
+const clip = (name: string, alt: string) => <LazyClip name={name} alt={alt} />;
 const PRACTICE = [
   { title: "Stories", body: "Make it meaningful.", alt: "The duck story", screen: "story", pic: clip("idea-story", "The duck story playing") },
   { title: "Explainers", body: "Make it clear.", alt: "A counting explainer", screen: "explainer", pic: clip("idea-explainer", "A counting explainer playing") },

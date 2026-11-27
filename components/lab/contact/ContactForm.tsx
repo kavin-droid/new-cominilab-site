@@ -114,7 +114,7 @@ export function ContactForm() {
           <Star size={44} />
           <Star size={34} />
         </span>
-        <p className="ct-done-title">Thanks. We&rsquo;ll be in touch soon.</p>
+        <p className="ct-done-title">Thank you!</p>
         <p className="lab-body">We usually reply within a couple of working days.</p>
       </div>
     );

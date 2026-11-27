@@ -12,6 +12,10 @@
        slow phone connection the map never drew. The text swaps to the web fonts when they come. -->
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="map.css" />
+  <!-- the site's tour (?tour=1) hides the back and places buttons before map.js runs, so they never flash while the
+       map loads or moves to the next land (CominiLab site, 2026-11-27) -->
+  <script>if (/[?&]tour=1(&|$)/.test(location.search)) document.documentElement.classList.add('cm-tour-early');</script>
+  <style>.cm-tour-early #back, .cm-tour-early #cards { display: none !important; }</style>
 </head>
 <body>
   <div id="app" class="cm-app">

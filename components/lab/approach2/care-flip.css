@@ -43,7 +43,8 @@
   85% { transform: translateY(0) scale(1.1, 0.86); }
   100% { transform: translateY(0) scale(1); }
 }
-@media (max-width: 600px) { .cf.arrived .cf-coco { scale: 0.6; } }
+.cf-coco { --cf-scale: 1; }
+@media (max-width: 600px) { .cf-coco { --cf-scale: 0.6; } .cf.arrived .cf-coco { scale: var(--cf-scale); } }
 
 /* the cast: plain faces peeking in at the edges, then happy faces gathering round the line */
 .cf-cast { position: absolute; z-index: 1; width: clamp(64px, 7vw, 104px); aspect-ratio: 1; transition: left 1s cubic-bezier(.3, .9, .3, 1), top 1s cubic-bezier(.3, .9, .3, 1), translate 1s cubic-bezier(.3, .9, .3, 1), rotate 0.8s ease; transition-delay: calc(var(--i) * 0.08s); }

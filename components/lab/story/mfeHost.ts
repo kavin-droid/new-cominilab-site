@@ -75,6 +75,13 @@ export function mountActivity(
     // a try-out starts straight at the first round, after any intro or countdown (owner, 2026-11-25); the site's
     // copies of the games (comini-site-games) read it
     ...(opts.autoplay ? { autoplay: true } : { skipIntro: true }),
+    // the try-out games ship without their voice clips (owner, 2026-11-26: a parent's try-out needs no voice), so the
+    // site's copies are told to fetch and say no line; each line still shows for as long as it would be said. The
+    // story keeps its voice. The hero's Delivery Boxes (/lab/games/delivery-boxes) ships none either (owner, 2026-11-27)
+    ...((activity.url.startsWith("/lab/try/") && !activity.id.startsWith("coco-")) ||
+    activity.url.startsWith("/lab/games/delivery-boxes/")
+      ? { voice: false }
+      : {}),
   };
   const ready = new Promise<void>((resolve, reject) => {
     const mo = new MutationObserver(() => {

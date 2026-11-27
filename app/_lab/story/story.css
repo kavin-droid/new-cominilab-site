@@ -275,7 +275,7 @@
 
 /* ---- the try modal: a polaroid centred over the dimmed page, the activity at 800 x 360 ---- */
 .st-try-modal { position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center; padding: 20px; background: rgba(13, 13, 13, 0.5); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); animation: stFadeIn 0.22s ease both; }
-.st-try-card { --tw: min(1120px, calc(100vw - 40px), calc((100vh - 150px) * 800 / 360)); width: var(--tw); padding: 12px 12px 0; background: #fff; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.22); animation: stTryIn 0.42s var(--ease-pop) both; }
+.st-try-card { --tw: min(1120px, calc(100vw - 40px), calc((100vh - 150px) * 800 / 360)); width: var(--tw); padding: 0 12px 12px; background: #fff; box-shadow: 12px 12px 0 rgba(13, 13, 13, 0.22); animation: stTryIn 0.42s var(--ease-pop) both; }
 @keyframes stTryIn { from { opacity: 0; transform: translateY(24px) scale(0.96); } }
 .st-try-stage { position: relative; width: 100%; aspect-ratio: 800 / 360; overflow: hidden; background: #F2F2F2; }
 .st-try-stage iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
@@ -283,12 +283,12 @@
 .st-try-mount { position: relative; width: 100%; height: 100%; }
 .st-try-mount > * { width: 100% !important; height: 100% !important; }
 .st-try-cover { position: absolute; inset: 0; display: grid; place-items: center; align-content: center; gap: 12px; background: #fff; }
-.st-try-bar { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 68px; padding: 10px 2px 12px 6px; }
-.st-try-bar b { font-size: clamp(1.05rem, 1.6vw, 1.3rem); font-weight: 800; letter-spacing: -0.01em; }
+/* the strip over the stage holds just the close button, top right (owner, 2026-11-27) */
+.st-try-bar { display: flex; align-items: center; justify-content: flex-end; min-height: 64px; padding: 8px 0; box-sizing: border-box; }
 .st-try-x { flex: none; width: 46px; height: 46px; display: grid; place-items: center; padding: 0; background: #fff; border: 1.5px solid var(--line); box-shadow: 4px 4px 0 #E5E5E5; cursor: pointer; transition: translate 0.15s ease, box-shadow 0.15s ease; }
 .st-try-x:hover { translate: -1px -1px; box-shadow: 5px 5px 0 #E5E5E5; }
 .st-try-x:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E5E5E5; }
-@media (max-width: 640px) { .st-try-modal { padding: 12px; } .st-try-card { --tw: calc(100vw - 24px); padding: 8px 8px 0; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.22); } .st-try-bar { min-height: 56px; } }
+@media (max-width: 640px) { .st-try-modal { padding: 12px; } .st-try-card { --tw: calc(100vw - 24px); padding: 0 8px 8px; box-shadow: 8px 8px 0 rgba(13, 13, 13, 0.22); } .st-try-bar { min-height: 56px; padding: 5px 0; } }
 
 @media (max-width: 767px) { .hc-ico svg { width: 44px; height: 44px; } .hc-tag { font-size: 1.05rem; } }
 
@@ -377,6 +377,9 @@
 .cov-in { position: absolute; display: block; width: max(100cqw, 100cqh * var(--ar, 2.2222)); height: max(100cqh, 100cqw / var(--ar, 2.2222)); left: calc((100cqw - max(100cqw, 100cqh * var(--ar, 2.2222))) * var(--fx, 0.5)); top: calc((100cqh - max(100cqh, 100cqw / var(--ar, 2.2222))) * var(--fy, 0.5)); }
 /* the day map keeps its land's own shape (2120 x 960) and covers the frame */
 .st-maptour .cov { --ar: 2.2083; }
+/* the still map sits over the live one until it has drawn, then fades out (MapTour.tsx) */
+.st-maptour-still { z-index: 1; transition: opacity 0.6s ease; }
+.st-maptour-still.gone { opacity: 0; pointer-events: none; }
 .cov-in > * { width: 100% !important; height: 100% !important; }
 .cov-in iframe, iframe.cov-in { border: 0; background: #fff; }
 
@@ -828,8 +831,7 @@ g.go .fs-red { fill: #5B2A2A; } g.go .fs-green { fill: #3CE07A; }
 .st-dw-sec { height: calc(100vh + 90vh); height: calc(100svh + 90svh); }
 .st-dw-sec .dwk2 { position: sticky; top: var(--nav-h, 68px); min-height: 0; height: calc(100vh - var(--nav-h, 68px)); height: calc(100svh - var(--nav-h, 68px)); box-sizing: border-box; }
 @media (max-width: 900px) {
-  /* a smaller logo; the hero fills the screen under the nav */
-  .lab-nav-story .lab-logo { width: 72px; }
+  /* the hero fills the screen under the nav (the smaller logo is in lab.css, for every page) */
   .st .hx { min-height: calc(100vh - var(--nav-h, 68px)); min-height: calc(100svh - var(--nav-h, 68px)); box-sizing: border-box; }
 }
 @media (max-width: 700px) {
@@ -857,7 +859,10 @@ g.go .fs-red { fill: #5B2A2A; } g.go .fs-green { fill: #3CE07A; }
 .is-poster { z-index: 1; }
 
 /* a try-out ends after three rounds with this card (TryModal.tsx) */
-.st-try-end { gap: 10px; padding: 20px; text-align: center; animation: dw2In 0.45s var(--ease-pop) both; }
+.st-try-end { gap: 10px; padding: 20px; text-align: center; animation: dw2In 0.45s var(--ease-pop) both; align-content: safe center; overflow-y: auto; }
+/* the stage grows to fit the closing card (TryModal.tsx sets its height) */
+.st-try-stage.fitting { aspect-ratio: auto; transition: height 0.4s var(--ease-rise); }
+@media (max-width: 640px) { .st-try-end { padding: 16px 14px; } }
 .st-try-end-h { margin: 6px 0 0; font-size: clamp(1.3rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -0.02em; }
 .st-try-end-p { margin: 0; max-width: 34ch; }
 .st-try-end-ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 8px; }
@@ -885,9 +890,6 @@ g.go .fs-red { fill: #5B2A2A; } g.go .fs-green { fill: #3CE07A; }
   .st .hx-text .lab-lede { max-width: 100%; font-size: 1rem; }
   .st .hx-ctas { flex-direction: column; align-items: stretch; width: 100%; max-width: none; gap: 14px; }
   .st .hx-ctas .lab-btn { justify-content: center; min-height: 58px; font-size: 1.1rem; }
-  /* the nav shows Sign in beside the menu, as a white button */
-  .lab-nav-story .lab-nav-cta { display: inline-flex; margin-left: auto; background: #FFFFFF; color: #0D0D0D; border: 1.5px solid #D9D9D9; box-shadow: 4px 4px 0 #E6E6E6; }
-  .lab-nav-story .lab-menu-btn { margin-left: 10px; }
 }
 /* short phones: the same layout, a little tighter, so the buttons still show on the first screen */
 @media (max-width: 900px) and (max-height: 720px) {
@@ -982,29 +984,13 @@ g.go .fs-red { fill: #5B2A2A; } g.go .fs-green { fill: #3CE07A; }
    once (owner, 2026-11-25: they showed, vanished and came back) */
 .dw2-in:not(.shown) > *:not(.dw2-coco), .dw2-in:not(.shown) .dw2-bubble { visibility: hidden; }
 
-/* ---- the story header (owner, 2026-11-25): an app button beside Sign in that shows the two store logos in turn and
-   opens a list of the stores; where the menu shows (tablets and phones), the app button sits beside the menu and Sign in
-   moves into the menu ---- */
-.lab-nav-story .lab-nav-in { gap: 10px; }
-.lab-store { position: relative; }
-.lab-store-btn { position: relative; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 4px 4px 0 #E6E6E6; cursor: pointer; }
-.lab-store-btn:active { translate: 3px 3px; box-shadow: 1px 1px 0 #E6E6E6; }
-.lab-store-ico { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; scale: 0.6; transition: opacity 0.35s ease, scale 0.45s var(--ease-pop); }
-.lab-store-ico.on { opacity: 1; scale: 1; }
-.lab-store-menu { position: absolute; right: 0; top: calc(100% + 10px); z-index: 60; display: grid; min-width: 250px; padding: 6px; background: #FFFFFF; border: 1.5px solid var(--line); box-shadow: 6px 6px 0 #E6E6E6; animation: dw2In 0.25s var(--ease-pop) both; }
-.lab-store-menu a { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 12px; color: var(--ink); font-weight: 700; text-decoration: none; }
-.lab-store-menu a:hover, .lab-store-menu a:focus-visible { background: #E8F7F6; }
-@media (max-width: 1023px) {
-  .lab-nav-story .lab-nav-cta { display: none !important; }
-  .lab-nav-story .lab-store { margin-left: auto; }
-  .lab-nav-story .lab-menu-btn { margin-left: 0; }
-}
-@media (prefers-reduced-motion: reduce) { .lab-store-ico { transition: none; } }
-.lab-store-menu a { white-space: nowrap; }
+/* the story header's app button and its layout live in lab.css (they are on every page, owner 2026-11-27) */
 .dw2-in.shown .dw2-coco-img { animation: none; } /* Coco has just flown in; no second pop */
 /* the week's replay: a round refresh icon at the bottom centre (owner, 2026-11-26) */
-.sg-again { justify-self: center; display: grid; place-items: center; width: 40px; height: 40px; color: var(--ink); background: var(--paper); border: 1.5px solid var(--line); box-shadow: 3px 3px 0 rgba(13, 13, 13, 0.1); cursor: pointer; transition: rotate 0.4s ease; }
-.sg-again:hover { rotate: -40deg; }
+/* just the icon (owner, 2026-11-27): no box, border or shadow, and it no longer turns on hover or press; still a 44px
+   button to tap, with the site's focus ring */
+.sg-again { justify-self: center; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: var(--ink); background: none; border: 0; box-shadow: none; cursor: pointer; }
+.sg-again:focus-visible { outline: 2px solid var(--teal-700); outline-offset: 2px; }
 /* the milestone note's tick: just a teal tick, no box behind it */
 .fs-note-tick { background: none; color: var(--teal); font-size: 1rem; font-weight: 900; }
 /* the last slide: the question bubble turns over to the answer; the line and buttons wait for the answer */

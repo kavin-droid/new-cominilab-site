@@ -79,9 +79,13 @@ export function CareFlip() {
     const a = st.getBoundingClientRect();
     let x: number, y: number;
     if (spot === N) {
+      // he hops off to stand just after "care." (owner, 2026-11-27: on a phone he used to land on "better"); his size
+      // on screen is his 64px box times the scale the stylesheet gives him (smaller on phones)
       const last = st.querySelector<HTMLElement>(`[data-w="${N - 1}"]`)!.getBoundingClientRect();
-      if (a.right - last.right > 90) { x = last.right - a.left + 44; y = last.bottom - a.top - 10; }
-      else { const b = st.querySelector<HTMLElement>(`[data-w="2"]`)!.getBoundingClientRect(); x = b.left - a.left + b.width / 2; y = b.top - a.top + b.height * 0.16; }
+      const w = 64 * (parseFloat(getComputedStyle(c).getPropertyValue("--cf-scale")) || 1);
+      if (last.right + 6 + w <= a.right - 4) { x = last.right - a.left + 6 + w / 2 + (w >= 64 ? 12 : 0); y = last.bottom - a.top - (w >= 64 ? 10 : 0); } // small, he stands lower so his leaf clears the line above
+      // no room after it: under "care.", just below the line, so he covers no word
+      else { x = last.left - a.left + last.width / 2; y = last.bottom - a.top + w + 2; }
     } else {
       const r = st.querySelector<HTMLElement>(`[data-w="${spot}"]`)!.getBoundingClientRect();
       x = r.left - a.left + r.width / 2;

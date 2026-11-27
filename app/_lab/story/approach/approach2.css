@@ -169,9 +169,11 @@
 .ap2-cta { position: relative; z-index: 210; }
 /* practice cards: the name and its line sit close (owner, 2026-11-26) */
 .ap2-practice .hm-step .lab-h3 + .lab-body { margin-top: -10px; }
-/* phones (owner, 2026-11-26): the slider's two captions centred; the hero sits lower so its photos fill the screen's
-   bottom instead of leaving white space under them */
+/* phones: the slider's two captions sit on the left, one under the other, each its badge then its words (owner,
+   2026-11-27; they were centred); the hero sits lower so its photos fill the screen's bottom instead of leaving white
+   space under them */
 @media (max-width: 767px) {
-  .ap2-cmp .as-caps { align-items: center; text-align: center; }
+  .ap2-cmp .as-caps { align-items: flex-start; text-align: left; }
+  .ap2-cmp .as-cap .as-badge { order: -1; }
   .ap2-hero { padding-top: max(48px, calc((100svh - 760px) / 2 + 48px)); }
 }

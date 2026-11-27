@@ -33,7 +33,7 @@ import "@/components/lab/next/next.css";
 import "@/components/lab/motion/motion.css";
 import "./story.css";
 
-export const metadata = { title: { absolute: "CominiLab: Playful Learning" }, robots: { index: false, follow: false } };
+export const metadata = { title: { absolute: "CominiLab: Playful Learning" } };
 
 const read = (dir: string, f: string) => readFileSync(path.join(process.cwd(), "public/lab/img", dir, f), "utf8");
 

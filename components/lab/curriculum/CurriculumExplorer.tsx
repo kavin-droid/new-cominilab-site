@@ -35,7 +35,8 @@ export function CurriculumExplorer() {
 
   return (
     <div ref={top} className="cu-explorer">
-      <div className="cu-bar">
+      {/* the subject chips are drawn at once, never left for the scroll reveal (owner, 2026-11-27: their icons came in late) */}
+      <div className="cu-bar" data-no-reveal>
         <div className="cu-chips" role="group" aria-label="Subject">
           {LAB_SUBJECTS.map((s) => (
             <button key={s.id} type="button" className="cu-chip" aria-pressed={s.id === subject.id} onClick={() => s.id !== subject.id && pick(s.id)}>
